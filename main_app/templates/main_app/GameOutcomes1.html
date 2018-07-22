@@ -1,0 +1,80 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} OT: Game Outcomes {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <h4><b>Game Outcome</b></h4>
+                                </div>
+                                <div class="row">
+                                    <img src="{% static 'main_app/4.png' %}" class="img-fluid" alt="Responsive image"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <p></p>
+                                </div>
+                                <div class="row">
+                                    <h5><b><i>SCENARIO</i></b></h5>
+                                    <p>
+                                        <b>IF EVERYBODY KEEPS ALL OF THEIR ENDOWMENT, </b>
+                                    </p>
+                                    <p>
+                                        then 0 tokens ($0.00) are contributed to the
+                                        <b><i>House Conservation Fund</i></b>. There is no reward pay for residents.
+                                        All residents will receive the money for the 120 energy tokens in their private
+                                        account (worth $1.20).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <h4><b>Game Outcome</b></h4>
+                                </div>
+                                <div class="row">
+                                    <img src="{% static 'main_app/5.png' %}" class="img-fluid" alt="Responsive image"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <p></p>
+                                </div>
+                                <div class="row">
+                                    <h5><b><i>SCENARIO</i></b></h5>
+                                    <p>
+                                        <b>IF EVERYBODY INVESTS ALL OF THEIR ENDOWMENT, </b>
+                                    </p>
+                                    <p>
+                                        then 720 tokens ($7.20) are contributed to the
+                                        <b><i>House Conservation Fund</i></b>. Group goal is met and the 720 tokens will
+                                        be doubled and divided equally between all players. Everybody gets a reward of
+                                        240 tokens ($2.40). The 720 (worth $7.20) will also be donated to Carbonfund.org
+                                        to reduce air pollution.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% next_button %}
+        </div>
+    </div>
+
+{% endblock %}
+

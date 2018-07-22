@@ -1,0 +1,81 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %} OT: 12-Round Test Game {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+                <h5>{% if player.round_number <= 12 %}TRIAL GAME:{% endif %}</h5>
+            <div class="card" style="background: #f2f2f2">
+                <div class="card-body">
+                    <h4><b>
+                        END OF THE GAME
+
+                    </b></h4>
+
+                    <table class="table" style="text-align:Left;">
+                        <tr style="background: #d8d8d8">
+                            <th>
+                                YOUR FINAL RESULTS:
+                            </th>
+                            <th>Energy tokens</th>
+                            <th>US Dollars </th>
+                        </tr>
+                        <tr>
+                            <td><b>Total contributions to the House Conservation Fund: </b></td>
+                            <td><em style="color: #0000ff">{{ player.all_rounds_contribution }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><b>This did/did not meet the group goal of 216 energy tokens: </b></td>
+                            <td> <em style="color: #0000ff">{{ group.all_rounds_contribution }}</em> </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>The bonus to each player for meeting the group goal: </td>
+                            <td>
+                                {% if Constants.group_goal <= group.all_rounds_contribution %}
+                                    <em style="color: #0000ff">{{ group.bonus }}</em>
+                                {% else %}
+                                    <em style="color: #0000ff">{{ Constants.no_bonus }}</em>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if Constants.group_goal <= group.all_rounds_contribution %}
+                                    <em style="color: #0000ff">{{ group.bonus_in_dollars }}</em>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Remaining energy tokens in your personal account: </td>
+                            <td> <em style="color: #0000ff">{{ player.all_tokens_left }}</em> </td>
+                            <td> <em style="color: #0000ff">{{ player.remaining_tokens_in_dollars }}</em> </td>
+                        </tr>
+                        <tr>
+                            <td><b>TOTAL PAY TO YOU: </b></td>
+                            <td></td>
+                            <td> {{ player.payoff_in_dollars }} </td>
+                        </tr>
+
+                    </table>
+
+
+                    {% if player.round_number <= 12%}
+                    <hr style="background: black">
+                    <p><i><b>NOTE:</b> This was a speculative game just to give you a better understanding of how it works.</i></p>
+                    {% endif %}
+                    {% next_button %}
+                </div>
+            </div>
+
+
+         </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} OT: 12-Round Test Game {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+                <h5>{% if player.round_number <= 12 %}TRIAL GAME:{% endif %}</h5>
+            <div class="card" style="background: #dae5f1">
+                <div class="card-body">
+                    <h4><b>
+                        {% if player.round_number == 1 %} {{ months.0 }}
+                        {% elif player.round_number == 2 %} {{ months.1 }}
+                        {% elif player.round_number == 3 %} {{ months.2 }}
+                        {% elif player.round_number == 4 %} {{ months.3 }}
+                        {% elif player.round_number == 5 %} {{ months.4 }}
+                        {% elif player.round_number == 6 %} {{ months.5 }}
+                        {% elif player.round_number == 7 %} {{ months.6 }}
+                        {% elif player.round_number == 8 %} {{ months.7 }}
+                        {% elif player.round_number == 9 %} {{ months.8 }}
+                        {% elif player.round_number == 10 %} {{ months.9 }}
+                        {% elif player.round_number == 11 %} {{ months.10 }}
+                        {% elif player.round_number == 12 %} {{ months.11 }}
+                        {% endif %}
+
+                        (round {{ player.round_number }}): Feedback
+
+                    </b></h4>
+
+                    <table class="table" style="text-align:center;">
+                        <tr style="background: #d8d8d8">
+                            <th>
+                                {% if player.round_number == 1 %} {{ months.0 }}
+                                {% elif player.round_number == 2 %} {{ months.1 }}
+                                {% elif player.round_number == 3 %} {{ months.2 }}
+                                {% elif player.round_number == 4 %} {{ months.3 }}
+                                {% elif player.round_number == 5 %} {{ months.4 }}
+                                {% elif player.round_number == 6 %} {{ months.5 }}
+                                {% elif player.round_number == 7 %} {{ months.6 }}
+                                {% elif player.round_number == 8 %} {{ months.7 }}
+                                {% elif player.round_number == 9 %} {{ months.8 }}
+                                {% elif player.round_number == 10 %} {{ months.9 }}
+                                {% elif player.round_number == 11 %} {{ months.10 }}
+                                {% elif player.round_number == 12 %} {{ months.11 }}
+                                {% endif %}
+
+                                (round {{ player.round_number }})
+                            </th>
+                            <th>Cumulative (all rounds)</th>
+                        </tr>
+                        <tr>
+                            <td> You had: <em style="color: #0000ff">{{ player.previous_tokens_left }}</em></td>
+                            <td> You are left with: <em style="color: #0000ff">{{ player.all_tokens_left }}</em></td>
+                        </tr>
+                        <tr>
+                            <td> You donated: <em style="color: #0000ff">{{ player.contribution }}</em></td>
+                            <td> You have donated: <em style="color: #0000ff">{{ player.all_rounds_contribution }}</em> </td>
+                        </tr>
+                        <tr>
+                            <td><hr></td>
+                            <td><hr></td>
+                        </tr>
+                        <tr>
+                            <td> Other {{ Constants.players_without_me }} invested: <em style="color: #0000ff">{{ player.others_contribution }}</em> in total</td>
+                            <td> Other {{ Constants.players_without_me }} have invested: <em style="color: #0000ff">{{ player.all_rounds_others_contribution }}</em> </td>
+                        </tr>
+                        <tr>
+                            <td><hr></td>
+                            <td><hr></td>
+                        </tr>
+                        <tr>
+                            <td><b>House Conservation Fund received: </b><em style="color: #0000ff">{{ group.total_contribution}}</em></td>
+                            <td><b>House Conservation Fund received: </b><em style="color: #0000ff">{{ group.all_rounds_contribution}}</em></td>
+                        </tr>
+
+                    </table>
+
+                    {% next_button %}
+                </div>
+            </div>
+
+
+         </div>
+    </div>
+
+{% endblock %}
+

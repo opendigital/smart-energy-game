@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} OT: Game Outcomes {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <h4><b>Game Outcome</b></h4>
+                                </div>
+                                <div class="row">
+                                    <img src="{% static 'main_app/6.png' %}" class="img-fluid" alt="Responsive image"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <p></p>
+                                </div>
+                                <div class="row">
+                                    <h5><b><i>SCENARIO</i></b></h5>
+                                    <p>
+                                        <b>IF YOU KEEP ALL OF YOUR ENDOWMENT, WHILE ALL OTHERS INVEST THEIRS, </b>
+                                    </p>
+                                    <p>
+                                        then 600 tokens ($6.00) are contributed to the
+                                        <b><i>House Conservation Fund</i></b>. The group goal is achieved, the Fund is
+                                        doubled and divided between all residents. Reward per resident is $2.00 in
+                                        addition to the money for tokens in your private account.
+                                        <em id="htext1">So, your total pay is $3.20.</em>
+                                    </p>
+                                    <p>
+                                        Carbonfund.org will receive a donation of $6.00 to reduce air pollution.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <h4><b>Game Outcome</b></h4>
+                                </div>
+                                <div class="row">
+                                    <img src="{% static 'main_app/7.png' %}" class="img-fluid" alt="Responsive image"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <p></p>
+                                </div>
+                                <div class="row">
+                                    <h5><b><i>SCENARIO</i></b></h5>
+                                    <p>
+                                        <b>IF EVERYBODY ELSE KEEPS THEIR ENDOWMENTS, WHILE YOU INVEST ALL OF YOURS, </b>
+                                    </p>
+                                    <p>
+                                        Then, the conservation goal of 216 tokens in
+                                        <b><i>House Conservation Fund</i></b> is not reached. You will not be paid
+                                        anything, because there is no reward and you have nothing left in your personal
+                                        account.Since the group goal is not met, there is no collective donation either.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% next_button %}
+        </div>
+    </div>
+
+{% endblock %}
+

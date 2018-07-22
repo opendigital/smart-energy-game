@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+
+{% block title %} OT: Game Framing {% endblock %}
+
+
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <h4><b>INTRODUCTION</b></h4>
+                        <p>
+                            Household energy use is an important contributor to many environmental problems including air and water
+                            pollution and global warming. Many are seeking ways to encourage communities to use less energy.
+                        </p>
+                        <p>
+                            In this experiment, you will play a household energy conservation challenge. It is a real financial
+                            investment game where you will make decisions with 5 other Amazon Mechanical Turk workers. As residents of
+                            the apartment building you are trying to reduce your collective energy usage by 30%. You will earn a
+                            smaller or larger financial incentive, depending on your and others’ energy choices.
+                        </p>
+                        <p>
+                            Next, you will get instructions for the game, a trial game and a quiz (an opportunity to earn extra). Then,
+                            you’ll proceed to the actual game. To make this experiment a success,
+                            <strong>please read the following rules of the experiment very attentively. </strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <img src="{% static 'main_app/1.png' %}" class="img-fluid" alt="Responsive image"/>
+
+                    </div>
+                </div>
+            </div>
+            {% next_button %}
+        </div>
+    </div>
+
+{% endblock %}
+

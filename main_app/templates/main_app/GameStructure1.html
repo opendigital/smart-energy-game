@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+
+{% block title %} OT: Game Structure {% endblock %}
+
+
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <h4><b>THE GAME STRUCTURE</b></h4>
+                        <p>
+                            There are 6 players who represent people living in the same apartment building. Thus, in
+                            addition to you, there are 5 other players. The building is trying to meet a shared energy
+                            conservation goal of reducing the annual energy use by 30%* through resident actions. Hence,
+                            the <b><i>House Conservation Fund</i></b> will need to achieve 216 (equal to $2.16) by the
+                            end of the game.
+                        </p>
+                        <p>
+                            Every player faces the same decision problem. At the beginning of the experiment, you will
+                            receive <b>120 energy tokens ($1.20)</b> in your private account. During the experiment, you
+                            can invest your tokens either for personal benefit or use them to contribute to the
+                            <b><i>House Conservation Fund</i></b>. In the end:
+                        </p>
+                        <ul>
+                            <li><b>Token in your private account will be paid out to you in cash.</b></li>
+                            <li><b>If your group reaches the goal, the amount contributed to the
+                                <i>House Conservation Fund</i> will be doubled and divided evenly between the 6
+                                participants.
+                            </b></li>
+                            <li><b>Each $10 contributed to the energy conservation account will equate to an actual
+                                removal of 1 Metric Tons of air pollution</b> (by donating to Carbonfund.org).</li>
+                        </ul>
+                        <p>
+                            You will be making your decisions anonymously.
+                        </p>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4GameStructure1.html col-lg-4">
+                        <img src="{% static 'main_app/2.png' %}" class="img-fluid" alt="Responsive image"/>
+
+                    </div>
+                </div>
+            </div>
+            {% next_button %}
+        </div>
+    </div>
+
+{% endblock %}
+

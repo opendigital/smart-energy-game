@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} OT: 12-Round Test Game {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+        <h5> {% if player.round_number <= 12 %} TRIAL GAME {% endif %}</h5>
+
+        {% if player.round_number == 1 %}
+            <p>
+                Before we proceed, we’ll ask you to play a 12-round test game with simulated random feedback so that
+                you can get familiar with the the setup of the game, the slider tool with which you can invest your
+                energy tokens.
+            </p>
+        {% endif%}
+
+        <div class="card" style="background: #dae5f1">
+            <div class="card-body">
+                <h4>
+                    {% if player.round_number == 1 %} {{ months.0 }}
+                    {% elif player.round_number == 2 %} {{ months.1 }}
+                    {% elif player.round_number == 3 %} {{ months.2 }}
+                    {% elif player.round_number == 4 %} {{ months.3 }}
+                    {% elif player.round_number == 5 %} {{ months.4 }}
+                    {% elif player.round_number == 6 %} {{ months.5 }}
+                    {% elif player.round_number == 7 %} {{ months.6 }}
+                    {% elif player.round_number == 8 %} {{ months.7 }}
+                    {% elif player.round_number == 9 %} {{ months.8 }}
+                    {% elif player.round_number == 10 %} {{ months.9 }}
+                    {% elif player.round_number == 11 %} {{ months.10 }}
+                    {% elif player.round_number == 12 %} {{ months.11 }}
+                    {% endif %}
+
+                    (round {{ player.round_number }}): Investment
+                </h4>
+
+                <h4>
+                    <b>You have {{ player.previous_tokens_left }} energy tokens.</b>
+                </h4>
+                <h4>
+                    <b>How many energy tokens do you want to invest to the House Conservation Fund?</b>
+                </h4>
+                <p>
+                    Click on the slider to get a handle with which to choose any value between 0 and 10.
+                </p>
+
+                <div class="slidecontainer">
+                  <input align="middle" type="range" name="contribution" min="0" max="10" value="5" class="slider" id="myRange">
+                  <p>You will contribute to House Conservation Fund: <b><span id="group"></span></b> energy tokens</p>
+                  <p>You will keep for personal benefit: <b><span id="personal"></span></b> energy tokens</p>
+
+                </div>
+
+
+                <script src="{% static 'main_app/slider.js' %}" ></script>
+                {% next_button %}
+            </div>
+        </div>
+
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

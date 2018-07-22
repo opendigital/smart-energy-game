@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %} Introduction {% endblock %}
+
+{% block content %}
+    <p>
+        This game has two parts:
+
+        The major part consists of a public goods game with
+        {{ Constants.players_per_group }} randomly chosen players per group.
+        And the last part is a survey, where you will have to
+        choose one of the options shown on the screen.
+    </p>
+
+    <div class="card bg-light">
+        <div class="card-body">
+
+        <h3>Instructions</h3>
+        <p>
+            First, each participant in
+            the group is given {{ Constants.endowment }}. Each participant in
+            the group decides how much she or he is going to contribute to
+            the project. The group have set a goal of {{ Constants.group_goal }} points that should
+            be covered in {{ Constants.num_rounds }} rounds. The contribution could be
+            any integer from 0 to {{ Constants.endowment }}.
+        </p>
+        <p>
+            The earnings from the project are calculated as follows: The
+            contributions of all {{ Constants.players_per_group }} participants are
+            added up, the total contribution
+            is multiplied by a factor of {{ Constants.multiplier }}, and the
+            resulting amount is the total earnings from the project, which is
+            evenly split among all {{ Constants.players_per_group }}
+            participants. Your payoff equals your earnings from the project, plus
+            the amount you did not contribute.
+        {% next_button %}
+        </div>
+    </div>
+
+{% endblock %}
+

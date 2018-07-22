@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block content %}
+    <div class="card bg-light">
+        <div class="card-body">
+
+            {% formfield player.question %}
+
+            {% next_button %}
+
+        </div>
+    </div>
+
+{% endblock %}
