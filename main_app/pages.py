@@ -4,6 +4,16 @@ from .models import Constants
 import random
 
 
+class WaitingRoom(WaitPage):
+    title_text = "Waiting Room"
+    body_text = "Please wait until the other participants are ready."
+
+    group_by_arrival_time = True
+
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class ConsentForm(Page):
     # Displayed only in the first round
     def is_displayed(self):
@@ -51,7 +61,6 @@ class Survey(Page):
 
 
 class ResultsWaitPage(WaitPage):
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -90,6 +99,7 @@ class PostSurvey(Page):
 
 
 page_sequence = [
+    WaitingRoom,
     ConsentForm,
     GameFraming,
     GameStructure1,

@@ -85,3 +85,7 @@ nextButton.addEventListener("click", function (event) {
 canvas.addEventListener("click", function (event) {
     nextButton.style.display = "block";
 })
+
+canvas.addEventListener("touchstart",function (event) {
+    nextButton.style.display = "block";
+})
