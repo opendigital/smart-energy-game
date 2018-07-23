@@ -1,0 +1,5 @@
+id,question,choice1,choice2,choice3,choice4,solution
+1,"At minimum, how many tokens will each player have to invest into the House Conservation Fund in each round on average to meet the group conservation goal of 216 energy tokens?",2 tokens,3 tokens,6 tokens,10 tokens,3 tokens
+2,"Assuming the contributions to the House Conservation Fund meet the group conservation goal goal of 216, what is the total donation given to Carbonfund.org to reduce air pollution?",The total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars.,2x the total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars,3x the total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars,,The total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars.
+3,What is the individual level of contribution necessary for maximizing own monetary payoff?,0 tokens, 3 tokens,6 tokens,10 tokens,0 tokens
+4,What is the individual level of contribution necessary for maximizing monetary earnings for the group?,0 tokens, 3 tokens,6 tokens,10 tokens,10 tokens

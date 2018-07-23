@@ -41,7 +41,19 @@ SESSION_CONFIGS = [
         'display_name': "Base Game Re-Design",
         'num_demo_participants': 3,
         'app_sequence': ['main_app']
-    }
+    },
+    # {
+    #     'name': 'real_effort',
+    #     'display_name': "Real-effort transcription task",
+    #     'num_demo_participants': 1,
+    #     'app_sequence': ['real_effort'],
+    # },
+    # {
+    #     'name': 'quiz',
+    #     'display_name': "Quiz",
+    #     'num_demo_participants': 2,
+    #     'app_sequence': ['quiz'],
+    # }
 ]
 # see the end of this file for the inactive session configs
 

@@ -1,15 +1,141 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
 
-{% block title %} Quiz {% endblock %}
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %} SURVEY: Demographics {% endblock %}
 
 {% block content %}
-    <div class="card bg-light">
+    <div class="card bg-transparent">
         <div class="card-body">
 
-            {% formfield player.question %}
+            <div class="form-group required">
+                <label class="col-form-label" for="id_birth"> What is your year of birth?</label>
+                <div class="controls  field-birth">
+                    <input name="birth" maxlength="4" minlength="4" required="" id="id_birth" class="form-control" type="text">
+                    <div class="form-control-errors">{{ form.birth.errors }}</div>
+                </div>
+            </div>
 
-            {% next_button %}
+            <div class="form-group required">
+                <label class="col-form-label" for="id_gender_0">What is your gender?</label>
+                <div class="controls  field-gender">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="gender" value="Male" type="radio" id="id_gender_0" class="custom-control-input">
+                        <label class="custom-control-label" for="id_gender_0">Male</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="gender" value="Female" type="radio" id="id_gender_1" class="custom-control-input">
+                        <label class="custom-control-label" for="id_gender_1">Female</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="gender" value="Other" type="radio" id="id_gender_2" class="custom-control-input">
+                        <label class="custom-control-label" for="id_gender_2">Other</label>
+                        <input onchange="document.getElementById('id_gender_2').setAttribute('value',this.value)" maxlength="20" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-control-errors">{{ form.gender.errors }}</div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-form-label" for="id_eth_0">What term best describes your ethnic identity?</label>
+                <div class="controls  field-ethnic_group">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="ethnic_group" value="African-American" type="radio" id="id_eth_0" class="custom-control-input">
+                        <label class="custom-control-label" for="id_eth_0">African-American</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="ethnic_group" value="Asian-American" type="radio" id="id_eth_1" class="custom-control-input">
+                        <label class="custom-control-label" for="id_eth_1">Asian-American</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="ethnic_group" value="Hispanic" type="radio" id="id_eth_2" class="custom-control-input">
+                        <label class="custom-control-label" for="id_eth_2">Hispanic</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="ethnic_group" value="Caucasian" type="radio" id="id_eth_3" class="custom-control-input">
+                        <label class="custom-control-label" for="id_eth_3">Caucasian</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="ethnic_group" value="Native American" type="radio" id="id_eth_4" class="custom-control-input">
+                        <label class="custom-control-label" for="id_eth_4">Native American</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="ethnic_group" value="Other" type="radio" id="id_eth_5" class="custom-control-input">
+                        <label class="custom-control-label" for="id_eth_5">Other</label>
+                        <input onchange="document.getElementById('id_eth_5').setAttribute('value',this.value)" maxlength="20" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-control-errors">{{ form.ethnic_group.errors }}</div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-form-label" for="id_econ_0">What is your economic status?</label>
+                <div class="controls  field-ethnic_group">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="economic_status" value="Full time employed" type="radio" id="id_econ_0" class="custom-control-input">
+                        <label class="custom-control-label" for="id_econ_0">Full time employed</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="economic_status" value="Full time student" type="radio" id="id_econ_1" class="custom-control-input">
+                        <label class="custom-control-label" for="id_econ_1">Full time student</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="economic_status" value="Part time employed" type="radio" id="id_econ_2" class="custom-control-input">
+                        <label class="custom-control-label" for="id_econ_2">Part time employed</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="economic_status" value="Part time student" type="radio" id="id_econ_3" class="custom-control-input">
+                        <label class="custom-control-label" for="id_econ_3">Part time student</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="economic_status" value="Other" type="radio" id="id_econ_4" class="custom-control-input">
+                        <label class="custom-control-label" for="id_econ_4">Other</label>
+                        <input onchange="document.getElementById('id_econ_4').setAttribute('value',this.value)" maxlength="20" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-control-errors">{{ form.economic_status.errors }}</div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-form-label" for="id_exp_0">How many experiments have you participated in before this one?</label>
+                <div class="controls  field-previous_experiments">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="previous_experiments" value="None" type="radio" id="id_exp_0" class="custom-control-input">
+                        <label class="custom-control-label" for="id_exp_0">None</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="previous_experiments" value="1-2 previous" type="radio" id="id_exp_1" class="custom-control-input">
+                        <label class="custom-control-label" for="id_exp_1">1-2 previous</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="previous_experiments" value="3-5 previous" type="radio" id="id_exp_2" class="custom-control-input">
+                        <label class="custom-control-label" for="id_exp_2">3-5 previous</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="previous_experiments" value="More than 5 previous" type="radio" id="id_exp_3" class="custom-control-input">
+                        <label class="custom-control-label" for="id_exp_3">More than 5 previous</label>
+                    </div>
+                </div>
+                <div class="form-control-errors">{{ form.previous_experiments.errors }}</div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-form-label" for="id_reliability_0">Are your responses reliable enough for us to include them in our academic research that will have real implications on energy and housing community policy making?</label>
+                <div class="controls  field-gender">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="reliability" value="Yes" type="radio" id="id_reliability_0" class="custom-control-input">
+                        <label class="custom-control-label" for="id_reliability_0">Yes</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input required="" name="reliability" value="Not really" type="radio" id="id_reliability_1" class="custom-control-input">
+                        <label class="custom-control-label" for="id_reliability_1">Not really</label>
+                    </div>
+                </div>
+                <div class="form-control-errors">{{ form.reliability.errors }}</div>
+            </div>
+
+            <button class="otree-btn-next btn btn-success">Submit</button>
 
         </div>
     </div>

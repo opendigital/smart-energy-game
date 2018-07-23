@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block content %}
+    {{ form.bonus_question.errors }}
+    <div class="card bg-transparent">
+        <div class="card-body">
+
+            <p>
+                <b>Assume that there are goal of 222 energy tokens contributed to House Conservation Fund by the end of the
+                experiment. You personally invested a total of 12 energy tokens over the 12 rounds, leaving 108 energy
+                tokens in your private account. How much money will you receive at the end of the experiment for playing
+                    the game</b><em>(excluding participation and quiz pay)</em><b>?</b>
+
+            </p>
+            <form>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">My payout is $</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="0.00" name="bonus_question">
+                  </div>
+            </form>
+
+            {% next_button %}
+        </div>
+    </div>
+{% endblock %}
+

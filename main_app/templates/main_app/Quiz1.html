@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+            {% if player.round_number == 12 %}
+            <p>
+                You have read the instructions and played 12 rounds of a trial game. We now give you a basic quiz to
+                confirm that you understand the rules of the game. You will be paid and additional 5 energy tokens
+                ($0.05) for each correct answer in the quiz.
+            </p>
+            <p>
+                If you answer any of them incorrectly, you will be guided back to the instructions to re-read the
+                instructions to the game. <b>It is really important that you understand the rules of the game before
+                proceeding to the game.</b> You can still get paid for getting answers correct in the second try. There
+                is no 3rd try.
+            </p>
+            {% endif %}
+
+            {% formfield player.equilibrium_tokens %}
+
+            {% next_button %}
+
+        </div>
+    </div>
+
+{% endblock %}

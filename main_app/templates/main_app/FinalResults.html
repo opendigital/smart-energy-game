@@ -3,12 +3,12 @@
 
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
-{% block title %} {% if is_trial %}OT: 12-Round Test Game{%else%} GAME: Feedback {% endif%} {% endblock %}
+{% block title %} GAME: Final Results Feedback {% endblock %}
 
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
-                <h5>{% if is_trial%}TRIAL GAME:{% endif %}</h5>
+                <h5>{% if player.round_number <= 12 %}TRIAL GAME:{% endif %}</h5>
             <div class="card" style="background: #f2f2f2">
                 <div class="card-body">
                     <h4><b>
@@ -60,17 +60,29 @@
                             <td> <em style="color: #0000ff">{{ player.remaining_tokens_in_dollars }}</em> </td>
                         </tr>
                         <tr>
+                            <td>Additional pay for correct answers on the quiz:</td>
+                            <td></td>
+                            <td><em style="color: #0000ff">NOT YET IMPLEMENTED</em></td>
+                        </tr>
+
+                        <tr>
+                            <td>Your participation pay: </td>
+                            <td></td>
+                            <td><em>$.50</em></td>
+                        </tr>
+
+                        <tr>
                             <td><b>TOTAL PAY TO YOU: </b></td>
                             <td></td>
-                            <td> {{ player.total_tokens_in_dollars }} </td>
+                            <td> <b><em style="color: #0000ff">{{ player.total_tokens_in_dollars }} + $.50</em></b></td>
                         </tr>
 
                     </table>
 
 
-                    {% if is_trial %}
+                    {% if player.round_number <= 12%}
                     <hr style="background: black">
-                    <p><i><b>NOTE:</b> This was a speculative game just to give you a better understanding of how it works.</i></p>
+                    <p><i><b>NOTE:</b> Before you receive your pay, you will need to answer 2 brief surveys.</i></p>
                     {% endif %}
                     {% next_button %}
                 </div>

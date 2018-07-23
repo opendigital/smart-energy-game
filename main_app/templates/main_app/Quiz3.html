@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+
+            {% formfield player.max_individual %}
+            {% formfield player.max_group %}
+
+            {% next_button %}
+
+        </div>
+    </div>
+
+{% endblock %}

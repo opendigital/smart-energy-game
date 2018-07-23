@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block content %}
+    {{ form.tokens_question.errors }}
+    <div class="card bg-transparent">
+        <div class="card-body">
+
+            <p>
+                <b>Assume that the goal of 216 energy tokens has NOT been contributed to the House Conservation Fund and
+                    you have invested a total of 29 energy tokens in the 12 months, leaving 91 energy tokens still in
+                    your personal account. How much money will you receive at the end of the experiment?</b>
+            </p>
+            <form>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">My payout is $</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="0.00" name="tokens_question">
+                  </div>
+            </form>
+
+            {% next_button %}
+        </div>
+    </div>
+{% endblock %}
+
