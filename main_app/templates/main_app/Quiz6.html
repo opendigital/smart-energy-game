@@ -16,7 +16,7 @@
             <form>
                 <em>How many energy tokens do you think others will <b>invest</b> to the group fund?</em>
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="0" name="expected_contribution">
+                    <input id="invest" type="text" class="form-control" placeholder="0" name="expected_contribution" oninput="document.getElementById('keep').setAttribute('value',120-this.value)">
                     <div class="input-group-prepend">
                       <div class="input-group-text">tokens</div>
                     </div>
@@ -25,7 +25,7 @@
 
                 <em>How many energy tokens do you think others will <b>keep</b> for themselves?</em>
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="0" name="expected_individual">
+                    <input id="keep" type="text" class="form-control" placeholder="0" name="expected_individual" oninput="document.getElementById('invest').setAttribute('value',120-this.value)">
                     <div class="input-group-prepend">
                       <div class="input-group-text">tokens</div>
                     </div>

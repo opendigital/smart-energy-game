@@ -8,8 +8,8 @@
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
-                <h5>{% if is_trial %}TRIAL GAME:{% endif %}</h5>
-            <div class="card" style="background: linear-gradient(to right , #eaf7f1   , #c9e8da) no-repeat;">
+                <h5>{% if is_trial %}TRIAL GAME{% endif %}</h5>
+            <div class="card" style="background: #f2f2f2;">
                 <div class="card-body">
                     <h4><b>
                         {{ current_month }} (round
@@ -22,7 +22,7 @@
                     </b></h4>
 
                     <table class="table" style="text-align:center;">
-                        <tr style="background: linear-gradient(-40deg , #eaf7f1   , #c9e8da, #eaf7f1) no-repeat !important; border: transparent">
+                        <tr style="background: linear-gradient(to right,#dcdcdc,#b5b5b5)">
                             <th>{{ current_month }} (round
                                 {% if current_round != 0 %}
                                     {{ current_round }})
@@ -41,26 +41,28 @@
                             <td> You have donated: <em style="color: #0000ff">{{ player.all_rounds_contribution }}</em> </td>
                         </tr>
                         <tr>
-                            <td><hr></td>
-                            <td><hr></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td> Other {{ Constants.players_without_me }} invested: <em style="color: #0000ff">{{ player.others_contribution }}</em> in total</td>
                             <td> Other {{ Constants.players_without_me }} have invested: <em style="color: #0000ff">{{ player.all_rounds_others_contribution }}</em> </td>
                         </tr>
                         <tr>
-                            <td><hr></td>
-                            <td><hr></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><b>House Conservation Fund received: </b><em style="color: #0000ff">{{ group.total_contribution }}</em></td>
                             <td><b>House Conservation Fund received: </b><em style="color: #0000ff">{{ group.all_rounds_contribution }}</em></td>
                         </tr>
 
-                        <!--<tr>-->
-                            <!--<td>PAYOFF</td>-->
-                            <!--<td>{{ player.payoff }}</td>-->
-                        <!--</tr>-->
+                        {% if not is_trial%}
+                            <tr>
+                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
+                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
+                            </tr>
+                        {% endif%}
 
                     </table>
 

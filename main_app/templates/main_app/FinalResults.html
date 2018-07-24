@@ -24,6 +24,7 @@
                             <th>Energy tokens</th>
                             <th>US Dollars </th>
                         </tr>
+
                         <tr>
                             <td><b>Total contributions to the House Conservation Fund: </b></td>
                             <td><em style="color: #0000ff">{{ player.all_rounds_contribution }}</td>
@@ -59,22 +60,24 @@
                             <td> <em style="color: #0000ff">{{ player.all_tokens_left }}</em> </td>
                             <td> <em style="color: #0000ff">{{ player.remaining_tokens_in_dollars }}</em> </td>
                         </tr>
+
                         <tr>
                             <td>Additional pay for correct answers on the quiz:</td>
                             <td></td>
                             <td><em style="color: #0000ff">{{ player.how_many_good_answers }}</em></td>
                         </tr>
 
+
                         <tr>
                             <td>Your participation pay: </td>
                             <td></td>
-                            <td><em>$.50</em></td>
+                            <td><em>$0.50</em></td>
                         </tr>
 
                         <tr>
                             <td><b>TOTAL PAY TO YOU: </b></td>
                             <td></td>
-                            <td> <b><em style="color: #0000ff">{{ player.total_pay }}</em></b></td>
+                            <td> <b><em style="color: #0000ff">{{ player.total_pay}}</em></b></td>
                         </tr>
 
                     </table>

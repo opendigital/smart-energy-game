@@ -10,16 +10,10 @@ p {
 #htext1{
  color: #e36c09;
 }
-.form-control{
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-
 
 html {
   height: 100%;
-  background: linear-gradient(to right , transparent, #b7ffdc, transparent) no-repeat;
+  background: linear-gradient(to right , transparent, #dae5f1, transparent) no-repeat;
 }
 input[type='range'] {
   /*position: absolute;*/

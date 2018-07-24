@@ -48,23 +48,8 @@ class Group(BaseGroup):
                     self.bonus = self.all_rounds_contribution() * Constants.multiplier / Constants.players_per_group
                     p.payoff += self.bonus
 
-            # if p.tokens is None or self.round_number == 13:
-            #     p.tokens = c(120)
-            #     self.set_payoffs()
-            # elif self.round_number == 12 or self.round_number == 24:
-            #     print(p.tokens)
-            #     p.payoff += p.tokens.to_real_world_currency(self.session)
-            #     if self.all_rounds_contribution() >= Constants.group_goal:
-            #         p.bonus_tokens = self.all_rounds_contribution()
-            #         p.payoff += self.bonus_in_dollars()/Constants.players_per_group
-            # else:
-            #     p.tokens -= p.contribution
-
-
     # It's used for after-survey queries.
     def all_rounds_contribution(self):
-            # return sum([g.total_contribution for g in self.in_all_rounds()])
-
             if self.round_number <= Constants.num_rounds / 2:
                 return sum([g.total_contribution for g in self.in_rounds(1, self.round_number)])
             else:
@@ -76,11 +61,6 @@ class Group(BaseGroup):
 
     def bonus_in_dollars(self):
         return self.bonus.to_real_world_currency(self.session)
-
-    # def set_question_payoff(self, number):
-    #     for p in self.get_players():
-    #         p.in_round(Constants.num_rounds/2).is_
-
 
 
 class Player(BasePlayer):
@@ -119,10 +99,7 @@ class Player(BasePlayer):
     # Signature is not being stored
     # signature = models.StringField()
 
-    trial_tokens = models.CurrencyField()
-    game_tokens = models.CurrencyField()
-
-    quiz_tokens = models.CurrencyField(initial=0)
+    # quiz_tokens = models.CurrencyField(initial=0)
 
     contribution = models.CurrencyField(min=0, max=Constants.endowment)
 
@@ -163,13 +140,13 @@ class Player(BasePlayer):
         else:
             return sum([p.contribution for p in self.in_rounds(Constants.num_rounds / 2 + 1, self.round_number - 1)])
 
-
-    #
-    def initialize_tokens(self):
-        self.tokens = c(120)
-
     def check_answers(self):
-        if self.is_equilibrium_tokens_correct() and self.is_donation_correct() and self.is_max_group_correct() and self.is_max_individual_correct() and self.is_bonus_question_correct() and self.is_tokens_question_correct():
+        if self.equilibrium_tokens == Constants.answers[0] \
+                and self.donation == Constants.answers[1] \
+                and self.max_individual == Constants.answers[2] \
+                and self.max_group == Constants.answers[3] \
+                and self.bonus_question == Constants.answers[4] \
+                and self.tokens_question == Constants.answers[5]:
             self.everything_correct = True
             return True
         else:
@@ -179,37 +156,37 @@ class Player(BasePlayer):
     def is_equilibrium_tokens_correct(self):
         if self.equilibrium_tokens == Constants.answers[0]:
             self.payoff += 5
-            self.quiz_tokens += c(5)
+            # self.quiz_tokens += c(5)
         return self.equilibrium_tokens == Constants.answers[0]
 
     def is_donation_correct(self):
         if self.donation == Constants.answers[1]:
             self.payoff += 5
-            self.quiz_tokens += c(5)
+            # self.quiz_tokens += c(5)
         return self.donation == Constants.answers[1]
 
     def is_max_individual_correct(self):
         if self.max_individual == Constants.answers[2]:
             self.payoff += 5
-            self.quiz_tokens += c(5)
+            # self.quiz_tokens += c(5)
         return self.max_individual == Constants.answers[2]
 
     def is_max_group_correct(self):
         if self.max_group == Constants.answers[3]:
             self.payoff += 5
-            self.quiz_tokens += c(5)
+            # self.quiz_tokens += c(5)
         return self.max_group == Constants.answers[3]
 
     def is_bonus_question_correct(self):
         if self.bonus_question == Constants.answers[4]:
             self.payoff += 5
-            self.quiz_tokens += c(5)
+            # self.quiz_tokens += c(5)
         return self.bonus_question == Constants.answers[4]
 
     def is_tokens_question_correct(self):
         if self.tokens_question == Constants.answers[5]:
             self.payoff += 5
-            self.quiz_tokens += c(5)
+            # self.quiz_tokens += c(5)
         return self.tokens_question == Constants.answers[5]
 
     def display_instructions_again(self):
@@ -220,37 +197,29 @@ class Player(BasePlayer):
         if self.round_number == 1:
             return True
         elif self.round_number == Constants.num_rounds/2+1:
-            print('@@@ everything_correct? ', self.display_instructions_again())
             return not self.display_instructions_again()
         else:
             return False
 
     def how_many_good_answers(self):
         counter = 0
-        if self.in_round(Constants.num_rounds/2).is_equilibrium_tokens_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds/2).is_donation_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds/2).is_max_individual_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds/2).is_max_group_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds/2).is_bonus_question_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds/2).is_tokens_question_correct():
-            counter+=1
-        if self.in_round(Constants.num_rounds).is_equilibrium_tokens_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds).is_donation_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds).is_max_individual_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds).is_max_group_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds).is_bonus_question_correct():
-            counter+=1
-        elif self.in_round(Constants.num_rounds).is_tokens_question_correct():
-            counter+=1
+        answers = [self.in_round(Constants.num_rounds/2).equilibrium_tokens==Constants.answers[0],
+                   self.in_round(Constants.num_rounds/2).donation==Constants.answers[1],
+                   self.in_round(Constants.num_rounds/2).max_individual==Constants.answers[2],
+                   self.in_round(Constants.num_rounds/2).max_group==Constants.answers[3],
+                   self.in_round(Constants.num_rounds/2).bonus_question==Constants.answers[4],
+                   self.in_round(Constants.num_rounds/2).tokens_question==Constants.answers[5],
+                   self.in_round(Constants.num_rounds).equilibrium_tokens==Constants.answers[0],
+                   self.in_round(Constants.num_rounds).donation==Constants.answers[1],
+                   self.in_round(Constants.num_rounds).max_individual==Constants.answers[2],
+                   self.in_round(Constants.num_rounds).max_group==Constants.answers[3],
+                   self.in_round(Constants.num_rounds).bonus_question==Constants.answers[4],
+                   self.in_round(Constants.num_rounds).tokens_question==Constants.answers[5],
+                   ]
+        for answer_is_correct in answers:
+            if answer_is_correct:
+                counter+=5
+        print('@@@ ', counter)
 
         return c(counter).to_real_world_currency(self.session)
 

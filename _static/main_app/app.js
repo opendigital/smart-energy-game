@@ -39,14 +39,10 @@ function download(dataURL, filename) {
   var blob = dataURLToBlob(dataURL);
   var url = window.URL.createObjectURL(blob);
 
-  var a = document.getElementById("a");
-  a.style = "display: none";
-  a.href = url;
-  a.download = filename;
+  var a = document.getElementById("sign");
+  a.value = url;
 
-  document.body.appendChild(a);
-  a.click();
-  a.click();
+  console.log(url)
 
   window.URL.revokeObjectURL(url);
 }
@@ -77,8 +73,8 @@ nextButton.addEventListener("click", function (event) {
   if (signaturePad.isEmpty()) {
     alert("Please provide a signature first.");
   } else {
-    //var dataURL = signaturePad.toDataURL();
-    //download(dataURL, "signature.png");
+    // var dataURL = signaturePad.toDataURL();
+    // download(dataURL, "signature.png");
   }
 });
 

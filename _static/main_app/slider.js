@@ -8,13 +8,11 @@
   const left = parseInt(hidden_input.value.split(" ")[0]);
 
   group_output.innerHTML = slider.value;
-  personal_output.innerHTML = slider.value;
+  personal_output.innerHTML = 10 - slider.value;
 
   if (is_trial != "True"){
     tokens_left.innerHTML = left - slider.value;
   }
-
-
 
   slider.oninput = function() {
     group_output.innerHTML = this.value;
@@ -23,13 +21,3 @@
       tokens_left.innerHTML = left - this.value;
     }
   }
-
-/*
-document.querySelector('input[type=range]').addEventListener('input', function() {
-  this.setAttribute('value', this.value);
-});
-*/
-
-document.querySelector('input[type=range]').addEventListener('input', function() {
-  this.setAttribute('value', this.value);
-}, false);
