@@ -42,11 +42,7 @@
                         <tr>
                             <td>The bonus to each player for meeting the group goal: </td>
                             <td>
-                                {% if Constants.group_goal <= group.all_rounds_contribution %}
-                                    <em style="color: #0000ff">{{ group.bonus }}</em>
-                                {% else %}
-                                    <em style="color: #0000ff">{{ Constants.no_bonus }}</em>
-                                {% endif %}
+                                <em style="color: #0000ff">{{ group.bonus }}</em>
                             </td>
                             <td>
                                 {% if Constants.group_goal <= group.all_rounds_contribution %}

@@ -6,7 +6,6 @@
 {% block title %} Quiz {% endblock %}
 
 {% block content %}
-    {{ form.bonus_question.errors }}
     <div class="card bg-transparent">
         <div class="card-body">
 
@@ -23,7 +22,7 @@
                       <div class="input-group-text">My payout is $</div>
                     </div>
                     <input type="text" class="form-control" placeholder="0.00" name="bonus_question">
-                  </div>
+                  </div><div class="form-control-errors">{{ form.bonus_question.errors }}</div>
             </form>
 
             {% next_button %}

@@ -6,8 +6,6 @@
 {% block title %} Quiz {% endblock %}
 
 {% block content %}
-    {{ form.expected_contribution.errors }}
-    {{ form.expected_individual.errors }}
     <div class="card bg-transparent">
         <div class="card-body">
             <p>
@@ -22,14 +20,16 @@
                     <div class="input-group-prepend">
                       <div class="input-group-text">tokens</div>
                     </div>
-                </div>
+                </div><div class="form-control-errors">{{ form.expected_contribution.errors }}</div>
+
+
                 <em>How many energy tokens do you think others will <b>keep</b> for themselves?</em>
                 <div class="input-group mb-2">
                     <input type="text" class="form-control" placeholder="0" name="expected_individual">
                     <div class="input-group-prepend">
                       <div class="input-group-text">tokens</div>
                     </div>
-                </div>
+                </div><div class="form-control-errors">{{ form.expected_individual.errors }}</div>
             </form>
 
             {% next_button %}

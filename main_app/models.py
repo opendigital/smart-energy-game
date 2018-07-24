@@ -77,6 +77,11 @@ class Group(BaseGroup):
     def bonus_in_dollars(self):
         return self.bonus.to_real_world_currency(self.session)
 
+    # def set_question_payoff(self, number):
+    #     for p in self.get_players():
+    #         p.in_round(Constants.num_rounds/2).is_
+
+
 
 class Player(BasePlayer):
     # QUIZ
@@ -98,8 +103,8 @@ class Player(BasePlayer):
     )
     bonus_question = models.FloatField()
     tokens_question = models.FloatField()
-    expected_contribution = models.IntegerField()
-    expected_individual = models.IntegerField()
+    expected_contribution = models.IntegerField(min=0, max=120)
+    expected_individual = models.IntegerField(min=0, max=120)
 
     everything_correct = models.BooleanField()
 
@@ -116,6 +121,8 @@ class Player(BasePlayer):
 
     trial_tokens = models.CurrencyField()
     game_tokens = models.CurrencyField()
+
+    quiz_tokens = models.CurrencyField(initial=0)
 
     contribution = models.CurrencyField(min=0, max=Constants.endowment)
 
@@ -150,8 +157,6 @@ class Player(BasePlayer):
     def total_tokens_in_dollars(self):
         return self.remaining_tokens_in_dollars() + self.group.bonus_in_dollars()
 
-
-
     def total_contribution(self):
         if self.round_number <= Constants.num_rounds / 2:
             return sum([p.contribution for p in self.in_rounds(1, self.round_number - 1)])
@@ -164,7 +169,90 @@ class Player(BasePlayer):
         self.tokens = c(120)
 
     def check_answers(self):
-        if self.equilibrium_tokens == Constants.answers[0] and self.donation == Constants.answers[1] and self.max_individual == Constants.answers[2] and self.max_group == Constants.answers[3] and self.bonus_question == Constants.answers[4] and self.tokens_question == Constants.answers[5]:
+        if self.is_equilibrium_tokens_correct() and self.is_donation_correct() and self.is_max_group_correct() and self.is_max_individual_correct() and self.is_bonus_question_correct() and self.is_tokens_question_correct():
             self.everything_correct = True
+            return True
         else:
             self.everything_correct = False
+            return False
+
+    def is_equilibrium_tokens_correct(self):
+        if self.equilibrium_tokens == Constants.answers[0]:
+            self.payoff += 5
+            self.quiz_tokens += c(5)
+        return self.equilibrium_tokens == Constants.answers[0]
+
+    def is_donation_correct(self):
+        if self.donation == Constants.answers[1]:
+            self.payoff += 5
+            self.quiz_tokens += c(5)
+        return self.donation == Constants.answers[1]
+
+    def is_max_individual_correct(self):
+        if self.max_individual == Constants.answers[2]:
+            self.payoff += 5
+            self.quiz_tokens += c(5)
+        return self.max_individual == Constants.answers[2]
+
+    def is_max_group_correct(self):
+        if self.max_group == Constants.answers[3]:
+            self.payoff += 5
+            self.quiz_tokens += c(5)
+        return self.max_group == Constants.answers[3]
+
+    def is_bonus_question_correct(self):
+        if self.bonus_question == Constants.answers[4]:
+            self.payoff += 5
+            self.quiz_tokens += c(5)
+        return self.bonus_question == Constants.answers[4]
+
+    def is_tokens_question_correct(self):
+        if self.tokens_question == Constants.answers[5]:
+            self.payoff += 5
+            self.quiz_tokens += c(5)
+        return self.tokens_question == Constants.answers[5]
+
+    def display_instructions_again(self):
+        display = self.in_round(Constants.num_rounds / 2)
+        return display.everything_correct
+
+    def display_instructions(self):
+        if self.round_number == 1:
+            return True
+        elif self.round_number == Constants.num_rounds/2+1:
+            print('@@@ everything_correct? ', self.display_instructions_again())
+            return not self.display_instructions_again()
+        else:
+            return False
+
+    def how_many_good_answers(self):
+        counter = 0
+        if self.in_round(Constants.num_rounds/2).is_equilibrium_tokens_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds/2).is_donation_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds/2).is_max_individual_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds/2).is_max_group_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds/2).is_bonus_question_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds/2).is_tokens_question_correct():
+            counter+=1
+        if self.in_round(Constants.num_rounds).is_equilibrium_tokens_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds).is_donation_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds).is_max_individual_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds).is_max_group_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds).is_bonus_question_correct():
+            counter+=1
+        elif self.in_round(Constants.num_rounds).is_tokens_question_correct():
+            counter+=1
+
+        return c(counter).to_real_world_currency(self.session)
+
+    def total_pay(self):
+        return self.group.bonus_in_dollars() + self.remaining_tokens_in_dollars() + c(50).to_real_world_currency(self.session) + self.how_many_good_answers()

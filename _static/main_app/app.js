@@ -39,7 +39,7 @@ function download(dataURL, filename) {
   var blob = dataURLToBlob(dataURL);
   var url = window.URL.createObjectURL(blob);
 
-  var a = document.createElement("a");
+  var a = document.getElementById("a");
   a.style = "display: none";
   a.href = url;
   a.download = filename;

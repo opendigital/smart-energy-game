@@ -51,8 +51,18 @@
                 <h4><b>You will contribute to House Conservation Fund:</b> <em class="tk_out"><b><span id="group"></span></b></em> energy tokens</h4>
                 <h4><b>You will keep for personal benefit:</b> <em class="tk_out"><b><span id="personal"></span></b></em> energy tokens</h4>
 
+
+                {% if not is_trial %}
+                    <h4><b>You are left with: </b> <em class="tk_out"><b><span id="left"></span></b></em> energy tokens for the rest of the months</h4>
+                {% endif%}
+
+                <input type="hidden" name="{{ is_trial }}" value='{{ player.previous_tokens_left }}' id="id_my_hidden_input"/>
+
+
                 <script src="{% static 'main_app/slider.js' %}" ></script>
                 {% next_button %}
+
+
             </div>
         </div>
 

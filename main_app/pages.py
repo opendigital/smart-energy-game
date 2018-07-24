@@ -21,27 +21,27 @@ class ConsentForm(Page):
 
 class GameFraming(Page):
     def is_displayed(self):
-        return (self.player.round_number == 1 or self.player.round_number == Constants.num_rounds/2+1) and not self.player.everything_correct
+        return self.player.display_instructions()
 
 
 class GameStructure1(Page):
     def is_displayed(self):
-        return (self.player.round_number == 1 or self.player.round_number == Constants.num_rounds/2+1) and not self.player.everything_correct
+        return self.player.display_instructions()
 
 
 class GameStructure2(Page):
     def is_displayed(self):
-        return (self.player.round_number == 1 or self.player.round_number == Constants.num_rounds/2+1) and not self.player.everything_correct
+        return self.player.display_instructions()
 
 
 class GameOutcomes1(Page):
     def is_displayed(self):
-        return (self.player.round_number == 1 or self.player.round_number == Constants.num_rounds/2+1) and not self.player.everything_correct
+        return self.player.display_instructions()
 
 
 class GameOutcomes2(Page):
     def is_displayed(self):
-        return (self.player.round_number == 1 or self.player.round_number == Constants.num_rounds/2+1) and not self.player.everything_correct
+        return self.player.display_instructions()
 
 
 class Survey(Page):
@@ -89,6 +89,9 @@ class Quiz1(Page):
         random.shuffle(choices)
         return choices
 
+    def before_next_page(self):
+        self.player.is_equilibrium_tokens_correct()
+
 
 class Quiz2(Page):
     form_model = 'player'
@@ -103,6 +106,9 @@ class Quiz2(Page):
                 "3x the total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars "]
         random.shuffle(choices)
         return choices
+
+    def before_next_page(self):
+        self.player.is_donation_correct()
 
 
 class Quiz3(Page):
@@ -122,6 +128,10 @@ class Quiz3(Page):
         random.shuffle(choices)
         return choices
 
+    def before_next_page(self):
+        self.player.is_max_individual_correct()
+        self.player.is_max_group_correct()
+
 
 class Quiz4(Page):
     form_model = 'player'
@@ -136,6 +146,9 @@ class Quiz4(Page):
         elif value/10 > 0.72:
             return 'Round the value up to two decimals'
 
+    def before_next_page(self):
+        self.player.is_bonus_question_correct()
+
 
 class Quiz5(Page):
     form_model = 'player'
@@ -149,6 +162,9 @@ class Quiz5(Page):
             return 'The value must be between 0 and 7.20'
         elif (value / 10) > 0.72:
             return 'Round the value up to two decimals'
+
+    def before_next_page(self):
+        self.player.is_tokens_question_correct()
 
 
 class Quiz6(Page):
