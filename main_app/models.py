@@ -13,7 +13,7 @@ Solution for training problem
 
 class Constants(BaseConstants):
     name_in_url = 'training_problem'
-    players_per_group = 6
+    players_per_group = 2
     players_without_me = players_per_group - 1
     num_rounds = 24
 

@@ -16,34 +16,12 @@ html {
   background: linear-gradient(to right , transparent, #dae5f1, transparent) no-repeat;
 }
 input[type='range'] {
-  /*position: absolute;*/
-  /*top: 50%;*/
-  /*left: 50%;*/
-  /*border: solid 0 transparent;*/
-  border-width: 0 2.25em    1.875em;
+  border-width: 0 2.25em 1.875em;
   padding: 0;
   width: 80%;
-  /*height: 3em;*/
-  /*transform: translate(-50%, -50%);*/
   background: transparent;
   font: 1em courier, monospace;
   cursor: pointer;
-}
-input[type='range'], input[type='range']::-webkit-slider-runnable-track, input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-}
-input[type='range']::-webkit-slider-runnable-track {
-  position: relative;
-  box-sizing: border-box;
-  border: solid 1px #dbdadf;
-  width: 37.25em;
-  height: 0.75em;
-  /*background: linear-gradient(90deg, #009e81 0.125em, transparent 0.125em) repeat-x 0.5625em 50% #def9b1;*/
-  background-size: 4.5em 70%;
-}
-.js input[type='range']::-webkit-slider-runnable-track {
-  /*background: linear-gradient(to right bottom, #6f9730, #9ecd59) no-repeat, linear-gradient(90deg, #bbdc89 0.125em, transparent 0.125em) repeat-x 0.5625em 50% #def9b1;*/
-  background-size: 9.625em 100%, 4.5em 70%;
 }
 input[type='range']::-moz-range-track {
   box-sizing: border-box;
@@ -51,16 +29,6 @@ input[type='range']::-moz-range-track {
   width: 100%;
   height: 0.75em;
   background: transparent;
-  /*background-size: 4.5em 70%;*/
-}
-input[type='range']::-ms-track {
-  box-sizing: border-box;
-  border: solid 1px #dbdadf;
-  width: 37.25em;
-  height: 0.75em;
-  /*background: linear-gradient(90deg, #bbdc89 0.125em, transparent 0.125em) repeat-x 0.5625em 50% #def9b1;*/
-  background-size: 4.5em 70%;
-  color: transparent;
 }
 input[type='range']::-moz-range-progress {
   height: 0.75em;
@@ -68,172 +36,37 @@ input[type='range']::-moz-range-progress {
   border: solid 1px #66534e;
   background: linear-gradient(to right , #627d9e, #366092) no-repeat;
 }
-input[type='range']::-ms-fill-lower {
+input[type='range']::-moz-range-progress {
+  height: 0.75em;
   box-sizing: border-box;
   border: solid 1px #66534e;
-  /*background: linear-gradient(to right bottom, #6f9730, #9ecd59) no-repeat;*/
-}
-input[type='range']::-webkit-slider-thumb {
-  position: relative;
-  margin-top: -0.375em;
-  box-sizing: border-box;
-  /*border: solid 0.1875em #87bd32;*/
-  width: 1.25em;
-  height: 1.5em;
-  /*box-shadow: inset 0 0 0.125em rgba(64, 102, 10, .5);*/
-  /*background: linear-gradient(-45deg, transparent 50%, #92bd3a 50%, #77b428) #6cac11;*/
-  cursor: ew-resize;
-  border-bottom-width: 0;
+  background: linear-gradient(to right , #627d9e, #366092) no-repeat;
 }
 input[type='range']::-moz-range-thumb {
   border-radius: 0;
   box-sizing: border-box;
-  /*border: solid 0.1875em #87bd32;*/
   width: 0.6em;
   height: 2.5em;
   box-shadow: inset 0 0 0.125em rgba(64, 102, 10, .5);
   background: linear-gradient(-45deg, transparent 50%, #366092 50%, #627d9e) #627d9e;
   cursor: ew-resize;
 }
-input[type='range']::-ms-thumb {
-  box-sizing: border-box;
-  border: solid 0.1875em #87bd32;
-  width: 1.25em;
-  height: 1.5em;
-  box-shadow: inset 0 0 0.125em rgba(64, 102, 10, .5);
-  /*background: linear-gradient(-45deg, transparent 50%, #92bd3a 50%, #77b428) #6cac11;*/
-  cursor: ew-resize;
+input[type='range'], input[type='range']::-webkit-slider-runnable-track, input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
 }
-input[type='range']::-webkit-slider-runnable-track:before, input[type='range'] /deep/ #track:before, input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:after {
-  position: absolute;
-  top: 280%;
-  left: 50%;
-  width: 53.83333em;
-  height: 1.66667em;
-  transform: translate(-50%);
-  font: 700 0.75em/ 1.66667em courier, monospace;
-  text-indent: 0.83333em;
-  text-shadow: 0 1px currentColor;
+input[type='range']::-webkit-slider-runnable-track {
+  border: solid 1px #366092;
+  width: 100%;
+  height: 0.75em;
+  background: linear-gradient(to right ,#366092, #627d9e,#eef3f8) no-repeat;;
 }
-input[type='range']::-webkit-slider-runnable-track:before, input[type='range'] /deep/ #track:before {
-  color: #3466a2;
-  word-spacing: 1.33333em;
-  content: "Level-1 Level-2 Level-3 Level-4 Level-5 Level-6 Level-7 Level-8 Level-9";
-}
-input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:after {
-  /*background: linear-gradient(90deg, #c5c4c1 0.16667em, transparent 0.16667em) -0.16667em 0;*/
-  background-size: 6em 100%;
-}
-.js input[type='range']::-webkit-slider-runnable-track:after, .js input[type='range'] /deep/ #track:after {
-  /*color: green;*/
-}
-input[type='range']::-webkit-slider-thumb:before, input[type='range'] /deep/ #thumb:before {
-  box-sizing: border-box;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  border: solid 0.25em #87bd32;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  width: 0.942806685em;
-  height: 0.942806685em;
-  transform: translate(-50%, -53%) rotate(-45deg);
-  box-shadow: inset 1px -1px 1px rgba(64, 102, 10, .5);
-  /*background: #6cac11;*/
-  background-clip: padding-box;
-  content: '';
-}
-.js input[type='range'][value="1"]::-webkit-slider-runnable-track {
-  background-size: 0.625em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="1"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="1"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 0% 0, 11.11111% 0, 11.11111% 100%, 0% 100%, 0% 0);
-}
-.js input[type='range'][value="1"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="1"] /deep/ #track:after {
-  text-indent: 0.83333em;
-  content: "Level-1";
-}
-.js input[type='range'][value="2"]::-webkit-slider-runnable-track {
-  background-size: 5.125em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="2"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="2"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 11.11111% 0, 22.22222% 0, 22.22222% 100%, 11.11111% 100%, 11.11111% 0);
-}
-.js input[type='range'][value="2"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="2"] /deep/ #track:after {
-  text-indent: 6.83333em;
-  content: "Level-2";
-}
-.js input[type='range'][value="3"]::-webkit-slider-runnable-track {
-  background-size: 9.625em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="3"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="3"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 22.22222% 0, 33.33333% 0, 33.33333% 100%, 22.22222% 100%, 22.22222% 0);
-}
-.js input[type='range'][value="3"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="3"] /deep/ #track:after {
-  text-indent: 12.83333em;
-  content: "Level-3";
-}
-.js input[type='range'][value="4"]::-webkit-slider-runnable-track {
-  background-size: 14.125em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="4"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="4"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 33.33333% 0, 44.44444% 0, 44.44444% 100%, 33.33333% 100%, 33.33333% 0);
-}
-.js input[type='range'][value="4"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="4"] /deep/ #track:after {
-  text-indent: 18.83333em;
-  content: "Level-4";
-}
-.js input[type='range'][value="5"]::-webkit-slider-runnable-track {
-  background-size: 18.625em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="5"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="5"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 44.44444% 0, 55.55556% 0, 55.55556% 100%, 44.44444% 100%, 44.44444% 0);
-}
-.js input[type='range'][value="5"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="5"] /deep/ #track:after {
-  text-indent: 24.83333em;
-  content: "Level-5";
-}
-.js input[type='range'][value="6"]::-webkit-slider-runnable-track {
-  background-size: 23.125em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="6"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="6"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 55.55556% 0, 66.66667% 0, 66.66667% 100%, 55.55556% 100%, 55.55556% 0);
-}
-.js input[type='range'][value="6"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="6"] /deep/ #track:after {
-  text-indent: 30.83333em;
-  content: "Level-6";
-}
-.js input[type='range'][value="7"]::-webkit-slider-runnable-track {
-  background-size: 27.625em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="7"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="7"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 66.66667% 0, 77.77778% 0, 77.77778% 100%, 66.66667% 100%, 66.66667% 0);
-}
-.js input[type='range'][value="7"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="7"] /deep/ #track:after {
-  text-indent: 36.83333em;
-  content: "Level-7";
-}
-.js input[type='range'][value="8"]::-webkit-slider-runnable-track {
-  background-size: 32.125em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="8"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="8"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 77.77778% 0, 88.88889% 0, 88.88889% 100%, 77.77778% 100%, 77.77778% 0);
-}
-.js input[type='range'][value="8"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="8"] /deep/ #track:after {
-  text-indent: 42.83333em;
-  content: "Level-8";
-}
-.js input[type='range'][value="9"]::-webkit-slider-runnable-track {
-  background-size: 36.625em 100%, 4.5em 70%;
-}
-.js input[type='range'][value="9"]::-webkit-slider-runnable-track:before, .js input[type='range'][value="9"] /deep/ #track:before {
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 0 0, 88.88889% 0, 100% 0, 100% 100%, 88.88889% 100%, 88.88889% 0);
-}
-.js input[type='range'][value="9"]::-webkit-slider-runnable-track:after, .js input[type='range'][value="9"] /deep/ #track:after {
-  text-indent: 48.83333em;
-  content: "Level-9";
+input[type='range']::-webkit-slider-thumb {
+  margin-top: -0.875em;
+  width: 0.6em;
+  height: 2.5em;
+  background: linear-gradient(-45deg, transparent 50%, #366092 50%, #627d9e) #627d9e;
 }
 input[type='range']:focus {
   outline: none;
-  box-shadow: 0 0 0.125em lime;
+  box-shadow: 0 0 0.125em transparent;
 }

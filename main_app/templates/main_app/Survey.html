@@ -1,11 +1,14 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
 
-{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+{% block styles %}
+    <link href="{% static 'main_app/style.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block title %}{% if is_trial %} OT: 12-Round Test Game {% else %} GAME: {{ current_month }} Investment {% endif %} {% endblock %}
 
 {% block content %}
+
     <div class="card bg-transparent">
         <div class="card-body">
             {% if is_trial %}
