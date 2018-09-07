@@ -111,7 +111,7 @@ source, and you can modify them as you wish.
 SECRET_KEY = '68j-5$9@d=m0_*pb0n=_3u6%33fng(738yww&w^ttk136n(4vz'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
-INSTALLED_APPS = ['otree','raven.contrib.django.raven_compat']
+INSTALLED_APPS = ['otree']
 
 # inactive session configs
 ### {
