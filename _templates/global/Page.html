@@ -2,8 +2,39 @@
 {% load otree static %}
 
 {% block global_styles  %}
+    <style>html{background: white !important;}
+        #myProgress {position:absolute;width:100%;background: lightgray}#myBar {width: 1%;height:30px;}</style>
+
+    <div id="myProgress">
+        <div id="myBar"></div>
+    </div>
+
     <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
+
+
 {% endblock %}
 
+
 {% block global_scripts  %}
+
+<script>
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width = {{ progress }};
+            if (width<30){
+                elem.style.background = 'linear-gradient(to right , white, coral) no-repeat'
+            } else if (width>=30&&width<60){
+                elem.style.background = 'beige'
+            } else {
+                elem.style.background = 'green'
+            }
+            elem.style.width = width + '%';
+        }
+    }
+</script>
 {% endblock %}

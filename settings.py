@@ -6,7 +6,7 @@ from os import environ
 # e.g. self.session.config['participation_fee']
 
 # Environment keys for AWS
-
+SENTRY_DSN = environ.get('SENTRY_DSN')
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
@@ -102,9 +102,7 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
 
 DEMO_PAGE_INTRO_HTML = """
-Here are various games implemented with 
-oTree. These games are open
-source, and you can modify them as you wish.
+admin:GoBoilers2018!
 """
 
 # don't share this with anybody.

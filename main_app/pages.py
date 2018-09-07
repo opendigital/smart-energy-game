@@ -16,25 +16,39 @@ class ConsentForm(Page):
     def is_displayed(self):
         return self.player.round_number == 1
 
+    def vars_for_template(self):
+        return {'progress': 10}
 
 class GameFraming(Page):
     def is_displayed(self):
         return self.player.display_instructions()
+
+    def vars_for_template(self):
+        return {'progress': 20}
 
 
 class GameStructure1(Page):
     def is_displayed(self):
         return self.player.display_instructions()
 
+    def vars_for_template(self):
+        return {'progress': 30}
+
 
 class GameStructure2(Page):
     def is_displayed(self):
         return self.player.display_instructions()
 
+    def vars_for_template(self):
+        return {'progress': 40}
+
 
 class GameOutcomes1(Page):
     def is_displayed(self):
         return self.player.display_instructions()
+
+    def vars_for_template(self):
+        return {'progress': 50}
 
 
 class GameOutcomes2(Page):
