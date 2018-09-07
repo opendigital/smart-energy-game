@@ -91,7 +91,7 @@ ROOMS = [
 #   of the admin interface, set it to DEMO.
 
 # for flexibility, you can set it in the environment variable OTREE_AUTH_LEVEL
-AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL')
+AUTH_LEVEL = 'MODE'
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
@@ -137,7 +137,7 @@ INSTALLED_APPS = ['otree']
 ###     'display_name': "Ultimatum (strategy method treatment)",
 ###     'num_demo_participants': 2,
 ###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': True,
+###     'use_strategy_method': T'rcodibasegame2018'#rue,
 ### },
 ### {
 ###     'name': 'ultimatum_non_strategy',
