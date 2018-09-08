@@ -4,7 +4,7 @@
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
 
-{% block title %} OT: Game Structure {% endblock %}
+{% block title %}  {% endblock %}
 
 
 
@@ -13,41 +13,32 @@
         <div class="card-body">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                         <h4><b>THE GAME STRUCTURE</b></h4>
-                        <p>
-                            There are 6 players who represent people living in the same apartment building. Thus, in
-                            addition to you, there are 5 other players. The building is trying to meet a shared energy
-                            conservation goal of reducing the annual energy use by 30%* through resident actions. Hence,
-                            the <b><i>House Conservation Fund</i></b> will need to achieve 216 (equal to $2.16) by the
-                            end of the game.
-                        </p>
-                        <p>
-                            Every player faces the same decision problem. At the beginning of the experiment, you will
-                            receive <b>120 energy tokens ($1.20)</b> in your private account. During the experiment, you
-                            can invest your tokens either for personal benefit or use them to contribute to the
-                            <b><i>House Conservation Fund</i></b>. In the end:
-                        </p>
-                        <ul>
-                            <li><b>Token in your private account will be paid out to you in cash.</b></li>
-                            <li><b>If your group reaches the goal, the amount contributed to the
-                                <i>House Conservation Fund</i> will be doubled and divided evenly between the 6
-                                participants.
+                        <ul style="font-size: 18px">
+                            <li>
+                                There are <b>6 players</b>, who live in the same apartment building.
+                            </li>
+                            <li>
+                                Each player gets <b>10 energy tokens</b> (worth <b>$.01 each</b>) at the start of each
+                                month. Each token represents 1 unit of energy use beyond your basic needs.
+                            </li>
+                            <li>
+                                You will play <b>12 rounds</b> (for each “month” of a year). In each month, every player
+                                faces the same monthly decision problem: how much energy to keep in your <b><e style="color: #a700a8">private account</e></b>
+                                versus how much to conserve (by putting it in the <b><e style="color: blue">group conservation account</e></b>).
+                            </li>
+                            <li><b>
+                                To meet the <e style="color: blue">30%</e> (=<e style="color: blue">216 tokens</e>) energy reduction goal, each player should donate an average of 3 energy tokens every month to the group conservation account.
                             </b></li>
-                            <li><b>Each $10 contributed to the energy conservation account will equate to an actual
-                                removal of 1 Metric Tons of air pollution</b> (by donating to Carbonfund.org).</li>
                         </ul>
-                        <p>
-                            You will be making your decisions anonymously.
-                        </p>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4GameStructure1.html col-lg-4">
-                        <img src="{% static 'main_app/2.png' %}" class="img-fluid" alt="Responsive image"/>
-
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <img src="{% static 'main_app/2. THE GAME STRUCTURE.png' %}" class="img-fluid" alt="Responsive image"/>
                     </div>
                 </div>
             </div>
-            {% next_button %}
+            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
         </div>
     </div>
 

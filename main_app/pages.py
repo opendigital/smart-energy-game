@@ -1,3 +1,26 @@
+#page_sequence = [
+#    WaitingRoom,
+#    ConsentForm,
+#    GameFraming,
+#    GameStructure1,
+#    GameStructure2,
+#    GameOutcomes1,
+#    GameOutcomes2,
+#    Survey,
+#    ResultsWaitPage,
+#    Results,
+#    Congrats,
+#   Quiz1,
+#    Quiz2,
+#    Quiz3,
+#    Quiz4,
+#    Quiz5,
+#    Quiz6,
+#   FinalResults,
+#    PostSurvey
+#]
+
+
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
@@ -17,14 +40,14 @@ class ConsentForm(Page):
         return self.player.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 10}
+        return {'progress': 'consent'}
 
 class GameFraming(Page):
     def is_displayed(self):
         return self.player.display_instructions()
 
     def vars_for_template(self):
-        return {'progress': 20}
+        return {'progress': 'intro'}
 
 
 class GameStructure1(Page):
@@ -32,7 +55,7 @@ class GameStructure1(Page):
         return self.player.display_instructions()
 
     def vars_for_template(self):
-        return {'progress': 30}
+        return {'progress': 'intro'}
 
 
 class GameStructure2(Page):
@@ -40,7 +63,7 @@ class GameStructure2(Page):
         return self.player.display_instructions()
 
     def vars_for_template(self):
-        return {'progress': 40}
+        return {'progress': 'intro'}
 
 
 class GameOutcomes1(Page):
@@ -48,12 +71,23 @@ class GameOutcomes1(Page):
         return self.player.display_instructions()
 
     def vars_for_template(self):
-        return {'progress': 50}
+        return {'progress': 'intro'}
 
 
 class GameOutcomes2(Page):
     def is_displayed(self):
         return self.player.display_instructions()
+
+    def vars_for_template(self):
+        return {'progress': 'intro'}
+
+
+class ExamplesTransition(Page):
+    def is_displayed(self):
+        return self.player.display_instructions()
+
+    def vars_for_template(self):
+        return {'progress': 'examples'}
 
 
 class Survey(Page):
@@ -63,7 +97,8 @@ class Survey(Page):
     def vars_for_template(self):
         return {'current_month': Constants.months[(self.round_number - 1) % 12],
                 'current_round': self.round_number % 12,
-                'is_trial': self.round_number <= Constants.num_rounds / 2}
+                'is_trial': self.round_number <= Constants.num_rounds / 2,
+                'progress': 10}
 
 
 class ResultsWaitPage(WaitPage):
@@ -75,7 +110,8 @@ class Results(Page):
     def vars_for_template(self):
         return {'current_month': Constants.months[(self.round_number - 1) % 12],
                 'current_round': self.round_number % 12,
-                'is_trial': self.round_number <= Constants.num_rounds/2}
+                'is_trial': self.round_number <= Constants.num_rounds/2,
+                'progress': 10}
 
 
 class Congrats(Page):
@@ -86,7 +122,8 @@ class Congrats(Page):
     def vars_for_template(self):
         return {'current_month': Constants.months[(self.round_number - 1) % 12],
                 'current_round': self.round_number % 12,
-                'is_trial': self.round_number <= Constants.num_rounds / 2}
+                'is_trial': self.round_number <= Constants.num_rounds / 2,
+                'progress': 10}
 
 
 class Quiz1(Page):
@@ -215,6 +252,7 @@ page_sequence = [
     GameStructure2,
     GameOutcomes1,
     GameOutcomes2,
+    ExamplesTransition,
     Survey,
     ResultsWaitPage,
     Results,

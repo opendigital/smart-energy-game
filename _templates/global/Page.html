@@ -2,11 +2,14 @@
 {% load otree static %}
 
 {% block global_styles  %}
-    <style>html{background: white !important;}
-        #myProgress {position:absolute;width:100%;background: lightgray}#myBar {width: 1%;height:30px;}</style>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Mukta|Lato|Source+Sans+Pro');
+        html{background: white !important;} body{font-family: 'Source Sans Pro', sans-serif;}
+        #myProgress {width:100%;background: lightgray;margin-bottom: -40px;}#myBar {width: 1%;height:30px;}
+    </style>
 
     <div id="myProgress">
-        <div id="myBar"></div>
+        <div id="myBar"><center><b style="color: white">{{ progress }}</b></center></div>
     </div>
 
     <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
@@ -20,21 +23,27 @@
 <script>
     var elem = document.getElementById("myBar");
     var width = 1;
-    var id = setInterval(frame, 10);
-    function frame() {
-        if (width >= 100) {
-            clearInterval(id);
-        } else {
-            width = {{ progress }};
-            if (width<30){
-                elem.style.background = 'linear-gradient(to right , white, coral) no-repeat'
-            } else if (width>=30&&width<60){
-                elem.style.background = 'beige'
-            } else {
-                elem.style.background = 'green'
-            }
-            elem.style.width = width + '%';
-        }
+
+    elem.style.background = 'gray';
+    elem.style.borderRadius = '5%'
+    var progress = '{{ progress }}';
+    switch (progress) {
+        case 'consent'://Es 1, va 1
+            elem.style.width = '5%';
+            break;
+        case 'intro'://Son 5, van 6
+            elem.style.marginLeft = '5%';
+            elem.style.width = '15%';
+            break;
+        case 'examples'://Son 4, van 10
+            elem.style.marginLeft = '20%';
+            elem.style.width = '15%';
+            break;
+        default:
+            //DO NOTHING.
+            elem.style.marginLeft = '25%';
+            elem.style.width = '50%';
+            break;
     }
 </script>
 {% endblock %}

@@ -4,7 +4,6 @@
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
 
-{% block title %} OT: Game Framing {% endblock %}
 
 
 
@@ -13,31 +12,31 @@
         <div class="card-body">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                         <h4><b>INTRODUCTION</b></h4>
                         <p>
-                            Household energy use is an important contributor to many environmental problems including air and water
-                            pollution and global warming. Many are seeking ways to encourage communities to use less energy.
+                            Many communities are trying to use less energy. In this experiment, you will play a household
+                            energy conservation challenge. It is a <b>real financial investment game</b>     where you will make
+                            decisions with <e style="color: #a700a8">5 other</e> Amazon Mechanical Turkers.
                         </p>
                         <p>
-                            In this experiment, you will play a household energy conservation challenge. It is a real financial
-                            investment game where you will make decisions with 5 other Amazon Mechanical Turk workers. As residents of
-                            the apartment building you are trying to reduce your collective energy usage by 30%. You will earn a
-                            smaller or larger financial incentive, depending on your and others’ energy choices.
+                            As residents of a shared apartment building you are trying to reduce your combined energy
+                            usage by <e style="color: blue">30%</e> (<e style="color: blue">216 token</e>). You can earn a smaller or larger financial payment at the end of
+                            the game, depending on your and others’ energy choices.
                         </p>
-                        <p>
-                            Next, you will get instructions for the game, a trial game and a quiz (an opportunity to earn extra). Then,
-                            you’ll proceed to the actual game. To make this experiment a success,
-                            <strong>please read the following rules of the experiment very attentively. </strong>
-                        </p>
+                        <p><i>
+                            Next, you will get instructions for the game, a trial game and a comprehension quiz (with
+                            an opportunity to earn extra income). Then, you’ll proceed to the actual investment game.
+                            To make this experiment a success, <b>please read the following rules very attentively</b>.
+                        </i></p>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <img src="{% static 'main_app/1.png' %}" class="img-fluid" alt="Responsive image"/>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <img src="{% static 'main_app/1. INTRODUCTION.png' %}" class="img-fluid" alt="Responsive image"/>
 
                     </div>
                 </div>
             </div>
-            {% next_button %}
+            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
         </div>
     </div>
 

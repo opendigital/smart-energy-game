@@ -78,7 +78,7 @@ nextButton.addEventListener("click", function (event) {
   }
 });
 
-canvas.addEventListener("click", function (event) {
+canvas.addEventListener("click" || "ontouch" || "touchstart", function (event) {
     nextButton.style.display = "block";
 })
 

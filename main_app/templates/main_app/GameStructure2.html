@@ -4,7 +4,7 @@
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
 
-{% block title %} OT: Game Structure {% endblock %}
+{% block title %} {% endblock %}
 
 
 
@@ -13,42 +13,31 @@
         <div class="card-body">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                         <h4><b>THE GAME PLAY</b></h4>
-                        <img src="{% static 'main_app/3.png' %}" class="img-fluid" alt="Responsive image"/>
-                        <p></p>
+                        <ul style="font-size: 21px">
+                            <li>
+                                In each month all players are asked simultaneously: “<e style="color: blue"><i>How much energy do you want to
+                                conserve this month?</i></e>” You may choose to conserve anywhere from <e style="color: blue">0</e> to <e style="color: blue">10</e> energy tokens
+                                    each month, keeping the other tokens to your <e style="color: #a700a8">private account</e>.
+                            </li>
+                            <li>
+                                <b>After each month</b> (once all players have made their choices) the month’s results be
+                                displayed to all players. You’ll get updates on the <e style="color: blue">group conservation account</e> and your
+                                <e style="color: #a700a8">private account</e>. Your personal decision will not be shared with other players.
+                            </li>
+                            <li>
+                            <b>At the end of the game</b> (after 12 months) each player will be paid based on the rules
+                                described on the next page.
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p>
-                            <b>During the experiment:</b> You will play 12 rounds (1 round for each month of a year).
-                            In each month, you can choose to invest some of your energy tokens to the
-                            <b><i>House Conservation Fund</i></b> that aims to reduce your building’s energy consumption
-                            and reduce air pollution and the associated health risks.
-                        </p>
-                        <p>
-                            <b>In each month</b> all 6 players are asked simultaneously: “How much do you want to invest
-                                into <b><i>House Conservation Fund</i></b>?” You may contribute up to 10 energy tokens
-                                ($.01) each month. Only when all players have made their choices will the month’s
-                                results be displayed to all players. After each month, the computer will credit each
-                                player’s contribution to the <b><i>House Conservation Fund</i></b> and deduct them from
-                                their private accounts.
-                        </p>
-                        <p>
-                            <b>At the end of the game</b> (after 12 months) the computer will compare the
-                            H<b><i>House Conservation Fund</i></b> balance against the predetermined goal of 216 tokens
-                            ($2.16). Meeting the goal requires every player to contribute on average 3 tokens ($.03)
-                            each month into the <b><i>House Conservation Fund</i></b>. If the <b>ConservationFund</b>
-                            has 216 tokens or more, the amount invested into the collective pot will be doubled and
-                            divided back to participants evenly. The amount in the
-                            <b><i>House Conservation Fund</i></b> will also be matched with a donation to Carbonfund.org,
-                            <b>where each $10 will equate to an actual removal of 1 Metric Tons of air pollution.</b>
-                        </p>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <img src="{% static 'main_app/3. THE GAME PLAY.png' %}" class="img-fluid" alt="Responsive image"/>
                     </div>
                 </div>
             </div>
-            {% next_button %}
+            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
         </div>
     </div>
 
