@@ -1,0 +1,100 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} Practice Feedback {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+            <h2 style="padding-left: 10px"><b>PRACTICE GAME​</b></h2><br>
+            <div class="card" style="background: #f2f2f2;">
+                <div class="card-body">
+                    <center><h4><b><u>{{ current_month }} Feedback</u> </b></h4></center>
+
+                    <table class="table" style="text-align:center;">
+                        <tr style="background: linear-gradient(to right,#dcdcdc,#b5b5b5)">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>{{ current_month }} (this month)</th>
+                            <th>Cumulative to date (all past rounds)​</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Your contribution to your personal account:​</td>
+                            <td> <e style="color: #a700a8">{{ player.private_contribution }}</e></td>
+                            <td> <e style="color: #a700a8">{{ player.all_rounds_private_contribution }}</e></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><B>Your contribution to the group conservation account:</B>​</td>
+                            <td><e style="color: #0000ff">{{ player.contribution}}</e></td>
+                            <td><e style="color: #0000ff">{{ player.all_rounds_contribution }}</e> </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><b>Others’ total contribution to the group conservation account:​</b></td>
+                            <td><e style="color: #0000ff"> {{ player.random_others_contribution }} </e></td>
+                            <td><e style="color: #0000ff"> {{ player.all_rounds_random_contribution }} </e> </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><b>Total group conservation account contributions:</b>​</td>
+                            <td><b><e   style="color: #0000ff">{{ player.group_random_total_contribution }}</e></b></td>
+                            <td><b><e style="color: #0000ff">{{ player.all_rounds_group_random_contribution }}</e></b></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b><e style="color: #0000ff">% of annual energy reduction</e></b></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b><e style="color: #0000ff">Goal: 30% ​(216 tokens)</e></b></td>
+                        </tr>
+
+                        {% if not is_trial%}
+                            <tr>
+                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
+                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
+                            </tr>
+                        {% endif%}
+
+                    </table>
+
+                    {% next_button %}
+                </div>
+            </div>
+
+
+         </div>
+    </div>
+
+{% endblock %}
+

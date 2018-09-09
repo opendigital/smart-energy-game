@@ -1,11 +1,13 @@
 {% extends "otree/Page.html" %}
 {% load otree static %}
 
+
 {% block global_styles  %}
     <style>
         @import url('https://fonts.googleapis.com/css?family=Mukta|Lato|Source+Sans+Pro');
         html{background: white !important;} body{font-family: 'Source Sans Pro', sans-serif;}
         #myProgress {width:100%;background: lightgray;margin-bottom: -40px;}#myBar {width: 1%;height:30px;}
+         .otree-title{font-size:0;color: white !important;}
     </style>
 
     <div id="myProgress">
@@ -13,8 +15,6 @@
     </div>
 
     <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
-
-
 {% endblock %}
 
 
@@ -28,21 +28,37 @@
     elem.style.borderRadius = '5%'
     var progress = '{{ progress }}';
     switch (progress) {
-        case 'consent'://Es 1, va 1
+        case 'Consent'://Es 1, va 1
             elem.style.width = '5%';
             break;
-        case 'intro'://Son 5, van 6
+        case 'Introduction'://Son 5, van 6
             elem.style.marginLeft = '5%';
             elem.style.width = '15%';
             break;
-        case 'examples'://Son 4, van 10
+        case 'Examples'://Son 4, van 10
             elem.style.marginLeft = '20%';
             elem.style.width = '15%';
             break;
+        case 'Practice'://Son 2, van 12
+            elem.style.marginLeft = '35%';
+            elem.style.width = '7%';
+            break;
+        case 'Quiz'://Son 2, van 12
+            elem.style.marginLeft = '42%';
+            elem.style.width = '17%';
+            break;
+        case 'Game'://Son 2, van 12
+            elem.style.marginLeft = '59%';
+            elem.style.width = '31%';
+            break;
+        case 'Post-Survey'://Son 2, van 12
+            elem.style.marginLeft = '42%';
+            elem.style.width = '10%';
+            break;
         default:
             //DO NOTHING.
-            elem.style.marginLeft = '25%';
-            elem.style.width = '50%';
+            elem.style.marginLeft = '10%';
+            elem.style.width = '80%';
             break;
     }
 </script>

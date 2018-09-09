@@ -1,26 +1,3 @@
-#page_sequence = [
-#    WaitingRoom,
-#    ConsentForm,
-#    GameFraming,
-#    GameStructure1,
-#    GameStructure2,
-#    GameOutcomes1,
-#    GameOutcomes2,
-#    Survey,
-#    ResultsWaitPage,
-#    Results,
-#    Congrats,
-#   Quiz1,
-#    Quiz2,
-#    Quiz3,
-#    Quiz4,
-#    Quiz5,
-#    Quiz6,
-#   FinalResults,
-#    PostSurvey
-#]
-
-
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
@@ -40,46 +17,52 @@ class ConsentForm(Page):
         return self.player.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'consent'}
+        return {'progress': 'Consent'}
+
 
 class GameFraming(Page):
     def is_displayed(self):
-        return self.player.display_instructions()
+        return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'intro'}
+        return {'progress': 'Introduction'}
 
 
 class GameStructure1(Page):
     def is_displayed(self):
-        return self.player.display_instructions()
+        return self.round_number == 1 and self.player.repeatQuiz1
 
     def vars_for_template(self):
-        return {'progress': 'intro'}
+        return {'progress': 'Introduction'}
 
+    def before_next_page(self):
+        self.player.timesInstruction1+=1
 
 class GameStructure2(Page):
     def is_displayed(self):
-        return self.player.display_instructions()
+        return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'intro'}
+        return {'progress': 'Introduction'}
 
 
 class GameOutcomes1(Page):
     def is_displayed(self):
-        return self.player.display_instructions()
+        return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'intro'}
+        return {'progress': 'Introduction'}
 
 
 class GameOutcomes2(Page):
     def is_displayed(self):
-        return self.player.display_instructions()
+        return self.round_number == 1 and self.player.repeatQuiz2
 
     def vars_for_template(self):
-        return {'progress': 'intro'}
+        return {'progress': 'Introduction'}
+
+    def before_next_page(self):
+        self.player.timesInstruction2+=1
 
 
 class ExamplesTransition(Page):
@@ -87,51 +70,88 @@ class ExamplesTransition(Page):
         return self.player.display_instructions()
 
     def vars_for_template(self):
-        return {'progress': 'examples'}
+        return {'progress': 'Examples'}
 
 
-class Survey(Page):
+class ExamplesOne(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return {'progress': 'Examples'}
+
+
+class ExamplesTwo(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return {'progress': 'Examples'}
+
+
+class ExamplesThree(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return {'progress': 'Examples'}
+
+
+class PracticeTransition(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return {'progress': 'Practice'}
+
+
+class PracticeGame(Page):
     form_model = 'player'
     form_fields = ['contribution']
+
+    def is_displayed(self):
+        return self.round_number <= 2
 
     def vars_for_template(self):
         return {'current_month': Constants.months[(self.round_number - 1) % 12],
                 'current_round': self.round_number % 12,
                 'is_trial': self.round_number <= Constants.num_rounds / 2,
-                'progress': 10}
+                'progress': 'Practice'}
+
+    def before_next_page(self):
+        self.player.private_contribution = c(10) - self.player.contribution
+        self.player.random_others_contribution = c(0)
+        for i in range(0, Constants.players_per_group):
+            self.player.random_others_contribution += c(random.randint(0,11))
+        self.player.group_random_total_contribution = self.player.contribution + self.player.random_others_contribution
 
 
-class ResultsWaitPage(WaitPage):
-    def after_all_players_arrive(self):
-        self.group.set_payoffs()
-
-
-class Results(Page):
+class PracticeResults(Page):
     def vars_for_template(self):
         return {'current_month': Constants.months[(self.round_number - 1) % 12],
                 'current_round': self.round_number % 12,
                 'is_trial': self.round_number <= Constants.num_rounds/2,
-                'progress': 10}
+                'progress': 'Practice'}
 
 
-class Congrats(Page):
-    # Displayed only in the last round
+class QuizTransition(Page):
     def is_displayed(self):
-        return self.player.round_number == Constants.num_rounds/2 or self.player.round_number == Constants.num_rounds
+        return self.round_number == 1
 
     def vars_for_template(self):
-        return {'current_month': Constants.months[(self.round_number - 1) % 12],
-                'current_round': self.round_number % 12,
-                'is_trial': self.round_number <= Constants.num_rounds / 2,
-                'progress': 10}
+        return {'progress': 'Quiz'}
 
 
 class Quiz1(Page):
     form_model = 'player'
     form_fields = ['equilibrium_tokens']
 
+    def vars_for_template(self):
+        return {'progress': 'Quiz',
+                'correct_answer': Constants.answers[0]}
+
     def is_displayed(self):
-        return self.player.round_number == (Constants.num_rounds/2) or self.player.round_number == Constants.num_rounds
+        return self.round_number == 1 and self.player.repeatQuiz1
 
     def equilibrium_tokens_choices(self):
         choices = ["2 tokens", "3 tokens", "6 tokens", "10 tokens"]
@@ -139,30 +159,41 @@ class Quiz1(Page):
         return choices
 
     def before_next_page(self):
-        self.player.is_equilibrium_tokens_correct()
+        if self.player.is_equilibrium_tokens_correct():
+            self.player.repeatQuiz1 = False
+        else:
+            self.player.repeatQuiz1 = True
 
 
 class Quiz2(Page):
     form_model = 'player'
     form_fields = ['donation']
 
+    def vars_for_template(self):
+        return {'progress': 'Quiz',
+                'correct_answer': Constants.answers[1]}
+
     def is_displayed(self):
-        return self.player.round_number == (Constants.num_rounds/2) or self.player.round_number == Constants.num_rounds
+        return self.round_number == 1 and self.player.repeatQuiz2
 
     def donation_choices(self):
-        choices = ["The total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars.",
-                "2x the total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars ",
-                "3x the total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars "]
+        choices = ["True","False"]
         random.shuffle(choices)
         return choices
 
     def before_next_page(self):
-        self.player.is_donation_correct()
+        if self.player.is_donation_correct():
+            self.player.repeatQuiz2 = False
+        else:
+            self.player.repeatQuiz2 = True
 
 
 class Quiz3(Page):
     form_model = 'player'
     form_fields = ['max_individual', 'max_group']
+
+    def vars_for_template(self):
+        return {'progress': 'Quiz'}
 
     def is_displayed(self):
         return self.player.round_number == (Constants.num_rounds/2) or self.player.round_number == Constants.num_rounds
@@ -186,6 +217,9 @@ class Quiz4(Page):
     form_model = 'player'
     form_fields = ['bonus_question']
 
+    def vars_for_template(self):
+        return {'progress': 'Quiz'}
+
     def is_displayed(self):
         return self.player.round_number == (Constants.num_rounds/2) or self.player.round_number == Constants.num_rounds
 
@@ -202,6 +236,9 @@ class Quiz4(Page):
 class Quiz5(Page):
     form_model = 'player'
     form_fields = ['tokens_question']
+
+    def vars_for_template(self):
+        return {'progress': 'Quiz'}
 
     def is_displayed(self):
         return self.player.round_number == (Constants.num_rounds/2) or self.player.round_number == Constants.num_rounds
@@ -220,6 +257,9 @@ class Quiz6(Page):
     form_model = 'player'
     form_fields = ['expected_contribution', 'expected_individual']
 
+    def vars_for_template(self):
+        return {'progress': 'Quiz'}
+
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds/2
 
@@ -229,6 +269,42 @@ class Quiz6(Page):
 
     def before_next_page(self):
         self.player.check_answers()
+
+
+class Survey(Page):
+    form_model = 'player'
+    form_fields = ['contribution']
+
+    def vars_for_template(self):
+        return {'current_month': Constants.months[(self.round_number - 1) % 12],
+                'current_round': self.round_number % 12,
+                'is_trial': self.round_number <= Constants.num_rounds / 2,
+                'progress': 'Game'}
+
+
+class ResultsWaitPage(WaitPage):
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
+
+
+class Results(Page):
+    def vars_for_template(self):
+        return {'current_month': Constants.months[(self.round_number - 1) % 12],
+                'current_round': self.round_number % 12,
+                'is_trial': self.round_number <= Constants.num_rounds/2,
+                'progress': 'Game'}
+
+
+class Congrats(Page):
+    # Displayed only in the last round
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds/2 or self.player.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+        return {'current_month': Constants.months[(self.round_number - 1) % 12],
+                'current_round': self.round_number % 12,
+                'is_trial': self.round_number <= Constants.num_rounds / 2,
+                'progress': 'Game'}
 
 
 class PostSurvey(Page):
@@ -245,24 +321,45 @@ class FinalResults(Page):
 
 
 page_sequence = [
-    WaitingRoom,
-    ConsentForm,
-    GameFraming,
-    GameStructure1,
-    GameStructure2,
-    GameOutcomes1,
-    GameOutcomes2,
-    ExamplesTransition,
-    Survey,
-    ResultsWaitPage,
-    Results,
-    Congrats,
-    Quiz1,
-    Quiz2,
+    #WaitingRoom,
+    #ConsentForm,
+    #GameFraming,
+    #GameStructure1,
+    #GameStructure2,
+    #GameOutcomes1,
+    #GameOutcomes2,
+    #ExamplesTransition,
+    #ExamplesOne,
+    ExamplesTwo,
+    ExamplesThree,
+    #PracticeTransition,
+    #PracticeGame,
+    #PracticeResults,
+    #QuizTransition,
+    #Quiz1,
+    #GameStructure1,
+    #Quiz1,
+    #Quiz2,
+    #GameOutcomes2,
+    #Quiz2,
     Quiz3,
-    Quiz4,
-    Quiz5,
-    Quiz6,
-    FinalResults,
-    PostSurvey
+    ExamplesTwo,
+    ExamplesThree,
+    Quiz3,
+    #ExamplesThree,
+    #ExamplesTwo,
+    #Quiz3,
+    #Quiz4,
+    #ExamplesOne,
+    #Quiz4,
+    #Quiz5,
+    #Quiz5,
+    #Quiz6,
+    #Quiz6,
+    #Survey,
+    #ResultsWaitPage,
+    #Results,
+    #Congrats,
+    #FinalResults,
+    #PostSurvey
 ]

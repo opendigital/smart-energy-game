@@ -1,21 +1,15 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
-
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
-
-
-{% block title %}  {% endblock %}
-
-
-
+{% block title %}Game Structure{% endblock %}
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <h4><b>THE GAME STRUCTURE</b></h4>
-                        <ul style="font-size: 18px">
+                        <h2><b>THE GAME STRUCTURE</b></h2><br>
+                        <ul style="font-size: 18px;text-align: justify;text-justify: inter-word;">
                             <li>
                                 There are <b>6 players</b>, who live in the same apartment building.
                             </li>
@@ -41,6 +35,4 @@
             <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
         </div>
     </div>
-
 {% endblock %}
-

@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block title %}Examples 2-3{% endblock %}
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body" style="padding-right: 0;">
+            <div class="container">
+                <img style="position: absolute;padding-left: 46.5%" src="{% static 'main_app/13.MIDDLE.png' %}" class="img-fluid" alt="Responsive image"/>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right: 20px">
+                        <center><h4><b>EXAMPLE 2: NO CONSERVATION​</b></h4><br></center>
+                        <p  style="text-align: justify;text-justify: inter-word;">
+                            But, if ALL players put ALL energy tokens in their <e style="color: #a700a8">personal accounts</e>
+                            and do not <e style="color: blue">conserve</e> any energy, then everybody just gets their private share: <b>$1.20</b>
+                        </p>
+                        <img src="{% static 'main_app/9. EXAMPLE 2.png' %}" class="img-fluid" alt="Responsive image"/>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 18px">
+                        <center><h4><b>EXAMPLE 3: MAX CONSERVATION​</b></h4><br></center>
+                        <p>
+                            Or, if ALL players <e style="color: blue">conserve</e> the maximum amount of 10 energy tokens every month, then
+                            everybody just gets the group bonus: <b>$2.20​</b>
+                        </p>
+                        <img src="{% static 'main_app/10. EXAMPLE 3.png' %}" class="img-fluid" alt="Responsive image"/>
+                    </div>
+                </div>
+            </div>
+            <br><button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+        </div>
+    </div>
+{% endblock %}
+

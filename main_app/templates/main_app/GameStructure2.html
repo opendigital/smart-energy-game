@@ -1,31 +1,25 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
-
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
-
-
-{% block title %} {% endblock %}
-
-
-
+{% block title %}Game Play{% endblock %}
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
-            <div class="container">
+            <div class="container" style="height: 90%">
                 <div class="row">
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <h4><b>THE GAME PLAY</b></h4>
-                        <ul style="font-size: 21px">
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7"   >
+                        <h2><b>THE GAME PLAY</b></h2><br>
+                        <ul style="font-size: 19px;text-align: justify;text-justify: inter-word;">
                             <li>
                                 In each month all players are asked simultaneously: “<e style="color: blue"><i>How much energy do you want to
                                 conserve this month?</i></e>” You may choose to conserve anywhere from <e style="color: blue">0</e> to <e style="color: blue">10</e> energy tokens
                                     each month, keeping the other tokens to your <e style="color: #a700a8">private account</e>.
-                            </li>
+                            </li><br>
                             <li>
                                 <b>After each month</b> (once all players have made their choices) the month’s results be
                                 displayed to all players. You’ll get updates on the <e style="color: blue">group conservation account</e> and your
                                 <e style="color: #a700a8">private account</e>. Your personal decision will not be shared with other players.
-                            </li>
+                            </li><br>
                             <li>
                             <b>At the end of the game</b> (after 12 months) each player will be paid based on the rules
                                 described on the next page.
@@ -40,6 +34,4 @@
             <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
         </div>
     </div>
-
 {% endblock %}
-

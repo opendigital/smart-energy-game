@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body" >
+            <h2 style="padding-left: 10px"><b>COMPREHENSION QUIZ </b></h2><br>
+            <div class="container" >
+                <ul style="font-size: 22px"><li>
+                    Now that you have read the instructions and played 2 practice rounds, we will give you a basic quiz
+                    to confirm that you understand the rules of the game. You’ll be paid an additional $0.05 for each
+                    correct quiz answer. <B>It is very important that you understand the rules of the game before playing
+                    the real game</B>.</li><br>
+                <li>
+                    <b>If you answer a question incorrectly</b>, you will be directed back to the relevant section of
+                    instructions. You will get a second chance to answer the question and will get paid for answering it
+                    correctly. ​
+                </li><br>
+                <li >
+                    <b>After a second incorrect answer</b>, the computer will tell you the correct answer and you will
+                    NOT get the payment for that question.​
+                </li></ul><br>
+            </div>
+            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+        </div>
+    </div>
+
+{% endblock %}
+

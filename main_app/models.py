@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'training_problem'
     players_per_group = 6
     players_without_me = players_per_group - 1
-    num_rounds = 24
+    num_rounds = 14
 
     endowment = c(100)
     multiplier = 2
@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER',
               'NOVEMBER', 'DECEMBER']
 
-    answers = ["3 tokens", "The total tokens in the House Conservation Fund x $.01 to convert the energy tokens into dollars.", "0 tokens", "10 tokens", 1.82, 0.91]
+    answers = ["3 tokens", "True", "0 tokens", "10 tokens", 1.82, 0.91]
 
 
 class Subsession(BaseSubsession):
@@ -35,12 +35,14 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     total_contribution = models.CurrencyField()
+    total_random_contribution = models.CurrencyField()
     bonus = models.CurrencyField(initial=c(0))
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
 
         for p in self.get_players():
+            self.total_random_contribution = p.contribution + p.random_others_contribution
             p.payoff = c(10) - p.contribution
 
             if self.round_number > 1:
@@ -55,6 +57,9 @@ class Group(BaseGroup):
             else:
                 return sum([g.total_contribution for g in self.in_rounds(Constants.num_rounds / 2 + 1, self.round_number)])
 
+    #def all_rounds_random_contribution(self):
+    #    return sum([g.total_contribution for g in self.in_previous_rounds()])
+
     # It's used for before-survey queries.
     def previous_rounds_contribution(self):
             return sum([g.total_contribution for g in self.in_previous_rounds()])
@@ -66,11 +71,11 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # QUIZ
     equilibrium_tokens = models.StringField(
-        label='At minimum, how many tokens will each player have to invest into the House Conservation Fund in each round on average to meet the group conservation goal of 216 energy tokens?',
+        label='',
         widget=widgets.RadioSelectHorizontal
     )
     donation = models.StringField(
-        label=' Assuming the contributions to the House Conservation Fund meet the group conservation goal of 216, what is the total donation given to Carbonfund.org to reduce air pollution?',
+        label='',
         widget=widgets.RadioSelect
     )
     max_individual = models.StringField(
@@ -101,7 +106,20 @@ class Player(BasePlayer):
 
     # quiz_tokens = models.CurrencyField(initial=0)
 
-    contribution = models.CurrencyField(min=0, max=Constants.endowment)
+    contribution = models.CurrencyField(min=0, max=10)
+    private_contribution = models.CurrencyField(min=0, max=10)
+    random_others_contribution = models.CurrencyField()
+    group_random_total_contribution = models.CurrencyField()
+
+    repeatQuiz1 = models.BooleanField(initial=True)
+    timesInstruction1 = models.IntegerField(initial=0)
+    repeatQuiz2 = models.BooleanField(initial=True)
+    timesInstruction2 = models.IntegerField(initial=0)
+    repeatQuiz3 = models.BooleanField(initial=True)
+    timesInstruction3 = models.IntegerField(initial=0)
+    repeatQuiz4 = models.BooleanField(initial=True)
+    timesInstruction4 = models.IntegerField(initial=0)
+
 
     # First row RESULTS
     def all_tokens_left(self):
@@ -115,6 +133,18 @@ class Player(BasePlayer):
             return sum([p.contribution for p in self.in_rounds(1, self.round_number)])
         else:
             return sum([p.contribution for p in self.in_rounds(Constants.num_rounds/2+1, self.round_number)])
+
+    def all_rounds_private_contribution(self):
+        if self.round_number <= Constants.num_rounds/2:
+            return sum([p.private_contribution for p in self.in_rounds(1, self.round_number)])
+        else:
+            return sum([p.private_contribution for p in self.in_rounds(Constants.num_rounds/2+1, self.round_number)])
+
+    def all_rounds_random_contribution(self):
+        return sum([p.random_others_contribution for p in self.in_rounds(1, self.round_number)])
+
+    def all_rounds_group_random_contribution(self):
+        return sum([p.group_random_total_contribution for p in self.in_rounds(1, self.round_number)])
 
     def previous_rounds_contribution(self):
         if self.round_number <= Constants.num_rounds/2:
@@ -156,6 +186,7 @@ class Player(BasePlayer):
     def is_equilibrium_tokens_correct(self):
         if self.equilibrium_tokens == Constants.answers[0]:
             self.payoff += 5
+            self.repeatQuiz1 = False
             # self.quiz_tokens += c(5)
         return self.equilibrium_tokens == Constants.answers[0]
 

@@ -1,5 +1,26 @@
 p {
- font-size: 18px;
+ font-size:18px;
+}
+.form-control-errors{
+  text-align: center;
+}
+#contribution_box{
+  background: transparent;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: black;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-radius: 10%;
+  height: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  outline: none !important;
+  box-shadow: 0 0 10px transparent;
+}
+.pr{
+ color: #a700a8
 }
 .others{
   color: #a700a8;
