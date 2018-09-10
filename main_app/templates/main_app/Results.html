@@ -3,76 +3,94 @@
 
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
-{% block title %} {% if is_trial %} OT: 12-Round Test Game{% else %} GAME: {{ current_month }} Feedback {% endif %}{% endblock %}
+{% block title %} Game Feedback {% endblock %}
 
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
-                <h5>{% if is_trial %}TRIAL GAME{% endif %}</h5>
+            <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
             <div class="card" style="background: #f2f2f2;">
                 <div class="card-body">
-                    <h4><b>
-                        {{ current_month }} (round
-                        {% if current_round != 0 %}
-                            {{ current_round }})
-                        {% else %}
-                            12)
-                        {% endif %}
-                        : Feedback
-                    </b></h4>
+                    <center><h4><b><u>{{ current_month }} Feedback</u> </b></h4></center>
 
                     <table class="table" style="text-align:center;">
-                        <tr style="background: linear-gradient(to right,#dcdcdc,#b5b5b5)">
-                            <th>{{ current_month }} (round
-                                {% if current_round != 0 %}
-                                    {{ current_round }})
-                                {% else %}
-                                    12)
-                                {% endif %}
-                            </th>
-                            <th>Cumulative (all rounds)</th>
-                        </tr>
-                        <tr>
-                            <td> You had: <em style="color: #0000ff">{{ player.previous_tokens_left }}</em></td>
-                            <td> You are left with: <em style="color: #0000ff">{{ player.all_tokens_left }}</em></td>
-                        </tr>
-                        <tr>
-                            <td> You donated: <em style="color: #0000ff">{{ player.contribution }}</em></td>
-                            <td> You have donated: <em style="color: #0000ff">{{ player.all_rounds_contribution }}</em> </td>
+                        <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>{{ current_month }} (this month)</th>
+                            <th>Cumulative to date (all past rounds)​</th>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
-                        </tr>
-                        <tr>
-                            <td> Other {{ Constants.players_without_me }} invested: <em style="color: #0000ff">{{ player.others_contribution }}</em> in total</td>
-                            <td> Other {{ Constants.players_without_me }} have invested: <em style="color: #0000ff">{{ player.all_rounds_others_contribution }}</em> </td>
+                            <td>Your contribution to your personal account:​</td>
+                            <td> <e style="color: #a700a8">{{ player.private_contribution }}</e></td>
+                            <td> <e style="color: #a700a8">{{ player.all_rounds_private_contribution }}</e></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
+                            <td><B>Your contribution to the group conservation account:</B>​</td>
+                            <td><e style="color: #0000ff">{{ player.contribution}}</e></td>
+                            <td><e style="color: #0000ff">{{ player.all_rounds_contribution }}</e> </td>
                         </tr>
                         <tr>
-                            <td><b>House Conservation Fund received: </b><em style="color: #0000ff">{{ group.total_contribution }}</em></td>
-                            <td><b>House Conservation Fund received: </b><em style="color: #0000ff">{{ group.all_rounds_contribution }}</em></td>
-                        </tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
 
-                        {% if not is_trial%}
-                            <tr>
-                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
-                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
-                            </tr>
-                        {% endif%}
-
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><b>Others’ total contribution to the group conservation account:​</b></td>
+                            <td><e style="color: #0000ff"> {{ player.others_contribution }} </e></td>
+                            <td><e style="color: #0000ff"> {{ player.all_rounds_others_contribution }} </e> </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><b>Total group conservation account contributions:</b>​</td>
+                            <td><b><e   style="color: #0000ff">{{ group.total_contribution }}</e></b></td>
+                            <td><b><e style="color: #0000ff">{{ group.all_rounds_contribution }}</e></b></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td id="percentage"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b><e style="color: #0000ff">Goal: 30% ​(216 tokens)</e></b></td>
+                        </tr>
                     </table>
-
-                    {% next_button %}
                 </div>
             </div>
-
-
+            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%;margin-top: 30px; width: 100px">Next</button>
          </div>
     </div>
+    <script>
+    var percentage = document.getElementById("percentage")
+    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0],10)*100/215)
+
+
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of annual energy reduction</e></b>"
+    </script>
 
 {% endblock %}
 

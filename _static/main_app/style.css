@@ -1,6 +1,9 @@
 p {
  font-size:18px;
 }
+/*#explanation{
+  white-space: normal;
+}*/
 .form-control-errors{
   text-align: center;
 }

@@ -1,32 +1,254 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
-
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
-
-{% block title %} Quiz {% endblock %}
-
+{% block title %} Quiz 4 {% endblock %}
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
-
-            <p>
-                <b>Assume that there are goal of 222 energy tokens contributed to House Conservation Fund by the end of the
-                experiment. You personally invested a total of 12 energy tokens over the 12 rounds, leaving 108 energy
-                tokens in your private account. How much money will you receive at the end of the experiment for playing
-                    the game</b><em>(excluding participation and quiz pay)</em><b>?</b>
-
-            </p>
-            <form>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">My payout is $</div>
+            <h2 style="padding-left: 10px"><b>COMPREHENSION QUIZ 4/4</b></h2><br>
+            <p>Q4.a:</p>
+            <p><b>If there are 300 tokens in the group conservation account at the end of the game (worth $3.00) and you have 108 tokens left in your private account, then how much will you receive at the end of the game? ​</b></p>
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <label>My payout from my personal account is: </label>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
+                            <table>
+                                <tr>
+                                    <td><input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label></td>
+                                    <td><input name="answerQ4a1" type="radio" id="id2" value="$1.08"/><label for="id2">$1.08</label></td>
+                                    <td><input name="answerQ4a1" type="radio" id="id3" value="$2.08"/><label for="id3">$2.08</label></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br><p id="Explanation"></p><br>
                     </div>
-                    <input type="text" class="form-control" placeholder="0.00" name="bonus_question">
-                  </div><div class="form-control-errors">{{ form.bonus_question.errors }}</div>
-            </form>
+                    <div class="row">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <label>My payout from the group conservation account is: </label>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"  style="white-space:nowrap">
+                            <table>
+                                <tr>
+                                    <td><input name="answerQ4a2" type="radio" id="id4" value="$1.00"/><label for="id4">$1.00</label></td>
+                                    <td><input name="answerQ4a2" type="radio" id="id5" value="$1.08"/><label for="id5">$1.08</label></td>
+                                    <td><input name="answerQ4a2" type="radio" id="id6" value="$2.08"/><label for="id6">$2.08</label></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br><p id="Explanation2"></p><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <label>Total payout is (personal plus conservation): </label>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"  style="white-space:nowrap">
+                            <table>
+                                <tr>
+                                    <td><input name="answerQ4a3" type="radio" id="id7" value="$1.00"/><label for="id7">$1.00</label></td>
+                                    <td><input name="answerQ4a3" type="radio" id="id8" value="$1.08"/><label for="id8">$1.08</label></td>
+                                    <td><input name="answerQ4a3" type="radio" id="id9" value="$2.08"/><label for="id9">$2.08</label></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br><p id="Explanation3"></p><br>
+                    </div>
+                </div>
+            </div>
 
-            {% next_button %}
+            <p>Q4.b:</p>
+            <p><b>How would your payout at the end of the game change if the total in the group conservation account had only 200 tokens? </b></p>
+            <div >
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <label>My payout from my personal account is: </label>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
+                            <table>
+                                <tr>
+                                    <td><input name="answerQ4b1" type="radio" id="id11" value="$0.00"/><label for="id11">$0.00</label></td>
+                                    <td><input name="answerQ4b1" type="radio" id="id12" value="$1.08"/><label for="id12">$1.08</label></td>
+                                    <td><input name="answerQ4b1" type="radio" id="id13" value="$2.08"/><label for="id13">$2.08</label></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br><p id="Explanation4"></p><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <label>My payout from the group conservation account is: </label>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
+                            <table>
+                                <tr>
+                                    <td><input name="answerQ4b2" type="radio" id="id14" value="$0.00"/><label for="id14">$0.00</label></td>
+                                    <td><input name="answerQ4b2" type="radio" id="id15" value="$1.08"/><label for="id15">$1.08</label></td>
+                                    <td><input name="answerQ4b2" type="radio" id="id16" value="$2.08"/><label for="id16">$2.08</label></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br><p id="Explanation5"></p><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <label>Total payout is (personal plus conservation): </label>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
+                            <table>
+                                <tr>
+                                    <td><input name="answerQ4b3" type="radio" id="id17" value="$0.00"/><label for="id17">$0.00</label></td>
+                                    <td><input name="answerQ4b3" type="radio" id="id18" value="$1.08"/><label for="id18">$1.08</label></td>
+                                    <td><input name="answerQ4b3" type="radio" id="id19" value="$2.08"/><label for="id19">$2.08</label></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br><p id="Explanation6"></p><br>
+                    </div>
+                </div>
+            </div>
+
+            <button style="display: block" id="checkButton" type="button" class="btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Check Answer</button>
+            <button style="display: none" id="nextButton" class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 50%; width: 100px">Next</button>
+
+
+
+
+
+
+
+
+
+
+            <script>
+                var checkButton = document.getElementById("checkButton")
+                var nextButton = document.getElementById("nextButton")
+                var explanation = document.getElementById("Explanation")
+                var explanation2 = document.getElementById("Explanation2")
+                var explanation3 = document.getElementById("Explanation3")
+                var explanation4 = document.getElementById("Explanation4")
+                var explanation5 = document.getElementById("Explanation5")
+                var explanation6 = document.getElementById("Explanation6")
+
+
+
+
+
+
+
+
+                if( '{{ player.timesInstruction4 }}' == '0'){//INITIAL FIRST TRY
+                    nextButton.style.display = "block";
+                    nextButton.style.background = "#8d8d8d";
+                    nextButton.style.marginLeft = "80%";
+                    nextButton.style.width = "120px";
+                    checkButton.style.display = "none";
+                }else{                                       //SECOND TRY
+                    checkButton.style.background = "#8d8d8d";
+                    checkButton.style.marginLeft = "80%";
+                    checkButton.style.width = "120px";
+
+                    for (i = 1; i < 20; i++) {
+                        if(i!=10){
+                            document.getElementById("id"+i).checked = false;
+                        }
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+                checkButton.onclick = function () {
+                    //var radioInputs = document.getElementsByClassName("form-check-input")
+                    var answerSelected = ""
+                    var answerSelected2 =""
+                    var answerSelected3 =""
+                    var answerSelected4 =""
+                    var answerSelected5 =""
+                    var answerSelected6 =""
+
+
+
+
+
+                    for (i = 1; i < 20; i++) {
+                        if(i!=10){
+                            var curRadio = document.getElementById("id"+i)
+
+                            if(curRadio.checked){
+                                if(i<=3){                //answerA1
+                                    answerSelected=curRadio.value;
+                                } else if(3<i&&i<=6){   //answerA2
+                                    answerSelected2=curRadio.value;
+                                } else if(6<i&&i<=9){   //answerA3
+                                    answerSelected3=curRadio.value;
+                                } else if(10<i&&i<=13){ //answerB1
+                                    answerSelected4=curRadio.value;
+                                }  else if(13<i&&i<=16){//answerB2
+                                    answerSelected5=curRadio.value;
+                                }  else if(16<i&&i<=19){//answerB3
+                                    answerSelected6=curRadio.value;
+                                }
+                            }
+                        }
+                    }
+
+
+
+
+                    if(answerSelected!=""&&answerSelected2!=""&&answerSelected3!=""&&answerSelected4!=""&&answerSelected5!=""&&answerSelected6!="") {
+                        nextButton.style.display = "block";
+                        nextButton.style.background = "#8d8d8d";
+                        nextButton.style.marginLeft = "80%";
+                        nextButton.style.width = "100px";
+                        checkButton.style.display = "none";
+
+                        var answers = [answerSelected,answerSelected2,answerSelected3,answerSelected4,answerSelected5,answerSelected6]
+                        var correct_answers = ["{{ correct_answer }}","{{ correct_answer2 }}","{{ correct_answer3 }}",
+                                               "{{ correct_answer4 }}","{{ correct_answer5 }}","{{ correct_answer6 }}"]
+                        var explanations = [explanation,explanation2,explanation3,explanation4,explanation5,explanation6]
+                        var textExplain = [
+                            "The correct answer is $1.08. You are paid $.01 for each of the 108 energy tokens eft in your private account.",
+                            "The correct answer is $1.00. The 300 energy tokens meets the conservation goal, so they are doubled to 600 tokens and then distributed equally to all 6 players, resulting in $1.00 bonus pay per player.",
+                            "The correct answer is $2.08. Add the energy token values in your personal account ($1.08) and the bonus ($1.00) to get your final pay of $2.08.",
+                            "The correct answer is $1.08. You are paid $.01 for each of the 108 energy tokens left in your private account, even if the group does not meet the conservation goal of 216 tokens.",
+                            "The correct answer is $0.00. The 200 energy tokens do not meet the group conservation goal of 216 energy tokens, so no group bonus is paid.",
+                            "The correct answer is $1.08. Add the energy token values in your private account ($1.08) and the bonus from the group conservation account ($0.00) to get your final pay of $1.08”"
+                        ]
+
+                        for(i=0; i<6;i++){
+                            explanations[i].style.display="block"
+                            explanations[i].style.whiteSpace="normal"
+                        }
+
+                        for (i = 1; i < 20; i++) {
+                            if(i!=10){
+                               if (!document.getElementById("id"+i).checked) {
+                                    document.getElementById("id"+i).disabled = true;
+                                }
+                            }
+
+                        }
+
+                        for (i=0;i<6;i++){
+                            if (answers[i]==correct_answers[i]){
+                                explanations[i].innerHTML = "<e style=\"color:green\">Correct!</e> "
+                            }else{
+                                explanations[i].innerHTML = "<e style=\"color:red\">Wrong!</e> "
+                            }
+                            explanations[i].innerHTML += "<e style=\"color:gray\">"+ textExplain[i] +"</e>"
+                        }
+                    }
+                }
+            </script>
         </div>
     </div>
 {% endblock %}
-

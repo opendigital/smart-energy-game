@@ -1,78 +1,41 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
-
-{% block styles %}
-    <link href="{% static 'main_app/style.css' %}" rel="stylesheet">
-{% endblock %}
-
-{% block title %}{% if is_trial %} OT: 12-Round Test Game {% else %} GAME: {{ current_month }} Investment {% endif %} {% endblock %}
-
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block title %}Practice Game{% endblock %}
 {% block content %}
-
     <div class="card bg-transparent">
         <div class="card-body">
-            {% if is_trial %}
-                <h5>TRIAL GAME</h5>
-            {% else %}
-                <h5><b>THE REAL GAME</b></h5>
-                <h4><b>{{ current_month }} INVESTMENT</b></h4>
-            {% endif %}
-
-        {% if player.round_number == 1 %}
-            <p>
-                Before we proceed, we’ll ask you to play a 12-round test game with simulated random feedback so that
-                you can get familiar with the the setup of the game, the slider tool with which you can invest your
-                energy tokens.
-            </p>
-        {% endif%}
-
-        <div class="card" style="background: linear-gradient(to right ,#eef3f8, #dae5f1,#eef3f8) no-repeat;">
-            <div class="card-body">
-
-                {% if is_trial %}
-                <h4>
-                    {{ current_month }} (round
-                    {% if current_round != 0 %}
-                        {{ current_round }}): Investment
-                    {% else %}
-                        12): Investment
-                    {% endif %}
-                </h4>
-                {% endif %}
-                <h4>
-                    <b>You have <em class="tk_out">{{ player.previous_tokens_left }}</em>.</b>
-                </h4>
-                <h4>
-                    <b>How many energy tokens do you want to invest to the House Conservation Fund?</b>
-                </h4>
-                <p>
-                    Click on the slider to get a handle with which to choose any value between 0 and 10.
-                </p>
-
-                <em style="font-size: 30px;margin: 5px;">0</em> <input id="myRange" type='range' min='0' max='10' value=3 step='1' name="contribution"/> <em style="font-size: 30px;margin: 5px;">10</em>
-                <p></p>
-                <h4><b>You will contribute to House Conservation Fund:</b> <em class="tk_out"><b><span id="group"></span></b></em> energy tokens</h4>
-                <h4><b>You will keep for personal benefit:</b> <em class="tk_out"><b><span id="personal"></span></b></em> energy tokens</h4>
+            <h2 style="padding-left: 10px"><b>PRACTICE GAME​</b></h2><br>
+            <div class="form-control-errors" id="errors">{{ form.contribution.errors }}</div>
 
 
-                {% if not is_trial %}
-                    <h4><b>You are left with: </b> <em class="tk_out"><b><span id="left"></span></b></em> energy tokens for the rest of the months</h4>
-                {% endif%}
+            <div class="card" style="background: linear-gradient(to right ,#eef3f8, #dae5f1,#eef3f8) no-repeat;">
+                <div class="card-body">
+                    <center><h4><b><u>{{ current_month }}</u></b></h4></center>
+                    <h4><b>You have <e class="pr">10</e> energy tokens.</b></h4><br>
+                    <h4><b>How much energy do you want to conserve this month?</b></h4><br>
+                    <div class="container" style="padding: 0">
+                        <div class="row">
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="padding-right: 0; margin-right: -38px">
+                                <p>Enter a number between 0 and 10 to save energy tokens to the group conservation account:</p>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 0">
+                                <input name="contribution" id="contribution_box" min="0" max="10" type="number">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p style="margin-top: -15px; margin-left: 14px">This is how much you will keep this month for your personal energy account:
+                                <b><span id="personal" style="color: #a700a8"></span></b>
+                            energy tokens</p>
 
-                <input type="hidden" name="{{ is_trial }}" value='{{ player.previous_tokens_left }}' id="id_my_hidden_input"/>
-
-
-                <script src="{% static 'main_app/slider.js' %}" ></script>
-                {% next_button %}
-
-
+                            <div style="display: none" ><input name="private_contribution" id="private_box" min="0" max="10" type="number"></div>
+                        </div>
+                    </div>
+                    <script src="{% static 'main_app/game.js' %}" ></script>
+                    <br>
+                    <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+                </div>
             </div>
         </div>
-
-
-
-        </div>
     </div>
-
-
 {% endblock %}

@@ -69,7 +69,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><b><e style="color: #0000ff">% of annual energy reduction</e></b></td>
+                            <td id="percentage"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -88,13 +88,20 @@
 
                     </table>
 
-                    {% next_button %}
+
                 </div>
+
             </div>
-
-
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; margin-top:30px;width: 100px">Next</button>
          </div>
     </div>
+    <script>
+    var percentage = document.getElementById("percentage")
+    var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0],10)*100/215)
+
+
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of annual energy reduction</e></b>"
+    </script>
 
 {% endblock %}
 

@@ -1,22 +1,111 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
-
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
-
-{% block title %} Quiz {% endblock %}
-
+{% block title %} Quiz 3 {% endblock %}
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
+            <h2 style="padding-left: 10px"><b>COMPREHENSION QUIZ 3/4</b></h2><br>
+            <p>Q3.a:</p>
+            <p><b>True or False: you will have greater benefits than others if you keep all of your energy tokens for yourself, while others invest all of theirs to the group conservation account. ​</b></p>
+            {% formfield player.Q3a %}
+            <br><p id="Explanation"></p><br>
+            <p>Q3.b:</p>
+            <p><b>True or False: the group will maximize its benefits if all players invest all of their energy tokens to the group contribution fund.​</b></p>
+            {% formfield player.Q3b %}
+            <br><p id="Explanation2"></p><br>
+            <button style="display: block" id="checkButton" type="button" class="btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Check Answer</button>
+            <button style="display: none" id="nextButton" class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 50%; width: 100px">Next</button>
+            <script>
+                var checkButton = document.getElementById("checkButton")
+                var nextButton = document.getElementById("nextButton")
+                var explanation = document.getElementById("Explanation")
+                var explanation2 = document.getElementById("Explanation2")
+                if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '0'){//INITIAL FIRST TRY
+                    nextButton.style.display = "block";
+                    nextButton.style.background = "#8d8d8d";
+                    nextButton.style.marginLeft = "80%";
+                    nextButton.style.width = "120px";
+                    checkButton.style.display = "none";
+                }else if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '1'){
+                    checkButton.style.background = "#8d8d8d";
+                    checkButton.style.marginLeft = "80%";
+                    checkButton.style.width = "120px";
+                    var radioInputs = document.getElementsByClassName("form-check-input")
 
-            {% formfield player.max_individual %}
-            {% formfield player.max_group %}
+                    for (i = 0; i < radioInputs.length; i++) {
+                        var currentRadio = radioInputs.item(i)
+                        if(i<2){
+                            if(!currentRadio.checked) currentRadio.disabled = true
+                        }else{
+                            currentRadio.checked = false;
+                        }
+                    }
+                }else if( '{{ player.timesInstruction3a }}' == '1' && '{{ player.timesInstruction3b }}' == '0'){
+                    checkButton.style.background = "#8d8d8d";
+                    checkButton.style.marginLeft = "80%";
+                    checkButton.style.width = "120px";
+                    var radioInputs = document.getElementsByClassName("form-check-input")
 
-            {% next_button %}
+                    for (i = 0; i < radioInputs.length; i++) {
+                        var currentRadio = radioInputs.item(i)
+                        if(i>=2){
+                            if(!currentRadio.checked) currentRadio.disabled = true
+                        }else{
+                            currentRadio.checked = false;
+                        }
+                    }
+                }else{
+                    checkButton.style.background = "#8d8d8d";
+                    checkButton.style.marginLeft = "80%";
+                    checkButton.style.width = "120px";
+                    var radioInputs = document.getElementsByClassName("form-check-input")
 
+                    for (i = 0; i < radioInputs.length; i++) {
+                        var currentRadio = radioInputs.item(i)
+                        currentRadio.checked = false;
+                    }
+                }
+                checkButton.onclick = function () {
+                    var radioInputs = document.getElementsByClassName("form-check-input")
+                    var answerSelected = ""
+                    var answerSelected2 =""
+                    for (i = 0; i < radioInputs.length; i++) {
+                        if(radioInputs.item(i).checked && i<=1) {
+                            answerSelected = radioInputs.item(i).value;
+                        }else if(radioInputs.item(i).checked && i>1){
+                            answerSelected2 = radioInputs.item(i).value;
+                        }
+                    }
+                    if(answerSelected!=""&&answerSelected2!="") {
+                        explanation.style.display = "block"
+                        explanation2.style.display = "block"
+                        nextButton.style.display = "block";
+                        nextButton.style.background = "#8d8d8d";
+                        nextButton.style.marginLeft = "80%";
+                        nextButton.style.width = "100px";
+                        checkButton.style.display = "none";
+                        for (i = 0; i < radioInputs.length; i++) {
+                            if (!radioInputs.item(i).checked) {
+                                radioInputs.item(i).disabled = true;
+                            }
+                        }
+                        if (answerSelected == '{{ correct_answer }}') {
+                            explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                        } else {
+                            explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
+                        }
+                        explanation.innerHTML += "<e style=\"color:gray\">It is true that you can free ride at the expense of others if you keep all of your energy tokens in your private account (earning you $1.20+$1.67=$2.87), while others invest all of theirs ($0.00+\t$1.67=$1.67.</e>"
+                        if (answerSelected2 == '{{ correct_answer }}') {
+                            explanation2.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                        } else {
+                            console.log(answerSelected2+","+ radioInputs.item(0).value +","+radioInputs.item(1).value   )
+                            explanation2.innerHTML = "<e style=\"color:red\">Wrong!</e> "
+                        }
+                        explanation2.innerHTML += "<e style=\"color:gray\">It is true that all players will have the maximum benefits IF ALL players invest all of their energy tokens. Every player will then get a bonus of $1.67, plus the actual environmental benefit of reduced air pollution.</e>"
+                    }
+                }
+            </script>
         </div>
     </div>
-
 {% endblock %}
-
-<!---->

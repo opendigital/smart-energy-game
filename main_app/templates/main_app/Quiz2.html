@@ -8,7 +8,7 @@
             <h2 style="padding-left: 10px"><b>COMPREHENSION QUIZ 2/4</b></h2><br>
             <p>Q2:</p>
             <p><b>True or False: for each token in the group conservation account, $0.01 is contributed to carbonfund.org?</b></p>
-            {% formfield player.donation %}
+            {% formfield player.Q2 %}
             <br><p id="Explanation"></p><br>
             <button style="display: block" id="checkButton" type="button" class="btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Check Answer</button>
             <button style="display: none" id="nextButton" class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 50%; width: 100px">Next</button>
@@ -16,7 +16,7 @@
                 var checkButton = document.getElementById("checkButton")
                 var nextButton = document.getElementById("nextButton")
                 var explanation = document.getElementById("Explanation")
-                if( '{{ player.timesInstruction2 }}' == '1'){
+                if( '{{ player.timesInstruction2 }}' == '0'){
                     nextButton.style.display = "block";
                     nextButton.style.background = "#8d8d8d";
                     nextButton.style.marginLeft = "80%";

@@ -26,37 +26,52 @@
                         </tr>
 
                         <tr>
-                            <td><b>Total contributions to the House Conservation Fund: </b></td>
+                            <td><b>Total contributions to the group conservation account: ​</b></td>
                             <td><em style="color: #0000ff">{{ player.all_rounds_contribution }}</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td><b>This did/did not meet the group goal of {{ Constants.group_goal }} energy tokens: </b></td>
-                            <td> <em style="color: #0000ff">{{ group.all_rounds_contribution }}</em> </td>
+                            <td><e style="color: green">Your group’s donation to Carbonfund.org to reduce air pollution: ​</e></td>
+                            <td><em style="color: #0000ff">{{ player.all_rounds_contribution }}</td>
                             <td></td>
                         </tr>
+
+                        {% if goal_meet %}
+                            <tr>
+                                <td><b>Congratulations, you met the 30% group energy conservation goal of 216 energy tokens. </b></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td><b>Sorry, you did not meet the 30% group energy conservation goal of 216 energy tokens. </b></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>The bonus to each player for meeting the group goal: </td>
+                            <td>Each player’s bonus for meeting the group conservation goal: </td>
                             <td>
-                                {% if Constants.group_goal <= group.all_rounds_contribution %}
+                                {% if goal_meet %}
                                     <em style="color: #0000ff">{{ group.bonus }}</em>
                                 {% else %}
                                     <em style="color: #0000ff">{{ Constants.no_bonus }}</em>
                                 {% endif %}
                             </td>
                             <td>
-                                {% if Constants.group_goal <= group.all_rounds_contribution %}
+                                {% if goal_meet %}
                                     <em style="color: #0000ff">{{ group.bonus_in_dollars }}</em>
                                 {% endif %}
                             </td>
                         </tr>
                         <tr>
-                            <td>Remaining energy tokens in your personal account: </td>
+                            <td>Energy tokens in your personal account: </td>
                             <td> <em style="color: #0000ff">{{ player.all_tokens_left }}</em> </td>
                             <td> <em style="color: #0000ff">{{ player.remaining_tokens_in_dollars }}</em> </td>
                         </tr>
@@ -82,12 +97,10 @@
 
                     </table>
 
-
-                    {% if player.round_number <= 12%}
                     <hr style="background: black">
                     <p><i><b>NOTE:</b> Before you receive your pay, you will need to answer 2 brief surveys.</i></p>
-                    {% endif %}
-                    {% next_button %}
+
+                    <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
                 </div>
             </div>
 

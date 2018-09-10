@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'training_problem'
     players_per_group = 6
     players_without_me = players_per_group - 1
-    num_rounds = 14
+    num_rounds = 13
 
     endowment = c(100)
     multiplier = 2
@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER',
               'NOVEMBER', 'DECEMBER']
 
-    answers = ["3 tokens", "True", "0 tokens", "10 tokens", 1.82, 0.91]
+    answers = ["3 tokens", "True", "True", "True","$1.08","$1.00","$2.08","$1.08","$0.00","$1.08"]
 
 
 class Subsession(BaseSubsession):
@@ -42,23 +42,19 @@ class Group(BaseGroup):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
 
         for p in self.get_players():
-            self.total_random_contribution = p.contribution + p.random_others_contribution
+            if self.total_random_contribution:
+                self.total_random_contribution = p.contribution + p.random_others_contribution
+
             p.payoff = c(10) - p.contribution
 
-            if self.round_number > 1:
+            if self.round_number == 13:
                 if Constants.group_goal <= self.all_rounds_contribution() and (self.round_number == Constants.num_rounds/2 or self.round_number == Constants.num_rounds):
                     self.bonus = self.all_rounds_contribution() * Constants.multiplier / Constants.players_per_group
                     p.payoff += self.bonus
 
     # It's used for after-survey queries.
     def all_rounds_contribution(self):
-            if self.round_number <= Constants.num_rounds / 2:
-                return sum([g.total_contribution for g in self.in_rounds(1, self.round_number)])
-            else:
-                return sum([g.total_contribution for g in self.in_rounds(Constants.num_rounds / 2 + 1, self.round_number)])
-
-    #def all_rounds_random_contribution(self):
-    #    return sum([g.total_contribution for g in self.in_previous_rounds()])
+        return sum([g.total_contribution for g in self.in_rounds(2, self.round_number)])
 
     # It's used for before-survey queries.
     def previous_rounds_contribution(self):
@@ -69,29 +65,40 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    # QUIZ
-    equilibrium_tokens = models.StringField(
-        label='',
-        widget=widgets.RadioSelectHorizontal
-    )
-    donation = models.StringField(
-        label='',
-        widget=widgets.RadioSelect
-    )
-    max_individual = models.StringField(
-        label='What is the individual level of contribution necessary for maximizing own monetary payoff?',
-        widget=widgets.RadioSelectHorizontal
-    )
-    max_group = models.StringField(
-        label='What is the individual level of contribution necessary for maximizing monetary earnings for the group?',
-        widget=widgets.RadioSelectHorizontal
-    )
-    bonus_question = models.FloatField()
-    tokens_question = models.FloatField()
-    expected_contribution = models.IntegerField(min=0, max=120)
-    expected_individual = models.IntegerField(min=0, max=120)
+    # PRACTICE AND REAL GAME
+    contribution = models.CurrencyField(min=0, max=10)
+    private_contribution = models.CurrencyField(min=0, max=10)
+    random_others_contribution = models.CurrencyField()
+    group_random_total_contribution = models.CurrencyField()
 
-    everything_correct = models.BooleanField()
+    # QUIZ
+    Q1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
+    Q2 = models.StringField(label='', widget=widgets.RadioSelect)
+    Q3a = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
+    Q3b = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
+
+    answerQ4a1 = models.StringField()
+    answerQ4a2 = models.StringField()
+    answerQ4a3 = models.StringField()
+    answerQ4b1 = models.StringField()
+    answerQ4b2 = models.StringField()
+    answerQ4b3 = models.StringField()
+
+    repeatQuiz1 = models.BooleanField(initial=False)
+    timesInstruction1 = models.IntegerField(initial=0)
+    repeatQuiz2 = models.BooleanField(initial=False)
+    timesInstruction2 = models.IntegerField(initial=0)
+    repeatQuiz3a = models.BooleanField(initial=False)
+    timesInstruction3a = models.IntegerField(initial=0)
+    repeatQuiz3b = models.BooleanField(initial=False)
+    timesInstruction3b = models.IntegerField(initial=0)
+    repeatQuiz4 = models.BooleanField(initial=False)
+    timesInstruction4 = models.IntegerField(initial=0)
+
+    doItOnce = models.BooleanField(initial=True)
+    doItOnce2 = models.BooleanField(initial=True)
+    doItOnce3 = models.BooleanField(initial=True)
+    doItOnce4 = models.BooleanField(initial=True)
 
     # POST_SURVEY
     birth = models.IntegerField()
@@ -101,27 +108,7 @@ class Player(BasePlayer):
     previous_experiments = models.StringField()
     reliability = models.StringField()
 
-    # Signature is not being stored
-    # signature = models.StringField()
-
-    # quiz_tokens = models.CurrencyField(initial=0)
-
-    contribution = models.CurrencyField(min=0, max=10)
-    private_contribution = models.CurrencyField(min=0, max=10)
-    random_others_contribution = models.CurrencyField()
-    group_random_total_contribution = models.CurrencyField()
-
-    repeatQuiz1 = models.BooleanField(initial=True)
-    timesInstruction1 = models.IntegerField(initial=0)
-    repeatQuiz2 = models.BooleanField(initial=True)
-    timesInstruction2 = models.IntegerField(initial=0)
-    repeatQuiz3 = models.BooleanField(initial=True)
-    timesInstruction3 = models.IntegerField(initial=0)
-    repeatQuiz4 = models.BooleanField(initial=True)
-    timesInstruction4 = models.IntegerField(initial=0)
-
-
-    # First row RESULTS
+    # WILD METHODS
     def all_tokens_left(self):
         return c(120) - self.all_rounds_contribution()
 
@@ -129,16 +116,10 @@ class Player(BasePlayer):
         return c(120) - self.previous_rounds_contribution()
 
     def all_rounds_contribution(self):
-        if self.round_number <= Constants.num_rounds/2:
-            return sum([p.contribution for p in self.in_rounds(1, self.round_number)])
-        else:
-            return sum([p.contribution for p in self.in_rounds(Constants.num_rounds/2+1, self.round_number)])
+        return sum([p.contribution for p in self.in_rounds(2, self.round_number)])
 
     def all_rounds_private_contribution(self):
-        if self.round_number <= Constants.num_rounds/2:
-            return sum([p.private_contribution for p in self.in_rounds(1, self.round_number)])
-        else:
-            return sum([p.private_contribution for p in self.in_rounds(Constants.num_rounds/2+1, self.round_number)])
+        return sum([p.private_contribution for p in self.in_rounds(2, self.round_number)])
 
     def all_rounds_random_contribution(self):
         return sum([p.random_others_contribution for p in self.in_rounds(1, self.round_number)])
@@ -171,12 +152,10 @@ class Player(BasePlayer):
             return sum([p.contribution for p in self.in_rounds(Constants.num_rounds / 2 + 1, self.round_number - 1)])
 
     def check_answers(self):
-        if self.equilibrium_tokens == Constants.answers[0] \
-                and self.donation == Constants.answers[1] \
-                and self.max_individual == Constants.answers[2] \
-                and self.max_group == Constants.answers[3] \
-                and self.bonus_question == Constants.answers[4] \
-                and self.tokens_question == Constants.answers[5]:
+        if self.Q1 == Constants.answers[0] \
+                and self.Q2 == Constants.answers[1] \
+                and self.Q3a == Constants.answers[2] \
+                and self.Q3b == Constants.answers[3]:
             self.everything_correct = True
             return True
         else:
@@ -184,41 +163,34 @@ class Player(BasePlayer):
             return False
 
     def is_equilibrium_tokens_correct(self):
-        if self.equilibrium_tokens == Constants.answers[0]:
+        if self.Q1 == Constants.answers[0] and self.doItOnce4:
             self.payoff += 5
-            self.repeatQuiz1 = False
-            # self.quiz_tokens += c(5)
-        return self.equilibrium_tokens == Constants.answers[0]
+            self.doItOnce4 = False
+        return self.Q1 == Constants.answers[0]
 
     def is_donation_correct(self):
-        if self.donation == Constants.answers[1]:
+        if self.Q2 == Constants.answers[1] and self.doItOnce3:
+            self.doItOnce3 = False
             self.payoff += 5
-            # self.quiz_tokens += c(5)
-        return self.donation == Constants.answers[1]
+        return self.Q2 == Constants.answers[1]
+
+    def is_both_Examples_right(self):
+        if self.Q3a == Constants.answers[2] and self.Q3b == Constants.answers[3] and self.doItOnce :
+            self.payoff += 5
+            self.doItOnce = False
+        return self.Q3a == Constants.answers[2] and self.Q3b == Constants.answers[3]
+
+    def is_all_values_right(self):
+        if self.doItOnce2 and self.answerQ4a1 == Constants.answers[4] and self.answerQ4a2 == Constants.answers[5] and self.answerQ4a3 == Constants.answers[6] and self.answerQ4b1 == Constants.answers[7] and self.answerQ4b2 == Constants.answers[8] and self.answerQ4b3 == Constants.answers[9]:
+            self.payoff += 5
+            self.doItOnce2 = False
+        return self.answerQ4a1 == Constants.answers[4] and self.answerQ4a2 == Constants.answers[5] and self.answerQ4a3 == Constants.answers[6] and self.answerQ4b1 == Constants.answers[7] and self.answerQ4b2 == Constants.answers[8] and self.answerQ4b3 == Constants.answers[9]
 
     def is_max_individual_correct(self):
-        if self.max_individual == Constants.answers[2]:
-            self.payoff += 5
-            # self.quiz_tokens += c(5)
-        return self.max_individual == Constants.answers[2]
+        return self.Q3a == Constants.answers[2]
 
     def is_max_group_correct(self):
-        if self.max_group == Constants.answers[3]:
-            self.payoff += 5
-            # self.quiz_tokens += c(5)
-        return self.max_group == Constants.answers[3]
-
-    def is_bonus_question_correct(self):
-        if self.bonus_question == Constants.answers[4]:
-            self.payoff += 5
-            # self.quiz_tokens += c(5)
-        return self.bonus_question == Constants.answers[4]
-
-    def is_tokens_question_correct(self):
-        if self.tokens_question == Constants.answers[5]:
-            self.payoff += 5
-            # self.quiz_tokens += c(5)
-        return self.tokens_question == Constants.answers[5]
+        return self.Q3b == Constants.answers[3]
 
     def display_instructions_again(self):
         display = self.in_round(Constants.num_rounds / 2)
@@ -234,18 +206,11 @@ class Player(BasePlayer):
 
     def how_many_good_answers(self):
         counter = 0
-        answers = [self.in_round(Constants.num_rounds/2).equilibrium_tokens==Constants.answers[0],
-                   self.in_round(Constants.num_rounds/2).donation==Constants.answers[1],
-                   self.in_round(Constants.num_rounds/2).max_individual==Constants.answers[2],
-                   self.in_round(Constants.num_rounds/2).max_group==Constants.answers[3],
-                   self.in_round(Constants.num_rounds/2).bonus_question==Constants.answers[4],
-                   self.in_round(Constants.num_rounds/2).tokens_question==Constants.answers[5],
-                   self.in_round(Constants.num_rounds).equilibrium_tokens==Constants.answers[0],
-                   self.in_round(Constants.num_rounds).donation==Constants.answers[1],
-                   self.in_round(Constants.num_rounds).max_individual==Constants.answers[2],
-                   self.in_round(Constants.num_rounds).max_group==Constants.answers[3],
-                   self.in_round(Constants.num_rounds).bonus_question==Constants.answers[4],
-                   self.in_round(Constants.num_rounds).tokens_question==Constants.answers[5],
+        answers = [
+                   self.in_round(2).Q1 == Constants.answers[0],
+                   self.in_round(2).Q2 == Constants.answers[1],
+                   self.is_both_Examples_right(),
+                   self.is_all_values_right(),
                    ]
         for answer_is_correct in answers:
             if answer_is_correct:

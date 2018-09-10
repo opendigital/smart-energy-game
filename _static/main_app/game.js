@@ -15,6 +15,11 @@ if(other_errors != null){
     errors.style.borderRadius = "15px"
 }
 
+
+contribution_box.onchange = function(){
+    document.getElementById('personal').setAttribute('value',10-this.value)
+    document.getElementById('private_box').setAttribute('value',10-this.value)
+}
 contribution_box.oninput = function () {
     if(0 <= this.value && this.value <= 10){
         personal_output.innerHTML = 10 - this.value;
