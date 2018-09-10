@@ -7,7 +7,7 @@ import random
 class WaitingRoom(WaitPage):
     title_text = "Waiting Room"
     body_text = "Please wait until the other participants are ready."
-    group_by_arrival_time = True
+    #group_by_arrival_time = True
 
     def is_displayed(self):
         return self.round_number == 1
