@@ -122,7 +122,7 @@ class PracticeTransition(Page):
 
 class PracticeGame(Page):
     form_model = 'player'
-    form_fields = ['contribution']
+    form_fields = ['practice_contribution']
 
     def is_displayed(self):
         return self.round_number <= 2
@@ -134,11 +134,11 @@ class PracticeGame(Page):
                 'progress': 'Practice'}
 
     def before_next_page(self):
-        self.player.private_contribution = c(10) - self.player.contribution
+        self.player.practice_private_contribution = c(10) - self.player.practice_contribution
         self.player.random_others_contribution = c(0)
         for i in range(0, Constants.players_per_group):
             self.player.random_others_contribution += c(random.randint(0,11))
-        self.player.group_random_total_contribution = self.player.contribution + self.player.random_others_contribution
+        self.player.group_random_total_contribution = self.player.practice_contribution + self.player.random_others_contribution
 
 
 class PracticeResults(Page):

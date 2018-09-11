@@ -13,27 +13,27 @@
                 <div class="card-body">
                     <center><h4><b><u>{{ current_month }} Feedback</u> </b></h4></center>
 
-                    <table class="table" style="text-align:center;">
+                    <table class="table" style="text-align:left;">
                         <tr style="background: linear-gradient(to right,#dcdcdc,#b5b5b5)">
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th>{{ current_month }} (this month)</th>
-                            <th>Cumulative to date (all past rounds)​</th>
+                            <th>{{ current_month }}<br> (this month)</th>
+                            <th>Cumulative to date<br> (all past rounds)​</th>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td>Your contribution to your personal account:​</td>
-                            <td> <e style="color: #a700a8">{{ player.private_contribution }}</e></td>
-                            <td> <e style="color: #a700a8">{{ player.all_rounds_private_contribution }}</e></td>
+                            <td> <e style="color: #a700a8">{{ player.practice_private_contribution }}</e></td>
+                            <td> <e style="color: #a700a8">{{ player.all_rounds_practice_private_contribution }}</e></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td><B>Your contribution to the group conservation account:</B>​</td>
-                            <td><e style="color: #0000ff">{{ player.contribution}}</e></td>
-                            <td><e style="color: #0000ff">{{ player.all_rounds_contribution }}</e> </td>
+                            <td><e style="color: #0000ff">{{ player.practice_contribution}}</e></td>
+                            <td><e style="color: #0000ff">{{ player.all_rounds_practice_contribution }}</e> </td>
                         </tr>
                         <tr>
                             <td></td>
@@ -71,20 +71,6 @@
                             <td></td>
                             <td id="percentage"></td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><b><e style="color: #0000ff">Goal: 30% ​(216 tokens)</e></b></td>
-                        </tr>
-
-                        {% if not is_trial%}
-                            <tr>
-                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
-                                <td style="color: #8d8d8d">Goal is: {{ Constants.group_goal }}</td>
-                            </tr>
-                        {% endif%}
 
                     </table>
 
@@ -100,7 +86,7 @@
     var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0],10)*100/215)
 
 
-    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of annual energy reduction</e></b>"
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 30% (2016)</e></b>"
     </script>
 
 {% endblock %}

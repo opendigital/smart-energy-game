@@ -67,7 +67,9 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # PRACTICE AND REAL GAME
     contribution = models.CurrencyField(min=0, max=10)
+    practice_contribution = models.CurrencyField(min=0, max=10)
     private_contribution = models.CurrencyField(min=0, max=10)
+    practice_private_contribution = models.CurrencyField(min=0, max=10)
     random_others_contribution = models.CurrencyField()
     group_random_total_contribution = models.CurrencyField()
 
@@ -117,6 +119,12 @@ class Player(BasePlayer):
 
     def all_rounds_contribution(self):
         return sum([p.contribution for p in self.in_rounds(2, self.round_number)])
+
+    def all_rounds_practice_contribution(self):
+        return sum([p.practice_contribution for p in self.in_rounds(1, self.round_number)])
+
+    def all_rounds_practice_private_contribution(self):
+        return sum([p.practice_private_contribution for p in self.in_rounds(1, self.round_number)])
 
     def all_rounds_private_contribution(self):
         return sum([p.private_contribution for p in self.in_rounds(2, self.round_number)])
