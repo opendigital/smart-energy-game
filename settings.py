@@ -18,13 +18,12 @@ mturk_hit_settings = {
     'preview_template': 'global/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 7*24, # 7 days
-    #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
+    'grant_qualification_id': '31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY',
     'qualification_requirements': [
         {
-            'QualificationTypeId': "00000000000000000071",
-            'Comparator': "EqualTo",
-            'LocaleValues': [{'Country': "US"}]
-        },
+            'QualificationTypeId': "31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY",
+            'Comparator': "DoesNotExist",
+        }
     ]
 }
 
@@ -102,7 +101,12 @@ ADMIN_PASSWORD = 'GoBoilers2018!'#environ.get('OTREE_ADMIN_PASSWORD')
 DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
 
 DEMO_PAGE_INTRO_HTML = """
-admin:GoBoilers2018!
+In order to test 
+
+USER:admin
+PASSWORD:GoBoilers2018!
+
+
 """
 
 # don't share this with anybody.
