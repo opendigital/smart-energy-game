@@ -129,7 +129,7 @@ class Player(BasePlayer):
     I_like_to_share_my_ideas_and_materials_with_others = models.StringField()
     I_like_to_cooperate_with_others = models.StringField()
     I_can_learn_important_things_from_others = models.StringField()
-    I_try_to_share_my_ideas_and_resources_with_others_when_I_think_it_will_help_them = models.StringField()
+    I_try_to_share_my_ideas_and_resources_with_others = models.StringField()
     People_learn_lots_of_important_things_from_each_other = models.StringField()
     It_is_a_good_idea_for_people_to_help_each_other = models.StringField()
     I_like_to_do_better_work_than_others = models.StringField()
