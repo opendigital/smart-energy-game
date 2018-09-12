@@ -3,76 +3,21 @@
 
 {% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
-{% block title %} {% if is_trial %}OT: 12-Round Test Game{%else%} GAME: Feedback {% endif%} {% endblock %}
+{% block title %}Air Polltion Reduction{% endblock %}
 
 {% block content %}
     <div class="card bg-transparent">
         <div class="card-body">
-                <h5>{% if is_trial%}TRIAL GAME:{% endif %}</h5>
-            <div class="card" style="background: #f2f2f2">
-                <div class="card-body">
-                    <h4><b>
-                        END OF THE GAME
-
-                    </b></h4>
-
-                    <table class="table" style="text-align:Left;">
-                        <tr style="background: #d8d8d8">
-                            <th>
-                                YOUR FINAL RESULTS:
-                            </th>
-                            <th>Energy tokens</th>
-                            <th>US Dollars </th>
-                        </tr>
-                        <tr>
-                            <td><b>Total contributions to the House Conservation Fund: </b></td>
-                            <td><em style="color: #0000ff">{{ player.all_rounds_contribution }}</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><b>This did/did not meet the group goal of {{ Constants.group_goal }} energy tokens: </b></td>
-                            <td> <em style="color: #0000ff">{{ group.all_rounds_contribution }}</em> </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>The bonus to each player for meeting the group goal: </td>
-                            <td>
-                                <em style="color: #0000ff">{{ group.bonus }}</em>
-                            </td>
-                            <td>
-                                {% if Constants.group_goal <= group.all_rounds_contribution %}
-                                    <em style="color: #0000ff">{{ group.bonus_in_dollars }}</em>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Remaining energy tokens in your personal account: </td>
-                            <td> <em style="color: #0000ff">{{ player.all_tokens_left }}</em> </td>
-                            <td> <em style="color: #0000ff">{{ player.remaining_tokens_in_dollars }}</em> </td>
-                        </tr>
-                        <tr>
-                            <td><b>TOTAL PAY TO YOU: </b></td>
-                            <td></td>
-                            <td> {{ player.total_tokens_in_dollars }} </td>
-                        </tr>
-
-                    </table>
-
-
-                    {% if is_trial %}
-                    <hr style="background: black">
-                    <p><i><b>NOTE:</b> This was a speculative game just to give you a better understanding of how it works.</i></p>
-                    {% endif %}
-                    {% next_button %}
+            <h2 style="padding-left: 10px"><b>YOUR GROUP’s AIR POLLUTION REDUCTION RESULT</b></h2><br>
+            <div class="card" style="background: transparent;border-color: transparent">
+                <div class="card-body" >
+                   <img src="{% static 'main_app/CONGRATS.png' %}" class="img-fluid" alt="Responsive image"/>
+                    <div style="font-size: 20px;position: absolute;top: 55%;left: 49%;transform: translate(-50%, -50%);"><B>{{ lbs }}</B></div>
+                    <div style="font-size: 20px;position: absolute;top: 55%;left: 60%;transform: translate(-50%, -50%);"><B>{{ amount }}</B></div>
                 </div>
             </div>
-
-
+            <br><br>
+             <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
          </div>
     </div>
 

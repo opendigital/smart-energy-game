@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'training_problem'
     players_per_group = 6
     players_without_me = players_per_group - 1
-    num_rounds = 13
+    num_rounds = 3#13
 
     endowment = c(100)
     multiplier = 2
@@ -37,6 +37,8 @@ class Group(BaseGroup):
     total_contribution = models.CurrencyField()
     total_random_contribution = models.CurrencyField()
     bonus = models.CurrencyField(initial=c(0))
+    doItOnce = models.BooleanField(initial=True)
+    carbonFund = models.CurrencyField()
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
@@ -47,14 +49,31 @@ class Group(BaseGroup):
 
             p.payoff = c(10) - p.contribution
 
-            if self.round_number == 13:
-                if Constants.group_goal <= self.all_rounds_contribution() and (self.round_number == Constants.num_rounds/2 or self.round_number == Constants.num_rounds):
+            if self.round_number == Constants.num_rounds:
+                if Constants.group_goal <= self.all_rounds_contribution():
                     self.bonus = self.all_rounds_contribution() * Constants.multiplier / Constants.players_per_group
                     p.payoff += self.bonus
 
     # It's used for after-survey queries.
+    def pay_quizzes(self):
+        if self.doItOnce and self.round_number == Constants.num_rounds:
+            self.doItOnce = False
+            for p in self.get_players():
+                p.payoff += p.how_many_good_answers()
+        #return
+
+    def pay_carbonfund(self):
+        self.carbonFund = self.all_rounds_contribution()/10*22
+        #return
+
     def all_rounds_contribution(self):
         return sum([g.total_contribution for g in self.in_rounds(2, self.round_number)])
+
+    def all_rounds_contribution_in_dollars(self):
+        return c(self.all_rounds_contribution()).to_real_world_currency(self.session)
+
+    def all_rounds_contribution_donation(self):
+        return models.IntegerField(initial=self.all_rounds_contribution())
 
     # It's used for before-survey queries.
     def previous_rounds_contribution(self):
@@ -79,12 +98,12 @@ class Player(BasePlayer):
     Q3a = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
     Q3b = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
 
-    answerQ4a1 = models.StringField()
-    answerQ4a2 = models.StringField()
-    answerQ4a3 = models.StringField()
-    answerQ4b1 = models.StringField()
-    answerQ4b2 = models.StringField()
-    answerQ4b3 = models.StringField()
+    Q4a1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$1.00", "$1.08", "$2.08"])
+    Q4a2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$1.00", "$1.08", "$2.08"])
+    Q4a3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$1.00", "$1.08", "$2.08"])
+    Q4b1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.08", "$2.08"])
+    Q4b2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.08", "$2.08"])
+    Q4b3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.08", "$2.08"])
 
     repeatQuiz1 = models.BooleanField(initial=False)
     timesInstruction1 = models.IntegerField(initial=0)
@@ -102,13 +121,57 @@ class Player(BasePlayer):
     doItOnce3 = models.BooleanField(initial=True)
     doItOnce4 = models.BooleanField(initial=True)
 
-    # POST_SURVEY
+
+
+    # POST SURVEY 1
+
+    I_like_to_help_other_people = models.StringField()
+    I_like_to_share_my_ideas_and_materials_with_others = models.StringField()
+    I_like_to_cooperate_with_others = models.StringField()
+    I_can_learn_important_things_from_others = models.StringField()
+    I_try_to_share_my_ideas_and_resources_with_others_when_I_think_it_will_help_them = models.StringField()
+    People_learn_lots_of_important_things_from_each_other = models.StringField()
+    It_is_a_good_idea_for_people_to_help_each_other = models.StringField()
+    I_like_to_do_better_work_than_others = models.StringField()
+    I_work_to_get_better_than_others = models.StringField()
+    I_like_to_be_the_best_at_what_I_do = models.StringField()
+    I_dont_like_to_be_second = models.StringField()
+    I_like_to_compete_with_other_students_to_see_who_can_do_the_best = models.StringField()
+    I_am_happiest_when_I_am_competing_with_others = models.StringField()
+    I_like_the_challenge_of_seeing_who_is_best = models.StringField()
+    Competing_with_others_is_a_good_way_to_work = models.StringField()
+    I_dont_like_working_with_others = models.StringField()
+    I_like_to_work_with_others_reverse = models.StringField()
+    It_bothers_me_when_I_have_to_work_with_others = models.StringField()
+    I_do_better_when_I_work_alone = models.StringField()
+    I_like_work_better_when_I_do_it_all_myself = models.StringField()
+    I_would_rather_work_along_than_with_others = models.StringField()
+    Working_in_small_groups_is_better_than_working_alone_reverse = models.StringField()
+
+    # POST_SURVEY 2
+
+    Plants = models.StringField()
+    Marine_life = models.StringField()
+    Birds = models.StringField()
+    Animals = models.StringField()
+    My_prosperity = models.StringField()
+    My_lifestyle = models.StringField()
+    My_health = models.StringField()
+    My_future = models.StringField()
+    People_in_my_community = models.StringField()
+    The_human_race = models.StringField()
+    Children = models.StringField()
+    People_in_the_United_States = models.StringField()
+
+    # POST_SURVEY 3
     birth = models.IntegerField()
     gender = models.StringField()
     ethnic_group = models.StringField()
     economic_status = models.StringField()
     previous_experiments = models.StringField()
     reliability = models.StringField()
+    politic_party = models.StringField()
+    years_in_us = models.IntegerField(min=0,max=120)
 
     # WILD METHODS
     def all_tokens_left(self):
@@ -189,10 +252,10 @@ class Player(BasePlayer):
         return self.Q3a == Constants.answers[2] and self.Q3b == Constants.answers[3]
 
     def is_all_values_right(self):
-        if self.doItOnce2 and self.answerQ4a1 == Constants.answers[4] and self.answerQ4a2 == Constants.answers[5] and self.answerQ4a3 == Constants.answers[6] and self.answerQ4b1 == Constants.answers[7] and self.answerQ4b2 == Constants.answers[8] and self.answerQ4b3 == Constants.answers[9]:
+        if self.doItOnce2 and self.Q4a1 == Constants.answers[4] and self.Q4a2 == Constants.answers[5] and self.Q4a3 == Constants.answers[6] and self.Q4b1 == Constants.answers[7] and self.Q4b2 == Constants.answers[8] and self.Q4b3 == Constants.answers[9]:
             self.payoff += 5
             self.doItOnce2 = False
-        return self.answerQ4a1 == Constants.answers[4] and self.answerQ4a2 == Constants.answers[5] and self.answerQ4a3 == Constants.answers[6] and self.answerQ4b1 == Constants.answers[7] and self.answerQ4b2 == Constants.answers[8] and self.answerQ4b3 == Constants.answers[9]
+        return self.Q4a1 == Constants.answers[4] and self.Q4a2 == Constants.answers[5] and self.Q4a3 == Constants.answers[6] and self.Q4b1 == Constants.answers[7] and self.Q4b2 == Constants.answers[8] and self.Q4b3 == Constants.answers[9]
 
     def is_max_individual_correct(self):
         return self.Q3a == Constants.answers[2]
@@ -217,15 +280,14 @@ class Player(BasePlayer):
         answers = [
                    self.in_round(2).Q1 == Constants.answers[0],
                    self.in_round(2).Q2 == Constants.answers[1],
-                   self.is_both_Examples_right(),
-                   self.is_all_values_right(),
+                   self.in_round(2).is_both_Examples_right(),
+                   self.in_round(2).is_all_values_right(),
                    ]
         for answer_is_correct in answers:
             if answer_is_correct:
                 counter+=5
-        print('@@@ ', counter)
 
-        return c(counter).to_real_world_currency(self.session)
+        return c(counter)
 
     def total_pay(self):
-        return self.group.bonus_in_dollars() + self.remaining_tokens_in_dollars() + c(50).to_real_world_currency(self.session) + self.how_many_good_answers()
+        return self.group.bonus_in_dollars() + self.remaining_tokens_in_dollars() + c(50).to_real_world_currency(self.session) + c(self.how_many_good_answers()).to_real_world_currency(self.session)

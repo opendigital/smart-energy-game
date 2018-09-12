@@ -16,10 +16,8 @@
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
                             <table>
-                                <tr>
-                                    <td><input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label></td>
-                                    <td><input name="answerQ4a1" type="radio" id="id2" value="$1.08"/><label for="id2">$1.08</label></td>
-                                    <td><input name="answerQ4a1" type="radio" id="id3" value="$2.08"/><label for="id3">$2.08</label></td>
+                                <tr><!--<input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label>-->
+                                    <td>{% formfield player.Q4a1 %}</td>
                                 </tr>
                             </table>
                         </div>
@@ -31,10 +29,8 @@
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"  style="white-space:nowrap">
                             <table>
-                                <tr>
-                                    <td><input name="answerQ4a2" type="radio" id="id4" value="$1.00"/><label for="id4">$1.00</label></td>
-                                    <td><input name="answerQ4a2" type="radio" id="id5" value="$1.08"/><label for="id5">$1.08</label></td>
-                                    <td><input name="answerQ4a2" type="radio" id="id6" value="$2.08"/><label for="id6">$2.08</label></td>
+                                <tr><!--<input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label>-->
+                                    <td>{% formfield player.Q4a2 %}</td>
                                 </tr>
                             </table>
                         </div>
@@ -46,10 +42,8 @@
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"  style="white-space:nowrap">
                             <table>
-                                <tr>
-                                    <td><input name="answerQ4a3" type="radio" id="id7" value="$1.00"/><label for="id7">$1.00</label></td>
-                                    <td><input name="answerQ4a3" type="radio" id="id8" value="$1.08"/><label for="id8">$1.08</label></td>
-                                    <td><input name="answerQ4a3" type="radio" id="id9" value="$2.08"/><label for="id9">$2.08</label></td>
+                                <tr><!--<input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label>-->
+                                    <td>{% formfield player.Q4a3 %}</td>
                                 </tr>
                             </table>
                         </div>
@@ -68,10 +62,8 @@
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
                             <table>
-                                <tr>
-                                    <td><input name="answerQ4b1" type="radio" id="id11" value="$0.00"/><label for="id11">$0.00</label></td>
-                                    <td><input name="answerQ4b1" type="radio" id="id12" value="$1.08"/><label for="id12">$1.08</label></td>
-                                    <td><input name="answerQ4b1" type="radio" id="id13" value="$2.08"/><label for="id13">$2.08</label></td>
+                                <tr><!--<input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label>-->
+                                    <td>{% formfield player.Q4b1 %}</td>
                                 </tr>
                             </table>
                         </div>
@@ -83,10 +75,8 @@
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
                             <table>
-                                <tr>
-                                    <td><input name="answerQ4b2" type="radio" id="id14" value="$0.00"/><label for="id14">$0.00</label></td>
-                                    <td><input name="answerQ4b2" type="radio" id="id15" value="$1.08"/><label for="id15">$1.08</label></td>
-                                    <td><input name="answerQ4b2" type="radio" id="id16" value="$2.08"/><label for="id16">$2.08</label></td>
+                                <tr><!--<input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label>-->
+                                    <td>{% formfield player.Q4b2 %}</td>
                                 </tr>
                             </table>
                         </div>
@@ -98,10 +88,8 @@
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="white-space:nowrap">
                             <table>
-                                <tr>
-                                    <td><input name="answerQ4b3" type="radio" id="id17" value="$0.00"/><label for="id17">$0.00</label></td>
-                                    <td><input name="answerQ4b3" type="radio" id="id18" value="$1.08"/><label for="id18">$1.08</label></td>
-                                    <td><input name="answerQ4b3" type="radio" id="id19" value="$2.08"/><label for="id19">$2.08</label></td>
+                                <tr><!--<input name="answerQ4a1" type="radio" id="id1" value="$1.00"/><label for="id1">$1.00</label>-->
+                                    <td>{% formfield player.Q4b3 %}</td>
                                 </tr>
                             </table>
                         </div>
@@ -114,14 +102,6 @@
             <button style="display: none" id="nextButton" class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 50%; width: 100px">Next</button>
 
 
-
-
-
-
-
-
-
-
             <script>
                 var checkButton = document.getElementById("checkButton")
                 var nextButton = document.getElementById("nextButton")
@@ -131,43 +111,90 @@
                 var explanation4 = document.getElementById("Explanation4")
                 var explanation5 = document.getElementById("Explanation5")
                 var explanation6 = document.getElementById("Explanation6")
-
-
-
-
-
-
-
+                var radioInputs = document.getElementsByClassName("form-check-input")
 
                 if( '{{ player.timesInstruction4 }}' == '0'){//INITIAL FIRST TRY
-                    nextButton.style.display = "block";
-                    nextButton.style.background = "#8d8d8d";
-                    nextButton.style.marginLeft = "80%";
-                    nextButton.style.width = "120px";
-                    checkButton.style.display = "none";
-                }else{                                       //SECOND TRY
+                    checkButton.style.background = "#8d8d8d";
+                    checkButton.style.marginLeft = "80%";
+                    checkButton.style.width = "120px";
+                }else {                                       //SECOND TRY
                     checkButton.style.background = "#8d8d8d";
                     checkButton.style.marginLeft = "80%";
                     checkButton.style.width = "120px";
 
-                    for (i = 1; i < 20; i++) {
-                        if(i!=10){
-                            document.getElementById("id"+i).checked = false;
+
+                    for (i = 0; i < radioInputs.length; i++) {
+                        var currentRadio = radioInputs.item(i)
+                        switch (i) {
+                            case 0:
+                            case 1:
+                            case 2:
+                                if (radioInputs.item(1).checked) {
+                                    if (!currentRadio.checked) currentRadio.disabled = true
+                                    explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                } else {
+                                    currentRadio.checked = false;
+                                }
+                                break;
+                            case 3:
+                            case 4:
+                            case 5:
+                                if (radioInputs.item(3).checked) {
+                                    if (!currentRadio.checked) currentRadio.disabled = true
+                                    explanation2.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                } else {
+                                    currentRadio.checked = false;
+                                }
+                                break;
+                            case 6:
+                            case 7:
+                            case 8:
+                                if (radioInputs.item(8).checked) {
+                                    if (!currentRadio.checked) currentRadio.disabled = true
+                                    explanation3.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                } else {
+                                    currentRadio.checked = false;
+                                }
+                                break;
+                            case 9:
+                            case 10:
+                            case 11:
+                                if (radioInputs.item(10).checked) {
+                                    if (!currentRadio.checked) currentRadio.disabled = true
+                                    explanation4.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                } else {
+                                    currentRadio.checked = false;
+                                }
+                                break;
+                            case 12:
+                            case 13:
+                            case 14:
+                                if (radioInputs.item(12).checked) {
+                                    if (!currentRadio.checked) currentRadio.disabled = true
+                                    explanation5.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                } else {
+                                    currentRadio.checked = false;
+                                }
+                                break;
+                            case 15:
+                            case 16:
+                            case 17:
+                                if (radioInputs.item(1).checked) {
+                                    if (!currentRadio.checked) currentRadio.disabled = true
+                                    explanation6.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                } else {
+                                    currentRadio.checked = false;
+                                }
+                                break;
+                            default:
+                                currentRadio.checked = false;
                         }
                     }
                 }
 
-
-
-
-
-
-
-
-
-
                 checkButton.onclick = function () {
-                    //var radioInputs = document.getElementsByClassName("form-check-input")
+
+                    var radioInputs = document.getElementsByClassName("form-check-input")
                     var answerSelected = ""
                     var answerSelected2 =""
                     var answerSelected3 =""
@@ -175,34 +202,44 @@
                     var answerSelected5 =""
                     var answerSelected6 =""
 
+                    for (let i = 0; i < radioInputs.length; i++) {
+                        let currentRadio = radioInputs.item(i)
 
-
-
-
-                    for (i = 1; i < 20; i++) {
-                        if(i!=10){
-                            var curRadio = document.getElementById("id"+i)
-
-                            if(curRadio.checked){
-                                if(i<=3){                //answerA1
-                                    answerSelected=curRadio.value;
-                                } else if(3<i&&i<=6){   //answerA2
-                                    answerSelected2=curRadio.value;
-                                } else if(6<i&&i<=9){   //answerA3
-                                    answerSelected3=curRadio.value;
-                                } else if(10<i&&i<=13){ //answerB1
-                                    answerSelected4=curRadio.value;
-                                }  else if(13<i&&i<=16){//answerB2
-                                    answerSelected5=curRadio.value;
-                                }  else if(16<i&&i<=19){//answerB3
-                                    answerSelected6=curRadio.value;
-                                }
-                            }
+                        switch (i) {
+                            case 0:
+                            case 1:
+                            case 2:
+                                if (currentRadio.checked) answerSelected = currentRadio.value;
+                                break;
+                            case 3:
+                            case 4:
+                            case 5:
+                                if (currentRadio.checked) answerSelected2 = currentRadio.value;
+                                break;
+                            case 6:
+                            case 7:
+                            case 8:
+                                if (currentRadio.checked) answerSelected3 = currentRadio.value;
+                                break;
+                            case 9:
+                            case 10:
+                            case 11:
+                                if (currentRadio.checked) answerSelected4 = currentRadio.value;
+                                break;
+                            case 12:
+                            case 13:
+                            case 14:
+                                if (currentRadio.checked) answerSelected5 = currentRadio.value;
+                                break;
+                            case 15:
+                            case 16:
+                            case 17:
+                                if (currentRadio.checked) answerSelected6 = currentRadio.value;
+                                break;
+                            default:
+                            //DO NOTHING
                         }
                     }
-
-
-
 
                     if(answerSelected!=""&&answerSelected2!=""&&answerSelected3!=""&&answerSelected4!=""&&answerSelected5!=""&&answerSelected6!="") {
                         nextButton.style.display = "block";
@@ -224,27 +261,32 @@
                             "The correct answer is $1.08. Add the energy token values in your private account ($1.08) and the bonus from the group conservation account ($0.00) to get your final pay of $1.08”"
                         ]
 
-                        for(i=0; i<6;i++){
-                            explanations[i].style.display="block"
-                            explanations[i].style.whiteSpace="normal"
-                        }
-
-                        for (i = 1; i < 20; i++) {
-                            if(i!=10){
-                               if (!document.getElementById("id"+i).checked) {
-                                    document.getElementById("id"+i).disabled = true;
-                                }
+                        for (let i = 0; i < radioInputs.length; i++) {
+                            let currentRadio = radioInputs.item(i)
+                            if (!currentRadio.checked) {
+                                    currentRadio.disabled = true;
                             }
-
                         }
 
                         for (i=0;i<6;i++){
-                            if (answers[i]==correct_answers[i]){
-                                explanations[i].innerHTML = "<e style=\"color:green\">Correct!</e> "
+                            explanations[i].style.display="block"
+                            explanations[i].style.whiteSpace="normal"
+
+                            if('{{ player.timesInstruction4 }}' == '0'){
+                                if (answers[i]==correct_answers[i]){
+                                    explanations[i].innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                }else{
+                                    explanations[i].innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
+                                }
                             }else{
-                                explanations[i].innerHTML = "<e style=\"color:red\">Wrong!</e> "
+                                if (answers[i]==correct_answers[i]){
+                                    explanations[i].innerHTML = "<e style=\"color:green\">Correct!</e> "
+                                }else{
+                                    explanations[i].innerHTML = "<e style=\"color:red\">Wrong!</e> "
+                                }
+                                explanations[i].innerHTML += "<e style=\"color:gray\">"+ textExplain[i] +"</e>"
                             }
-                            explanations[i].innerHTML += "<e style=\"color:gray\">"+ textExplain[i] +"</e>"
+
                         }
                     }
                 }

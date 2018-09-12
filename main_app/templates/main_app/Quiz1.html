@@ -17,11 +17,17 @@
                 var nextButton = document.getElementById("nextButton")
                 var explanation = document.getElementById("Explanation")
                 if( '{{ player.timesInstruction1 }}' == '0'){
-                    nextButton.style.display = "block";
+                    /*nextButton.style.display = "block";
                     nextButton.style.background = "#8d8d8d";
                     nextButton.style.marginLeft = "80%";
                     nextButton.style.width = "120px";
-                    checkButton.style.display = "none";
+                    checkButton.style.display = "none";*/
+                    checkButton.style.background = "#8d8d8d";
+                    checkButton.style.marginLeft = "80%";
+                    checkButton.style.width = "120px";
+                    for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
+                        document.getElementsByClassName("form-check-input").item(i).checked = false;
+                    }
                 }else{
                     checkButton.style.background = "#8d8d8d";
                     checkButton.style.marginLeft = "80%";
@@ -50,12 +56,22 @@
                                 radioInputs.item(i).disabled = true;
                             }
                         }
-                        if (answerSelected == '{{ correct_answer }}') {
-                            explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
-                        } else {
-                            explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
+
+                        if( '{{ player.timesInstruction1 }}' == '0') {
+                            if (answerSelected != '{{ correct_answer }}') {
+                                explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
+                            }else{
+                                explanation.innerHTML = "<e style=\"color:green\">Correct!</e>"
+                            }
+                        }else {
+                            if (answerSelected == '{{ correct_answer }}') {
+                                explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
+                            } else {
+                                explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
+                            }
+                            explanation.innerHTML += "<e style=\"color:gray\">To meet the 30% energy conservation goal, each player should donate on average 3 energy tokens each month to the group conservation account, resulting in at least 216 energy tokens at the end of the game.</e>"
                         }
-                        explanation.innerHTML += "<e style=\"color:gray\">To meet the 30% energy conservation goal, each player should donate on average 3 energy tokens each month to the group conservation account, resulting in at least 216 energy tokens at the end of the game.</e>"
+
                     }
                 }
             </script>

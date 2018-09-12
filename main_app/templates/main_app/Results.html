@@ -13,13 +13,13 @@
                 <div class="card-body">
                     <center><h4><b><u>{{ current_month }} Feedback</u> </b></h4></center>
 
-                    <table class="table" style="text-align:center;">
+                    <table class="table" style="text-align:left;">
                         <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th>{{ current_month }} (this month)</th>
-                            <th>Cumulative to date (all past rounds)​</th>
+                            <th>{{ current_month }} <br>(this month)</th>
+                            <th>Cumulative to date <br>(all past rounds)​</th>
                         </tr>
                         <tr>
                             <td></td>
@@ -71,13 +71,6 @@
                             <td></td>
                             <td id="percentage"></td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><b><e style="color: #0000ff">Goal: 30% ​(216 tokens)</e></b></td>
-                        </tr>
                     </table>
                 </div>
             </div>
@@ -86,10 +79,10 @@
     </div>
     <script>
     var percentage = document.getElementById("percentage")
-    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0],10)*100/215)
+    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0],10)*100/216)
 
 
-    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of annual energy reduction</e></b>"
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 30% (2016)</e></b>"
     </script>
 
 {% endblock %}

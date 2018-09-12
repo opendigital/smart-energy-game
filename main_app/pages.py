@@ -175,7 +175,7 @@ class Quiz1(Page):
 
     def Q1_choices(self):
         choices = ["2 tokens", "3 tokens", "6 tokens", "10 tokens"]
-        random.shuffle(choices)
+        #random.shuffle(choices)#Fix for randomness
         return choices
 
     def before_next_page(self):
@@ -249,22 +249,17 @@ class Quiz3(Page):
 
 class Quiz4(Page):
     form_model = 'player'
-    form_fields = ['answerQ4a1','answerQ4a2','answerQ4a3',
-                   'answerQ4b1','answerQ4b2','answerQ4b3']
+    form_fields = ['Q4a1','Q4a2','Q4a3',
+                   'Q4b1','Q4b2','Q4b3']
 
     def vars_for_template(self):
         return {'progress': 'Quiz',
+                'xINSTRUCTIONS':self.player.timesInstruction4,
                 'correct_answer':'$1.08','correct_answer2':'$1.00','correct_answer3':'$2.08',
                 'correct_answer4':'$1.08','correct_answer5':'$0.00','correct_answer6':'$1.08'}
 
     def is_displayed(self):
         return self.round_number == 2 and self.player.timesInstruction4 <= 1 and not self.player.is_all_values_right()
-
-    def bonus_question_error_message(self, value):
-        if not (0 <= value <= 7.20):
-            return 'The value must be between 0 and 7.20'
-        elif value/10 > 0.72:
-            return 'Round the value up to two decimals'
 
     def before_next_page(self):
         if self.player.is_all_values_right():
@@ -362,31 +357,112 @@ class Congrats(Page):
     def vars_for_template(self):
         return {'current_month': Constants.months[(self.round_number - 2) % 12],
                 'current_round': self.round_number - 1,
-                'progress': 'Game'}
-
-
-class PostSurvey(Page):
-    form_model = 'player'
-    form_fields = ['birth', 'gender', 'ethnic_group', 'economic_status', 'previous_experiments', 'reliability']
-
-    def is_displayed(self):
-        return self.player.round_number == Constants.num_rounds
-
-    def vars_for_template(self):
-        return {'current_month': Constants.months[(self.round_number - 2) % 12],
-                'current_round': self.round_number - 1,
-                'progress': 'Game'}
-
+                'progress': 'Game',
+                    'lbs': str(self.group.all_rounds_contribution()/10*22).split(" ")[0] + " lbs",
+                'amount': c(self.group.all_rounds_contribution()).to_real_world_currency(self.session)}
 
 class FinalResults(Page):
     def vars_for_template(self):
         return {'current_month': Constants.months[(self.round_number - 2) % 12],
                 'current_round': self.round_number - 1,
                 'progress': 'Game',
-                'goal_meet': Constants.group_goal <= self.group.all_rounds_contribution()}
+                'goal_meet': Constants.group_goal <= self.group.all_rounds_contribution(),
+                'carbonfund': self.group.all_rounds_contribution_in_dollars(),
+                'quiz': c(self.player.how_many_good_answers()).to_real_world_currency(self.session)}
 
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
+
+    def before_next_page(self):
+        self.group.pay_carbonfund()
+        self.group.pay_quizzes()
+
+
+class PostSurvey(Page):
+    form_model = 'player'
+    form_fields = ['I_like_to_help_other_people',
+                   'I_like_to_share_my_ideas_and_materials_with_others',
+                   'I_like_to_cooperate_with_others',
+                   'I_can_learn_important_things_from_others',
+                   'I_try_to_share_my_ideas_and_resources_with_others_when_I_think_it_will_help_them',
+                   'People_learn_lots_of_important_things_from_each_other',
+                   'It_is_a_good_idea_for_people_to_help_each_other',
+                   'I_like_to_do_better_work_than_others',
+                   'I_work_to_get_better_than_others',
+                   'I_like_to_be_the_best_at_what_I_do',
+                   'I_dont_like_to_be_second',
+                   'I_like_to_compete_with_other_students_to_see_who_can_do_the_best',
+                   'I_am_happiest_when_I_am_competing_with_others',
+                   'I_like_the_challenge_of_seeing_who_is_best',
+                   'Competing_with_others_is_a_good_way_to_work',
+                   'I_dont_like_working_with_others',
+                   'I_like_to_work_with_others_reverse',
+                   'It_bothers_me_when_I_have_to_work_with_others',
+                   'I_do_better_when_I_work_alone',
+                   'I_like_work_better_when_I_do_it_all_myself',
+                   'I_would_rather_work_along_than_with_others',
+                   'Working_in_small_groups_is_better_than_working_alone_reverse']
+
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+        return {'current_month': Constants.months[(self.round_number - 2) % 12],
+                'current_round': self.round_number - 1,
+                'progress': 'Survey',
+                'forms': [
+                    'I_like_to_help_other_people',
+                   'I_like_to_share_my_ideas_and_materials_with_others',
+                   'I_like_to_cooperate_with_others',
+                   'I_can_learn_important_things_from_others',
+                   'I_try_to_share_my_ideas_and_resources_with_others_when_I_think_it_will_help_them',
+                   'People_learn_lots_of_important_things_from_each_other',
+                   'It_is_a_good_idea_for_people_to_help_each_other',
+                   'I_like_to_do_better_work_than_others',
+                   'I_work_to_get_better_than_others',
+                   'I_like_to_be_the_best_at_what_I_do',
+                   'I_dont_like_to_be_second',
+                   'I_like_to_compete_with_other_students_to_see_who_can_do_the_best',
+                   'I_am_happiest_when_I_am_competing_with_others',
+                   'I_like_the_challenge_of_seeing_who_is_best',
+                   'Competing_with_others_is_a_good_way_to_work',
+                   'I_dont_like_working_with_others',
+                   'I_like_to_work_with_others_reverse',
+                   'It_bothers_me_when_I_have_to_work_with_others',
+                   'I_do_better_when_I_work_alone',
+                   'I_like_work_better_when_I_do_it_all_myself',
+                   'I_would_rather_work_along_than_with_others',
+                   'Working_in_small_groups_is_better_than_working_alone_reverse'],
+                'names': ['I like to help other people ','I like to share my ideas and materials with others ','I like to cooperate with others ','I can learn important things from others ','I try to share my ideas and resources with others when I think it will help them ','People learn lots of important things from each other ','It is a good idea for people to help each other  ','I like to do better work than others ','I work to get better than others ','I like to be the best at what I do ','I don’t like to be second ','I like to compete with other students to see who can do the best ','I am happiest when I am competing with others ','I like the challenge of seeing who is best ','Competing with others is a good way to work  ','I don’t like working with others ','I like to work with others (reverse) ','It bothers me when I have to work with others  ','I do better when I work alone ','I like work better when I do it all myself ','I would rather work along than with others','Working in small groups is better than working alone (reverse)'],
+                'aux': [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]}
+
+class PostSurvey2(Page):
+    form_model = 'player'
+    form_fields = ['Plants','Marine_life','Birds','Animals','My_prosperity','My_lifestyle','My_health','My_future','People_in_my_community','The_human_race','Children','People_in_the_United_States']
+
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+        return {'current_month': Constants.months[(self.round_number - 2) % 12],
+                'current_round': self.round_number - 1,
+                'progress': 'Survey',
+                'forms': ['Plants','Marine_life','Birds','Animals','My_prosperity','My_lifestyle','My_health','My_future','People_in_my_community','The_human_race','Children','People_in_the_United_States'],
+                'names': ['Plants','Marine life','Birds','Animals','My prosperity','My lifestyle','My health','My future','People in my community','The human race','Children','People in the United States'],
+                'aux': [0,1,2,3,4,5,6,7,8,9,10,11]}
+
+class PostSurvey3(Page):
+    form_model = 'player'
+    form_fields = ['birth', 'gender', 'ethnic_group', 'economic_status', 'previous_experiments', 'reliability','politic_party','years_in_us']
+
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+        return {'current_month': Constants.months[(self.round_number - 2) % 12],
+                'current_round': self.round_number - 1,
+                'progress': 'Game'}
+
 
 
 page_sequence = [
@@ -422,6 +498,9 @@ page_sequence = [
     Survey,
     ResultsWaitPage,
     Results,
+    Congrats,
     FinalResults,
-    #PostSurvey
+    PostSurvey,
+    PostSurvey2,
+    PostSurvey3
 ]
