@@ -391,7 +391,7 @@ class PostSurvey(Page):
                    'I_work_to_get_better_than_others',
                    'I_like_to_be_the_best_at_what_I_do',
                    'I_dont_like_to_be_second',
-                   'I_like_to_compete_with_other_students_to_see_who_can_do_the_best',
+                   'I_like_to_compete_with_other_students',
                    'I_am_happiest_when_I_am_competing_with_others',
                    'I_like_the_challenge_of_seeing_who_is_best',
                    'Competing_with_others_is_a_good_way_to_work',
@@ -401,7 +401,7 @@ class PostSurvey(Page):
                    'I_do_better_when_I_work_alone',
                    'I_like_work_better_when_I_do_it_all_myself',
                    'I_would_rather_work_along_than_with_others',
-                   'Working_in_small_groups_is_better_than_working_alone_reverse']
+                   'Working_in_small_groups_is_better_than_working_alone']
 
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
@@ -422,7 +422,7 @@ class PostSurvey(Page):
                    'I_work_to_get_better_than_others',
                    'I_like_to_be_the_best_at_what_I_do',
                    'I_dont_like_to_be_second',
-                   'I_like_to_compete_with_other_students_to_see_who_can_do_the_best',
+                   'I_like_to_compete_with_other_students',
                    'I_am_happiest_when_I_am_competing_with_others',
                    'I_like_the_challenge_of_seeing_who_is_best',
                    'Competing_with_others_is_a_good_way_to_work',
@@ -432,7 +432,7 @@ class PostSurvey(Page):
                    'I_do_better_when_I_work_alone',
                    'I_like_work_better_when_I_do_it_all_myself',
                    'I_would_rather_work_along_than_with_others',
-                   'Working_in_small_groups_is_better_than_working_alone_reverse'],
+                   'Working_in_small_groups_is_better_than_working_alone'],
                 'names': ['I like to help other people ','I like to share my ideas and materials with others ','I like to cooperate with others ','I can learn important things from others ','I try to share my ideas and resources with others when I think it will help them ','People learn lots of important things from each other ','It is a good idea for people to help each other  ','I like to do better work than others ','I work to get better than others ','I like to be the best at what I do ','I don’t like to be second ','I like to compete with other students to see who can do the best ','I am happiest when I am competing with others ','I like the challenge of seeing who is best ','Competing with others is a good way to work  ','I don’t like working with others ','I like to work with others (reverse) ','It bothers me when I have to work with others  ','I do better when I work alone ','I like work better when I do it all myself ','I would rather work along than with others','Working in small groups is better than working alone (reverse)'],
                 'aux': [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]}
 

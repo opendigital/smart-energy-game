@@ -136,7 +136,7 @@ class Player(BasePlayer):
     I_work_to_get_better_than_others = models.StringField()
     I_like_to_be_the_best_at_what_I_do = models.StringField()
     I_dont_like_to_be_second = models.StringField()
-    I_like_to_compete_with_other_students_to_see_who_can_do_the_best = models.StringField()
+    I_like_to_compete_with_other_students= models.StringField()
     I_am_happiest_when_I_am_competing_with_others = models.StringField()
     I_like_the_challenge_of_seeing_who_is_best = models.StringField()
     Competing_with_others_is_a_good_way_to_work = models.StringField()
@@ -146,7 +146,7 @@ class Player(BasePlayer):
     I_do_better_when_I_work_alone = models.StringField()
     I_like_work_better_when_I_do_it_all_myself = models.StringField()
     I_would_rather_work_along_than_with_others = models.StringField()
-    Working_in_small_groups_is_better_than_working_alone_reverse = models.StringField()
+    Working_in_small_groups_is_better_than_working_alone = models.StringField()
 
     # POST_SURVEY 2
 
