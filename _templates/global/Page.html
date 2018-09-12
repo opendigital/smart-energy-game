@@ -11,7 +11,7 @@
     </style>
 
     <div id="myProgress">
-        <div id="myBar"><center><b style="color: white">{{ progress }}</b></center></div>
+        <div id="myBar"><center><b style="color: white">{% if progress != "End" %}{{ progress }}{% else %}{% endif %}</b></center></div>
     </div>
 
     <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
@@ -54,6 +54,10 @@
         case 'Survey'://Son 2, van 12
             elem.style.marginLeft = '90%';
             elem.style.width = '10%';
+            break;
+        case 'End'://Son 2, van 12
+            elem.style.marginLeft = '0';
+            elem.style.width = '100%';
             break;
         default:
             //DO NOTHING.

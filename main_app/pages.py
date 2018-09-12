@@ -436,6 +436,7 @@ class PostSurvey(Page):
                 'names': ['I like to help other people ','I like to share my ideas and materials with others ','I like to cooperate with others ','I can learn important things from others ','I try to share my ideas and resources with others when I think it will help them ','People learn lots of important things from each other ','It is a good idea for people to help each other  ','I like to do better work than others ','I work to get better than others ','I like to be the best at what I do ','I don’t like to be second ','I like to compete with other students to see who can do the best ','I am happiest when I am competing with others ','I like the challenge of seeing who is best ','Competing with others is a good way to work  ','I don’t like working with others ','I like to work with others (reverse) ','It bothers me when I have to work with others  ','I do better when I work alone ','I like work better when I do it all myself ','I would rather work along than with others','Working in small groups is better than working alone (reverse)'],
                 'aux': [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]}
 
+
 class PostSurvey2(Page):
     form_model = 'player'
     form_fields = ['Plants','Marine_life','Birds','Animals','My_prosperity','My_lifestyle','My_health','My_future','People_in_my_community','The_human_race','Children','People_in_the_United_States']
@@ -451,6 +452,7 @@ class PostSurvey2(Page):
                 'names': ['Plants','Marine life','Birds','Animals','My prosperity','My lifestyle','My health','My future','People in my community','The human race','Children','People in the United States'],
                 'aux': [0,1,2,3,4,5,6,7,8,9,10,11]}
 
+
 class PostSurvey3(Page):
     form_model = 'player'
     form_fields = ['birth', 'gender', 'ethnic_group', 'economic_status', 'previous_experiments', 'reliability','politic_party','years_in_us']
@@ -463,6 +465,13 @@ class PostSurvey3(Page):
                 'current_round': self.round_number - 1,
                 'progress': 'Game'}
 
+
+class Debriefing(Page):
+    def vars_for_template(self):
+        return {'progress': 'End'}
+
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds
 
 
 page_sequence = [
@@ -502,5 +511,6 @@ page_sequence = [
     FinalResults,
     PostSurvey,
     PostSurvey2,
-    PostSurvey3
+    PostSurvey3,
+    Debriefing
 ]
