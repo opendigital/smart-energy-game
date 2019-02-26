@@ -1,60 +1,65 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
 
-{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
 {% block title %}Game Outcome{% endblock %}
 
 {% block content %}
-    <div class="card bg-transparent">
-        <div class="card-body">
-            <h2 style="padding-left: 10px"><b>GAME OUTCOME</b></h2><br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <p>
-                            Players will receive $0.01 for every energy token left in their <e style="color: #a700a8">private accounts</e>. ​
-                        </p>
-                    </div>
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <img src="{% static 'main_app/4. GAME OUTCOME.png' %}" class="img-fluid" alt="Responsive image"/>
-                            </div>
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                <p>
-                                    <b>(A) If the group meets or exceeds it’s <e style="color: blue">group conservation
-                                        goal</e> of <e style="color: blue">30%</e> (<e style="color: blue">216 tokens</e>)</b>, then the
-                                group account is doubled and divided equally among all  players. <e style="color: gray"><i>For example, for every 6
-                                tokens collectively added to the group conservation account, each player will receive
-                                    6*2/6=2 tokens.</i></e>
-                                </p>
-                                <p>
-                                    <b>(B) If the group fails</b> to make it’s conservation goal, <b>no bonus</b> pay will be paid.
-                                </p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <img src="{% static 'main_app/5. GAME OUTCOME.png' %}" class="img-fluid" alt="Responsive image"/>
-                            </div>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>GAME OUTCOME</b></h2><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <p>
+                        Players will receive $0.10 for every energy token left in their <e style="color: #a700a8">private
+                            accounts</e>. ​
+                    </p>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <!-- <img src="{% static 'main_app/4. GAME OUTCOME.png' %}" class="img-fluid" alt="Responsive image"/> -->
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <p>
+                                <b>(A) If the group meets or exceeds its <e style="color: blue">group conservation
+                                        goal</e> of <e style="color: blue">60%</e> (<e style="color: blue">1584 tokens</e>)</b>,
+                                then the
+                                group account is doubled and divided equally among all players. <e style="color: gray"><i>For
+                                        example, for every 22
+                                        tokens collectively added to the group conservation account, each player will
+                                        receive
+                                        2 tokens.</i></e>
+                            </p>
+                            <p>
+                                <b>(B) If the group fails</b> to make its conservation goal, <b>no bonus</b> pay will
+                                be paid.
+                            </p>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <!-- <img src="{% static 'main_app/5. GAME OUTCOME.png' %}" class="img-fluid" alt="Responsive image" /> -->
                         </div>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="font-size: 20px">
-                        <b>Your pay at the end of the game.</b>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                        <p style="padding-top: 30px"><i>
-                            Next, well explain how this game will have a real environmental impact.
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="font-size: 20px">
+                    <b>Your pay at the end of the game.</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <p style="padding-top: 30px"><i>
+                            Next, we'll explain how this game will have a real environmental impact.
                         </i></p>
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-top: 40px">
-                        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 20px; width: 100px">Next</button>
-                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-top: 40px">
+                    <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 20px; width: 100px">Next</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}
-

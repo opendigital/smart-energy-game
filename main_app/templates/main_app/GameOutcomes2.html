@@ -1,41 +1,44 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
 
-{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 
 {% block title %} Real Environmental Impact {% endblock %}
 
 {% block content %}
-    <div class="card bg-transparent">
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                        <h2><b>REAL ENVIRONMENTAL IMPACT</b></h2><br>
-                        <ul style="font-size: 18px;text-align: left;">
-                            <li>
-                                The dollar value of the energy tokens ($.01 per token) contributed to the <e style="color: blue">group
-                                conservation account</e> <b>will be used to purchase pollution credits from Carbonfund.org</b>.
-                            </li><br>
-                            <li>
-                                These will pay for verified renewable energy, energy efficiency and reforestation
-                                projects that reduce carbon dioxide and other air pollution.
-                            </li><br>
-                            <li>
-                                Every 10 energy tokens in the <e style="color: blue">group conservation account</e> will
-                                result in an <b><e style="color: green">actual reduction of 22 pounds of air pollution</e></b>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <img src="{% static 'main_app/7. REAL ENVIRONMENTAL IMPACT.png' %}" class="img-fluid" alt="Responsive image"/>
-                    </div>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <h2><b>REAL ENVIRONMENTAL IMPACT</b></h2><br>
+                    <ul style="font-size: 18px;text-align: left;">
+                        <li>
+                            The dollar value of the energy tokens ($0.10 per token) contributed to the <e style="color: blue">group
+                                conservation account</e> <b>will be used to purchase pollution credits from
+                                Carbonfund.org</b>.
+                        </li><br>
+                        <li>
+                            These will pay for verified renewable energy, energy efficiency and reforestation
+                            projects that reduce carbon dioxide and other air pollution.
+                        </li><br>
+                        <li>
+                            Every 10 energy tokens in the <e style="color: blue">group conservation account</e> will
+                            result in an <b>
+                                <e style="color: green">actual reduction of 22 pounds of air pollution</e>
+                            </b>.
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <!-- <img src="{% static 'main_app/7. REAL ENVIRONMENTAL IMPACT.png' %}" class="img-fluid" alt="Responsive image"/> -->
                 </div>
             </div>
-            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 15%;margin-top: 19px; width: 100px">Next</button>
-
         </div>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 15%;margin-top: 19px; width: 100px">Next</button>
+
     </div>
+</div>
 
 {% endblock %}
-

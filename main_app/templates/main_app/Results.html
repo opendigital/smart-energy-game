@@ -131,10 +131,9 @@
     }
 
     var percentage = document.getElementById("percentage")
-    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 216)
+    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 1584)
 
-
-    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 30% (2016)</e></b>"
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (1584)</e></b>"
 
     console.log("{{ player.others_contribution_array }}");
     console.log("user contribution: " + parseInt("{{ player.contribution }}"));

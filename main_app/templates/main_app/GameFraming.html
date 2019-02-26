@@ -1,39 +1,41 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
 
-{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 {% block title %}Introduction{% endblock %}
 {% block content %}
-    <div class="card bg-transparent">
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="text-align: left;">
-                        <h2><b>INTRODUCTION</b></h2><br>
-                        <p>
-                            Many communities are trying to use less energy. In this experiment, you will play a household
-                            energy conservation challenge. It is a <b>real financial investment game</b>     where you will make
-                            decisions with <e style="color: #a700a8">5 other</e> Amazon Mechanical Turkers.
-                        </p>
-                        <p>
-                            As residents of a shared apartment building you are trying to reduce your combined energy
-                            usage by <e style="color: blue">30%</e> (<e style="color: blue">216 token</e>). You can earn a smaller or larger financial payment at the end of
-                            the game, depending on your and others’ energy choices.
-                        </p>
-                        <p><i>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="text-align: left;">
+                    <h2><b>INTRODUCTION</b></h2><br>
+                    <p>
+                        Many communities are trying to use less energy. In this experiment, you will play a household
+                        energy conservation challenge. It is a <b>real financial investment game</b> where you will
+                        make
+                        decisions with <e style="color: #a700a8">5 other</e> Amazon Mechanical Turkers.
+                    </p>
+                    <p>
+                        As residents of a shared apartment building you are trying to reduce your combined energy
+                        usage by <e style="color: blue">30%</e> (<e style="color: blue">216 token</e>). You can earn a
+                        smaller or larger financial payment at the end of
+                        the game, depending on your and others’ energy choices.
+                    </p>
+                    <p><i>
                             Next, you will get instructions for the game, a trial game and a comprehension quiz (with
                             an opportunity to earn extra income). Then, you’ll proceed to the actual investment game.
                             To make this experiment a success, <b>please read the following rules very attentively</b>.
                         </i></p>
-                    </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                        <img src="{% static 'main_app/1. INTRODUCTION.png' %}" class="img-fluid" alt="Responsive image"/>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <!-- <img src="{% static 'main_app/1. INTRODUCTION.png' %}" class="img-fluid" alt="Responsive image"/> -->
 
-                    </div>
                 </div>
             </div>
-            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
         </div>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
     </div>
+</div>
 {% endblock %}
-

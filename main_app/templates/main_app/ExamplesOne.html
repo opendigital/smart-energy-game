@@ -1,47 +1,55 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
-{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 {% block title %}Example 1{% endblock %}
 {% block content %}
-    <div class="card bg-transparent">
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <h2><b>EXAMPLE 1: EQUAL 30% CONSERVATION​</b></h2><br>
-                        <p>
-                            <b>If all players conserve 3 energy tokens every month on average</b>, then earnings will follow the image at right:​
-                        </p>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <h2><b>EXAMPLE 1: EQUAL 60% CONSERVATION​</b></h2><br>
+                    <p>
+                        <b>If all players conserve 6 energy tokens every month on average</b>, then the earnings will
+                        be as follows
+                    </p>
 
-                        <ul style="font-size: 18px;text-align: left;">
-                            <li>
-                                <b><e style="color: #a700a8">Private account</e></b>: Each player has 90 tokens left, earning them <e style="color: #a700a8">$0.90</e>.
-                            </li>
-                            <li>
-                                <b><e style="color: blue">Group conservation account</e></b>: has 216 tokens ($2.16).
-                                The group meets the conservation goal, so a bonus is paid by doubling the 216 tokens
-                                (to 432) and dividing them equally among all players. Every player’s bonus is 72 tokens
-                                (<e style="color: blue">$0.72</e>).
-                            </li>
-                            <li>
-                                <i><b>Your total earnings</b>: <e style="color: #a700a8">$0.90 (private account</e>) +
-                                <e style="color: blue">$0.72 </e>(<e style="color: blue">group conservation bonus</e>)
-                                <b>= $1.62</b></i>
-                            </li>
-                            <li><b>
-                                <e style="color: green">Pollution reduction</e></b>: The dollar value of the energy
-                                tokens in the <e style="color: blue"> conservation account</e> ($2.16) is donated to
-                                Carbonfund.org, reducing approximately <e style="color: green">475</e> pounds of air pollution
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                        <img src="{% static 'main_app/8. EXAMPLE 1.png' %}" class="img-fluid" alt="Responsive image"/>
-                    </div>
+                    <ul style="font-size: 18px;text-align: left;">
+                        <li>
+                            <b>
+                                <e style="color: #a700a8">Private account</e>
+                            </b>: Each player has 48 tokens left, earning them <e style="color: #a700a8">$4.80</e>.
+                        </li>
+                        <li>
+                            <b>
+                                <e style="color: blue">Group conservation account</e>
+                            </b>: The group has 1,584 tokens ($158.40).
+                            The group meets the conservation goal, so a bonus is paid by doubling the 1,584 tokens
+                            (to 3,168 tokens) and dividing them equally among all players. Every player’s bonus is 144
+                            tokens
+                            (<e style="color: blue">$14.40</e>).
+                        </li>
+                        <li>
+                            <i><b>Your total earnings</b>: <e style="color: #a700a8">$14.40 (private account</e>) +
+                                <e style="color: blue">$14.40 </e>(<e style="color: blue">group conservation bonus</e>)
+                                <b>= $19.20</b></i>
+                        </li>
+                        <li><b>
+                                <e style="color: green">Pollution reduction</e>
+                            </b>: The dollar value of the energy
+                            tokens in the <e style="color: blue"> conservation account</e> ($158.40) is donated to
+                            Carbonfund.org, reducing approximately <e style="color: green">3500</e> pounds of air
+                            pollution
+                        </li>
+                    </ul>
                 </div>
+                <!-- <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <img src="{% static 'main_app/8. EXAMPLE 1.png' %}" class="img-fluid" alt="Responsive image" />
+                </div> -->
             </div>
-            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
         </div>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
     </div>
+</div>
 {% endblock %}
-

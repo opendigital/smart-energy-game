@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER',
               'NOVEMBER', 'DECEMBER']
 
-    answers = ["3 tokens", "True", "True", "True","$1.08","$1.00","$2.08","$1.08","$0.00","$1.08"]
+    answers = ["6 tokens", "True", "True", "True","$1.00","$18.18","$19.18","$1.00","$0.00","$1.00"]
 
 
 class Subsession(BaseSubsession):
@@ -98,12 +98,12 @@ class Player(BasePlayer):
     Q3a = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
     Q3b = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
 
-    Q4a1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$1.00", "$1.08", "$2.08"])
-    Q4a2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$1.00", "$1.08", "$2.08"])
-    Q4a3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$1.00", "$1.08", "$2.08"])
-    Q4b1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.08", "$2.08"])
-    Q4b2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.08", "$2.08"])
-    Q4b3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.08", "$2.08"])
+    Q4a1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.00", "$2.00"])
+    Q4a2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$18.18", "$20.18", "$22.18"])
+    Q4a3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$17.18", "$18.18", "$19.18"])
+    Q4b1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.00", "$2.00"])
+    Q4b2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.18", "$2.00"])
+    Q4b3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.00", "$2.08"])
 
     repeatQuiz1 = models.BooleanField(initial=False)
     timesInstruction1 = models.IntegerField(initial=0)
