@@ -13,9 +13,9 @@ Solution for training problem
 
 class Constants(BaseConstants):
     name_in_url = 'training_problem'
-    players_per_group = 6
+    players_per_group = 1
     players_without_me = players_per_group - 1
-    num_rounds = 3#13
+    num_rounds = 14 # this number needs to be 1 higher than the desired number of rounds
 
     endowment = c(100)
     multiplier = 2
@@ -206,6 +206,9 @@ class Player(BasePlayer):
 
     def others_contribution(self):
         return sum([p.contribution for p in self.get_others_in_group()])
+
+    def others_contribution_array(self):
+        return [p.contribution for p in self.get_others_in_group()]
 
     def all_rounds_others_contribution(self):
         return sum([p.all_rounds_contribution() for p in self.get_others_in_group()])

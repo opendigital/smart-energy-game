@@ -4,17 +4,17 @@
 {% block title %} Introduction {% endblock %}
 
 {% block content %}
-    <p>
-        This game has two parts:
+<p>
+    This game has two parts:
 
-        The major part consists of a public goods game with
-        {{ Constants.players_per_group }} randomly chosen players per group.
-        And the last part is a survey, where you will have to
-        choose one of the options shown on the screen.
-    </p>
+    The major part consists of a public goods game with
+    {{ Constants.players_per_group }} randomly chosen players per group.
+    And the last part is a survey, where you will have to
+    choose one of the options shown on the screen.
+</p>
 
-    <div class="card bg-light">
-        <div class="card-body">
+<div class="card bg-light">
+    <div class="card-body">
 
         <h3>Instructions</h3>
         <p>
@@ -34,9 +34,8 @@
             evenly split among all {{ Constants.players_per_group }}
             participants. Your payoff equals your earnings from the project, plus
             the amount you did not contribute.
-        {% next_button %}
-        </div>
+            {% next_button %}
     </div>
+</div>
 
 {% endblock %}
-
