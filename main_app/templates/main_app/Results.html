@@ -16,7 +16,7 @@
                     <h4><b><u>{{ current_month }} Feedback</u> </b></h4>
                 </center>
 
-                <table class="table" style="text-align:left;">
+                <table id="table" class="table" style="text-align:left;">
                     <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">
                         <th></th>
                         <th></th>
@@ -97,6 +97,39 @@
     </div>
 </div>
 <script>
+    function parseCurrency(str) {
+        raw_numbers = str.split(" ");
+        let numbers = [];
+        for (let i = 0; i < raw_numbers.length; i++) {
+            let n = raw_numbers[i];
+            n = n.replace(/\D/g, '');
+            n = parseInt(n);
+            numbers.push(n);
+        }
+
+        return numbers;
+    }
+
+    function createRow(container, user_id, current_contribution, total_contribution) {
+        let row = document.createElement("tr");
+        row.append(document.createElement("td"));
+        row.append(document.createElement("td"));
+
+        let label = document.createElement("td");
+        label.innerHTML = "Player " + user_id + "'s contribution to the group conservation account:";
+        row.append(label);
+
+        let current_contribution_HTML = document.createElement("td");
+        current_contribution_HTML.innerHTML = "<e style='color: #a700a8'>" + current_contribution + " tokens</e>";
+        row.append(current_contribution_HTML);
+
+        let total_contribution_HTML = document.createElement("td");
+        total_contribution_HTML.innerHTML = "<e style='color: #a700a8'>" + total_contribution + " tokens</e>";
+        row.append(total_contribution_HTML);
+
+        container.append(row);
+    }
+
     var percentage = document.getElementById("percentage")
     var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 216)
 
@@ -104,6 +137,33 @@
     percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 30% (2016)</e></b>"
 
     console.log("{{ player.others_contribution_array }}");
+    console.log("user contribution: " + parseInt("{{ player.contribution }}"));
+    console.log("user id: " + parseInt("{{ player.id_in_group }}"));
+    console.log("{{ player.all_rounds_others_contribution_array }}");
+    console.log("------------------------------------------------------");
+
+    // gather data
+    let user_id = parseInt("{{ player.id_in_group }}");
+    let user_contribution = parseInt("{{ player.contribution }}");
+    let user_total_contribution = parseInt("{{ player.all_rounds_contribution }}");
+
+    let current_round_contributions = parseCurrency("{{ player.others_contribution_array }}");
+    current_round_contributions.splice(user_id - 1, 0, user_contribution);
+
+    let total_contributions = parseCurrency("{{ player.all_rounds_others_contribution_array }}");
+    total_contributions.splice(user_id - 1, 0, user_total_contribution);
+
+    // add it to the table
+    let table = document.getElementById("table");
+
+    for (let i = 0; i < current_round_contributions.length; i++) {
+        if (i + 1 != user_id) {
+            createRow(table, i + 1, current_round_contributions[i], total_contributions[i]);
+        }
+    }
+
+    console.log(current_round_contributions);
+    console.log(total_contributions);
 </script>
 
 {% endblock %}

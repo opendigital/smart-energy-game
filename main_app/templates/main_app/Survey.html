@@ -1,41 +1,46 @@
 {% extends "global/Page.html" %}
 {% load static otree %}
-{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
 {% block title %}Real Game{% endblock %}
 {% block content %}
-    <div class="card bg-transparent">
-        <div class="card-body">
-            <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
-            <div class="form-control-errors" id="errors">{{ form.contribution.errors }}</div>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
+        <div class="form-control-errors" id="errors">{{ form.contribution.errors }}</div>
 
 
-            <div class="card" style="background: linear-gradient(to right ,#eef3f8, #dae5f1,#eef3f8) no-repeat;">
-                <div class="card-body">
-                    <center><h4><b><u>{{ current_month }}</u></b></h4></center>
-                    <h4><b>You have <e class="pr">10</e> energy tokens.</b></h4><br>
-                    <h4><b>How much energy do you want to conserve this month?</b></h4><br>
-                    <div class="container" style="padding: 0">
-                        <div class="row">
-                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="padding-right: 0; margin-right: -38px">
-                                <p>Enter a number between 0 and 10 to save energy tokens to the group conservation account:</p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 0">
-                                <input name="contribution" id="contribution_box" min="0" max="10" type="number">
-                            </div>
+        <div class="card" style="background: linear-gradient(to right ,#eef3f8, #dae5f1,#eef3f8) no-repeat;">
+            <div class="card-body">
+                <center>
+                    <h4><b><u>{{ current_month }}</u></b></h4>
+                </center>
+                <h4><b>You have <e class="pr">10</e> energy tokens.</b></h4><br>
+                <h4><b>How much energy do you want to conserve this month?</b></h4><br>
+                <div class="container" style="padding: 0">
+                    <div class="row">
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="padding-right: 0; margin-right: -38px">
+                            <p>Enter a number between 0 and 10 to save energy tokens to the group conservation account:</p>
                         </div>
-                        <div class="row">
-                            <p style="margin-top: -15px; margin-left: 14px">This is how much you will keep this month for your personal energy account:
-                                <b><span id="personal" style="color: #a700a8"></span></b>
-                            energy tokens</p>
-
-                            <div style="display: none" ><input name="private_contribution" id="private_box" min="0" max="10" type="number"></div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 0">
+                            <input name="contribution" id="contribution_box" min="0" max="10" type="number">
                         </div>
                     </div>
-                    <script src="{% static 'main_app/game.js' %}" ></script>
-                    <br>
-                    <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+                    <div class="row">
+                        <p style="margin-top: -15px; margin-left: 14px">This is how much you will keep this month for
+                            your personal energy account:
+                            <b><span id="personal" style="color: #a700a8"></span></b>
+                            energy tokens</p>
+
+                        <div style="display: none"><input name="private_contribution" id="private_box" min="0" max="10"
+                                type="number"></div>
+                    </div>
                 </div>
+                <script src="{% static 'main_app/game.js' %}"></script>
+                <br>
+                <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
