@@ -17,7 +17,7 @@ mturk_hit_settings = {
     'frame_height': 500,
     'preview_template': 'global/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
-    'expiration_hours': 7*24, # 7 days
+    'expiration_hours': 7*24,  # 7 days
     'grant_qualification_id': '31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY',
     'qualification_requirements': [
         {
@@ -31,14 +31,14 @@ SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
     'participation_fee': 0.50,
     'doc': "",
-    'mturk_hit_settings': mturk_hit_settings,# Line for Mturk config
+    'mturk_hit_settings': mturk_hit_settings,  # Line for Mturk config
 }
 
 SESSION_CONFIGS = [
     {
         'name': 'main_app',
         'display_name': "Base Game Re-Design",
-        'num_demo_participants': 6,
+        'num_demo_participants': 2,
         'app_sequence': ['main_app']
     },
     # {
@@ -94,7 +94,7 @@ AUTH_LEVEL = 'DEMO'
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = 'GoBoilers2018!'#environ.get('OTREE_ADMIN_PASSWORD')
+ADMIN_PASSWORD = 'GoBoilers2018!'  # environ.get('OTREE_ADMIN_PASSWORD')
 
 
 # Consider '', None, and '0' to be empty/false
@@ -116,129 +116,129 @@ SECRET_KEY = '68j-5$9@d=m0_*pb0n=_3u6%33fng(738yww&w^ttk136n(4vz'
 INSTALLED_APPS = ['otree']
 
 # inactive session configs
-### {
-###     'name': 'trust',
-###     'display_name': "Trust Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust', 'payment_info'],
-### },
-### {
-###     'name': 'prisoner',
-###     'display_name': "Prisoner's Dilemma",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['prisoner', 'payment_info'],
-### },
-### {
-###     'name': 'ultimatum',
-###     'display_name': "Ultimatum (randomized: strategy vs. direct response)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-### },
-### {
-###     'name': 'ultimatum_strategy',
-###     'display_name': "Ultimatum (strategy method treatment)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': T'rcodibasegame2018'#rue,
-### },
-### {
-###     'name': 'ultimatum_non_strategy',
-###     'display_name': "Ultimatum (direct response treatment)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': False,
-### },
-### {
-###     'name': 'vickrey_auction',
-###     'display_name': "Vickrey Auction",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['vickrey_auction', 'payment_info'],
-### },
-### {
-###     'name': 'volunteer_dilemma',
-###     'display_name': "Volunteer's Dilemma",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['volunteer_dilemma', 'payment_info'],
-### },
-### {
-###     'name': 'cournot',
-###     'display_name': "Cournot Competition",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
+# {
+# 'name': 'trust',
+# 'display_name': "Trust Game",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['trust', 'payment_info'],
+# },
+# {
+# 'name': 'prisoner',
+# 'display_name': "Prisoner's Dilemma",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['prisoner', 'payment_info'],
+# },
+# {
+# 'name': 'ultimatum',
+# 'display_name': "Ultimatum (randomized: strategy vs. direct response)",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['ultimatum', 'payment_info'],
+# },
+# {
+# 'name': 'ultimatum_strategy',
+# 'display_name': "Ultimatum (strategy method treatment)",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['ultimatum', 'payment_info'],
+# 'use_strategy_method': T'rcodibasegame2018'#rue,
+# },
+# {
+# 'name': 'ultimatum_non_strategy',
+# 'display_name': "Ultimatum (direct response treatment)",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['ultimatum', 'payment_info'],
+# 'use_strategy_method': False,
+# },
+# {
+# 'name': 'vickrey_auction',
+# 'display_name': "Vickrey Auction",
+# 'num_demo_participants': 3,
+# 'app_sequence': ['vickrey_auction', 'payment_info'],
+# },
+# {
+# 'name': 'volunteer_dilemma',
+# 'display_name': "Volunteer's Dilemma",
+# 'num_demo_participants': 3,
+# 'app_sequence': ['volunteer_dilemma', 'payment_info'],
+# },
+# {
+# 'name': 'cournot',
+# 'display_name': "Cournot Competition",
+# 'num_demo_participants': 2,
+# 'app_sequence': [
 ###         'cournot', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'principal_agent',
-###     'display_name': "Principal Agent",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['principal_agent', 'payment_info'],
-### },
-### {
-###     'name': 'dictator',
-###     'display_name': "Dictator Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['dictator', 'payment_info'],
-### },
-### {
-###     'name': 'matching_pennies',
-###     'display_name': "Matching Pennies",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
-###         'matching_pennies',
-###     ],
-### },
-### {
-###     'name': 'traveler_dilemma',
-###     'display_name': "Traveler's Dilemma",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['traveler_dilemma', 'payment_info'],
-### },
-### {
-###     'name': 'bargaining',
-###     'display_name': "Bargaining Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['bargaining', 'payment_info'],
-### },
-### {
-###     'name': 'common_value_auction',
-###     'display_name': "Common Value Auction",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['common_value_auction', 'payment_info'],
-### },
-### {
-###     'name': 'bertrand',
-###     'display_name': "Bertrand Competition",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
+# ],
+# },
+# {
+# 'name': 'principal_agent',
+# 'display_name': "Principal Agent",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['principal_agent', 'payment_info'],
+# },
+# {
+# 'name': 'dictator',
+# 'display_name': "Dictator Game",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['dictator', 'payment_info'],
+# },
+# {
+# 'name': 'matching_pennies',
+# 'display_name': "Matching Pennies",
+# 'num_demo_participants': 2,
+# 'app_sequence': [
+# 'matching_pennies',
+# ],
+# },
+# {
+# 'name': 'traveler_dilemma',
+# 'display_name': "Traveler's Dilemma",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['traveler_dilemma', 'payment_info'],
+# },
+# {
+# 'name': 'bargaining',
+# 'display_name': "Bargaining Game",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['bargaining', 'payment_info'],
+# },
+# {
+# 'name': 'common_value_auction',
+# 'display_name': "Common Value Auction",
+# 'num_demo_participants': 3,
+# 'app_sequence': ['common_value_auction', 'payment_info'],
+# },
+# {
+# 'name': 'bertrand',
+# 'display_name': "Bertrand Competition",
+# 'num_demo_participants': 2,
+# 'app_sequence': [
 ###         'bertrand', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'real_effort',
-###     'display_name': "Real-effort transcription task",
-###     'num_demo_participants': 1,
-###     'app_sequence': [
-###         'real_effort',
-###     ],
-### },
-### {
-###     'name': 'lemon_market',
-###     'display_name': "Lemon Market Game",
-###     'num_demo_participants': 3,
-###     'app_sequence': [
+# ],
+# },
+# {
+# 'name': 'real_effort',
+# 'display_name': "Real-effort transcription task",
+# 'num_demo_participants': 1,
+# 'app_sequence': [
+# 'real_effort',
+# ],
+# },
+# {
+# 'name': 'lemon_market',
+# 'display_name': "Lemon Market Game",
+# 'num_demo_participants': 3,
+# 'app_sequence': [
 ###         'lemon_market', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'public_goods_simple',
-###     'display_name': "Public Goods (simple version from tutorial)",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['public_goods_simple', 'payment_info'],
-### },
-### {
-###     'name': 'trust_simple',
-###     'display_name': "Trust Game (simple version from tutorial)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust_simple'],
-### },
+# ],
+# },
+# {
+# 'name': 'public_goods_simple',
+# 'display_name': "Public Goods (simple version from tutorial)",
+# 'num_demo_participants': 3,
+# 'app_sequence': ['public_goods_simple', 'payment_info'],
+# },
+# {
+# 'name': 'trust_simple',
+# 'display_name': "Trust Game (simple version from tutorial)",
+# 'num_demo_participants': 2,
+# 'app_sequence': ['trust_simple'],
+# },
