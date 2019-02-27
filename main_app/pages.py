@@ -255,8 +255,8 @@ class Quiz4(Page):
     def vars_for_template(self):
         return {'progress': 'Quiz',
                 'xINSTRUCTIONS':self.player.timesInstruction4,
-                'correct_answer':'$1.08','correct_answer2':'$1.00','correct_answer3':'$2.08',
-                'correct_answer4':'$1.08','correct_answer5':'$0.00','correct_answer6':'$1.08'}
+                'correct_answer':'$1.00','correct_answer2':'$18.18','correct_answer3':'$19.18',
+                'correct_answer4':'$1.00','correct_answer5':'$0.00','correct_answer6':'$1.00'}
 
     def is_displayed(self):
         return self.round_number == 2 and self.player.timesInstruction4 <= 1 and not self.player.is_all_values_right()
@@ -455,7 +455,20 @@ class PostSurvey2(Page):
 
 class PostSurvey3(Page):
     form_model = 'player'
-    form_fields = ['birth', 'gender', 'ethnic_group', 'economic_status', 'previous_experiments', 'reliability','politic_party','years_in_us']
+    form_fields = ['birth', 'gender', 'ethnic_group', 'economic_status', 'previous_experiments', 'reliability','politic_party','years_in_us',
+                    'early_conserve', 'middle_conserve', 'end_conserve', 'individual_conservation_feedback_rank', 'collective_conservation_feedback_rank',
+                   'carbon_offset_feedback_rank', 'percent_goal_feedback_rank', 'total_contribution_feedback_rank']
+
+    # OPEN_QUESTIONS in POST_SURVEY 3
+    # early_conserve = models.StringField()
+    # middle_conserve = models.StringField()
+    # end_conserve = models.StringField()
+
+    # individual_conservation_feedback_rank = models.IntegerField()
+    # collective_conservation_feedback_rank = models.IntegerField()
+    # carbon_offset_feedback_rank = models.IntegerField()
+    # percent_goal_feedback_rank = models.IntegerField()
+    # total_contribution_feedback_rank = models.IntegerField()
 
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
@@ -475,42 +488,42 @@ class Debriefing(Page):
 
 
 page_sequence = [
-    # ConsentForm,
-    # # WaitingRoom,
-    # GameFraming,
-    # GameStructure1,
-    # GameStructure2,
-    # GameOutcomes1,
-    # GameOutcomes2,
-    # ExamplesTransition,
-    # ExamplesOne,
-    # ExamplesTwo,
-    # ExamplesThree,
-    # PracticeTransition,
-    # PracticeGame,
-    # PracticeResults,
-    # QuizTransition,
-    # Quiz1,
-    # GameStructure1,
-    # Quiz1,
-    # Quiz2,
-    # GameOutcomes2,
-    # Quiz2,
-    # Quiz3,
-    # ExamplesTwo,
-    # ExamplesThree,
-    # Quiz3,
-    # Quiz4,
-    # ExamplesOne,
-    # Quiz4,
-    # RealGameTransition,
+    ConsentForm,
+    # WaitingRoom,
+    GameFraming,
+    GameStructure1,
+    GameStructure2,
+    GameOutcomes1,
+    GameOutcomes2,
+    ExamplesTransition,
+    ExamplesOne,
+    ExamplesTwo,
+    ExamplesThree,
+    PracticeTransition,
+    PracticeGame,
+    PracticeResults,
+    QuizTransition,
+    Quiz1,
+    GameStructure1,
+    Quiz1,
+    Quiz2,
+    GameOutcomes2,
+    Quiz2,
+    Quiz3,
+    ExamplesTwo,
+    ExamplesThree,
+    Quiz3,
+    Quiz4,
+    ExamplesOne,
+    Quiz4,
+    RealGameTransition,
     Survey,
     ResultsWaitPage,
     Results,
     Congrats,
     FinalResults,
-    PostSurvey,
-    PostSurvey2,
+    # PostSurvey,
+    # PostSurvey2,
     PostSurvey3,
     Debriefing
 ]

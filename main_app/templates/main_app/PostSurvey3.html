@@ -9,10 +9,100 @@
 {% block content %}
 <div class="card bg-transparent">
     <div class="card-body">
-        <h2 style="padding-left: 10px"><b>POST-GAME SURVEY 3/3​</b></h2><br>
+        <h2 style="padding-left: 10px"><b>POST-GAME SURVEY</b></h2><br>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_birth">1. How did you decide how much to conserve in the first round?</label>
+            <div class="controls early_conserve">
+                <input name="early_conserve" maxlength="5000" minlength="1" required="" id="id_early_conserve" class="form-control"
+                    type="text">
+                <div class="form-control-errors">{{ form.early_conserve.errors }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_birth">2. How did you decide whether or not to alter your
+                contribution behavior in the middle of the game?</label>
+            <div class="controls middle_conserve">
+                <input name="middle_conserve" maxlength="5000" minlength="1" required="" id="id_middle_conserve" class="form-control"
+                    type="text">
+                <div class="form-control-errors">{{ form.middle_conserve.errors }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_end_conserve">3. How did you decide how much to conserve in the last
+                round?</label>
+            <div class="controls end_conserve">
+                <input name="end_conserve" maxlength="5000" minlength="1" required="" id="id_end_conserve" class="form-control"
+                    type="text">
+                <div class="form-control-errors">{{ form.end_conserve.errors }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_individual_conservation_feedback_rank">4. On a scale of 1 (not
+                influential at all) to 5 (very
+                influential), how influential was the post round feedback on how many tokens other players had
+                individually conserved?</label>
+            <div class="controls individual_conservation_feedback_rank">
+                <input name="individual_conservation_feedback_rank" maxlength="1" minlength="1" required="" id="id_individual_conservation_feedback_rank"
+                    class="form-control" type="text">
+                <div class="form-control-errors">{{ form.individual_conservation_feedback_rank.errors }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_collective_conservation_feedback_rank">5. On a scale of 1 (not
+                influential at all) to 5 (very
+                influential), how influential was the post round feedback on how many tokens other players had
+                collectively conserved?</label>
+            <div class="controls collective_conservation_feedback_rank">
+                <input name="collective_conservation_feedback_rank" maxlength="1" minlength="1" required="" id="id_collective_conservation_feedback_rank"
+                    class="form-control" type="text">
+                <div class="form-control-errors">{{ form.collective_conservation_feedback_rank.errors }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_carbon_offset_feedback_rank">6. On a scale of 1 (not influential at
+                all) to 5 (very
+                influential), how influential was the post round feedback on how much carbon the group would help
+                offset?</label>
+            <div class="controls carbon_offset_feedback_rank">
+                <input name="carbon_offset_feedback_rank" maxlength="1" minlength="1" required="" id="id_carbon_offset_feedback_rank"
+                    class="form-control" type="text">
+                <div class="form-control-errors">{{ form.carbon_offset_feedback_rank.errors }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_percent_goal_feedback_rank">7. On a scale of 1 (not influential at
+                all) to 5 (very
+                influential), how influential was the post round feedback on what percent of the conservation goal had
+                the group achieved?</label>
+            <div class="controls percent_goal_feedback_rank">
+                <input name="percent_goal_feedback_rank" maxlength="1" minlength="1" required="" id="id_percent_goal_feedback_rank"
+                    class="form-control" type="text">
+                <div class="form-control-errors">{{ form.percent_goal_feedback_rank.errors }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="id_total_contribution_feedback_rank">8. On a scale of 1 (not
+                influential at
+                all) to 5 (very
+                influential), how influential was the post round feedback on the total contribution
+                the group had achieved?</label>
+            <div class="controls total_contribution_feedback_rank">
+                <input name="total_contribution_feedback_rank" maxlength="1" minlength="1" required="" id="id_total_contribution_feedback_rank"
+                    class="form-control" type="text">
+                <div class="form-control-errors">{{ form.total_contribution_feedback_rank.errors }}</div>
+            </div>
+        </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_birth">1. What is your year of birth?</label>
+            <label class="col-form-label" for="id_birth">9. What is your year of birth?</label>
             <div class="controls  field-birth">
                 <input name="birth" maxlength="4" minlength="4" required="" id="id_birth" class="form-control" type="text">
                 <div class="form-control-errors">{{ form.birth.errors }}</div>
@@ -20,7 +110,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_gender_0">2. What is your gender?</label>
+            <label class="col-form-label" for="id_gender_0">10. What is your gender?</label>
             <div class="controls  field-gender">
                 <div class="custom-control custom-radio custom-control-inline">
                     <input onchange="document.getElementById('id_gender_2').setAttribute('value',this.value)" required=""
@@ -43,7 +133,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_eth_0">3. What term best describes your racial identity?</label>
+            <label class="col-form-label" for="id_eth_0">11. What term best describes your racial identity?</label>
             <div class="controls  field-ethnic_group">
                 <div class="custom-control custom-radio custom-control-inline">
                     <input required="" name="ethnic_group" value="African-American" type="radio" id="id_eth_0" class="custom-control-input">
@@ -77,7 +167,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_econ_0">4. What is your economic status?</label>
+            <label class="col-form-label" for="id_econ_0">12. What is your economic status?</label>
             <div class="controls  field-ethnic_group">
                 <div class="custom-control custom-radio custom-control-inline">
                     <input required="" name="economic_status" value="Full time employed" type="radio" id="id_econ_0"
@@ -111,7 +201,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_exp_0">5. How many multi-player game experiments like the one you
+            <label class="col-form-label" for="id_exp_0">13. How many multi-player game experiments like the one you
                 just played have you participated in before this one?​</label>
             <div class="controls  field-previous_experiments">
                 <div class="custom-control custom-radio custom-control-inline">
@@ -138,7 +228,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_reliability_0">6. Are your responses reliable enough for us to
+            <label class="col-form-label" for="id_reliability_0">14. Are your responses reliable enough for us to
                 include them in our academic research that will have real implications on energy and housing community
                 policy making? </label>
             <div class="controls  field-gender">
@@ -155,7 +245,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_pol_0">7. Which political party do you most identify with?</label>
+            <label class="col-form-label" for="id_pol_0">15. Which political party do you most identify with?</label>
             <div class="controls  field-ethnic_group">
                 <div class="custom-control custom-radio custom-control-inline">
                     <input required="" name="politic_party" value="Democrat" type="radio" id="id_pol_0" class="custom-control-input">
@@ -181,7 +271,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="col-form-label" for="id_US">8. How many years have you lived in the U.S. ? </label>
+            <label class="col-form-label" for="id_US">16. How many years have you lived in the U.S.? </label>
             <div class="controls  field-birth">
                 <input name="years_in_us" min=0 max=120 required="" id="id_US" class="form-control" type="number">
                 <div class="form-control-errors">{{ form.years_in_us.errors }}</div>
@@ -189,7 +279,6 @@
         </div>
 
         <button class="otree-btn-next btn btn-outline-success btn-lg btn-block">Submit</button>
-
     </div>
 </div>
 

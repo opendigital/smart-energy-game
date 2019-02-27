@@ -15,7 +15,8 @@ class Constants(BaseConstants):
     name_in_url = 'training_problem'
     players_per_group = 2
     players_without_me = players_per_group - 1
-    num_rounds = 3 # this number needs to be 1 higher than the desired number of rounds
+    num_actual_rounds = 2 # edit this one
+    num_rounds = num_actual_rounds + 1 # don't edit this one
 
     endowment = c(100)
     multiplier = 2
@@ -125,43 +126,43 @@ class Player(BasePlayer):
 
     # POST SURVEY 1
 
-    I_like_to_help_other_people = models.StringField()
-    I_like_to_share_my_ideas_and_materials_with_others = models.StringField()
-    I_like_to_cooperate_with_others = models.StringField()
-    I_can_learn_important_things_from_others = models.StringField()
-    I_try_to_share_my_ideas_and_resources_with_others = models.StringField()
-    People_learn_lots_of_important_things_from_each_other = models.StringField()
-    It_is_a_good_idea_for_people_to_help_each_other = models.StringField()
-    I_like_to_do_better_work_than_others = models.StringField()
-    I_work_to_get_better_than_others = models.StringField()
-    I_like_to_be_the_best_at_what_I_do = models.StringField()
-    I_dont_like_to_be_second = models.StringField()
-    I_like_to_compete_with_other_students= models.StringField()
-    I_am_happiest_when_I_am_competing_with_others = models.StringField()
-    I_like_the_challenge_of_seeing_who_is_best = models.StringField()
-    Competing_with_others_is_a_good_way_to_work = models.StringField()
-    I_dont_like_working_with_others = models.StringField()
-    I_like_to_work_with_others_reverse = models.StringField()
-    It_bothers_me_when_I_have_to_work_with_others = models.StringField()
-    I_do_better_when_I_work_alone = models.StringField()
-    I_like_work_better_when_I_do_it_all_myself = models.StringField()
-    I_would_rather_work_along_than_with_others = models.StringField()
-    Working_in_small_groups_is_better_than_working_alone = models.StringField()
+    # I_like_to_help_other_people = models.StringField()
+    # I_like_to_share_my_ideas_and_materials_with_others = models.StringField()
+    # I_like_to_cooperate_with_others = models.StringField()
+    # I_can_learn_important_things_from_others = models.StringField()
+    # I_try_to_share_my_ideas_and_resources_with_others = models.StringField()
+    # People_learn_lots_of_important_things_from_each_other = models.StringField()
+    # It_is_a_good_idea_for_people_to_help_each_other = models.StringField()
+    # I_like_to_do_better_work_than_others = models.StringField()
+    # I_work_to_get_better_than_others = models.StringField()
+    # I_like_to_be_the_best_at_what_I_do = models.StringField()
+    # I_dont_like_to_be_second = models.StringField()
+    # I_like_to_compete_with_other_students= models.StringField()
+    # I_am_happiest_when_I_am_competing_with_others = models.StringField()
+    # I_like_the_challenge_of_seeing_who_is_best = models.StringField()
+    # Competing_with_others_is_a_good_way_to_work = models.StringField()
+    # I_dont_like_working_with_others = models.StringField()
+    # I_like_to_work_with_others_reverse = models.StringField()
+    # It_bothers_me_when_I_have_to_work_with_others = models.StringField()
+    # I_do_better_when_I_work_alone = models.StringField()
+    # I_like_work_better_when_I_do_it_all_myself = models.StringField()
+    # I_would_rather_work_along_than_with_others = models.StringField()
+    # Working_in_small_groups_is_better_than_working_alone = models.StringField()
 
     # POST_SURVEY 2
 
-    Plants = models.StringField()
-    Marine_life = models.StringField()
-    Birds = models.StringField()
-    Animals = models.StringField()
-    My_prosperity = models.StringField()
-    My_lifestyle = models.StringField()
-    My_health = models.StringField()
-    My_future = models.StringField()
-    People_in_my_community = models.StringField()
-    The_human_race = models.StringField()
-    Children = models.StringField()
-    People_in_the_United_States = models.StringField()
+    # Plants = models.StringField()
+    # Marine_life = models.StringField()
+    # Birds = models.StringField()
+    # Animals = models.StringField()
+    # My_prosperity = models.StringField()
+    # My_lifestyle = models.StringField()
+    # My_health = models.StringField()
+    # My_future = models.StringField()
+    # People_in_my_community = models.StringField()
+    # The_human_race = models.StringField()
+    # Children = models.StringField()
+    # People_in_the_United_States = models.StringField()
 
     # POST_SURVEY 3
     birth = models.IntegerField()
@@ -172,6 +173,17 @@ class Player(BasePlayer):
     reliability = models.StringField()
     politic_party = models.StringField()
     years_in_us = models.IntegerField(min=0,max=120)
+
+    # OPEN_QUESTIONS in POST_SURVEY 3
+    early_conserve = models.StringField()
+    middle_conserve = models.StringField()
+    end_conserve = models.StringField()
+
+    individual_conservation_feedback_rank = models.IntegerField()
+    collective_conservation_feedback_rank = models.IntegerField()
+    carbon_offset_feedback_rank = models.IntegerField()
+    percent_goal_feedback_rank = models.IntegerField()
+    total_contribution_feedback_rank = models.IntegerField()
 
     # WILD METHODS
     def all_tokens_left(self):
@@ -296,4 +308,4 @@ class Player(BasePlayer):
         return c(counter)
 
     def total_pay(self):
-        return self.group.bonus_in_dollars() + self.remaining_tokens_in_dollars() + c(50).to_real_world_currency(self.session) + c(self.how_many_good_answers()).to_real_world_currency(self.session)
+        return self.group.bonus_in_dollars() + self.remaining_tokens_in_dollars() + c(5).to_real_world_currency(self.session) + c(self.how_many_good_answers()).to_real_world_currency(self.session)
