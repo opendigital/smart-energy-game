@@ -38,7 +38,7 @@ SESSION_CONFIGS = [
     {
         'name': 'main_app',
         'display_name': "Base Game Re-Design",
-        'num_demo_participants': 2,
+        'num_demo_participants': 22,
         'app_sequence': ['main_app']
     },
     # {
