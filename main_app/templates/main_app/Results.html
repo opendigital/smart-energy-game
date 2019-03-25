@@ -209,33 +209,43 @@
             .attr("class", "point")
             .attr("transform", function (d, i) {
 
-                if (randomArray[roundNumber] == undefined) {
-                    console.log("randomArray[roundNumber] broke");
-                    console.log("roundNumber = " + roundNumber);
-                    console.log(randomArray);
-                    console.log(randomArray[roundNumber]);
+                // if (randomArray[roundNumber] == undefined) {
+                //     console.log("randomArray[roundNumber] broke");
+                //     console.log("roundNumber = " + roundNumber);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                // }
+                console.log("before calcing offsets");
+                console.log(roundNumber);
+
+                let xOffset;
+                let yOffset;
+
+                if (roundNumber < 0) {
+                    xOffset = yOffset = 0;
+                } else {
+                    xOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0];
+                    yOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0]; randomArray[roundNumber][i][1];
                 }
 
-                let xOffset = randomArray[roundNumber][i][0];
-                let yOffset = randomArray[roundNumber][i][1];
+                console.log("after calcing offsets");
+                // if (xOffset == undefined) {
+                //     console.log("xOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][0]);
+                // }
 
-                if (xOffset == undefined) {
-                    console.log("xOffset broke");
-                    console.log("roundNumber = " + roundNumber + ", i = " + i);
-                    console.log(randomArray);
-                    console.log(randomArray[roundNumber]);
-                    console.log(randomArray[roundNumber][i]);
-                    console.log(randomArray[roundNumber][i][0]);
-                }
-
-                if (yOffset == undefined) {
-                    console.log("yOffset broke");
-                    console.log("roundNumber = " + roundNumber + ", i = " + i);
-                    console.log(randomArray);
-                    console.log(randomArray[roundNumber]);
-                    console.log(randomArray[roundNumber][i]);
-                    console.log(randomArray[roundNumber][i][1]);
-                }
+                // if (yOffset == undefined) {
+                //     console.log("yOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][1]);
+                // }
 
                 let x = pointScale(d.x) + xOffset + padding;
                 let y = yScale(d.value) + yOffset + padding;
@@ -308,33 +318,40 @@
             .duration(1000)
             .attr("class", "point")
             .attr("transform", function (d, i) {
-                if (randomArray[roundNumber] == undefined) {
-                    console.log("randomArray[roundNumber] broke");
-                    console.log("roundNumber = " + roundNumber);
-                    console.log(randomArray);
-                    console.log(randomArray[roundNumber]);
+                // if (randomArray[roundNumber] == undefined) {
+                //     console.log("randomArray[roundNumber] broke");
+                //     console.log("roundNumber = " + roundNumber);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                // }
+
+                let xOffset;
+                let yOffset;
+
+                if (roundNumber < 0) {
+                    xOffset = yOffset = 0;
+                } else {
+                    xOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0];
+                    yOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0]; randomArray[roundNumber][i][1];
                 }
 
-                let xOffset = randomArray[roundNumber][i][0];
-                let yOffset = randomArray[roundNumber][i][1];
+                // if (xOffset == undefined) {
+                //     console.log("xOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][0]);
+                // }
 
-                if (xOffset == undefined) {
-                    console.log("xOffset broke");
-                    console.log("roundNumber = " + roundNumber + ", i = " + i);
-                    console.log(randomArray);
-                    console.log(randomArray[roundNumber]);
-                    console.log(randomArray[roundNumber][i]);
-                    console.log(randomArray[roundNumber][i][0]);
-                }
-
-                if (yOffset == undefined) {
-                    console.log("yOffset broke");
-                    console.log("roundNumber = " + roundNumber + ", i = " + i);
-                    console.log(randomArray);
-                    console.log(randomArray[roundNumber]);
-                    console.log(randomArray[roundNumber][i]);
-                    console.log(randomArray[roundNumber][i][1]);
-                }
+                // if (yOffset == undefined) {
+                //     console.log("yOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][1]);
+                // }
 
                 let x = pointScale(d.x) + xOffset + padding;
                 let y = yScale(d.value) + yOffset + padding;
@@ -347,7 +364,7 @@
 
 
     function drawProximityChart(oldContributions, newContributions, userID, randomArray, roundNumber) {
-        renderOldPoints(oldContributions, userID, randomArray, roundNumber);
+        renderOldPoints(oldContributions, userID, randomArray, roundNumber - 1); // need previous round's offsets
         movePoints(newContributions, userID, randomArray, roundNumber);
     }
 
