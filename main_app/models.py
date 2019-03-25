@@ -11,13 +11,13 @@ author = 'Juan Camilo Cardenas Gomez'
 doc = """
 Solution for training problem
 """
-
+offset = 3
 
 class Constants(BaseConstants):
     name_in_url = 'training_problem'
-    players_per_group = 22 # *********remember to update the one in the group class
+    players_per_group = 22
     players_without_me = players_per_group - 1
-    num_actual_rounds = 12 # edit this one, ********remember to update the one in the group class
+    num_actual_rounds = 12 # edit this one
     num_rounds = num_actual_rounds + 1 # don't edit this one
 
     endowment = c(100)
@@ -31,17 +31,14 @@ class Constants(BaseConstants):
 
     answers = ["6 tokens", "True", "True", "True","$1.00","$18.18","$19.18","$1.00","$0.00","$1.00"]
 
-    offsets = [[[choice([-3, 3]), choice([-3, 3])] # choice([-offset, offset]), choice([-offset, offset])
-                for x in range(2)] for x in range(3)]  # access terms as offsets[round][player_id]
-
+    offsets = [[[choice([-offset, offset]), choice([-offset, offset])] for player in range(22)]
+               for round in range(12)]  # inner num is players_per_group, outer_num is num_rounds
 
 class Subsession(BaseSubsession):
     pass
 
 
 class Group(BaseGroup):
-
-
     total_contribution = models.CurrencyField()
     total_random_contribution = models.CurrencyField()
     bonus = models.CurrencyField(initial=c(0))
