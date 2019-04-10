@@ -267,8 +267,8 @@
 
     function drawProximityChart(oldContributions, newContributions, userID, randomArray, roundNumber) {
         console.log(userID);
-        renderOldPoints(oldContributions, userID, randomArray, roundNumber - 1); // need previous round's offsets
-        movePoints(newContributions, userID, randomArray, roundNumber);
+        renderOldPoints(newContributions, userID, randomArray, roundNumber - 1); // need previous round's offsets
+        //movePoints(newContributions, userID, randomArray, roundNumber);
     }
 
     let r0_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
