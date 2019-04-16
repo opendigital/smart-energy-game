@@ -288,6 +288,8 @@
         r1_data.splice(user_id, 0, user_contribution);
         drawProximityChart(r0_data, r1_data, user_id, random_array, current_round);
     } else {
+        let r1_contribution = parseInt("{{ player.all_rounds_practice_contribution}}") - user_contribution;
+        r1_data.splice(user_id, 0, r1_contribution);
         r2_data.splice(user_id, 0, user_contribution);
         drawProximityChart(r1_data, r2_data, user_id, random_array, current_round);
     }
