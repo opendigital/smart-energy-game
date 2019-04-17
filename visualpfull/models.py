@@ -15,9 +15,9 @@ offset = 3
 
 class Constants(BaseConstants):
     name_in_url = 'visualpfull'
-    players_per_group = 22
+    players_per_group = 3
     players_without_me = players_per_group - 1
-    num_actual_rounds = 12 # edit this one
+    num_actual_rounds = 2 # edit this one
     num_rounds = num_actual_rounds + 1 # don't edit this one
 
     endowment = c(100)
