@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     name_in_url = 'visualpnoanim'
     players_per_group = 22
     players_without_me = players_per_group - 1
-    num_actual_rounds = 12 # edit this one
+    num_actual_rounds = 4 # edit this one
     num_rounds = num_actual_rounds + 1 # don't edit this one
 
     endowment = c(100)
@@ -26,8 +26,8 @@ class Constants(BaseConstants):
     group_goal = c(216)
     no_bonus = c(0)
 
-    months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER',
-              'NOVEMBER', 'DECEMBER']
+    months = ['SPRING', 'SUMMER', 'FALL', 'WINTER', 'SPRING', 'SUMMER', 'FALL', 'WINTER', 'SPRING', 'SUMMER',
+              'FALL', 'WINTER']
 
     answers = ["6 tokens", "True", "True", "True","$1.00","$18.18","$19.18","$1.00","$0.00","$1.00"]
 
