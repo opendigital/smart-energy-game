@@ -42,22 +42,10 @@ SESSION_CONFIGS = [
         'app_sequence': ['descriptive']
     },
     {
-        'name': 'visualp',
-        'display_name': "Partial Animated Proximity Chart (12 rounds)",
-        'num_demo_participants': 22,
-        'app_sequence': ['visualp'],
-    },
-    {
         'name': 'visualpfull',
         'display_name': "Full Animated Proximity Chart (12 rounds)",
         'num_demo_participants': 22,
         'app_sequence': ['visualpfull'],
-    },
-    {
-        'name': 'visualpnoanim',
-        'display_name': "Partial Non-Animated Proximity Chart (12 rounds)",
-        'num_demo_participants': 22,
-        'app_sequence': ['visualpnoanim'],
     },
     {
         'name': 'visualpfullnoanim',
@@ -66,22 +54,10 @@ SESSION_CONFIGS = [
         'app_sequence': ['visualpfullnoanim'],
     },
     {
-        'name': 'visualr',
-        'display_name': "Partial Animated Radial Chart (12 rounds)",
-        'num_demo_participants': 22,
-        'app_sequence': ['visualr'],
-    },
-    {
         'name': 'visualrfull',
         'display_name': "Full Animated Radial Chart (12 rounds)",
         'num_demo_participants': 22,
         'app_sequence': ['visualrfull'],
-    },
-    {
-        'name': 'visualrnoanim',
-        'display_name': "Partial Non-Animated Radial Chart (12 rounds)",
-        'num_demo_participants': 22,
-        'app_sequence': ['visualrfullnoanim'],
     },
     {
         'name': 'visualrfullnoanim',
