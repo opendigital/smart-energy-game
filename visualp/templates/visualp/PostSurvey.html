@@ -1,0 +1,186 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %}Survey #1{% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+        <h2 style="padding-left: 10px"><b>POST-GAME SURVEY 1/3​</b></h2><br>
+        <p><B>Please answer as honestly as possible. Remember your responses are anonymous. ​
+            For each item below, please choose ONE rating that best describes you:  </B></p>
+            <table class="table" style="text-align:left;">
+                <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">                    	                                         ​
+                    <th></th>
+                    <th>Definitely false</th>
+                    <th>Probably false</th>
+                    <th>Probably true</th>
+                    <th>Definitely true</th>
+                </tr>
+                {% for i in aux %}
+                    <tr>
+                        {% if forloop.counter0 is 0 %}
+                            <td>{{ names.0 }}<br></td>
+                            <td><input name="{{ forms.0 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.0 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.0 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.0 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 1 %}
+                            <td>{{ names.1 }}<br></td>
+                            <td><input name="{{ forms.1 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.1 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.1 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.1 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 2 %}
+                            <td>{{ names.2 }}<br></td>
+                            <td><input name="{{ forms.2 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.2 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.2 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.2 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 3 %}
+                            <td>{{ names.3 }}<br></td>
+                            <td><input name="{{ forms.3 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.3 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.3 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.3 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 4 %}
+                            <td>{{ names.4 }}<br></td>
+                            <td><input name="{{ forms.4 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.4 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.4 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.4 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 5 %}
+                            <td>{{ names.5 }}<br></td>
+                            <td><input name="{{ forms.5 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.5 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.5 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.5 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 6 %}
+                            <td>{{ names.6 }}<br></td>
+                            <td><input name="{{ forms.6 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.6 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.6 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.6 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 7 %}
+                            <td>{{ names.7 }}<br></td>
+                            <td><input name="{{ forms.7 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.7 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.7 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.7 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 8 %}
+                            <td>{{ names.8 }}<br></td>
+                            <td><input name="{{ forms.8 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.8 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.8 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.8 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 9 %}
+                            <td>{{ names.9 }}<br></td>
+                            <td><input name="{{ forms.9 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.9 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.9 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.9 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 10 %}
+                            <td>{{ names.10 }}<br></td>
+                            <td><input name="{{ forms.10 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.10 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.10 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.10 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 11 %}
+                            <td>{{ names.11 }}<br></td>
+                            <td><input name="{{ forms.11 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.11 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.11 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.11 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 12 %}
+                            <td>{{ names.12 }}<br></td>
+                            <td><input name="{{ forms.12 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.12 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.12 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.12 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 13 %}
+                            <td>{{ names.13 }}<br></td>
+                            <td><input name="{{ forms.13 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.13 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.13 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.13 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 14 %}
+                            <td>{{ names.14 }}<br></td>
+                            <td><input name="{{ forms.14 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.14 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.14 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.14 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 15 %}
+                            <td>{{ names.15 }}<br></td>
+                            <td><input name="{{ forms.15 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.15 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.15 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.15 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 16 %}
+                            <td>{{ names.16 }}<br></td>
+                            <td><input name="{{ forms.16 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.16 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.16 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.16 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 17 %}
+                            <td>{{ names.17 }}<br></td>
+                            <td><input name="{{ forms.17 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.17 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.17 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.7 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 18 %}
+                            <td>{{ names.18 }}<br></td>
+                            <td><input name="{{ forms.18 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.18 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.18 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.18 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 19 %}
+                            <td>{{ names.19 }}<br></td>
+                            <td><input name="{{ forms.19 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.19 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.19 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.19 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 20 %}
+                            <td>{{ names.20 }}<br></td>
+                            <td><input name="{{ forms.20 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.20 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.20 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.20 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                        {% if forloop.counter0 is 21 %}
+                            <td>{{ names.21 }}<br></td>
+                            <td><input name="{{ forms.21 }}" value="Definitely false" type="radio"></td>
+                            <td><input name="{{ forms.21 }}" value="Probably false" type="radio"></td>
+                            <td><input name="{{ forms.21 }}" value="Definitely true" type="radio"></td>
+                            <td><input name="{{ forms.21 }}" value="Definitely true" type="radio"></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table><br>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+
+        </div>
+    </div>
+
+{% endblock %}

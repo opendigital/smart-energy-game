@@ -1,0 +1,140 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %}Final Results Feedback{% endblock %}
+
+{% block content %}
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL FINANCIAL INVESTMENT GAME RESULTS</b></h2><br>
+        <div class="card" style="background: #f2f2f2">
+            <div class="card-body">
+                <table class="table" style="text-align:Left;">
+                    <tr style="background: #d8d8d8">
+                        <th>
+                            YOUR FINAL RESULTS:
+                        </th>
+                        <th>Energy tokens</th>
+                        <th>US Dollars </th>
+                    </tr>
+
+                    <tr>
+                        <td><b>Total contributions to the group conservation account: ​</b></td>
+                        <td><b>
+                                <e style="color: #0000ff">{{ player.group.all_rounds_contribution }}
+                            </b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <e style="color: green">Your group’s donation to Carbonfund.org to reduce air pollution: ​</e>
+                        </td>
+                        <td></td>
+                        <td>
+                            <e style="color: green">{{ carbonfund }}</e>
+                        </td>
+                    </tr>
+
+                    {% if goal_meet %}
+                    <tr>
+                        <td><b>
+                                <e style="color: blue">Congratulations, you met the 60% group energy conservation goal
+                                    of 1,584 energy tokens.</e>
+                            </b></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td><b>
+                                <e style="color: #a700a8">Sorry, you did not meet the 60% group energy conservation
+                                    goal of 1,584 energy tokens.</e>
+                            </b></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Each player’s bonus for meeting the group conservation goal: </td>
+                        <td>
+                            {% if goal_meet %}
+                            <b>
+                                <e style="color: #0000ff">{{ group.bonus }}</e>
+                            </b>
+                            {% else %}
+                            <b>
+                                <e style="color: #0000ff">{{ Constants.no_bonus }}</e>
+                            </b>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if goal_meet %}
+                            <b>
+                                <e style="color: #0000ff">{{ group.bonus_in_dollars }}</e>
+                            </b>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Energy tokens in your personal account: </td>
+                        <td> <b>
+                                <e style="color: #a700a8">{{ player.all_tokens_left }}
+                            </b></e>
+                        </td>
+                        <td> <b>
+                                <e style="color: #a700a8">{{ player.remaining_tokens_in_dollars }}
+                            </b></e>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Additional pay for correct answers on the quiz:</td>
+                        <td></td>
+                        <td>
+                            <e style="color: #0000ff">{{ quiz }}</e>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Your participation pay: </td>
+                        <td></td>
+                        <td>
+                            <e>$0.50</e>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>TOTAL PAY TO YOU: </b></td>
+                        <td></td>
+                        <td> <b>
+                                <e style="color: #0000ff">{{ player.total_pay}}</e>
+                            </b></td>
+                    </tr>
+
+                </table>
+
+                <hr style="background: black">
+                <p><i>
+                        <e style="color: red"><b>NOTE:</b> Before you receive your pay, you will need to answer a brief
+                            survey.</e>​
+                    </i></p>
+
+                <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

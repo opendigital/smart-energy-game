@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %}Real Game{% endblock %}
+
+{% block content %}
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
+        <div class="container">
+            <i>
+                <p style="font-size: 22px">
+                    This concludes our introduction, practice game, and the comprehension quiz.​ ​
+                </p><br>
+                <p style="font-size: 22px">
+                    <i>Now, you will start the <b>real investment game</b>. Remember, your pay depends on other
+                        players. Good luck!​</i>
+                </p>
+        </div>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+    </div>
+</div>
+
+{% endblock %}

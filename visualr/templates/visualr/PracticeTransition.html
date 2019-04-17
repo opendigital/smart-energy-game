@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %}Practice{% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body" >
+            <h2 style="padding-left: 10px"><b>PRACTICE GAME</b></h2><br>
+            <div class="container" >
+                <i><p  style="font-size: 22px">
+                    Before we proceed, we’ll ask you to play 2 rounds of practice so that you can get familiar with the the set up of the game. ​
+                </p><br>
+                <p style="color: red;font-size: 22px">
+                    Remember, the decisions of other players in this test exercise are generated randomly by the computer, and do not represent the actual decisions of other players.  ​
+                </p>
+                <p style="color: red;font-size: 22px">
+                    Trial results DO NOT count toward your final payment.
+                </p></i><br>
+            </div>
+            <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+        </div>
+    </div>
+
+{% endblock %}
+

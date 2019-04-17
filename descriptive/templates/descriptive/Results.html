@@ -1,0 +1,168 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} Game Feedback {% endblock %}
+
+{% block content %}
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
+        <div class="card" style="background: #f2f2f2;">
+            <div class="card-body">
+                <center>
+                    <h4><b><u>{{ current_month }} Feedback</u> </b></h4>
+                </center>
+
+                <table id="table" class="table" style="text-align:left;">
+                    <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{ current_month }} <br>(this month)</th>
+                        <th>Cumulative to date <br>(all past rounds)​</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Your contribution to your personal account:​</td>
+                        <td>
+                            <e style="color: #a700a8">{{ player.private_contribution }}</e>
+                        </td>
+                        <td>
+                            <e style="color: #a700a8">{{ player.all_rounds_private_contribution }}</e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><B>Your contribution to the group conservation account:</B>​</td>
+                        <td>
+                            <e style="color: #0000ff">{{ player.contribution}}</e>
+                        </td>
+                        <td>
+                            <e style="color: #0000ff">{{ player.all_rounds_contribution }}</e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Others’ total contribution to the group conservation account:​</b></td>
+                        <td>
+                            <e style="color: #0000ff"> {{ player.others_contribution }} </e>
+                        </td>
+                        <td>
+                            <e style="color: #0000ff"> {{ player.all_rounds_others_contribution }} </e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Total group conservation account contributions:</b>​</td>
+                        <td><b>
+                                <e style="color: #0000ff">{{ group.total_contribution }}</e>
+                            </b></td>
+                        <td><b>
+                                <e style="color: #0000ff">{{ group.all_rounds_contribution }}</e>
+                            </b></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="percentage"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%;margin-top: 30px; width: 100px">Next</button>
+    </div>
+</div>
+<script>
+    function parseCurrency(str) {
+        raw_numbers = str.split(" ");
+        let numbers = [];
+        for (let i = 0; i < raw_numbers.length; i++) {
+            let n = raw_numbers[i];
+            n = n.replace(/\D/g, '');
+            n = parseInt(n);
+            numbers.push(n);
+        }
+
+        return numbers;
+    }
+
+    function createRow(container, user_id, current_contribution, total_contribution) {
+        let row = document.createElement("tr");
+        row.append(document.createElement("td"));
+        row.append(document.createElement("td"));
+
+        let label = document.createElement("td");
+        label.innerHTML = "Player " + user_id + "'s contribution to the group conservation account:";
+        row.append(label);
+
+        let current_contribution_HTML = document.createElement("td");
+        current_contribution_HTML.innerHTML = "<e style='color: #0000ff'>" + current_contribution + " tokens</e>";
+        row.append(current_contribution_HTML);
+
+        let total_contribution_HTML = document.createElement("td");
+        total_contribution_HTML.innerHTML = "<e style='color: #0000ff'>" + total_contribution + " tokens</e>";
+        row.append(total_contribution_HTML);
+
+        container.append(row);
+    }
+
+    var percentage = document.getElementById("percentage")
+    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 1584)
+
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (1584)</e></b>"
+
+    console.log("{{ player.others_contribution_array }}");
+    console.log("user contribution: " + parseInt("{{ player.contribution }}"));
+    console.log("user id: " + parseInt("{{ player.id_in_group }}"));
+    console.log("{{ player.all_rounds_others_contribution_array }}");
+    console.log("------------------------------------------------------");
+
+    // gather data
+    let user_id = parseInt("{{ player.id_in_group }}");
+    let user_contribution = parseInt("{{ player.contribution }}");
+    let user_total_contribution = parseInt("{{ player.all_rounds_contribution }}");
+
+    let current_round_contributions = parseCurrency("{{ player.others_contribution_array }}");
+    current_round_contributions.splice(user_id - 1, 0, user_contribution);
+
+    let total_contributions = parseCurrency("{{ player.all_rounds_others_contribution_array }}");
+    total_contributions.splice(user_id - 1, 0, user_total_contribution);
+
+    // add it to the table
+    let table = document.getElementById("table");
+
+    for (let i = 0; i < current_round_contributions.length; i++) {
+        if (i + 1 != user_id) {
+            createRow(table, i + 1, current_round_contributions[i], total_contributions[i]);
+        }
+    }
+
+    console.log(current_round_contributions);
+    console.log(total_contributions);
+</script>
+
+{% endblock %}

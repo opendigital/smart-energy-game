@@ -36,23 +36,59 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
-        'name': 'main_app',
-        'display_name': "Base Game Re-Design",
+        'name': 'descriptive',
+        'display_name': "Descriptive (12 rounds)",
         'num_demo_participants': 22,
-        'app_sequence': ['main_app']
+        'app_sequence': ['descriptive']
     },
-    # {
-    #     'name': 'real_effort',
-    #     'display_name': "Real-effort transcription task",
-    #     'num_demo_participants': 1,
-    #     'app_sequence': ['real_effort'],
-    # },
-    # {
-    #     'name': 'quiz',
-    #     'display_name': "Quiz",
-    #     'num_demo_participants': 2,
-    #     'app_sequence': ['quiz'],
-    # }
+    {
+        'name': 'visualp',
+        'display_name': "Partial Animated Proximity Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualp'],
+    },
+    {
+        'name': 'visualpfull',
+        'display_name': "Full Animated Proximity Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualpfull'],
+    },
+    {
+        'name': 'visualpnoanim',
+        'display_name': "Partial Non-Animated Proximity Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualpnoanim'],
+    },
+    {
+        'name': 'visualpfullnoanim',
+        'display_name': "Full Non-Animated Proximity Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualpfullnoanim'],
+    },
+    {
+        'name': 'visualr',
+        'display_name': "Partial Animated Radial Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualr'],
+    },
+    {
+        'name': 'visualrfull',
+        'display_name': "Full Animated Radial Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualrfull'],
+    },
+    {
+        'name': 'visualrnoanim',
+        'display_name': "Partial Non-Animated Radial Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualrfullnoanim'],
+    },
+    {
+        'name': 'visualrfullnoanim',
+        'display_name': "Full Non-Animated Radial Chart (12 rounds)",
+        'num_demo_participants': 22,
+        'app_sequence': ['visualrfullnoanim'],
+    },
 ]
 # see the end of this file for the inactive session configs
 

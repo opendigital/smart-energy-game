@@ -1,0 +1,171 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %}Survey #2{% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+        <h2 style="padding-left: 10px"><b>POST-GAME SURVEY 2/3​</b></h2><br>
+        <p><B>People often express concern about environmental problems, but some people differ as to which consequences
+            concern them the most. We are going to list different areas where environmental problems could have harmful
+            consequences.  For each, please rate how concerned you are about their impact using a scale from “Not at all
+            concerned” to “Extremely concerned”. </B></p>
+            <table class="table" style="text-align:left;">
+                <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">                    	                                         ​
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Not at all ​concerned​</th>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Moderately concerned</th>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Extremely ​concerned</th>
+                </tr>
+            </table>
+            <table style="width: 100%">
+                {% for i in aux %}
+                    <tr>
+                        {% if forloop.counter0 is 0 %}
+                            <td>{{ names.0 }}<br></td>
+                            <td><input name="{{ forms.0 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.0 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.0 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.0 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.0 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.0 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.0 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 1 %}
+                            <td style="background: #F3F3F3">{{ names.1 }}<br></td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.1 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.1 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.1 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.1 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.1 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.1 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.1 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 2 %}
+                            <td>{{ names.2 }}<br></td>
+                            <td><input name="{{ forms.2 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.2 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.2 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.2 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.2 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.2 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.2 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 3 %}
+                            <td style="background: #F3F3F3">{{ names.3 }}<br></td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.3 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.3 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.3 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.3 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.3 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.3 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.3 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 4 %}
+                            <td>{{ names.4 }}<br></td>
+                            <td><input name="{{ forms.4 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.4 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.4 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.4 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.4 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.4 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.4 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 5 %}
+                            <td style="background: #F3F3F3">{{ names.5 }}<br></td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.5 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.5 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.5 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.5 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.5 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.5 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.5 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 6 %}
+                            <td>{{ names.6 }}<br></td>
+                            <td><input name="{{ forms.6 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.6 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.6 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.6 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.6 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.6 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.6 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 7 %}
+                            <td style="background: #F3F3F3">{{ names.7 }}<br></td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.7 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.7 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.7 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.7 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.7 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.7 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.7 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 8 %}
+                            <td>{{ names.8 }}<br></td>
+                            <td><input name="{{ forms.8 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.8 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.8 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.8 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.8 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.8 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.8 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 9 %}
+                            <td style="background: #F3F3F3">{{ names.9 }}<br></td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.9 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.9 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.9 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.9 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.9 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.9 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.9 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 10 %}
+                            <td>{{ names.10 }}<br></td>
+                            <td><input name="{{ forms.10 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.10 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.10 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.10 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.10 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.10 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input name="{{ forms.10 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                        {% if forloop.counter0 is 11 %}
+                            <td style="background: #F3F3F3">{{ names.11 }}<br></td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.11 }}" value="Not at all ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.11 }}" value="Not at all ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.11 }}" value="Moderately  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.11 }}" value="Moderately  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.11 }}" value="Moderately  ​concerned+1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.11 }}" value="Extremely  ​concerned-1" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="background: #F3F3F3"><input name="{{ forms.11 }}" value="Extremely  ​concerned" type="radio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table><br>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Next</button>
+
+        </div>
+    </div>
+
+    <script>
+    errors = document.getElementsByClassName("otree-form-errors alert alert-danger").item(0)
+    if (errors != null) {
+        errors.style.background = "red"
+        errors.style.borderColor = "transparent"
+        errors.style.textAlign = "center"
+
+        errors.innerHTML="<e style=\"color:white;\"><B>Please fill this form completely.</b></e>"
+    }else{
+        console.log(errors)
+    }
+    </script>
+{% endblock %}

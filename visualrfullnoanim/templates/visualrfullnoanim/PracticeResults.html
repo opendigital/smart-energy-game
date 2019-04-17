@@ -1,0 +1,242 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} Practice Feedback {% endblock %}
+
+{% block content %}
+<style>
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    svg {
+        font-family: Helvetica, Arial, Sans-Serif;
+    }
+</style>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
+        <div id="chart_container" class="card" style="background: white;">
+        </div>
+        <button class="otree-btn-next btn"
+            style="background: #8d8d8d; margin-left: 80%;margin-top: 30px; width: 100px">Next</button>
+    </div>
+</div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+    function draw_graph(data, new_data) {
+        let circle_edges = [0, 2, 4, 6, 8, 10];
+
+        let width = 960,
+            height = 500,
+            radius = Math.min(width, height) / 2 - 30;
+
+        let user_color = "#999";
+        let others_color = "#555";
+
+        let r = d3.scale.linear()
+            .domain([0, 10])
+            .range([radius, 0]);
+
+        let svg = d3.select("#chart_container").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        // plot circles
+        let gr = svg.append("g")
+            .attr("class", "r axis")
+            .selectAll("g")
+            .data(circle_edges)
+            .enter().append("g")
+            .attr("fill", (d) => {
+                let hex_color;
+                if (d < 3) {
+                    hex_color = "#EEE";
+                } else if (d < 7) {
+                    hex_color = "#DDD";
+                } else {
+                    hex_color = "#CCC";
+                }
+
+                return hex_color;
+            });
+
+        gr.append("circle")
+            .attr("r", r);
+
+        // add axis
+        let centerX = 0;
+        svg.append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", 0)
+            .attr("y2", -r(0))
+            .attr("fill", "#707070")
+            .attr("stroke", "#707070")
+            .attr("stroke-width", 1.5);
+
+
+        // axis labels
+        circle_edges.map((d, i) => {
+            if (i < circle_edges.length - 1) {
+                let unit = "";
+                if (i == 0) {
+                    unit = " contributed"
+                }
+                svg.append("text").text("$" + d + unit)
+                    .attr("transform", () => {
+                        return "translate(7, " + -r(d + 0.25) + ")"
+                    })
+            }
+
+            svg.append("path")
+                .attr("transform", function () { return "translate(0," + -r(d) + ")"; })
+                .attr("d", d3.svg.symbol().type("triangle-down"))
+                .attr("fill", "#707070")
+        })
+
+
+        // legends
+        let user_legend = svg.append("g").append("g");
+
+        user_legend.append("circle")
+            .attr("fill", user_color)
+            .attr("cx", r(0) - 10)
+            .attr("cy", r(0) - 5)
+            .attr("r", 6);
+
+        user_legend
+            .append("text")
+            .text("Your contribution")
+            .attr("x", r(0))
+            .attr("y", r(0));
+
+        let others_legend = svg.append("g").append("g");
+
+        others_legend.append("circle")
+            .attr("fill", others_color)
+            .attr("cx", r(0) - 10)
+            .attr("cy", r(0) - 5 - 20)
+            .attr("r", 6);
+
+        others_legend
+            .append("text")
+            .text("Others' contributions")
+            .attr("x", r(0))
+            .attr("y", r(0) - 20);
+
+        // plot points
+        svg.selectAll("point")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", "point")
+            .attr("transform", function (d) {
+                // get angle and radius
+                let angle = d[0],
+                    radius = r(d[1]),
+                    x = radius * Math.cos(angle),
+                    y = radius * Math.sin(angle);
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("r", 10)
+            .attr("fill", function (d, i) {
+                let is_user = d[2];
+                return is_user ? user_color : others_color;
+            })
+
+        // move points to new positions
+        svg.selectAll(".point")
+            .data(new_data)
+            .transition()
+            .duration(1000)
+            .attr("class", "point")
+            .attr("transform", function (d) {
+                // get angle and radius
+                let angle = d[0],
+                    radius = r(d[1]),
+                    x = radius * Math.cos(angle),
+                    y = radius * Math.sin(angle);
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("fill", function (d) {
+                let is_user = d[2];
+                return is_user ? user_color : others_color;
+            })
+    }
+
+    let r0_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let r1_data = [1, 9, 4, 5, 5, 1, 9, 7, 0, 9, 0, 4, 8, 0, 5, 4, 7, 1, 5, 6, 0];
+    let r2_data = [3, 2, 6, 8, 6, 5, 6, 6, 5, 6, 4, 5, 8, 6, 10, 5, 10, 8, 10, 5, 6];
+
+    let current_round = parseInt("{{ group.round_number }}");
+    let user_id = parseInt("{{ player.id_in_group }}") - 1;
+    let user_contribution = parseInt("{{ player.practice_contribution }}");
+
+    if (current_round === 1) {
+        r1_data.splice(user_id, 0, user_contribution);
+
+        let old_data = [];
+        for (let i = 0; i < r1_data.length; i++) {
+            let term = [
+                0,
+                10,
+                false
+            ];
+            old_data.push(term);
+        }
+        old_data[user_id][2] = true;
+
+        let new_data = [];
+
+        for (let i = 0; i < r1_data.length; i++) {
+            let term = [
+                (i + 1) * Math.PI / (r1_data.length / 2),
+                r1_data[i],
+                old_data[i][2]
+            ];
+
+            new_data.push(term);
+        }
+
+        draw_graph(new_data, new_data);
+    } else {
+        let r1_contribution = parseInt("{{ player.all_rounds_practice_contribution}}") - user_contribution;
+        r1_data.splice(user_id, 0, r1_contribution);
+        r2_data.splice(user_id, 0, user_contribution);
+
+        let old_data = [];
+        for (let i = 0; i < r2_data.length; i++) {
+            let term = [
+                (i + 1) * Math.PI / (r1_data.length / 2),
+                r1_data[i],
+                false
+            ];
+            old_data.push(term);
+        }
+        old_data[user_id][2] = true;
+
+        let new_data = [];
+
+        for (let i = 0; i < r2_data.length; i++) {
+            let term = [
+                (i + 1) * Math.PI / (r2_data.length / 2),
+                r2_data[i],
+                old_data[i][2]
+            ];
+
+            new_data.push(term);
+        }
+
+
+        draw_graph(new_data, new_data);
+    }
+
+</script>
+
+{% endblock %}

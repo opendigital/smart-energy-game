@@ -1,0 +1,298 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} Practice Feedback {% endblock %}
+
+{% block content %}
+<style>
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    svg {
+        font-family: Helvetica, Arial, Sans-Serif;
+    }
+</style>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
+        <div id="chart_container" class="card" style="background: white;">
+
+        </div>
+        <button class="otree-btn-next btn"
+            style="background: #8d8d8d; margin-left: 80%;margin-top: 30px; width: 100px">Next</button>
+    </div>
+</div>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<script>
+    var percentage = document.getElementById("percentage")
+    var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0], 10) * 100 / 1584)
+
+
+    // percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (1584)</e></b>"
+
+    let padding = 50;
+    let pointRadius = 15;
+    let numPlayers = 22;
+    let maxContribution = 10;
+
+    let svgWidth = pointRadius * (2 * numPlayers) + 2 * padding;
+    let svgHeight = pointRadius * (2 * maxContribution) + 2 * padding;
+
+    let userColor = "#999";
+    let othersColor = "#555";
+
+    let svg = d3.select("#chart_container")
+        .append("svg")
+        .attr("width", svgWidth)
+        .attr("height", svgHeight)
+
+    let xScale = d3.scaleLinear()
+        .domain([0, numPlayers])
+        .range([0, numPlayers * 2 * pointRadius]);
+
+    let yScale = d3.scaleLinear()
+        .domain([0, maxContribution])
+        .range([2 * maxContribution * pointRadius, 0]);
+
+    function renderAxis(yScale) {
+        let yAxis = d3.axisLeft()
+            .scale(yScale)
+            .ticks(5);
+
+        svg.append("g")
+            .attr("transform", "translate(" + padding + ", " + padding + ")")
+            .call(yAxis);
+
+        // axis label
+        svg.append("text")
+            .attr("class", "y label")
+            .attr("text-anchor", "middle")
+            .attr("y", padding / 2)
+            .attr("x", -svgHeight / 2)
+            .attr("transform", "rotate(-90)")
+            .text("Contribution");
+    }
+
+    renderAxis(yScale);
+
+    function renderOldPoints(oldContributions, userID, randomArray, roundNumber) {
+        let contributionObjects = {};
+
+        for (let i = 0; i < oldContributions.length; ++i) {
+            if (contributionObjects[oldContributions[i]] != undefined) {
+                ++contributionObjects[oldContributions[i]].count;
+            } else {
+                contributionObjects[oldContributions[i]] = {
+                    value: oldContributions[i],
+                    count: 1
+                };
+            }
+        }
+
+        let allPoints = [];
+
+        let pointScale = d3.scaleLinear()
+            .domain([0, numPlayers])
+            .range([pointRadius, (2 * numPlayers + 1) * pointRadius])
+
+        oldContributions.forEach((value, index) => {
+            let instance = 0; // if this is the third instance of "value" in the array this will be 3
+            for (let i = index; i >= 0; --i) {
+                if (oldContributions[i] == value) {
+                    ++instance;
+                }
+            }
+
+            let pointObject = {
+                value: value,
+                x: instance
+            };
+
+            let count = contributionObjects[value].count;
+            let centerValue = numPlayers / 2;
+
+            let centerIndex;
+            if (count % 2 == 1) {
+                centerIndex = Math.floor(count / 2) + 0.5;
+            } else {
+                centerIndex = Math.floor(count / 2);
+            }
+
+            pointObject.x += (centerValue - centerIndex);
+            allPoints.push(pointObject);
+        })
+
+        // plot points
+        let maxOffset = 3;
+        let visibleRadius = pointRadius - maxOffset;
+        svg.selectAll("point")
+            .data(allPoints)
+            .enter()
+            .append("circle")
+            .attr("class", "point")
+            .attr("transform", function (d, i) {
+
+                // if (randomArray[roundNumber] == undefined) {
+                //     console.log("randomArray[roundNumber] broke");
+                //     console.log("roundNumber = " + roundNumber);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                // }
+                console.log("before calcing offsets");
+                console.log(roundNumber);
+
+                let xOffset;
+                let yOffset;
+
+                if (roundNumber < 0) {
+                    xOffset = yOffset = 0;
+                } else {
+                    xOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0];
+                    yOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0]; randomArray[roundNumber][i][1];
+                }
+
+                console.log("after calcing offsets");
+                // if (xOffset == undefined) {
+                //     console.log("xOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][0]);
+                // }
+
+                // if (yOffset == undefined) {
+                //     console.log("yOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][1]);
+                // }
+
+                let x = pointScale(d.x) + xOffset + padding;
+                let y = yScale(d.value) + yOffset + padding;
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("r", visibleRadius)
+            .attr("fill", function (d, i) {
+                let is_user = i === userID;
+                return is_user ? userColor : othersColor;
+            })
+    }
+
+    function movePoints(newContributions, userID, randomArray, roundNumber) {
+        console.log(randomArray);
+        console.log("below is roundNumber");
+        console.log(roundNumber);
+        let contributionObjects = {};
+
+        for (let i = 0; i < newContributions.length; ++i) {
+            if (contributionObjects[newContributions[i]] != undefined) {
+                ++contributionObjects[newContributions[i]].count;
+            } else {
+                contributionObjects[newContributions[i]] = {
+                    value: newContributions[i],
+                    count: 1
+                };
+            }
+        }
+
+        let allPoints = [];
+
+        let pointScale = d3.scaleLinear()
+            .domain([0, numPlayers])
+            .range([pointRadius, (2 * numPlayers + 1) * pointRadius])
+
+        newContributions.forEach((value, index) => {
+            let instance = 0; // if this is the third instance of "value" in the array this will be 3
+            for (let i = index; i >= 0; --i) {
+                if (newContributions[i] == value) {
+                    ++instance;
+                }
+            }
+
+            let pointObject = {
+                value: value,
+                x: instance
+            };
+
+            let count = contributionObjects[value].count;
+            let centerValue = numPlayers / 2;
+
+            let centerIndex;
+            if (count % 2 == 1) {
+                centerIndex = Math.floor(count / 2) + 0.5;
+            } else {
+                centerIndex = Math.floor(count / 2);
+            }
+
+            pointObject.x += (centerValue - centerIndex);
+            allPoints.push(pointObject);
+        })
+
+        // plot points
+        let maxOffset = 3;
+
+        // move points to new positions
+        svg.selectAll(".point")
+            .data(allPoints)
+            .transition()
+            .duration(1000)
+            .attr("class", "point")
+            .attr("transform", function (d, i) {
+                let xOffset;
+                let yOffset;
+
+                if (roundNumber < 0) {
+                    xOffset = yOffset = 0;
+                } else {
+                    xOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0];
+                    yOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0]; randomArray[roundNumber][i][1];
+                }
+
+                let x = pointScale(d.x) + xOffset + padding;
+                let y = yScale(d.value) + yOffset + padding;
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("fill", function (d, i) {
+                return i === userID ? userColor : othersColor;
+            })
+    }
+
+    function drawProximityChart(oldContributions, newContributions, userID, randomArray, roundNumber) {
+        console.log(userID);
+        renderOldPoints(oldContributions, userID, randomArray, roundNumber - 1); // need previous round's offsets
+        movePoints(newContributions, userID, randomArray, roundNumber);
+    }
+
+    let r0_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let r1_data = [1, 9, 4, 5, 5, 1, 9, 7, 0, 9, 0, 4, 8, 0, 5, 4, 7, 1, 5, 6, 0];
+    let r2_data = [3, 2, 6, 8, 6, 5, 6, 6, 5, 6, 4, 5, 8, 6, 10, 5, 10, 8, 10, 5, 6];
+
+    console.log(r1_data.length);
+
+    let current_round = parseInt("{{ group.round_number }}");
+    let user_id = parseInt("{{ player.id_in_group }}") - 1;
+    let random_array = {{ Constants.offsets }};
+    let user_contribution = parseInt("{{ player.practice_contribution }}");
+    console.log("user contribution below");
+    console.log(user_contribution);
+
+    if (current_round === 1) {
+        r1_data.splice(user_id, 0, user_contribution);
+        drawProximityChart(r0_data, r1_data, user_id, random_array, current_round);
+    } else {
+        let r1_contribution = parseInt("{{ player.all_rounds_practice_contribution}}") - user_contribution;
+        r1_data.splice(user_id, 0, r1_contribution);
+        r2_data.splice(user_id, 0, user_contribution);
+        drawProximityChart(r1_data, r2_data, user_id, random_array, current_round);
+    }
+</script>
+
+{% endblock %}

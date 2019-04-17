@@ -1,0 +1,427 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} Game Feedback {% endblock %}
+
+{% block content %}
+<style>
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    svg {
+        font-family: Helvetica, Arial, Sans-Serif;
+    }
+</style>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
+        <div id="chart_container" class="card" style="background: white;">
+            <!-- <div class="card-body">
+                <center>
+                    <h4><b><u>{{ current_month }} Feedback</u> </b></h4>
+                </center>
+
+                <table class="table" style="text-align:left;">
+                    <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{ current_month }} <br>(this month)</th>
+                        <th>Cumulative to date <br>(all past rounds)​</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Your contribution to your personal account:​</td>
+                        <td>
+                            <e style="color: #a700a8">{{ player.private_contribution }}</e>
+                        </td>
+                        <td>
+                            <e style="color: #a700a8">{{ player.all_rounds_private_contribution }}</e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><B>Your contribution to the group conservation account:</B>​</td>
+                        <td>
+                            <e style="color: #0000ff">{{ player.contribution}}</e>
+                        </td>
+                        <td>
+                            <e style="color: #0000ff">{{ player.all_rounds_contribution }}</e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Others’ total contribution to the group conservation account:​</b></td>
+                        <td>
+                            <e style="color: #0000ff"> {{ player.others_contribution }} </e>
+                        </td>
+                        <td>
+                            <e style="color: #0000ff"> {{ player.all_rounds_others_contribution }} </e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Total group conservation account contributions:</b>​</td>
+                        <td><b>
+                                <e style="color: #0000ff">{{ group.total_contribution }}</e>
+                            </b></td>
+                        <td><b>
+                                <e style="color: #0000ff">{{ group.all_rounds_contribution }}</e>
+                            </b></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="percentage"></td>
+                    </tr>
+                </table>
+            </div> -->
+        </div>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%;margin-top: 30px; width: 100px">Next</button>
+    </div>
+</div>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+    let padding = 50;
+    let pointRadius = 15;
+    let numPlayers = 22;
+    let maxContribution = 10;
+
+    let svgWidth = pointRadius * (2 * numPlayers) + 2 * padding;
+    let svgHeight = pointRadius * (2 * maxContribution) + 2 * padding;
+
+    let userColor = "#999";
+    let othersColor = "#555";
+
+    let svg = d3.select("#chart_container")
+        .append("svg")
+        .attr("width", svgWidth)
+        .attr("height", svgHeight)
+
+    let xScale = d3.scaleLinear()
+        .domain([0, numPlayers])
+        .range([0, numPlayers * 2 * pointRadius]);
+
+    let yScale = d3.scaleLinear()
+        .domain([0, maxContribution])
+        .range([2 * maxContribution * pointRadius, 0]);
+
+    function renderAxis(yScale) {
+        let yAxis = d3.axisLeft()
+            .scale(yScale)
+            .ticks(5);
+
+        svg.append("g")
+            .attr("transform", "translate(" + padding + ", " + padding + ")")
+            .call(yAxis);
+
+        // axis label
+        svg.append("text")
+            .attr("class", "y label")
+            .attr("text-anchor", "middle")
+            .attr("y", padding / 2)
+            .attr("x", -svgHeight / 2)
+            .attr("transform", "rotate(-90)")
+            .text("Contribution");
+    }
+
+    renderAxis(yScale);
+
+    function renderOldPoints(oldContributions, userID, randomArray, roundNumber) {
+        let contributionObjects = {};
+
+        for (let i = 0; i < oldContributions.length; ++i) {
+            if (contributionObjects[oldContributions[i]] != undefined) {
+                ++contributionObjects[oldContributions[i]].count;
+            } else {
+                contributionObjects[oldContributions[i]] = {
+                    value: oldContributions[i],
+                    count: 1
+                };
+            }
+        }
+
+        let allPoints = [];
+
+        let pointScale = d3.scaleLinear()
+            .domain([0, numPlayers])
+            .range([pointRadius, (2 * numPlayers + 1) * pointRadius])
+
+        oldContributions.forEach((value, index) => {
+            let instance = 0; // if this is the third instance of "value" in the array this will be 3
+            for (let i = index; i >= 0; --i) {
+                if (oldContributions[i] == value) {
+                    ++instance;
+                }
+            }
+
+            let pointObject = {
+                value: value,
+                x: instance
+            };
+
+            let count = contributionObjects[value].count;
+            let centerValue = numPlayers / 2;
+
+            let centerIndex;
+            if (count % 2 == 1) {
+                centerIndex = Math.floor(count / 2) + 0.5;
+            } else {
+                centerIndex = Math.floor(count / 2);
+            }
+
+            pointObject.x += (centerValue - centerIndex);
+            allPoints.push(pointObject);
+        })
+
+        // plot points
+        let maxOffset = 3;
+        let visibleRadius = pointRadius - maxOffset;
+        svg.selectAll("point")
+            .data(allPoints)
+            .enter()
+            .append("circle")
+            .attr("class", "point")
+            .attr("transform", function (d, i) {
+
+                // if (randomArray[roundNumber] == undefined) {
+                //     console.log("randomArray[roundNumber] broke");
+                //     console.log("roundNumber = " + roundNumber);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                // }
+                console.log("before calcing offsets");
+                console.log(roundNumber);
+
+                let xOffset;
+                let yOffset;
+
+                if (roundNumber < 0) {
+                    xOffset = yOffset = 0;
+                } else {
+                    xOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0];
+                    yOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0]; randomArray[roundNumber][i][1];
+                }
+
+                console.log("after calcing offsets");
+                // if (xOffset == undefined) {
+                //     console.log("xOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][0]);
+                // }
+
+                // if (yOffset == undefined) {
+                //     console.log("yOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][1]);
+                // }
+
+                let x = pointScale(d.x) + xOffset + padding;
+                let y = yScale(d.value) + yOffset + padding;
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("r", visibleRadius)
+            .attr("fill", function (d, i) {
+                let is_user = i === userID;
+                return is_user ? userColor : othersColor;
+            })
+    }
+
+    function movePoints(newContributions, userID, randomArray, roundNumber) {
+        console.log(randomArray);
+        console.log("below is roundNumber");
+        console.log(roundNumber);
+        let contributionObjects = {};
+
+        for (let i = 0; i < newContributions.length; ++i) {
+            if (contributionObjects[newContributions[i]] != undefined) {
+                ++contributionObjects[newContributions[i]].count;
+            } else {
+                contributionObjects[newContributions[i]] = {
+                    value: newContributions[i],
+                    count: 1
+                };
+            }
+        }
+
+        let allPoints = [];
+
+        let pointScale = d3.scaleLinear()
+            .domain([0, numPlayers])
+            .range([pointRadius, (2 * numPlayers + 1) * pointRadius])
+
+        newContributions.forEach((value, index) => {
+            let instance = 0; // if this is the third instance of "value" in the array this will be 3
+            for (let i = index; i >= 0; --i) {
+                if (newContributions[i] == value) {
+                    ++instance;
+                }
+            }
+
+            let pointObject = {
+                value: value,
+                x: instance
+            };
+
+            let count = contributionObjects[value].count;
+            let centerValue = numPlayers / 2;
+
+            let centerIndex;
+            if (count % 2 == 1) {
+                centerIndex = Math.floor(count / 2) + 0.5;
+            } else {
+                centerIndex = Math.floor(count / 2);
+            }
+
+            pointObject.x += (centerValue - centerIndex);
+            allPoints.push(pointObject);
+        })
+
+        // plot points
+        let maxOffset = 3;
+
+        // move points to new positions
+        svg.selectAll(".point")
+            .data(allPoints)
+            .transition()
+            .duration(1000)
+            .attr("class", "point")
+            .attr("transform", function (d, i) {
+                // if (randomArray[roundNumber] == undefined) {
+                //     console.log("randomArray[roundNumber] broke");
+                //     console.log("roundNumber = " + roundNumber);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                // }
+
+                let xOffset;
+                let yOffset;
+
+                if (roundNumber < 0) {
+                    xOffset = yOffset = 0;
+                } else {
+                    xOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0];
+                    yOffset = (roundNumber < 0) ? 0 : randomArray[roundNumber][i][0]; randomArray[roundNumber][i][1];
+                }
+
+                // if (xOffset == undefined) {
+                //     console.log("xOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][0]);
+                // }
+
+                // if (yOffset == undefined) {
+                //     console.log("yOffset broke");
+                //     console.log("roundNumber = " + roundNumber + ", i = " + i);
+                //     console.log(randomArray);
+                //     console.log(randomArray[roundNumber]);
+                //     console.log(randomArray[roundNumber][i]);
+                //     console.log(randomArray[roundNumber][i][1]);
+                // }
+
+                let x = pointScale(d.x) + xOffset + padding;
+                let y = yScale(d.value) + yOffset + padding;
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("fill", function (d, i) {
+                return i === userID ? userColor : othersColor;
+            })
+    }
+
+
+    function drawProximityChart(oldContributions, newContributions, userID, randomArray, roundNumber) {
+        renderOldPoints(oldContributions, userID, randomArray, roundNumber); // need previous round's offsets
+        // movePoints(newContributions, userID, randomArray, roundNumber);
+    }
+
+    String.prototype.replaceAll = function (search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+    };
+
+    // var percentage = document.getElementById("percentage")
+    // var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 216)
+
+    let newData = "{{ player.others_contribution_array }}";
+    newData = newData.replaceAll("Currency(", "");
+    newData = newData.replace("[", "");
+    newData = newData.replace("]", "");
+    newData = newData.replaceAll(")", "");
+    newData = newData.replaceAll(",", "");
+    newData = newData.split(" ");
+
+    for (let i = 0; i < newData.length; i++) {
+        newData[i] = parseInt(newData[i]);
+    }
+
+    let myContribution = parseInt("{{ player.contribution }}");
+
+    let userID = parseInt("{{ player.id_in_group }}") - 1;
+
+    newData.splice(userID, 0, myContribution);
+
+    // get old data
+    let oldData = JSON.parse(localStorage.getItem("oldData"));
+
+    if (oldData == null || typeof (oldData) != "object" || !oldData.hasOwnProperty("length") || oldData.length == 0) {
+        oldData = [];
+        let defaultValue = 0;
+        for (let i = 0; i < newData.length - 1; i++) {
+            oldData.push(defaultValue);
+        }
+
+        oldData.splice(userID, 0, defaultValue);
+    }
+
+    console.log(newData);
+
+    console.log(oldData);
+
+    let randomArray = {{ Constants.offsets }};
+    // console.log(randomArray);
+
+    let roundNumber = {{ group.round_number }} - 2;
+
+    // draw_graph(oldData, newData);
+    drawProximityChart(oldData, newData, userID, randomArray, roundNumber);
+
+    localStorage.removeItem("oldData");
+    localStorage.setItem("oldData", JSON.stringify(newData));
+    // percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 30% (2016)</e></b>"
+</script>
+
+{% endblock %}

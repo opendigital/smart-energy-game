@@ -1,0 +1,340 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %}
+<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block title %} Game Feedback {% endblock %}
+
+{% block content %}
+<style>
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    svg {
+        font-family: Helvetica, Arial, Sans-Serif;
+    }
+</style>
+<div class="card bg-transparent">
+    <div class="card-body">
+        <h2 style="padding-left: 10px"><b>REAL INVESTMENT GAME​</b></h2><br>
+        <div id="chart_container" class="card" style="background: white;">
+            <!-- <div class="card-body">
+                <center>
+                    <h4><b><u>{{ current_month }} Feedback</u> </b></h4>
+                </center>
+
+                <table class="table" style="text-align:left;">
+                    <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{ current_month }} <br>(this month)</th>
+                        <th>Cumulative to date <br>(all past rounds)​</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Your contribution to your personal account:​</td>
+                        <td>
+                            <e style="color: #a700a8">{{ player.private_contribution }}</e>
+                        </td>
+                        <td>
+                            <e style="color: #a700a8">{{ player.all_rounds_private_contribution }}</e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><B>Your contribution to the group conservation account:</B>​</td>
+                        <td>
+                            <e style="color: #0000ff">{{ player.contribution}}</e>
+                        </td>
+                        <td>
+                            <e style="color: #0000ff">{{ player.all_rounds_contribution }}</e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Others’ total contribution to the group conservation account:​</b></td>
+                        <td>
+                            <e style="color: #0000ff"> {{ player.others_contribution }} </e>
+                        </td>
+                        <td>
+                            <e style="color: #0000ff"> {{ player.all_rounds_others_contribution }} </e>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Total group conservation account contributions:</b>​</td>
+                        <td><b>
+                                <e style="color: #0000ff">{{ group.total_contribution }}</e>
+                            </b></td>
+                        <td><b>
+                                <e style="color: #0000ff">{{ group.all_rounds_contribution }}</e>
+                            </b></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="percentage"></td>
+                    </tr>
+                </table>
+            </div> -->
+        </div>
+        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%;margin-top: 30px; width: 100px">Next</button>
+    </div>
+</div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+    function draw_graph(data, new_data) {
+        let circle_edges = [0, 2, 4, 6, 8, 10];
+
+        let width = 960,
+            height = 500,
+            radius = Math.min(width, height) / 2 - 30;
+
+        let user_color = "#999";
+        let others_color = "#555";
+
+        let r = d3.scale.linear()
+            .domain([0, 10])
+            .range([radius, 0]);
+
+        let svg = d3.select("#chart_container").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        // plot circles
+        let gr = svg.append("g")
+            .attr("class", "r axis")
+            .selectAll("g")
+            .data(circle_edges)
+            .enter().append("g")
+            .attr("fill", (d) => {
+                let hex_color;
+                if (d < 3) {
+                    hex_color = "#EEE";
+                } else if (d < 7) {
+                    hex_color = "#DDD";
+                } else {
+                    hex_color = "#CCC";
+                }
+
+                return hex_color;
+            });
+
+        gr.append("circle")
+            .attr("r", r);
+
+        // add axis
+        let centerX = 0;
+        svg.append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", 0)
+            .attr("y2", -r(0))
+            .attr("fill", "#707070")
+            .attr("stroke", "#707070")
+            .attr("stroke-width", 1.5);
+
+
+        // axis labels
+        circle_edges.map((d, i) => {
+            if (i < circle_edges.length - 1) {
+                let unit = "";
+                if (i == 0) {
+                    unit = " contributed"
+                }
+                svg.append("text").text("$" + d + unit)
+                    .attr("transform", () => {
+                        return "translate(7, " + -r(d + 0.25) + ")"
+                    })
+            }
+
+            svg.append("path")
+                .attr("transform", function () { return "translate(0," + -r(d) + ")"; })
+                .attr("d", d3.svg.symbol().type("triangle-down"))
+                .attr("fill", "#707070")
+        })
+
+
+        // legends
+        let user_legend = svg.append("g").append("g");
+
+        user_legend.append("circle")
+            .attr("fill", user_color)
+            .attr("cx", r(0) - 10)
+            .attr("cy", r(0) - 5)
+            .attr("r", 6);
+
+        user_legend
+            .append("text")
+            .text("Your contribution")
+            .attr("x", r(0))
+            .attr("y", r(0));
+
+        let others_legend = svg.append("g").append("g");
+
+        others_legend.append("circle")
+            .attr("fill", others_color)
+            .attr("cx", r(0) - 10)
+            .attr("cy", r(0) - 5 - 20)
+            .attr("r", 6);
+
+        others_legend
+            .append("text")
+            .text("Others' contributions")
+            .attr("x", r(0))
+            .attr("y", r(0) - 20);
+
+        // plot points
+        svg.selectAll("point")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", "point")
+            .attr("transform", function (d) {
+                // get angle and radius
+                let angle = d[0],
+                    radius = r(d[1]),
+                    x = radius * Math.cos(angle),
+                    y = radius * Math.sin(angle);
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("r", 10)
+            .attr("fill", function (d, i) {
+                let is_user = d[2];
+                return is_user ? user_color : others_color;
+            })
+
+        // move points to new positions
+        svg.selectAll(".point")
+            .data(new_data)
+            .transition()
+            .duration(1000)
+            .attr("class", "point")
+            .attr("transform", function (d) {
+                // get angle and radius
+                let angle = d[0],
+                    radius = r(d[1]),
+                    x = radius * Math.cos(angle),
+                    y = radius * Math.sin(angle);
+                return "translate(" + [x, y] + ")";
+            })
+            .attr("fill", function (d) {
+                let is_user = d[2];
+                return is_user ? user_color : others_color;
+            })
+
+
+    }
+
+    String.prototype.replaceAll = function (search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+    };
+
+    var percentage = document.getElementById("percentage")
+    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 216)
+
+    let results = "{{ player.others_contribution_array }}";
+    results = results.replaceAll("Currency(", "");
+    results = results.replace("[", "");
+    results = results.replace("]", "");
+    results = results.replaceAll(")", "");
+    results = results.replaceAll(",", "");
+    results = results.split(" ");
+
+    for (let i = 0; i < results.length; i++) {
+        results[i] = parseInt(results[i]);
+    }
+    // console.log(results)
+
+    let my_contribution = parseInt("{{ player.contribution }}");
+    // my_contribution *= 2;
+    // console.log("My contribution was: " + (my_contribution / 2));
+
+    let new_data = [];
+
+    for (let i = 0; i < results.length; i++) {
+        let term = [
+            results[i],
+            false
+        ];
+        new_data.push(term);
+    }
+
+    let user_id = parseInt("{{ player.id_in_group }}");
+
+    new_data.splice(user_id - 1, 0, [
+        my_contribution,
+        true
+    ]);
+
+    let old_data = JSON.parse(localStorage.getItem("old_data"));
+
+    if (old_data == null || typeof (old_data) != "object" || !old_data.hasOwnProperty("length") || old_data.length == 0) {
+        old_data = [];
+        for (let i = 0; i < results.length; i++) {
+            let term2 = [
+                0,
+                10,
+                false
+            ];
+            old_data.push(term2);
+        }
+
+        old_data.splice(user_id - 1, 0, [
+            0,
+            10,
+            true
+        ]);
+    }
+
+    for (let i = 0; i < new_data.length; i++) {
+        new_data[i] = [
+            (i + 1) * Math.PI / (new_data.length / 2),
+            new_data[i][0],
+            new_data[i][1]
+        ]
+    }
+
+    console.log(new_data);
+
+    draw_graph(old_data, new_data);
+
+    // let test = [];
+    // localStorage.setItem("meme", JSON.stringify(test));
+
+    // let test2 = JSON.parse(localStorage.getItem("mseme"));
+    // console.log((test2));
+
+    localStorage.removeItem("old_data");
+    localStorage.setItem("old_data", JSON.stringify(new_data));
+    // percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 30% (2016)</e></b>"
+</script>
+
+{% endblock %}

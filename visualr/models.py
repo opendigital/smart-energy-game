@@ -12,7 +12,7 @@ Solution for training problem
 
 
 class Constants(BaseConstants):
-    name_in_url = 'training_problem'
+    name_in_url = 'visualr'
     players_per_group = 22
     players_without_me = players_per_group - 1
     num_actual_rounds = 12 # edit this one

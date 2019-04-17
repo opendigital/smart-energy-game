@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block styles %} <link href="{% static 'main_app/style.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block content %}
+    <div class="card bg-transparent">
+        <div class="card-body">
+            <p>
+                <em>Before we proceed to the game please tell us what do you think other players will choose to keep for
+                    themselves and how much will they invest towards group goal, on average?</em>
+            </p>
+
+            <form>
+                <em>How many energy tokens do you think others will <b>invest</b> to the group fund?</em>
+                <div class="input-group mb-2">
+                    <input id="invest" type="text" class="form-control" placeholder="0" name="expected_contribution" oninput="document.getElementById('keep').setAttribute('value',120-this.value)">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">tokens</div>
+                    </div>
+                </div><div class="form-control-errors">{{ form.expected_contribution.errors }}</div>
+
+
+                <em>How many energy tokens do you think others will <b>keep</b> for themselves?</em>
+                <div class="input-group mb-2">
+                    <input id="keep" type="text" class="form-control" placeholder="0" name="expected_individual" oninput="document.getElementById('invest').setAttribute('value',120-this.value)">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">tokens</div>
+                    </div>
+                </div><div class="form-control-errors">{{ form.expected_individual.errors }}</div>
+            </form>
+
+            {% next_button %}
+        </div>
+    </div>
+{% endblock %}
+
