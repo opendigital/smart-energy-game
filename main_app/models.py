@@ -13,9 +13,9 @@ Solution for training problem
 
 class Constants(BaseConstants):
     name_in_url = 'training_problem'
-    players_per_group = 22
-    players_without_me = players_per_group - 1
-    num_actual_rounds = 12 # edit this one
+    players_per_group = 3
+    # players_without_me = players_per_group - 1
+    num_actual_rounds = 2 # edit this one
     num_rounds = num_actual_rounds + 1 # don't edit this one
 
     endowment = c(100)
@@ -40,8 +40,20 @@ class Group(BaseGroup):
     bonus = models.CurrencyField(initial=c(0))
     doItOnce = models.BooleanField(initial=True)
     carbonFund = models.CurrencyField()
+    test = 0
+
+
+    # bot contributions
+    bot_contributions = [[10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3],
+                        [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]]
+
+                        # bot_contributions[round number][player number]
+    
+    bot_total_contributions = [[10, 9, 8,3,3,2,2,1,8, 10,10, 9,8, 8,  7, 7, 6, 6, 6, 5, 5,4,4,4,3],
+                           [20,18,16,6,6,4,4,2,16,20,20,18,16,16,14,14,12,12,12,10,10,8,8,8,6]]
 
     def set_payoffs(self):
+        self.test = 2392
         self.total_contribution = sum([p.contribution for p in self.get_players()])
 
         for p in self.get_players():
@@ -85,6 +97,15 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    # bot contributions
+    # bot_contributions = [[10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3],
+    #                     [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]]
+
+    #                     # bot_contributions[round number][player number]
+    
+    # bot_total_contributions = [[10, 9, 8,3,3,2,2,1,8, 10,10, 9,8, 8,  7, 7, 6, 6, 6, 5, 5,4,4,4,3],
+    #                        [20,18,16,6,6,4,4,2,16,20,20,18,16,16,14,14,12,12,12,10,10,8,8,8,6]]
+
     # PRACTICE AND REAL GAME
     contribution = models.CurrencyField(min=0, max=10)
     practice_contribution = models.CurrencyField(min=0, max=10)

@@ -2,6 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 import random
+from main_app import models
 
 
 class WaitingRoom(WaitPage):
@@ -332,11 +333,24 @@ class ResultsWaitPage(WaitPage):
     title_text = "Waiting Room"
     body_text = "Please wait until the other participants are ready."
 
+    models.Group.bot_contributions = [[10 for x in round_] for round_ in models.Group.bot_contributions]
+    print(models.Group.bot_contributions)
+
     def is_displayed(self):
         return self.round_number >= 2
 
     def after_all_players_arrive(self):
         self.group.set_payoffs()
+        # self.models.group.bot_contributions = [[10 for x in round_] for round_ in self.group.bot_contributions]
+        # print(self.models.group.bot_contributions)
+        
+        
+
+    
+    # def before_next_page(self):
+    #     self.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
+    #     print("test")
+
 
 
 class Results(Page):
@@ -347,6 +361,10 @@ class Results(Page):
         return {'current_month': Constants.months[(self.round_number - 2) % 12],
                 'current_round': self.round_number - 1,
                 'progress': 'Game'}
+    
+    # def before_next_page(self):
+    #     self.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
+    #     print("test")
 
 
 class Congrats(Page):
@@ -488,35 +506,35 @@ class Debriefing(Page):
 
 
 page_sequence = [
-    ConsentForm,
+    #ConsentForm,
     # WaitingRoom,
-    GameFraming,
-    GameStructure1,
-    GameStructure2,
-    GameOutcomes1,
-    GameOutcomes2,
-    ExamplesTransition,
-    ExamplesOne,
-    ExamplesTwo,
-    ExamplesThree,
-    PracticeTransition,
-    PracticeGame,
-    PracticeResults,
-    QuizTransition,
-    Quiz1,
-    GameStructure1,
-    Quiz1,
-    Quiz2,
-    GameOutcomes2,
-    Quiz2,
-    Quiz3,
-    ExamplesTwo,
-    ExamplesThree,
-    Quiz3,
-    Quiz4,
-    ExamplesOne,
-    Quiz4,
-    RealGameTransition,
+    # GameFraming,
+    # GameStructure1,
+    # GameStructure2,
+    # GameOutcomes1,
+    # GameOutcomes2,
+    # ExamplesTransition,
+    # ExamplesOne,
+    # ExamplesTwo,
+    # ExamplesThree,
+    # PracticeTransition,
+    # PracticeGame,
+    # PracticeResults,
+    # QuizTransition,
+    # Quiz1,
+    # GameStructure1,
+    # Quiz1,
+    # Quiz2,
+    # GameOutcomes2,
+    # Quiz2,
+    # Quiz3,
+    # ExamplesTwo,
+    # ExamplesThree,
+    # Quiz3,
+    # Quiz4,
+    # ExamplesOne,
+    # Quiz4,
+    # RealGameTransition,
     Survey,
     ResultsWaitPage,
     Results,

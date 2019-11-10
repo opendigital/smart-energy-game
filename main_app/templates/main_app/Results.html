@@ -146,11 +146,26 @@
     let user_contribution = parseInt("{{ player.contribution }}");
     let user_total_contribution = parseInt("{{ player.all_rounds_contribution }}");
 
-    let current_round_contributions = parseCurrency("{{ player.others_contribution_array }}");
-    current_round_contributions.splice(user_id - 1, 0, user_contribution);
+    // let current_round_contributions = parseCurrency("{{ player.others_contribution_array }}");
+    // current_round_contributions.splice(user_id - 1, 0, user_contribution);
+    let raw_contribution_string = "{{ player.contribution }}"
+    let player_contribution = parseInt(raw_contribution_string.split(" ")[0])
+    let current_round = {{ player.round_number }} - 2
+    let all_rounds_contribution = {{ group.bot_contributions }}
+    let current_round_contributions = all_rounds_contribution[current_round]
+    current_round_contributions.unshift(player_contribution)
+    //
+    // let total_contributions = parseCurrency("{{ player.all_rounds_others_contribution_array }}");
+    // total_contributions.splice(user_id - 1, 0, user_total_contribution);
+    let total_contributions = {{ group.bot_total_contributions }}
+    total_contributions = total_contributions[current_round]
+    total_contributions.unshift(player_contribution)
 
-    let total_contributions = parseCurrency("{{ player.all_rounds_others_contribution_array }}");
-    total_contributions.splice(user_id - 1, 0, user_total_contribution);
+    console.log("test variable")
+    console.log({{group.test}})
+    console.log("-------")
+    console.log(current_round_contributions);
+    console.log(total_contributions);
 
     // add it to the table
     let table = document.getElementById("table");
@@ -161,8 +176,7 @@
         }
     }
 
-    console.log(current_round_contributions);
-    console.log(total_contributions);
+
 </script>
 
 {% endblock %}
