@@ -13,9 +13,9 @@ Solution for training problem
 
 class Constants(BaseConstants):
     name_in_url = 'training_problem'
-    players_per_group = 3
+    players_per_group = None
     # players_without_me = players_per_group - 1
-    num_actual_rounds = 2 # edit this one
+    num_actual_rounds = 4 # edit this one
     num_rounds = num_actual_rounds + 1 # don't edit this one
 
     endowment = c(100)
@@ -40,20 +40,20 @@ class Group(BaseGroup):
     bonus = models.CurrencyField(initial=c(0))
     doItOnce = models.BooleanField(initial=True)
     carbonFund = models.CurrencyField()
-    test = 0
 
+    def set_bots(self):
+        self.session.vars["bot_contributions"] = [[self.round_number for i in range(25)] for j in range(6)]
+        self.session.vars["contribution_last_round"] = -1
 
-    # bot contributions
-    bot_contributions = [[10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3],
-                        [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]]
-
-                        # bot_contributions[round number][player number]
-    
-    bot_total_contributions = [[10, 9, 8,3,3,2,2,1,8, 10,10, 9,8, 8,  7, 7, 6, 6, 6, 5, 5,4,4,4,3],
-                           [20,18,16,6,6,4,4,2,16,20,20,18,16,16,14,14,12,12,12,10,10,8,8,8,6]]
+        if self.round_number - 2 > 1:
+            player = self.get_players()[0]
+            
+            player_last_round = player.in_round(self.round_number - 1)
+            self.session.vars["contribution_last_round"] = player_last_round.contribution
+            contribution_last_round = self.session.vars["contribution_last_round"]
+            self.session.vars["bot_contributions"][self.round_number - 2] = [-int(contribution_last_round) for i in range(25)]
 
     def set_payoffs(self):
-        self.test = 2392
         self.total_contribution = sum([p.contribution for p in self.get_players()])
 
         for p in self.get_players():
@@ -101,7 +101,7 @@ class Player(BasePlayer):
     # bot_contributions = [[10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3],
     #                     [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]]
 
-    #                     # bot_contributions[round number][player number]
+    # #                     # bot_contributions[round number][player number]
     
     # bot_total_contributions = [[10, 9, 8,3,3,2,2,1,8, 10,10, 9,8, 8,  7, 7, 6, 6, 6, 5, 5,4,4,4,3],
     #                        [20,18,16,6,6,4,4,2,16,20,20,18,16,16,14,14,12,12,12,10,10,8,8,8,6]]
@@ -207,6 +207,9 @@ class Player(BasePlayer):
     total_contribution_feedback_rank = models.IntegerField()
 
     # WILD METHODS
+   
+
+
     def all_tokens_left(self):
         return c(120) - self.all_rounds_contribution()
 

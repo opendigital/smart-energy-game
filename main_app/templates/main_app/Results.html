@@ -135,11 +135,11 @@
 
     percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (1584)</e></b>"
 
-    console.log("{{ player.others_contribution_array }}");
-    console.log("user contribution: " + parseInt("{{ player.contribution }}"));
-    console.log("user id: " + parseInt("{{ player.id_in_group }}"));
-    console.log("{{ player.all_rounds_others_contribution_array }}");
-    console.log("------------------------------------------------------");
+    // console.log("{{ player.others_contribution_array }}");
+    // console.log("user contribution: " + parseInt("{{ player.contribution }}"));
+    // console.log("user id: " + parseInt("{{ player.id_in_group }}"));
+    // console.log("{{ player.all_rounds_others_contribution_array }}");
+    // console.log("------------------------------------------------------");
 
     // gather data
     let user_id = parseInt("{{ player.id_in_group }}");
@@ -151,21 +151,20 @@
     let raw_contribution_string = "{{ player.contribution }}"
     let player_contribution = parseInt(raw_contribution_string.split(" ")[0])
     let current_round = {{ player.round_number }} - 2
-    let all_rounds_contribution = {{ group.bot_contributions }}
+    let all_rounds_contribution = {{ session.vars.bot_contributions }}
+    console.log(all_rounds_contribution)
     let current_round_contributions = all_rounds_contribution[current_round]
+    console.log(current_round_contributions)
     current_round_contributions.unshift(player_contribution)
     //
     // let total_contributions = parseCurrency("{{ player.all_rounds_others_contribution_array }}");
     // total_contributions.splice(user_id - 1, 0, user_total_contribution);
-    let total_contributions = {{ group.bot_total_contributions }}
+    let total_contributions = {{ session.vars.bot_contributions }}
+    console.log(total_contributions)
+    console.log("{{session.vars.contribution_last_round}}")
     total_contributions = total_contributions[current_round]
     total_contributions.unshift(player_contribution)
 
-    console.log("test variable")
-    console.log({{group.test}})
-    console.log("-------")
-    console.log(current_round_contributions);
-    console.log(total_contributions);
 
     // add it to the table
     let table = document.getElementById("table");

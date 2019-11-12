@@ -333,15 +333,16 @@ class ResultsWaitPage(WaitPage):
     title_text = "Waiting Room"
     body_text = "Please wait until the other participants are ready."
 
-    models.Group.bot_contributions = [[10 for x in round_] for round_ in models.Group.bot_contributions]
-    print(models.Group.bot_contributions)
+    # models.Player.bot_contributions = [[10 for x in round_] for round_ in models.Player.bot_contributions]
+    # print(models.Player.bot_contributions)
 
     def is_displayed(self):
         return self.round_number >= 2
 
     def after_all_players_arrive(self):
         self.group.set_payoffs()
-        # self.models.group.bot_contributions = [[10 for x in round_] for round_ in self.group.bot_contributions]
+        self.group.set_bots()
+        # self.models.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
         # print(self.models.group.bot_contributions)
         
         
