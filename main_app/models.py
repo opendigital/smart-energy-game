@@ -49,9 +49,14 @@ class Group(BaseGroup):
             player = self.get_players()[0]
             
             player_last_round = player.in_round(self.round_number - 1)
-            self.session.vars["contribution_last_round"] = player_last_round.contribution
-            contribution_last_round = self.session.vars["contribution_last_round"]
-            self.session.vars["bot_contributions"][self.round_number - 2] = [-int(contribution_last_round) for i in range(25)]
+            player_two_rounds_ago = player.in_round(self.round_number - 2)
+            # self.session.vars["contribution_last_round"] = player_last_round.contribution
+            # contribution_last_round = self.session.vars["contribution_last_round"]
+            contribution_last_round = int(player_last_round.contribution)
+            contribution_two_rounds_ago = int(player_two_rounds_ago.contribution)
+            self.session.vars["bot_contributions"][self.round_number - 2] = [
+                contribution_last_round if i % 2 == 0 else contribution_two_rounds_ago
+                for i in range(25)]
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
