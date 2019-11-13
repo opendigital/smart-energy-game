@@ -43,15 +43,12 @@ class Group(BaseGroup):
 
     def set_bots(self):
         self.session.vars["bot_contributions"] = [[self.round_number for i in range(25)] for j in range(6)]
-        self.session.vars["contribution_last_round"] = -1
 
         if self.round_number - 2 > 1:
             player = self.get_players()[0]
             
             player_last_round = player.in_round(self.round_number - 1)
             player_two_rounds_ago = player.in_round(self.round_number - 2)
-            # self.session.vars["contribution_last_round"] = player_last_round.contribution
-            # contribution_last_round = self.session.vars["contribution_last_round"]
             contribution_last_round = int(player_last_round.contribution)
             contribution_two_rounds_ago = int(player_two_rounds_ago.contribution)
             self.session.vars["bot_contributions"][self.round_number - 2] = [
