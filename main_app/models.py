@@ -43,6 +43,7 @@ class Group(BaseGroup):
 
     def set_bots(self):
         self.session.vars["bot_contributions"] = [[self.round_number for i in range(25)] for j in range(6)]
+        self.session.vars["contribution_last_round"] = -1
 
         if self.round_number - 2 > 1:
             player = self.get_players()[0]
