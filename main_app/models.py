@@ -133,15 +133,15 @@ class Group(BaseGroup):
             self.session.vars["bot_contributions"].append(new_contributions)
         
         # update cumulative contributions
-        if round_number >= 1:
-            cumulative_contribution_last_round = self.session.vars["cumulative_contributions"][round_number - 1]
-            cumulative_contributions = [term for term in cumulative_contribution_last_round]
-            for i in range(len(cumulative_contributions)):
-                cumulative_contributions[i] += cumulative_contribution_last_round[i]
-            if round_number > len(self.session.vars["cumulative_contributions"]):
-                self.session.vars["cumulative_contributions"].append(cumulative_contributions)
-            else:
-                self.session.vars["cumulative_contributions"][round_number] = cumulative_contributions
+        # if round_number >= 1:
+        #     cumulative_contribution_last_round = self.session.vars["cumulative_contributions"][round_number - 1]
+        #     cumulative_contributions = [term for term in cumulative_contribution_last_round]
+        #     for i in range(len(cumulative_contributions)):
+        #         cumulative_contributions[i] += cumulative_contribution_last_round[i]
+        #     if round_number > len(self.session.vars["cumulative_contributions"]):
+        #         self.session.vars["cumulative_contributions"].append(cumulative_contributions)
+        #     else:
+        #         self.session.vars["cumulative_contributions"][round_number] = cumulative_contributions
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])

@@ -148,17 +148,31 @@
     console.log("current round contribution")
     console.log(current_round_contributions)
 
-    let total_contributions = {{ session.vars.cumulative_contributions }}
-    console.log("cumulative contributions")
-    console.log(total_contributions)
-    total_contributions = total_contributions[current_round]    
+    // let total_contributions = {{ session.vars.bot_contributions }}
+    // console.log("cumulative contributions")
+    // console.log(total_contributions)
+    // total_contributions = total_contributions[current_round]
+    let cumulative_contributions = []   
 
+    // fill in first round
+    let first_round = all_rounds_contribution[0].slice(0)
+    cumulative_contributions.push(first_round)
+
+    // fill in all subsequent rounds
+    for (let i = 1; i < all_rounds_contribution.length; ++i) {
+        let cumulative_current_round = []
+        for (let j = 0; j < all_rounds_contribution[i].length; ++j) {
+            term = cumulative_contributions[i - 1][j] + all_rounds_contribution[i][j]
+            cumulative_current_round.push(term)
+        }
+        cumulative_contributions.push(cumulative_current_round)
+    }
 
     // add it to the table
     let table = document.getElementById("table");
-
+    let current_round_cumulative = cumulative_contributions[current_round]
     for (let i = 0; i < current_round_contributions.length; i++) {
-        createRow(table, i + 1, current_round_contributions[i], total_contributions[i]);
+        createRow(table, i + 1, current_round_contributions[i], current_round_cumulative[i]);
     }
 
 
