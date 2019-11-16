@@ -1,3 +1,5 @@
+from random import randint, shuffle
+
 from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
@@ -42,19 +44,104 @@ class Group(BaseGroup):
     carbonFund = models.CurrencyField()
 
     def set_bots(self):
-        self.session.vars["bot_contributions"] = [[self.round_number for i in range(25)] for j in range(6)]
-        self.session.vars["contribution_last_round"] = -1
+        round_number = self.round_number - 2
 
-        if self.round_number - 2 > 1:
+        if round_number <= 0:
+            # set initial condition for round 0
+            contributions = [
+                [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]
+            ]
+
+            # initialize cumulative contributions
+            self.session.vars["bot_contributions"] = contributions
+            print("lengths of cc before and after update in round_number <= 0 block")
+            self.session.vars["cumulative_contributions"] = contributions
+            print(len(self.session.vars["cumulative_contributions"]))
+        elif round_number == 1:
+            # set initial condition for round 1
+            contributions = [10,9,8,3,3,2,2,1,8,9 ,10,9,8,7,7,7,5,6,6,6,5,4,5,4,3]
+            self.session.vars["bot_contributions"].append(
+                contributions
+            )
+        else:
+            # get key data on prior rounds
             player = self.get_players()[0]
             
             player_last_round = player.in_round(self.round_number - 1)
             player_two_rounds_ago = player.in_round(self.round_number - 2)
-            contribution_last_round = int(player_last_round.contribution)
-            contribution_two_rounds_ago = int(player_two_rounds_ago.contribution)
-            self.session.vars["bot_contributions"][self.round_number - 2] = [
-                contribution_last_round if i % 2 == 0 else contribution_two_rounds_ago
-                for i in range(25)]
+            player_contribution_last_round = int(player_last_round.contribution)
+            player_contribution_two_rounds_ago = int(player_two_rounds_ago.contribution)
+
+            bot_contribution_last_round = self.session.vars["bot_contributions"][-1]
+            bot_contribution_two_rounds_ago = self.session.vars["bot_contributions"][-2]
+
+            # initialize basic constants
+            NUM_RECIPROCATORS = 3
+            NUM_FREE_RIDERS = 5
+            NUM_CONDITIONALS = 17
+            NUM_AGENTS = len(bot_contribution_last_round)
+
+            NUM_CCS_ABOVE = 3
+            NUM_CCS_BELOW = 2
+            new_contributions = []
+
+            # cooperator contributions
+            for _ in range(NUM_RECIPROCATORS):
+                new_contributions.append(randint(8, 10))
+
+            # free rider contributions
+            for _ in range(NUM_FREE_RIDERS):
+                new_contributions.append(randint(0, 2))
+
+            # identify factors needed to see if agents should be adjusted
+            is_upward_trend = player_contribution_last_round + sum(bot_contribution_last_round) > \
+                player_contribution_two_rounds_ago + sum(bot_contribution_two_rounds_ago)
+            
+            mean_last_round = float(player_contribution_last_round + sum(bot_contribution_last_round)) / float(NUM_AGENTS + 1)
+
+            # split agent list into those above mean and those below mean
+            cc_indices = list(range(NUM_RECIPROCATORS + NUM_FREE_RIDERS, NUM_AGENTS))
+            below_mean = []
+            above_mean = []
+
+            for i in cc_indices:
+                if bot_contribution_last_round[i] < mean_last_round:
+                    below_mean.append(i)
+                elif bot_contribution_last_round[i] > mean_last_round:
+                    above_mean.append(i)
+            
+            # randomly select NUM_CCS_ABOVE and NUM_CCS_BELOW from the appropriate agents
+            shuffle(below_mean)
+            shuffle(above_mean)
+            modify_above = above_mean[:NUM_CCS_ABOVE:]
+            modify_below = below_mean[:NUM_CCS_BELOW:]
+
+            # copy contributions of conditional cooperators and adjust if they're supposed to be
+            # adjusted
+            for i in cc_indices:
+                if i in modify_below and is_upward_trend:
+                    new_contributions.append(bot_contribution_last_round[i] + 1)
+                elif i in modify_above and not is_upward_trend:
+                    new_contributions.append(bot_contribution_last_round[i] - 1)
+                else:
+                    new_contributions.append(bot_contribution_last_round[i])
+                
+                # code to make sure no contributions are negative or > 10
+                new_contributions[-1] = min(10, max(0, new_contributions[-1]))
+
+            # send to the bot contribution array
+            self.session.vars["bot_contributions"].append(new_contributions)
+        
+        # update cumulative contributions
+        if round_number >= 1:
+            cumulative_contribution_last_round = self.session.vars["cumulative_contributions"][round_number - 1]
+            cumulative_contributions = [term for term in cumulative_contribution_last_round]
+            for i in range(len(cumulative_contributions)):
+                cumulative_contributions[i] += cumulative_contribution_last_round[i]
+            if round_number > len(self.session.vars["cumulative_contributions"]):
+                self.session.vars["cumulative_contributions"].append(cumulative_contributions)
+            else:
+                self.session.vars["cumulative_contributions"][round_number] = cumulative_contributions
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
@@ -102,7 +189,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # bot contributions
     # bot_contributions = [[10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3],
-    #                     [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]]
+    #                      [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]]
 
     # #                     # bot_contributions[round number][player number]
     
