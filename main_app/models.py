@@ -170,7 +170,26 @@ class Group(BaseGroup):
         #return
 
     def all_rounds_contribution(self):
-        return sum([g.total_contribution for g in self.in_rounds(2, self.round_number)])
+        player = self.get_players()[0]
+        player_in_all_rounds = player.in_all_rounds()
+        group_sum = sum([sum(x) for x in self.session.vars["bot_contributions"]])
+        player_sum = sum([int(player.contribution) for player in player_in_all_rounds])
+        return group_sum + player_sum
+
+    def all_rounds_others_contribution(self):
+        return sum([sum(x) for x in self.session.vars["bot_contributions"]])
+
+    def total_contribution(self):
+        player = self.get_players()[0]
+        player_contribution = int(player.contribution)
+        group_contributions = sum(x in self.session.vars["bot_contributions"][self.round_number - 2])
+        return player_contribution + group_contributions
+
+
+        
+    #     return sum([g.total_contribution for g in self.in_rounds(2, self.round_number)])
+
+
 
     def all_rounds_contribution_in_dollars(self):
         return c(self.all_rounds_contribution()).to_real_world_currency(self.session)
@@ -184,6 +203,8 @@ class Group(BaseGroup):
 
     def bonus_in_dollars(self):
         return self.bonus.to_real_world_currency(self.session)
+
+    
 
 
 class Player(BasePlayer):
@@ -330,17 +351,32 @@ class Player(BasePlayer):
         else:
             return sum([p.contribution for p in self.in_rounds(Constants.num_rounds/2+1, self.round_number-1)])
 
+    
     def others_contribution(self):
-        return sum([p.contribution for p in self.get_others_in_group()])
+        return sum(self.session.vars["bot_contributions"][self.round_number -2])
 
     def others_contribution_array(self):
-        return [p.contribution for p in self.get_others_in_group()]
-
-    def all_rounds_others_contribution(self):
-        return sum([p.all_rounds_contribution() for p in self.get_others_in_group()])
-
+        return self.session.vars["bot_contributions"][self.round_number -2]
+    
     def all_rounds_others_contribution_array(self):
-        return ([p.all_rounds_contribution() for p in self.get_others_in_group()])
+        return self.session.vars["bot_contributions"]
+
+    
+
+
+
+    
+    # def others_contribution(self):
+    #     return sum([p.contribution for p in self.get_others_in_group()])
+
+    # def others_contribution_array(self):
+    #     return [p.contribution for p in self.get_others_in_group()]
+
+    # def all_rounds_others_contribution(self):
+    #     return sum([p.all_rounds_contribution() for p in self.get_others_in_group()])
+
+    # def all_rounds_others_contribution_array(self):
+    #     return ([p.all_rounds_contribution() for p in self.get_others_in_group()])
 
     def remaining_tokens_in_dollars(self):
         return c(self.all_tokens_left()).to_real_world_currency(self.session)
@@ -423,3 +459,5 @@ class Player(BasePlayer):
 
     def total_pay(self):
         return self.group.bonus_in_dollars() + self.remaining_tokens_in_dollars() + c(5).to_real_world_currency(self.session) + c(self.how_many_good_answers()).to_real_world_currency(self.session)
+
+    def get_other_contributions(self)
