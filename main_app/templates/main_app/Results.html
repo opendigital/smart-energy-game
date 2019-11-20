@@ -131,9 +131,9 @@
     }
 
     var percentage = document.getElementById("percentage")
-    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 1584)
+    var value = Math.floor(parseInt("{{ group.all_rounds_contribution }}".split(" ")[0], 10) * 100 / 900)
 
-    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (1584)</e></b>"
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (900)</e></b>"
 
     // gather data
     let user_id = parseInt("{{ player.id_in_group }}");

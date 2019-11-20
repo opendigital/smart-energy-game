@@ -102,10 +102,9 @@
 </div>
 <script>
     var percentage = document.getElementById("percentage")
-    var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0], 10) * 100 / 1584)
+    var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0], 10) * 100 / 900)
 
-
-    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (1584)</e></b>"
+    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (900)</e></b>"
 </script>
 
 {% endblock %}

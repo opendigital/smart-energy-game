@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     endowment = c(100)
     multiplier = 2
 
-    group_goal = c(936)
+    group_goal = c(900)
     no_bonus = c(0)
 
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER',
@@ -43,13 +43,20 @@ class Group(BaseGroup):
     doItOnce = models.BooleanField(initial=True)
     carbonFund = models.CurrencyField()
 
+    def get_bot_contributions_string(self):
+        bot_contributions_str = models.LongStringField(initial=str(self.session.vars["bot_contributions"][0]))
+        for i in range(1, len(self.session.vars["bot_contributions"])):
+            bot_contributions_str = bot_contributions_str + "\n" + models.LongStringField(initial=str(self.session.vars["bot_contributions"][i]))
+        return bot_contributions_str
+
     def set_bots(self):
+        player = self.get_players()[0]
         round_number = self.round_number - 2
 
         if round_number <= 0:
             # set initial condition for round 0
             contributions = [
-                [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]
+                [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4]
             ]
 
             # initialize cumulative contributions
@@ -57,14 +64,12 @@ class Group(BaseGroup):
             self.session.vars["cumulative_contributions"] = contributions
         elif round_number == 1:
             # set initial condition for round 1
-            contributions = [10,9,8,3,3,2,2,1,8,9 ,10,9,8,7,7,7,5,6,6,6,5,4,5,4,3]
+            contributions = [10,9,8,3,3,2,2,1,8,9 ,10,9,8,7,7,7,5,6,6,6,5,4,5,4]
             self.session.vars["bot_contributions"].append(
                 contributions
             )
         else:
-            # get key data on prior rounds
-            player = self.get_players()[0]
-            
+            # get key data on prior rounds            
             player_last_round = player.in_round(self.round_number - 1)
             player_two_rounds_ago = player.in_round(self.round_number - 2)
             player_contribution_last_round = int(player_last_round.contribution)
@@ -76,7 +81,7 @@ class Group(BaseGroup):
             # initialize basic constants
             NUM_RECIPROCATORS = 3
             NUM_FREE_RIDERS = 5
-            NUM_CONDITIONALS = 17
+            NUM_CONDITIONALS = 16
             NUM_AGENTS = len(bot_contribution_last_round)
 
             NUM_CCS_ABOVE = 3
@@ -130,16 +135,8 @@ class Group(BaseGroup):
             # send to the bot contribution array
             self.session.vars["bot_contributions"].append(new_contributions)
         
-        # update cumulative contributions
-        # if round_number >= 1:
-        #     cumulative_contribution_last_round = self.session.vars["cumulative_contributions"][round_number - 1]
-        #     cumulative_contributions = [term for term in cumulative_contribution_last_round]
-        #     for i in range(len(cumulative_contributions)):
-        #         cumulative_contributions[i] += cumulative_contribution_last_round[i]
-        #     if round_number > len(self.session.vars["cumulative_contributions"]):
-        #         self.session.vars["cumulative_contributions"].append(cumulative_contributions)
-        #     else:
-        #         self.session.vars["cumulative_contributions"][round_number] = cumulative_contributions
+        # store bot contributions
+        player.bot_contributions_in_round = str(self.session.vars["bot_contributions"][round_number])
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
@@ -229,23 +226,14 @@ class Player(BasePlayer):
     #                        [20,18,16,6,6,4,4,2,16,20,20,18,16,16,14,14,12,12,12,10,10,8,8,8,6]]
 
     # PRACTICE AND REAL GAME
+    
     contribution = models.CurrencyField(min=0, max=10)
     practice_contribution = models.CurrencyField(min=0, max=10)
     private_contribution = models.CurrencyField(min=0, max=10)
     practice_private_contribution = models.CurrencyField(min=0, max=10)
     random_others_contribution = models.CurrencyField()
     group_random_total_contribution = models.CurrencyField()
-
-
-
-    def get_bot_contributions_string(self):
-        bot_contributions_str = models.LongStringField(initial=str(self.session.vars["bot_contributions"][0]))
-        for i in range(1, len(self.session.vars["bot_contributions"])):
-            bot_contributions_str = bot_contributions_str + "\n" + models.LongStringField(initial=str(self.session.vars["bot_contributions"][0]))
-        return bot_contributions_str
-
-    
-    
+    bot_contributions_in_round = models.LongStringField()
 
     # QUIZ
     Q1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
