@@ -529,10 +529,11 @@ page_sequence = [
     GameOutcomes2,
     Quiz2,
     Quiz3,
-    ExamplesOne,
     ExamplesTwo,
     ExamplesThree,
     Quiz3,
+    Quiz4,
+    ExamplesOne,
     Quiz4,
     RealGameTransition,
     Survey,
@@ -540,8 +541,8 @@ page_sequence = [
     Results,
     Congrats,
     FinalResults,
-    # PostSurvey,
-    # PostSurvey2,
+    PostSurvey,
+    PostSurvey2,
     PostSurvey3,
     Debriefing
 ]
