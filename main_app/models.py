@@ -242,11 +242,11 @@ class Player(BasePlayer):
     Q3b = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
 
     Q4a1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.00", "$2.00"])
-    Q4a2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$18.18", "$20.18", "$22.18"])
-    Q4a3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$17.18", "$18.18", "$19.18"])
+    Q4a2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$6.00", "$8.00", "$16.00"])
+    Q4a3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$7.00", "$10.00", "$17.00"])
     Q4b1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.00", "$2.00"])
-    Q4b2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.18", "$2.00"])
-    Q4b3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$1.00", "$2.08"])
+    Q4b2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$0.00", "$0.80", "$2.00"])
+    Q4b3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal,choices = ["$1.00", "$1.80", "$3.00"])
 
     repeatQuiz1 = models.BooleanField(initial=False)
     timesInstruction1 = models.IntegerField(initial=0)

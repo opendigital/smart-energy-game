@@ -137,7 +137,7 @@ class PracticeGame(Page):
     def before_next_page(self):
         self.player.practice_private_contribution = c(10) - self.player.practice_contribution
         self.player.random_others_contribution = c(0)
-        for i in range(0, Constants.players_per_group):
+        for i in range(0, 24):
             self.player.random_others_contribution += c(random.randint(0,11))
         self.player.group_random_total_contribution = self.player.practice_contribution + self.player.random_others_contribution
 
@@ -256,7 +256,7 @@ class Quiz4(Page):
     def vars_for_template(self):
         return {'progress': 'Quiz',
                 'xINSTRUCTIONS':self.player.timesInstruction4,
-                'correct_answer':'$1.00','correct_answer2':'$18.18','correct_answer3':'$19.18',
+                'correct_answer':'$1.00','correct_answer2':'$16.00','correct_answer3':'$17.00',
                 'correct_answer4':'$1.00','correct_answer5':'$0.00','correct_answer6':'$1.00'}
 
     def is_displayed(self):
@@ -529,11 +529,10 @@ page_sequence = [
     GameOutcomes2,
     Quiz2,
     Quiz3,
+    ExamplesOne,
     ExamplesTwo,
     ExamplesThree,
     Quiz3,
-    Quiz4,
-    ExamplesOne,
     Quiz4,
     RealGameTransition,
     Survey,
