@@ -541,8 +541,8 @@ page_sequence = [
     Results,
     Congrats,
     FinalResults,
-    PostSurvey,
-    PostSurvey2,
+    # PostSurvey,
+    # PostSurvey2,
     PostSurvey3,
     Debriefing
 ]
