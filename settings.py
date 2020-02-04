@@ -31,7 +31,7 @@ SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.10,
     'participation_fee': 0.50,
     'doc': "",
-    'mturk_hit_settings': mturk_hit_settings,  # Line for Mturk config
+    'mturk_hit_settings': mturk_hit_settings,
 }
 
 SESSION_CONFIGS = [
@@ -57,11 +57,10 @@ SESSION_CONFIGS = [
 # see the end of this file for the inactive session configs
 
 
-# ISO-639 code
-# for example: de, fr, ja, ko, zh-hans
+# ISO-639 code: de, fr, ja, ko, zhhans
 LANGUAGE_CODE = 'en'
 
-# e.g. EUR, GBP, CNY, JPY
+# EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 POINTS_CUSTOM_NAME = 'tokens'
@@ -80,32 +79,28 @@ ROOMS = [
 
 
 # AUTH_LEVEL:
-# this setting controls which parts of your site are freely accessible,
-# and which are password protected:
-# - If it's not set (the default), then the whole site is freely accessible.
-# - If you are launching a study and want visitors to only be able to
-#   play your app if you provided them with a start link, set it to STUDY.
-# - If you would like to put your site online in public demo mode where
-#   anybody can play a demo version of your game, but not access the rest
-#   of the admin interface, set it to DEMO.
+# - If not set (default), whole site is freely accessible
+# - If launching a study and want visitors to only be able play your app
+#   if provided a start link, set it to STUDY
+# - If site will be = online in public demo mode, anybody can play a
+#   demo version of your game, but not access the the admin interface, set to DEMO
 
-# for flexibility, you can set it in the environment variable OTREE_AUTH_LEVEL
+# you can set the AUTH_LEVEL using the environment variable `OTREE_AUTH_LEVEL`
 AUTH_LEVEL = 'DEMO'
-
 ADMIN_USERNAME = 'admin'
-# for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = 'GoBoilers2018!'  # environ.get('OTREE_ADMIN_PASSWORD')
-
+# for security, best to set admin password with the environment variable `OTREE_ADMIN_PASSWORD`
+# ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+ADMIN_PASSWORD = 'GoBoilers2018!'
 
 # Consider '', None, and '0' to be empty/false
 DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
 
 DEMO_PAGE_INTRO_HTML = """
-In order to test 
-
-USER:admin
-PASSWORD:GoBoilers2018!
-
+In order to test
+</br>
+USER: admin</br>
+PASS: GoBoilers2018!
+</br></br>
 
 """
 
