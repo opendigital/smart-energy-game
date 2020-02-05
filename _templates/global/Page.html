@@ -1,68 +1,60 @@
 {% extends "otree/Page.html" %}
 {% load otree static %}
 
-
 {% block global_styles  %}
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Mukta|Lato|Source+Sans+Pro');
-        html{background: white !important;} body{font-family: 'Source Sans Pro', sans-serif;}
-        #myProgress {width:100%;background: lightgray;margin-bottom: -40px;}#myBar {width: 1%;height:30px;}
-         .otree-title{font-size:0;color: white !important;}
-    </style>
-
-    <div id="myProgress">
-        <div id="myBar"><center><b style="color: white">{% if progress != "End" %}{{ progress }}{% else %}{% endif %}</b></center></div>
-    </div>
-    <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
+<div id="myProgress">
+  <div id="myBar"><center><b style="color: white">{% if progress != "End" %}{{ progress }}{% else %}{% endif %}</b></center></div>
+</div>
+<link rel="stylesheet" type="text/css" href="{% static 'global/fonts.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
 {% endblock %}
 
 
 {% block global_scripts  %}
 
 <script>
-    var elem = document.getElementById("myBar");
-    var width = 1;
+var elem = document.getElementById("myBar");
+var width = 1;
 
-    elem.style.background = 'gray';
-    //elem.style.borderRadius = '10px'//FIX 1. Round Corners
-    var progress = '{{ progress }}';
-    switch (progress) {
-        case 'Consent'://Es 1, va 1
-            elem.style.width = '5%';
-            break;
-        case 'Introduction'://Son 5, van 6
-            elem.style.marginLeft = '5%';
-            elem.style.width = '15%';
-            break;
-        case 'Examples'://Son 4, van 10
-            elem.style.marginLeft = '20%';
-            elem.style.width = '15%';
-            break;
-        case 'Practice'://Son 2, van 12
-            elem.style.marginLeft = '35%';
-            elem.style.width = '7%';
-            break;
-        case 'Quiz'://Son 2, van 12
-            elem.style.marginLeft = '42%';
-            elem.style.width = '17%';
-            break;
-        case 'Game'://Son 2, van 12
-            elem.style.marginLeft = '59%';
-            elem.style.width = '31%';
-            break;
-        case 'Survey'://Son 2, van 12
-            elem.style.marginLeft = '90%';
-            elem.style.width = '10%';
-            break;
-        case 'End'://Son 2, van 12
-            elem.style.marginLeft = '0';
-            elem.style.width = '100%';
-            break;
-        default:
-            //DO NOTHING.
-            elem.style.marginLeft = '10%';
-            elem.style.width = '80%';
-            break;
-    }
+elem.style.background = 'gray';
+var progress = '{{ progress }}';
+switch (progress) {
+  case 'Consent':
+  elem.style.width = '5%';
+  break;
+  case 'Introduction':
+  elem.style.marginLeft = '5%';
+  elem.style.width = '15%';
+  break;
+  case 'Examples':
+  elem.style.marginLeft = '20%';
+  elem.style.width = '15%';
+  break;
+  case 'Practice':
+  elem.style.marginLeft = '35%';
+  elem.style.width = '7%';
+  break;
+  case 'Quiz':
+  elem.style.marginLeft = '42%';
+  elem.style.width = '17%';
+  break;
+  case 'Game':
+  elem.style.marginLeft = '59%';
+  elem.style.width = '31%';
+  break;
+  case 'Survey':
+  elem.style.marginLeft = '90%';
+  elem.style.width = '10%';
+  break;
+  case 'End':
+  elem.style.marginLeft = '0';
+  elem.style.width = '100%';
+  break;
+  default:
+  //DO NOTHING.
+  elem.style.marginLeft = '10%';
+  elem.style.width = '80%';
+  break;
+}
 </script>
 {% endblock %}
