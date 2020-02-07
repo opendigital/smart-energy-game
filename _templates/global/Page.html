@@ -2,16 +2,18 @@
 {% load otree static %}
 
 {% block global_styles  %}
-<div id="myProgress">
-  <div id="myBar"><center><b style="color: white">{% if progress != "End" %}{{ progress }}{% else %}{% endif %}</b></center></div>
-</div>
 <link rel="stylesheet" type="text/css" href="{% static 'global/fonts.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
 {% endblock %}
 
-
 {% block global_scripts  %}
-
+<div id="myProgress">
+  <div id="myBar">
+    <center>
+      <b style="color: white">{% if progress != "End" %}{{ progress }}{% else %}{% endif %}</b>
+    </center>
+  </div>
+</div>
 <script>
 var elem = document.getElementById("myBar");
 var width = 1;
