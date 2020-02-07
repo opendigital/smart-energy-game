@@ -1,3 +1,7 @@
+.debug-info {
+  display: none;
+}
+
 html {
   background: white !important;
 }
@@ -8,8 +12,9 @@ body {
 
 #myProgress {
   width: 100%;
+  position: absolute;
   background: lightgray;
-  margin-bottom: -40px;
+  top: 0;
 }
 
 #myBar {
@@ -25,17 +30,21 @@ body {
 .instructions {
   margin-bottom: 20px;
 }
+
 .icon-type {
   font-size: 4em;
   padding: 0em 10px;
   font-weight: bold;
 }
+
+.color-red { color: red }
 .flex-row { display: flex; }
 .flex-center { justify-content: center; }
 .flex-item { flex: 1; }
 .flex { display: flex; }
 .text-center { text-align: center; }
 .flex-vcenter { align-items: center; }
+
 .model-card {
   font-size: 1.5em;
   padding: 5px;
@@ -44,22 +53,23 @@ body {
   border: 2px solid #aaa;
   border-radius: 20px;
 }
+
 blockquote {
   font-style: italic;
   color: #666666;
   margin: .5em 0 .5em 1em;
 }
+
 p {
- font-size:18px;
+  font-size: 18px;
   text-align: left !important;
 }
-/*#explanation{
-  white-space: normal;
-}*/
-.form-control-errors{
+
+.form-control-errors {
   text-align: center;
 }
-#contribution_box{
+
+#contribution_box {
   background: transparent;
   border-top: transparent;
   border-left: transparent;
@@ -81,20 +91,22 @@ p {
   color: #a700a8;
 }
 
-.tk_out{
+.tk_out {
   color: #0000ff;
 }
-.otree-title{
+
+.otree-title {
  text-align: center;
 }
-#htext1{
+#htext1 {
  color: #e36c09;
 }
 
 html {
   height: 100%;
-  background: linear-gradient(to right , transparent, #dae5f1, transparent) no-repeat;
+  background: linear-gradient(to right ,transparent, #dae5f1, transparent) no-repeat;
 }
+
 input[type='range'] {
   border-width: 0 2.25em 1.875em;
   padding: 0;
@@ -103,6 +115,7 @@ input[type='range'] {
   font: 1em courier, monospace;
   cursor: pointer;
 }
+
 input[type='range']::-moz-range-track {
   box-sizing: border-box;
   border: solid 1px #627d9e;
@@ -110,43 +123,110 @@ input[type='range']::-moz-range-track {
   height: 0.75em;
   background: transparent;
 }
+
 input[type='range']::-moz-range-progress {
   height: 0.75em;
   box-sizing: border-box;
   border: solid 1px #66534e;
-  background: linear-gradient(to right , #627d9e, #366092) no-repeat;
+  background: linear-gradient(to right ,#627d9e, #366092) no-repeat;
 }
+
 input[type='range']::-moz-range-progress {
   height: 0.75em;
   box-sizing: border-box;
   border: solid 1px #66534e;
-  background: linear-gradient(to right , #627d9e, #366092) no-repeat;
+  background: linear-gradient(to right ,#627d9e, #366092) no-repeat;
 }
+
 input[type='range']::-moz-range-thumb {
   border-radius: 0;
   box-sizing: border-box;
   width: 0.6em;
   height: 2.5em;
-  box-shadow: inset 0 0 0.125em rgba(64, 102, 10, .5);
+  box-shadow: inset 0 0 0.125em rgba(64, 102, 10, 0.5);
   background: linear-gradient(-45deg, transparent 50%, #366092 50%, #627d9e) #627d9e;
   cursor: ew-resize;
 }
-input[type='range'], input[type='range']::-webkit-slider-runnable-track, input[type='range']::-webkit-slider-thumb {
+
+input[type='range'],
+input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
+
 input[type='range']::-webkit-slider-runnable-track {
   border: solid 1px #366092;
   width: 100%;
   height: 0.75em;
   background: linear-gradient(to right ,#366092, #627d9e,#eef3f8) no-repeat;;
 }
+
 input[type='range']::-webkit-slider-thumb {
   margin-top: -0.875em;
   width: 0.6em;
   height: 2.5em;
   background: linear-gradient(-45deg, transparent 50%, #366092 50%, #627d9e) #627d9e;
 }
+
 input[type='range']:focus {
   outline: none;
   box-shadow: 0 0 0.125em transparent;
+}
+
+input[type="radio"] {
+  padding: 1em !important;
+  font-size: 2em;
+  width: 20px;
+  height: 20px;
+}
+
+input[type="radio"]:focus {
+  outline: 2px solid #00a1ff;
+  outline-style: dotted;
+}
+
+.flex-form-row .form-group {
+  display: flex;
+}
+
+.flex-form-row .form-group label {
+  padding-right: 1em;
+}
+
+/* tables */
+
+.outline-row {
+  outline: 3px solid red;
+  outline-offset: 2px;
+}
+
+table {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+thead {
+  font-size: 0.9em;
+}
+
+tr > td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+tr > th:nth-child(n+2),
+tr > td:nth-child(n+2) {
+  text-align: center;
+}
+
+tr > th:first-of-type,
+tr > td:first-of-type {
+  padding-left: 5px;
+  text-align: left;
+}
+
+tr > td:last-of-type {
+  padding-right: 5px;
 }

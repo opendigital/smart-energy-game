@@ -6,54 +6,82 @@ from otree.api import (
     BaseSubsession,
     BaseGroup,
     BasePlayer,
-    Currency as c, currency_range
+    Currency as c,
+    currency_range
 )
+from .constants import Constants
+
+Const = Constants
 
 author = 'Juan Camilo Cardenas Gomez'
 doc = """
 Solution for training problem
 """
 
+def get_int_field(_label='', _min=0, _max=9999, _initial=None):
+    """Return otree text field type"""
+    return models.IntegerField(
+        label=_label,
+        min=_min,
+        max=_max,
+        initial=_initial,
+    )
 
-class Constants(BaseConstants):
-    """model docstring"""
-    name_in_url = 'training_problem'
-    players_per_group = None
-    # players_without_me = players_per_group - 1
-    num_actual_rounds = 6 # edit this one
-    num_rounds = num_actual_rounds + 1 # don't edit this one
-    endowment = c(100)
-    multiplier = 2
-    group_goal = c(900)
-    no_bonus = c(0)
+def get_text_field(_label=''):
+    """Return otree integer field type"""
+    return models.StringField(label=_label)
 
-    months = [
-        'JANUARY',
-        'FEBRUARY',
-        'MARCH',
-        'APRIL',
-        'MAY',
-        'JUNE',
-        'JULY',
-        'AUGUST',
-        'SEPTEMBER',
-        'OCTOBER',
-        'NOVEMBER',
-        'DECEMBER'
-    ]
+def get_range_field(_label, _choices):
+    """Return otree select field type"""
+    return models.IntegerField(
+        label=_label,
+        choices=_choices,
+    )
 
-    answers = [
-        "6 tokens",
-        "True",
-        "True",
-        "True",
-        "$1.00",
-        "$18.18",
-        "$19.18",
-        "$1.00",
-        "$0.00",
-        "$1.00"
-    ]
+def get_select_field(_label, _choices):
+    """Return otree select field type"""
+    return models.StringField(
+        label=_label,
+        choices=_choices,
+    )
+
+def get_radiorange_field(_label, _choices, _horiz=False):
+    """Return otree select field type"""
+    if _horiz:
+        _widget = widgets.RadioSelectHorizontal
+    else:
+        _widget = widgets.RadioSelect
+
+    return models.IntegerField(
+        label=_label,
+        choices=_choices,
+        widget=_widget
+    )
+
+def get_yesno_field(_label):
+    """Return otree true/false field type"""
+    return models.BooleanField(
+        label=_label,
+        choices=[
+            [True, 'Yes'],
+            [False, 'No']
+        ]
+    )
+
+def get_truefalse_field(_label, _choices):
+    """Return otree true/false field type"""
+    return models.BooleanField(
+        label=_label,
+        choices=[True, False]
+    )
+
+def get_likert_field(_label, _choices):
+    """Return otree likert scale field type"""
+    return models.IntegerField(
+        label=_label,
+        widget=widgets.RadioSelect,
+        choices=_choices
+    )
 
 
 class Subsession(BaseSubsession):
@@ -178,20 +206,20 @@ class Group(BaseGroup):
 
             player.payoff = c(10) - player.contribution
 
-            if self.round_number == Constants.num_rounds:
-                if Constants.group_goal <= self.all_rounds_contribution():
+            if self.round_number == Const.num_rounds:
+                if Const.group_goal <= self.all_rounds_contribution():
                     print("all rounds contribution:")
                     print(self.all_rounds_contribution())
                     print("mulitplier:")
-                    print(Constants.multiplier)
+                    print(Const.multiplier)
                     print("players per group:")
-                    print(Constants.players_per_group)
-                    self.bonus = self.all_rounds_contribution() * Constants.multiplier / 26
+                    print(Const.players_per_group)
+                    self.bonus = self.all_rounds_contribution() * Const.multiplier / 26
                     player.payoff += self.bonus
 
     # It's used for after-survey queries.
     def pay_quizzes(self):
-        if self.do_once and self.round_number == Constants.num_rounds:
+        if self.do_once and self.round_number == Const.num_rounds:
             self.do_once = False
             for player in self.get_players():
                 player.payoff += player.how_many_good_answers()
@@ -241,110 +269,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    # bot contributions
-    # bot_contributions = [[10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3],
-    #                      [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4,3]]
-    # bot_contributions[round number][player number]
-    # bot_total_contributions = [[10, 9, 8,3,3,2,2,1,8, 10,10, 9,8, 8,  7, 7, 6, 6, 6, 5, 5,4,4,4,3],
-    #                        [20,18,16,6,6,4,4,2,16,20,20,18,16,16,14,14,12,12,12,10,10,8,8,8,6]]
 
-    # PRACTICE AND REAL GAME
-    payoff = 0
-    contribution = models.CurrencyField(min=0, max=10)
-    practice_contribution = models.CurrencyField(min=0, max=10)
-    private_contribution = models.CurrencyField(min=0, max=10)
-    practice_private_contribution = models.CurrencyField(min=0, max=10)
-    random_others_contribution = models.CurrencyField()
-    group_random_total_contribution = models.CurrencyField()
-    bot_contributions_in_round = models.LongStringField()
-
-    # QUIZ
-    Q1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
-    Q2 = models.StringField(label='', widget=widgets.RadioSelect)
-    Q3a = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
-    Q3b = models.StringField(label='', widget=widgets.RadioSelectHorizontal)
-    Q4a1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal, choices = ["$0.00", "$1.00", "$2.00"])
-    Q4a2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal, choices = ["$6.00", "$8.00", "$16.00"])
-    Q4a3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal, choices = ["$7.00", "$10.00", "$17.00"])
-    Q4b1 = models.StringField(label='', widget=widgets.RadioSelectHorizontal, choices = ["$0.00", "$1.00", "$2.00"])
-    Q4b2 = models.StringField(label='', widget=widgets.RadioSelectHorizontal, choices = ["$0.00", "$0.80", "$2.00"])
-    Q4b3 = models.StringField(label='', widget=widgets.RadioSelectHorizontal, choices = ["$1.00", "$1.80", "$3.00"])
-
-    repeatQuiz1 = models.BooleanField(initial=False)
-    timesInstruction1 = models.IntegerField(initial=0)
-    repeatQuiz2 = models.BooleanField(initial=False)
-    timesInstruction2 = models.IntegerField(initial=0)
-    repeatQuiz3a = models.BooleanField(initial=False)
-    timesInstruction3a = models.IntegerField(initial=0)
-    repeatQuiz3b = models.BooleanField(initial=False)
-    timesInstruction3b = models.IntegerField(initial=0)
-    repeatQuiz4 = models.BooleanField(initial=False)
-    timesInstruction4 = models.IntegerField(initial=0)
-
-    do_once = models.BooleanField(initial=True)
-    do_once2 = models.BooleanField(initial=True)
-    do_once3 = models.BooleanField(initial=True)
-    do_once4 = models.BooleanField(initial=True)
-
-    # POST SURVEY 1
-    # I_like_to_help_other_people = models.StringField()
-    # I_like_to_share_my_ideas_and_materials_with_others = models.StringField()
-    # I_like_to_cooperate_with_others = models.StringField()
-    # I_can_learn_important_things_from_others = models.StringField()
-    # I_try_to_share_my_ideas_and_resources_with_others = models.StringField()
-    # People_learn_lots_of_important_things_from_each_other = models.StringField()
-    # It_is_a_good_idea_for_people_to_help_each_other = models.StringField()
-    # I_like_to_do_better_work_than_others = models.StringField()
-    # I_work_to_get_better_than_others = models.StringField()
-    # I_like_to_be_the_best_at_what_I_do = models.StringField()
-    # I_dont_like_to_be_second = models.StringField()
-    # I_like_to_compete_with_other_students= models.StringField()
-    # I_am_happiest_when_I_am_competing_with_others = models.StringField()
-    # I_like_the_challenge_of_seeing_who_is_best = models.StringField()
-    # Competing_with_others_is_a_good_way_to_work = models.StringField()
-    # I_dont_like_working_with_others = models.StringField()
-    # I_like_to_work_with_others_reverse = models.StringField()
-    # It_bothers_me_when_I_have_to_work_with_others = models.StringField()
-    # I_do_better_when_I_work_alone = models.StringField()
-    # I_like_work_better_when_I_do_it_all_myself = models.StringField()
-    # I_would_rather_work_along_than_with_others = models.StringField()
-    # Working_in_small_groups_is_better_than_working_alone = models.StringField()
-
-    # POST_SURVEY 2
-    # Plants = models.StringField()
-    # Marine_life = models.StringField()
-    # Birds = models.StringField()
-    # Animals = models.StringField()
-    # My_prosperity = models.StringField()
-    # My_lifestyle = models.StringField()
-    # My_health = models.StringField()
-    # My_future = models.StringField()
-    # People_in_my_community = models.StringField()
-    # The_human_race = models.StringField()
-    # Children = models.StringField()
-    # People_in_the_United_States = models.StringField()
-
-    # POST_SURVEY 3
-    birth = models.IntegerField()
-    gender = models.StringField()
-    ethnic_group = models.StringField()
-    economic_status = models.StringField()
-    previous_experiments = models.StringField()
-    reliability = models.StringField()
-    politic_party = models.StringField()
-    years_in_us = models.IntegerField(min=0, max=120)
-
-    # OPEN_QUESTIONS in POST_SURVEY 3
-    early_conserve = models.StringField()
-    middle_conserve = models.StringField()
-    end_conserve = models.StringField()
-    individual_conservation_feedback_rank = models.IntegerField()
-    collective_conservation_feedback_rank = models.IntegerField()
-    carbon_offset_feedback_rank = models.IntegerField()
-    percent_goal_feedback_rank = models.IntegerField()
-    total_contribution_feedback_rank = models.IntegerField()
-
-    # WILD METHODS
     def all_tokens_left(self):
         return c(120) - self.all_rounds_contribution()
 
@@ -370,9 +295,19 @@ class Player(BasePlayer):
         return sum([p.group_random_total_contribution for p in self.in_rounds(1, self.round_number)])
 
     def previous_rounds_contribution(self):
-        if self.round_number <= Constants.num_rounds / 2:
-            return sum([p.contribution for p in self.in_rounds(1, self.round_number - 1)])
-        return sum([p.contribution for p in self.in_rounds(Constants.num_rounds / 2 + 1, self.round_number - 1)])
+        if self.round_number <= Const.num_rounds / 2:
+            return sum([
+                p.contribution for p in self.in_rounds(
+                    1,
+                    self.round_number - 1
+                )
+            ])
+        return sum([
+            p.contribution for p in self.in_rounds(
+                Const.num_rounds / 2 + 1,
+                self.round_number - 1
+            )
+        ])
 
     def others_contribution(self):
         return c(sum(self.session.vars["bot_contributions"][self.round_number -2]))
@@ -406,15 +341,15 @@ class Player(BasePlayer):
         return self.remaining_tokens_in_dollars() + self.group.bonus_in_dollars()
 
     def total_contribution(self):
-        if self.round_number <= Constants.num_rounds / 2:
+        if self.round_number <= Const.num_rounds / 2:
             return sum([p.contribution for p in self.in_rounds(1, self.round_number - 1)])
-        return sum([p.contribution for p in self.in_rounds(Constants.num_rounds / 2 + 1, self.round_number - 1)])
+        return sum([p.contribution for p in self.in_rounds(Const.num_rounds / 2 + 1, self.round_number - 1)])
 
     def check_answers(self):
-        if self.Q1 == Constants.answers[0] \
-                and self.Q2 == Constants.answers[1] \
-                and self.Q3a == Constants.answers[2] \
-                and self.Q3b == Constants.answers[3]:
+        if self.quiz_1 == Const.answers[0] \
+                and self.quiz_2 == Const.answers[1] \
+                and self.quiz_3a == Const.answers[2] \
+                and self.quiz_3b == Const.answers[3]:
             self.everything_correct = True
             return True
 
@@ -422,65 +357,68 @@ class Player(BasePlayer):
         return False
 
     def is_equilibrium_tokens_correct(self):
-        if self.Q1 == Constants.answers[0] and self.do_once4:
+        if self.quiz_1 == Const.answers[0] and self.do_once4:
             self.payoff += 5
             self.do_once4 = False
-        return self.Q1 == Constants.answers[0]
+        return self.quiz_1 == Const.answers[0]
 
     def is_donation_correct(self):
-        if self.Q2 == Constants.answers[1] and self.do_once3:
+        if self.quiz_2 == Const.answers[1] and self.do_once3:
             self.do_once3 = False
             self.payoff += 5
-        return self.Q2 == Constants.answers[1]
+        return self.quiz_2 == Const.answers[1]
 
     def is_both_Examples_right(self):
-        if self.Q3a == Constants.answers[2] and self.Q3b == Constants.answers[3] and self.do_once :
+        if self.quiz_3a == Const.answers[2] \
+            and self.quiz_3b == Const.answers[3] \
+            and self.do_once:
             self.payoff += 5
             self.do_once = False
-        return self.Q3a == Constants.answers[2] and self.Q3b == Constants.answers[3]
+        return self.quiz_3a == Const.answers[2] and self.quiz_3b == Const.answers[3]
 
     def is_all_values_right(self):
         if self.do_once2 \
-            and self.Q4a1 == Constants.answers[4] \
-            and self.Q4a2 == Constants.answers[5] \
-            and self.Q4a3 == Constants.answers[6] \
-            and self.Q4b1 == Constants.answers[7] \
-            and self.Q4b2 == Constants.answers[8] \
-            and self.Q4b3 == Constants.answers[9]:
+            and self.quiz_4a1 == Const.answers[4] \
+            and self.quiz_4a2 == Const.answers[5] \
+            and self.quiz_4a3 == Const.answers[6] \
+            and self.quiz_4b1 == Const.answers[7] \
+            and self.quiz_4b2 == Const.answers[8] \
+            and self.quiz_4b3 == Const.answers[9]:
             self.payoff += 5
             self.do_once2 = False
-        return self.Q4a1 == Constants.answers[4] \
-            and self.Q4a2 == Constants.answers[5] \
-            and self.Q4a3 == Constants.answers[6] \
-            and self.Q4b1 == Constants.answers[7] \
-            and self.Q4b2 == Constants.answers[8] \
-            and self.Q4b3 == Constants.answers[9]
+        return self.quiz_4a1 == Const.answers[4] \
+            and self.quiz_4a2 == Const.answers[5] \
+            and self.quiz_4a3 == Const.answers[6] \
+            and self.quiz_4b1 == Const.answers[7] \
+            and self.quiz_4b2 == Const.answers[8] \
+            and self.quiz_4b3 == Const.answers[9]
 
     def is_max_individual_correct(self):
-        return self.Q3a == Constants.answers[2]
+        return self.quiz_3a == Const.answers[2]
 
     def is_max_group_correct(self):
-        return self.Q3b == Constants.answers[3]
+        return self.quiz_3b == Const.answers[3]
 
     def display_instructions_again(self):
-        display = self.in_round(Constants.num_rounds / 2)
+        display = self.in_round(Const.num_rounds / 2)
         return display.everything_correct
 
     def display_instructions(self):
         if self.round_number == 1:
             return True
-        if self.round_number == Constants.num_rounds / 2 + 1:
+        if self.round_number == Const.num_rounds / 2 + 1:
             return not self.display_instructions_again()
         return False
 
     def how_many_good_answers(self):
         counter = 0
         answers = [
-            self.in_round(2).Q1 == Constants.answers[0],
-            self.in_round(2).Q2 == Constants.answers[1],
+            self.in_round(2).quiz_1 == Const.answers[0],
+            self.in_round(2).quiz_2 == Const.answers[1],
             self.in_round(2).is_both_Examples_right(),
             self.in_round(2).is_all_values_right(),
         ]
+
         for answer_is_correct in answers:
             if answer_is_correct:
                 counter += 5
@@ -492,3 +430,174 @@ class Player(BasePlayer):
             + self.remaining_tokens_in_dollars() \
             + c(5).to_real_world_currency(self.session) \
             + c(self.how_many_good_answers()).to_real_world_currency(self.session)
+
+
+    # bot_contributions = [
+    #     [10, 9, 8, 3, 3, 2, 2, 1, 8, 10, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 4, 4, 4, 3],
+    #     [10, 9, 8, 3, 3, 2, 2, 1, 8, 10, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 4, 4, 4, 3]
+    # ]
+    # bot_contributions[round number][player number]
+    # bot_total_contributions = [
+    #     [10, 9, 8, 3, 3, 2, 2, 1, 8, 10, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 4, 4, 4, 3],
+    #     [20, 18, 16, 6, 6, 4, 4, 2, 16, 20, 20, 18, 16, 16, 14, 14, 12, 12, 12, 10, 10, 8, 8, 8, 6]
+    # ]
+
+    # PRACTICE AND REAL GAME
+    payoff = 0
+
+    contribution = models.CurrencyField(min=0, max=10)
+    practice_contribution = models.CurrencyField(min=0, max=10)
+    private_contribution = models.CurrencyField(min=0, max=10)
+    practice_private_contribution = models.CurrencyField(min=0, max=10)
+    random_others_contribution = models.CurrencyField()
+    group_random_total_contribution = models.CurrencyField()
+    bot_contributions_in_round = models.LongStringField()
+
+    # QUIZES
+    # ===========================================
+
+    quiz_1 = models.StringField(
+        label=Const.quiz_1_label,
+        widget=widgets.RadioSelect
+    )
+    quiz_2 = models.StringField(
+        label=Const.quiz_2_label,
+        widget=widgets.RadioSelect
+    )
+    quiz_3a = models.StringField(
+        label=Const.quiz_3a_label,
+        widget=widgets.RadioSelect
+    )
+    quiz_3b = models.StringField(
+        label=Const.quiz_3b_label,
+        widget=widgets.RadioSelect
+    )
+    quiz_4a1 = models.StringField(
+        label=Const.quiz_4a1_label,
+        widget=widgets.RadioSelectHorizontal,
+        choices=[
+            "$0.00",
+            "$1.00",
+            "$2.00"
+        ]
+    )
+    quiz_4a2 = models.StringField(
+        label=Const.quiz_4a2_label,
+        widget=widgets.RadioSelectHorizontal,
+        choices=[
+            "$6.00",
+            "$8.00",
+            "$16.00"
+        ]
+    )
+    quiz_4a3 = models.StringField(
+        label=Const.quiz_4a3_label,
+        widget=widgets.RadioSelectHorizontal,
+        choices=[
+            "$7.00",
+            "$10.00",
+            "$17.00"
+        ]
+    )
+    quiz_4b1 = models.StringField(
+        label=Const.quiz_4b1_label,
+        widget=widgets.RadioSelectHorizontal,
+        choices=[
+            "$0.00",
+            "$1.00",
+            "$2.00"
+        ]
+    )
+    quiz_4b2 = models.StringField(
+        label=Const.quiz_4b2_label,
+        widget=widgets.RadioSelectHorizontal,
+        choices=[
+            "$0.00",
+            "$0.80",
+            "$2.00"
+        ]
+    )
+    quiz_4b3 = models.StringField(
+        label=Const.quiz_4b3_label,
+        widget=widgets.RadioSelectHorizontal,
+        choices=[
+            "$1.00",
+            "$1.80", "$3.00"]
+        )
+
+    timesInstruction1 = models.IntegerField(initial=0)
+    timesInstruction2 = models.IntegerField(initial=0)
+    timesInstruction3a = models.IntegerField(initial=0)
+    timesInstruction3b = models.IntegerField(initial=0)
+    timesInstruction4 = models.IntegerField(initial=0)
+
+    repeatQuiz1 = models.BooleanField(initial=False)
+    repeatQuiz2 = models.BooleanField(initial=False)
+    repeatQuiz3a = models.BooleanField(initial=False)
+    repeatQuiz3b = models.BooleanField(initial=False)
+    repeatQuiz4 = models.BooleanField(initial=False)
+
+    do_once = models.BooleanField(initial=True)
+    do_once2 = models.BooleanField(initial=True)
+    do_once3 = models.BooleanField(initial=True)
+    do_once4 = models.BooleanField(initial=True)
+
+    # SURVEY FORM FIELDS
+    # ------------------
+    # POST SURVEY 1a
+    survey_goals = get_text_field(Const.survey_1_q1)
+    survey_goals_success = get_yesno_field(Const.survey_1_q2)
+    survey_guiding_info = get_text_field(Const.survey_1_q3)
+    survey_individual_conservation = get_text_field(Const.survey_1_q4)
+    survey_group_conservation = get_text_field(Const.survey_1_q5)
+
+    # POST SURVEY 1b
+    survey_rank_concentration = get_radiorange_field(Const.survey_1_qb1, Const.range_5, True)
+    survey_rank_understandable = get_radiorange_field(Const.survey_1_qb2, Const.range_5, True)
+    survey_rank_teamwork = get_radiorange_field(Const.survey_1_qb3, Const.range_5, True)
+    survey_rank_group = get_radiorange_field(Const.survey_1_qb4, Const.range_5, True)
+    survey_rank_collective = get_radiorange_field(Const.survey_1_qb5, Const.range_5, True)
+
+    # POST SURVEY 1c
+    survey_range_pastcontributions = get_radiorange_field(Const.survey_1_qc1, Const.range_5, True)
+    survey_range_totalgroup = get_radiorange_field(Const.survey_1_qc2, Const.range_5, True)
+    survey_range_totaloverall = get_radiorange_field(Const.survey_1_qc3, Const.range_5, True)
+    survey_range_percentgoal = get_radiorange_field(Const.survey_1_qc4, Const.range_5, True)
+    survey_range_envbenefit = get_radiorange_field(Const.survey_1_qc5, Const.range_5, True)
+
+
+
+    # POST SURVEY 2
+    survey_help_others = get_likert_field(Const.survey_2_items[0], Const.range_5)
+    survey_share_ideas = get_likert_field(Const.survey_2_items[1], Const.range_5)
+    survey_learn_others = get_likert_field(Const.survey_2_items[2], Const.range_5)
+    survey_work_others = get_likert_field(Const.survey_2_items[3], Const.range_5)
+    survey_self_best = get_likert_field(Const.survey_2_items[4], Const.range_5)
+    survey_self_challenge = get_likert_field(Const.survey_2_items[5], Const.range_5)
+    survey_dislike_teamwork = get_likert_field(Const.survey_2_items[6], Const.range_5)
+    survey_bothered_teamwork = get_likert_field(Const.survey_2_items[7], Const.range_5)
+    survey_better_alone = get_likert_field(Const.survey_2_items[8], Const.range_5)
+
+    # POST_SURVEY 3
+    survey_plants = get_likert_field(Const.survey_3_items[0], Const.range_concerned)
+    survey_marinelife = get_likert_field(Const.survey_3_items[1], Const.range_concerned)
+    survey_birds = get_likert_field(Const.survey_3_items[2], Const.range_concerned)
+    survey_animals = get_likert_field(Const.survey_3_items[3], Const.range_concerned)
+    survey_prosperity = get_likert_field(Const.survey_3_items[4], Const.range_concerned)
+    survey_lifestyle = get_likert_field(Const.survey_3_items[5], Const.range_concerned)
+    survey_health = get_likert_field(Const.survey_3_items[6], Const.range_concerned)
+    survey_future = get_likert_field(Const.survey_3_items[7], Const.range_concerned)
+    survey_community = get_likert_field(Const.survey_3_items[8], Const.range_concerned)
+    survey_humanrace = get_likert_field(Const.survey_3_items[9], Const.range_concerned)
+    survey_children = get_likert_field(Const.survey_3_items[10], Const.range_concerned)
+    survey_unitedstates = get_likert_field(Const.survey_3_items[11], Const.range_concerned)
+
+    # POST SURVEY 4
+    survey_demographics_birthyear = get_int_field(Const.survey_4_items[0], 1900, 2020)
+    survey_demographics_gender = get_select_field(Const.survey_4_items[1], Const.choice_demographics_gender)
+    survey_demographics_ethnicity = get_select_field(Const.survey_4_items[2], Const.choices_demographics_ethnicity)
+    survey_demographics_employment = get_select_field(Const.survey_4_items[3], Const.choices_demographics_employment)
+    survey_demographics_experience = get_select_field(Const.survey_4_items[4], Const.choices_demographics_experience)
+    survey_demographics_reliability = get_yesno_field(Const.survey_4_items[5])
+    survey_demographics_political = get_select_field(Const.survey_4_items[6], Const.choices_demographics_political)
+    survey_demographics_residency = get_int_field(Const.survey_4_items[7], 0, 120)

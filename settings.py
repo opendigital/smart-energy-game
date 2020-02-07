@@ -37,9 +37,11 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = [
     {
         'name': 'main_app',
-        'display_name': "Base Game Re-Design",
+        'display_name': "Base Game",
         'num_demo_participants': 1,
-        'app_sequence': ['main_app']
+        'app_sequence': [
+            'main_app'
+        ]
     },
     # {
     #     'name': 'real_effort',
@@ -54,8 +56,6 @@ SESSION_CONFIGS = [
     #     'app_sequence': ['quiz'],
     # }
 ]
-# see the end of this file for the inactive session configs
-
 
 # ISO-639 code: de, fr, ja, ko, zhhans
 LANGUAGE_CODE = 'en'
@@ -90,7 +90,8 @@ AUTH_LEVEL = 'DEMO'
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password with the environment variable `OTREE_ADMIN_PASSWORD`
 # ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-ADMIN_PASSWORD = 'GoBoilers2018!'
+# ADMIN_PASSWORD = 'GoBoilers2018!'
+ADMIN_PASSWORD = 'admin'
 
 # Consider '', None, and '0' to be empty/false
 DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
@@ -222,7 +223,8 @@ INSTALLED_APPS = ['otree']
 # 'display_name': "Lemon Market Game",
 # 'num_demo_participants': 3,
 # 'app_sequence': [
-###         'lemon_market', 'payment_info'
+#     'lemon_market',
+#     'payment_info'
 # ],
 # },
 # {
