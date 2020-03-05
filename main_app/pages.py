@@ -31,7 +31,12 @@ class IntroIntroduction(Page):
             or (self.round_number == 2 and self.player.repeatQuiz1)
 
     def vars_for_template(self):
-        return {'progress': 'Introduction'}
+        return {
+            'progress': 'Introduction',
+            'reduction_goal': '60',
+            'game_players': '24',
+            'game_rounds': '6',
+        }
 
     def before_next_page(self):
         self.player.timesInstruction1 += 1
@@ -43,7 +48,14 @@ class IntroStructure(Page):
         return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'Introduction'}
+        return {
+            'progress': 'Introduction',
+            'game_players': '25',
+            'game_tokens': '10',
+            'optimal_contribution': '6',
+            'reduction_goal': '60',
+            'token_value': '.01'
+        }
 
 
 class IntroGameplay(Page):
@@ -53,7 +65,15 @@ class IntroGameplay(Page):
             or (self.round_number == 2 and self.player.repeatQuiz2)
 
     def vars_for_template(self):
-        return {'progress': 'Introduction'}
+        return {
+            'progress': 'Introduction',
+            'game_players': '25',
+            'game_tokens': '10',
+            'optimal_contribution': '6',
+            'reduction_goal': '60',
+            'game_rounds': '6',
+            'token_value': '.01'
+        }
 
     def before_next_page(self):
         self.player.timesInstruction2 += 1
@@ -65,7 +85,16 @@ class IntroFinancialOutcomes(Page):
         return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'Introduction'}
+        return  {
+            'progress': 'Introduction',
+            'game_players': '25',
+            'game_tokens': '10',
+            'optimal_contribution': '6',
+            'reduction_goal': '60',
+            'game_rounds': '6',
+            'token_goal': '900',
+            'token_value': '.01'
+        }
 
 
 class IntroEnvironOutcomes(Page):
@@ -100,7 +129,16 @@ class Example1(Page):
             or (self.round_number == 2 and self.player.repeatQuiz4)
 
     def vars_for_template(self):
-        return {'progress': 'Examples'}
+        return {
+            'progress': 'Examples',
+            'classes': {
+                'row1': 'badge-success',
+                'row2': 'text-muted',
+                'row3': 'hide',
+                'row4': 'hide',
+                'row5': 'hide',
+            }
+        }
 
     def before_next_page(self):
         self.player.timesInstruction4 += 1

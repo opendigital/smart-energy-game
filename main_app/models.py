@@ -522,8 +522,10 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
         choices=[
             "$1.00",
-            "$1.80", "$3.00"]
-        )
+            "$1.80",
+            "$3.00"
+        ]
+    )
 
     timesInstruction1 = models.IntegerField(initial=0)
     timesInstruction2 = models.IntegerField(initial=0)

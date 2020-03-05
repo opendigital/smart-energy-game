@@ -15,7 +15,10 @@ class Constants(BaseConstants):
     name_in_url = 'energy-game'
     players_per_group = None
     # players_without_me = players_per_group - 1
+    reduction_goal = 60
     num_actual_rounds = 6
+    game_rounds = 6
+    game_players = 25
     num_rounds = num_actual_rounds + 1
     endowment = c(100)
     group_goal = c(900)
