@@ -1,0 +1,10 @@
+#!/bin/bash
+
+__run__() {
+  /usr/local/bin/otree devserver
+  google-chrome http://localhost:8000
+}
+
+
+export PYTHONPATH=/usr/bin/python3.7 \
+  && __run__
