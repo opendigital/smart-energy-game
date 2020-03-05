@@ -2,6 +2,10 @@
   display: none;
 }
 
+.hide {
+  display: none;
+}
+
 html {
   background: white !important;
 }
@@ -27,13 +31,18 @@ body {
   color: white !important;
 }
 
-.instructions {
-  margin-bottom: 20px;
+.game-variable {
+  background: #efefef;
+  padding: 0 0.25em;
+  font-size: 1.1em;
+  border: 1px solid #ddd;
 }
+
+.instructions { margin-bottom: 20px; }
 
 .icon-type {
   font-size: 4em;
-  padding: 0em 10px;
+  padding: 0 10px;
   font-weight: bold;
 }
 
@@ -52,6 +61,16 @@ body {
   line-height: 1;
   border: 2px solid #aaa;
   border-radius: 20px;
+}
+
+.card-header {
+
+}
+
+.card-header h1 {
+  margin-bottom: 0;
+  margin-top: 0;
+  line-height: 1;
 }
 
 blockquote {
@@ -84,10 +103,11 @@ p {
   outline: none !important;
   box-shadow: 0 0 10px transparent;
 }
-.pr{
- color: #a700a8
+.pr {
+  color: #a700a8;
 }
-.others{
+
+.others {
   color: #a700a8;
 }
 
@@ -96,8 +116,9 @@ p {
 }
 
 .otree-title {
- text-align: center;
+  text-align: center;
 }
+
 #htext1 {
  color: #e36c09;
 }
