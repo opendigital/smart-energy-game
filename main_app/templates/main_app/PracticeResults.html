@@ -7,104 +7,108 @@
 {% block title %} Practice Feedback {% endblock %}
 
 {% block content %}
-<div class="card bg-transparent">
-    <div class="card-body">
-        <h2 style="padding-left: 10px"><b>PRACTICE GAME</b></h2><br>
-        <div class="card" style="background: #f2f2f2;">
-            <div class="card-body">
-                <center>
-                    <h4><b><u>{{ current_month }} Feedback</u> </b></h4>
-                </center>
 
-                <table class="table" style="text-align:left;">
-                    <tr style="background: linear-gradient(to right,#dcdcdc,#b5b5b5)">
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>{{ current_month }}<br> (this month)</th>
-                        <th>Cumulative to date<br> (all past rounds)</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Your contribution to your personal account:</td>
-                        <td>
-                            <e style="color: #a700a8">{{ player.practice_private_contribution }}</e>
-                        </td>
-                        <td>
-                            <e style="color: #a700a8">{{ player.all_rounds_practice_private_contribution }}</e>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><B>Your contribution to the group conservation account:</B></td>
-                        <td>
-                            <e style="color: #0000ff">{{ player.practice_contribution}}</e>
-                        </td>
-                        <td>
-                            <e style="color: #0000ff">{{ player.all_rounds_practice_contribution }}</e>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+<div class="card">
 
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><b>Others' total contribution to the group conservation account:</b></td>
-                        <td>
-                            <e style="color: #0000ff"> {{ player.random_others_contribution }} </e>
-                        </td>
-                        <td>
-                            <e style="color: #0000ff"> {{ player.all_rounds_random_contribution }} </e>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><b>Total group conservation account contributions:</b></td>
-                        <td><b>
-                                <e style="color: #0000ff">{{ player.group_random_total_contribution }}</e>
-                            </b></td>
-                        <td><b>
-                                <e style="color: #0000ff">{{ player.all_rounds_group_random_contribution }}</e>
-                            </b></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td id="percentage"></td>
-                    </tr>
+  <div class="card-header">
+    <h1>PRACTICE GAME</h1>
+  </div>
 
-                </table>
+  <!-- <div class="card" style="background: #f2f2f2;"> -->
+  <div class="card-body">
 
+    <div class="card game-card">
+      <div class="card-title game-title">MONTH {{ current_round }} FEEDBACK</div>
 
-            </div>
+      <table class="table">
+        <tr style="background: linear-gradient(to right,#dcdcdc,#b5b5b5)">
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>{{ current_month }}<br> (this month)</th>
+          <th>Cumulative to date<br> (all past rounds)</th>
+        </tr>
 
-        </div>
-        <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 80%; margin-top:30px;width: 100px">Next</button>
+        <tr class="color-personal">
+          <td></td>
+          <td></td>
+          <td>You put into your private account:</td>
+          <td>
+            <div>{{ player.practice_private_contribution }}</div>
+          </td>
+          <td>
+            <div>{{ player.all_rounds_practice_private_contribution }}</div>
+          </td>
+        </tr>
+
+        <tr class="color-conserve">
+          <td></td>
+          <td></td>
+          <td>Your contribution to the group conservation account:</td>
+          <td>
+            <div>{{ player.practice_contribution}}</div>
+          </td>
+          <td>
+            <div>{{ player.all_rounds_practice_contribution }}</div>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+        </tr>
+
+        <tr class="color-conserve">
+
+          <td></td>
+          <td></td>
+          <td>Others' total contribution to the group conservation account:</td>
+
+          <td>
+            <div> {{ player.random_others_contribution }} </div>
+          </td>
+          <td>
+            <div> {{ player.all_rounds_random_contribution }} </div>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="color-conserve">
+          <td></td>
+          <td></td>
+          <td>Total group conservation account contributions:</td>
+          <td>
+            <div>{{ player.group_random_total_contribution }}</div>
+          </b></td>
+          <td>
+            <div>{{ player.all_rounds_group_random_contribution }}</div>
+          </b></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td id="percentage"></td>
+        </tr>
+      </table>
     </div>
+  </div>
+  {% include './blocks/next-button.html' %}
 </div>
 <script>
-    var percentage = document.getElementById("percentage")
-    var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0], 10) * 100 / 900)
 
-    percentage.innerHTML = "<b><e style=\"color: #0000ff\">" + value + "% of the annual energy <br>reduction goal of 60% (900)</e></b>"
+var percentage = document.getElementById("percentage")
+var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0], 10) * 100 / 900)
+percentage.innerHTML = "<div class='percenttogoal'>" + value + "% of the annual energy <br>reduction goal of 60% (900)</div>"
 </script>
 
 {% endblock %}

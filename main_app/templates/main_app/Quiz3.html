@@ -9,33 +9,31 @@
   <h1>SAMPLE COMPREHENSION QUIZ 3/4</h2>
     <div class="card-body">
       <p>Q3.a:</p>
+      {{ form.quiz_3b.label_tag }}
+      {{ form.quiz_3b }}
+      {{ form.quiz_3b.errors }}
 
-      {% formfield player.quiz_3a %}
 
-      <p id="Explanation"></p>
-
-      <p>Q3.b:</p>
-
-      {% formfield player.quiz_3b %}
-
-      <p id="Explanation2"></p>
-
-      <button style="display: block" id="checkButton" type="button" class="btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Check Answer</button>
-      <button style="display: none" id="nextButton" class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 50%; width: 100px">Next</button>
+      <p>Q3.b:
+      </p>
+      {{ form.quiz_3b.label_tag }}
+      {{ form.quiz_3b }}
+      {{ form.quiz_3b.errors }}
 
   </div>
+
+    {% include './blocks/quiz-buttons.html' %}
+
 </div>
 
 <script>
 var checkButton = document.getElementById("checkButton")
 var nextButton = document.getElementById("nextButton")
-var explanation = document.getElementById("Explanation")
-var explanation2 = document.getElementById("Explanation2")
-if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '0'){//INITIAL FIRST TRY
+var explanation = document.getElementById("message_box")
+var explanation2 = document.getElementById("message_box")
 
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
+if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '0'){
+
   var radioInputs = document.getElementsByClassName("form-check-input")
 
   for (i = 0; i < radioInputs.length; i++) {
@@ -43,39 +41,35 @@ if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}
     currentRadio.checked = false;
   }
 }else if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '1'){
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
+
   var radioInputs = document.getElementsByClassName("form-check-input")
 
   for (i = 0; i < radioInputs.length; i++) {
     var currentRadio = radioInputs.item(i)
     if(i<2){
       if(!currentRadio.checked) currentRadio.disabled = true
-      explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
+
     }else{
       currentRadio.checked = false;
     }
   }
-}else if( '{{ player.timesInstruction3a }}' == '1' && '{{ player.timesInstruction3b }}' == '0'){
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
+
+  } else if ( '{{ player.timesInstruction3a }}' == '1' && '{{ player.timesInstruction3b }}' == '0'){
+
   var radioInputs = document.getElementsByClassName("form-check-input")
 
   for (i = 0; i < radioInputs.length; i++) {
     var currentRadio = radioInputs.item(i)
     if(i>=2){
       if(!currentRadio.checked) currentRadio.disabled = true
-      explanation2.innerHTML = "<e style=\"color:green\">Correct!</e> "
+
     }else{
       currentRadio.checked = false;
     }
   }
-}else{
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
+
+} else {
+
   var radioInputs = document.getElementsByClassName("form-check-input")
 
   for (i = 0; i < radioInputs.length; i++) {
@@ -98,13 +92,7 @@ checkButton.onclick = function () {
   }
 
   if(answerSelected!=""&&answerSelected2!="") {
-    explanation.style.display = "block"
-    explanation2.style.display = "block"
-    nextButton.style.display = "block";
-    nextButton.style.background = "#8d8d8d";
-    nextButton.style.marginLeft = "80%";
-    nextButton.style.width = "100px";
-    checkButton.style.display = "none";
+
     for (i = 0; i < radioInputs.length; i++) {
       if (!radioInputs.item(i).checked) {
         radioInputs.item(i).disabled = true;
@@ -113,28 +101,28 @@ checkButton.onclick = function () {
 
     if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '0') {
       if (answerSelected != '{{ correct_answer }}') {
-        explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
+
       } else {
-        explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
+
       }if (answerSelected2 != '{{ correct_answer }}') {
-        explanation2.innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
+
       } else {
-        explanation2.innerHTML = "<e style=\"color:green\">Correct!</e> "
+
       }
     }else {
       if (answerSelected == '{{ correct_answer }}') {
-        explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
+
       } else {
-        explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
+
       }
-      explanation.innerHTML += "<e style=\"color:gray\">It is true that you can free ride at the expense of others if you keep all of your energy tokens in your private account (earning you $1.20+$1.67=$2.87), while others invest all of theirs ($0.00+\t$1.67=$1.67.</e>"
+
       if (answerSelected2 == '{{ correct_answer }}') {
         explanation2.innerHTML = "<e style=\"color:green\">Correct!</e> "
       } else {
         console.log(answerSelected2+","+ radioInputs.item(0).value +","+radioInputs.item(1).value   )
-        explanation2.innerHTML = "<e style=\"color:red\">Wrong!</e> "
+
       }
-      explanation2.innerHTML += "<e style=\"color:gray\">It is true that all players will have the maximum benefits IF ALL players invest all of their energy tokens. Every player will then get a bonus of $1.67, plus the actual environmental benefit of reduced air pollution.</e>"
+
     }
   }
 }

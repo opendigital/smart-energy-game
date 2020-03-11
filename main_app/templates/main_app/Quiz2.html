@@ -14,9 +14,9 @@
 
         <p id="Explanation"></p>
 
-        <button style="display: block" id="checkButton" type="button" class="btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">Check
-            Answer</button>
-        <button style="display: none" id="nextButton" class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 50%; width: 100px">Next</button>
+        {% include './blocks/quiz-buttons.html' %}
+
+
         <script>
             var checkButton = document.getElementById("checkButton")
             var nextButton = document.getElementById("nextButton")
