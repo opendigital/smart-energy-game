@@ -458,7 +458,8 @@ class Player(BasePlayer):
 
     quiz_1 = models.StringField(
         label=Const.quiz_1_label,
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
+        choices=Const.q1_choices,
     )
     quiz_2 = models.StringField(
         label=Const.quiz_2_label,
@@ -527,7 +528,8 @@ class Player(BasePlayer):
         ]
     )
 
-    timesInstruction1 = models.IntegerField(initial=0)
+    page_attempts = models.IntegerField(initial=0)
+
     timesInstruction2 = models.IntegerField(initial=0)
     timesInstruction3a = models.IntegerField(initial=0)
     timesInstruction3b = models.IntegerField(initial=0)

@@ -27,7 +27,7 @@ class IntroOutline(Page):
 class IntroIntroduction(Page):
     """Page Docstring"""
     def is_displayed(self):
-        return (self.round_number == 1 and self.player.timesInstruction1 == 0) \
+        return (self.round_number == 1 and self.player.page_attempts == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz1)
 
     def vars_for_template(self):
@@ -39,7 +39,7 @@ class IntroIntroduction(Page):
         }
 
     def before_next_page(self):
-        self.player.attemptsq1 += 1
+        self.player.page_attempts += 1
 
 
 class IntroStructure(Page):
@@ -103,14 +103,14 @@ class IntroEnvironOutcomes(Page):
         return self.round_number == 1
 
     # def is_displayed(self):
-    #     return (self.round_number == 1 and self.player.timesInstruction1 == 0) \
+    #     return (self.round_number == 1 and self.player.page_attempts == 0) \
     #         or (self.round_number == 2 and self.player.repeatQuiz2)
 
     def vars_for_template(self):
         return {'progress': 'Introduction'}
 
     def before_next_page(self):
-        self.player.timesInstruction1 += 1
+        self.player.page_attempts += 1
 
 
 class Examples(Page):
@@ -258,24 +258,23 @@ class Quiz1(Page):
     form_model = 'player'
     form_fields = ['quiz_1']
 
-
     def vars_for_template(self):
         return {
             'progress': 'Quiz',
             'correct_answer': Constants.answers[0],
-            'q1_hints': Constants.quiz_hint[0],
-            'q1_hints': Constants.quiz_hint,
-            'xINST': self.player.attemptsq1,
-            'REP?': self.player.repeatQuiz1
+            'quiz_hint1': Constants.quiz_default_hint,
+            'quiz_hint2': Constants.quiz_hints[0],
+            'xINST': self.player.page_attempts,
+            'REP?': self.player.repeatQuiz1,
         }
 
     def is_displayed(self):
         return self.round_number == 2 \
-            and self.player.attemptsq1 <= 1 \
+            and self.player.page_attempts <= 1 \
             and not self.player.is_equilibrium_tokens_correct()
 
     def quiz1_choices(self):
-        Constants.q1_choices
+        choices=self.player.form_fields.choices
         random.shuffle(choices)
         return choices
 
@@ -297,13 +296,13 @@ class Quiz2(Page):
         return {
             'progress': 'Quiz',
             'correct_answer': Constants.answers[1],
-            'quiz_hint1': Constants.quiz_hint[0],
-            'quiz_hint2': Constants.quiz_hint[1],
+            'quiz_hint1': Constants.quiz_hints[0],
+            'quiz_hint2': Constants.quiz_hints[1],
         }
 
     def is_displayed(self):
         return self.round_number == 2 \
-            and self.player.attemptsq1 <= 1 \
+            and self.player.page_attempts <= 1 \
             and not self.player.is_donation_correct()
 
     def quiz_2_choices(self):
@@ -335,6 +334,9 @@ class Quiz3(Page):
             'progress': 'Quiz',
             'correct_answer': 'True',
             'correct_answer2': 'True',
+            'quiz_hint1': Constants.quiz_default_hint,
+            'quiz_hint2': Constants.quiz_hints[2],
+
         }
 
     def is_displayed(self):
@@ -631,20 +633,20 @@ class Debriefing(Page):
 
 
 page_sequence = [
-    IntroConsent,
-    IntroOutline,
-    IntroIntroduction,
-    IntroStructure,
-    IntroGameplay,
-    IntroFinancialOutcomes,
-    IntroEnvironOutcomes,
-    Examples,
-    Example1,
-    Example2,
-    Example3,
-    PracticeIntro,
-    PracticeGame,
-    PracticeResults,
+    # IntroConsent,
+    # IntroOutline,
+    # IntroIntroduction,
+    # IntroStructure,
+    # IntroGameplay,
+    # IntroFinancialOutcomes,
+    # IntroEnvironOutcomes,
+    # Examples,
+    # Example1,
+    # Example2,
+    # Example3,
+    # PracticeIntro,
+    # PracticeGame,
+    # PracticeResults,
     Quiz,
     Quiz1,
     Quiz2,
