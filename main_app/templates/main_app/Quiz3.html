@@ -8,17 +8,22 @@
 <div class="card bg-transparent">
   <h1>SAMPLE COMPREHENSION QUIZ 3/4</h2>
     <div class="card-body">
-      <p>Q3.a:</p>
+
+  <div>
+    <p>Q3b:</p>
+      {{ form.quiz_3a.label_tag }}
+      {{ form.quiz_3a }}
+      {{ form.quiz_3a.errors }}
+
+      {% include './blocks/message-box.html' %}
+    </div>
+    <p>Q3b:</p>
       {{ form.quiz_3b.label_tag }}
       {{ form.quiz_3b }}
       {{ form.quiz_3b.errors }}
 
-
-      <p>Q3.b:
-      </p>
-      {{ form.quiz_3b.label_tag }}
-      {{ form.quiz_3b }}
-      {{ form.quiz_3b.errors }}
+      {% include './blocks/message-box.html' %}
+    </div>
 
   </div>
 
@@ -27,8 +32,8 @@
 </div>
 
 <script>
-var checkButton = document.getElementById("checkButton")
-var nextButton = document.getElementById("nextButton")
+// var checkButton = document.getElementById("checkButton")
+// var nextButton = document.getElementById("nextButton")
 var explanation = document.getElementById("message_box")
 var explanation2 = document.getElementById("message_box")
 

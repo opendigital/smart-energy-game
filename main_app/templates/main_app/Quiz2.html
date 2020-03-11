@@ -9,75 +9,72 @@
     <div class="card-body">
         <h1>COMPREHENSION QUIZ 2/4</h1>
         <p>Q2:</p>
-
         {% formfield player.quiz_2 %}
 
         <p id="Explanation"></p>
-
         {% include './blocks/quiz-buttons.html' %}
-
-
-        <script>
-            var checkButton = document.getElementById("checkButton")
-            var nextButton = document.getElementById("nextButton")
-            var explanation = document.getElementById("Explanation")
-            if ('{{ player.timesInstruction2 }}' == '0') {
-                /*nextButton.style.display = "block";
-                nextButton.style.background = "#8d8d8d";
-                nextButton.style.marginLeft = "80%";
-                nextButton.style.width = "120px";
-                checkButton.style.display = "none";*/
-                checkButton.style.background = "#8d8d8d";
-                checkButton.style.marginLeft = "80%";
-                checkButton.style.width = "120px";
-                for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
-                    document.getElementsByClassName("form-check-input").item(i).checked = false;
-                }
+</div>
+<script>
+// var checkButton = document.getElementById("checkButton")
+// var nextButton = document.getElementById("nextButton")
+var explanation = document.getElementById("Explanation")
+if ('{{ player.timesInstruction2 }}' == '0') {
+    /*nextButton.style.display = "block";
+    nextButton.style.background = "#8d8d8d";
+    nextButton.style.marginLeft = "80%";
+    nextButton.style.width = "120px";
+    checkButton.style.display = "none";*/
+    // checkButton.style.background = "#8d8d8d";
+    // checkButton.style.marginLeft = "80%";
+    // checkButton.style.width = "120px";
+    for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
+        document.getElementsByClassName("form-check-input").item(i).checked = false;
+    }
+} else {
+    // checkButton.style.background = "#8d8d8d";
+    // checkButton.style.marginLeft = "80%";
+    // checkButton.style.width = "120px";
+    for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
+        document.getElementsByClassName("form-check-input").item(i).checked = false;
+    }
+}
+checkButton.onclick = function () {
+    var radioInputs = document.getElementsByClassName("form-check-input")
+    var answerSelected = ""
+    for (i = 0; i < radioInputs.length; i++) {
+        if (radioInputs.item(i).checked) {
+            answerSelected = radioInputs.item(i).value;
+        }
+    }
+    if (answerSelected != "") {
+        // explanation.style.display = "block"
+        // nextButton.style.display = "block";
+        // nextButton.style.background = "#8d8d8d";
+        // nextButton.style.marginLeft = "80%";
+        // nextButton.style.width = "100px";
+        // checkButton.style.display = "none";
+        for (i = 0; i < radioInputs.length; i++) {
+            if (!radioInputs.item(i).checked) {
+                radioInputs.item(i).disabled = true;
+            }
+        }
+        if ('{{ player.timesInstruction2 }}' == '0') {
+            if (answerSelected != '{{ correct_answer }}') {
+                explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
             } else {
-                checkButton.style.background = "#8d8d8d";
-                checkButton.style.marginLeft = "80%";
-                checkButton.style.width = "120px";
-                for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
-                    document.getElementsByClassName("form-check-input").item(i).checked = false;
-                }
+                explanation.innerHTML = "<e style=\"color:green\">Correct!</e>"
             }
-            checkButton.onclick = function () {
-                var radioInputs = document.getElementsByClassName("form-check-input")
-                var answerSelected = ""
-                for (i = 0; i < radioInputs.length; i++) {
-                    if (radioInputs.item(i).checked) {
-                        answerSelected = radioInputs.item(i).value;
-                    }
-                }
-                if (answerSelected != "") {
-                    explanation.style.display = "block"
-                    nextButton.style.display = "block";
-                    nextButton.style.background = "#8d8d8d";
-                    nextButton.style.marginLeft = "80%";
-                    nextButton.style.width = "100px";
-                    checkButton.style.display = "none";
-                    for (i = 0; i < radioInputs.length; i++) {
-                        if (!radioInputs.item(i).checked) {
-                            radioInputs.item(i).disabled = true;
-                        }
-                    }
-                    if ('{{ player.timesInstruction2 }}' == '0') {
-                        if (answerSelected != '{{ correct_answer }}') {
-                            explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
-                        } else {
-                            explanation.innerHTML = "<e style=\"color:green\">Correct!</e>"
-                        }
-                    } else {
-                        if (answerSelected == '{{ correct_answer }}') {
-                            explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
-                        } else {
-                            explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
-                        }
-                        explanation.innerHTML += "<e style=\"color:gray\">Each token in the group conservation account equals $0.10 dollars. The dollar value of the group conservation account is contributed to Carbonfund.org.</e>"
-                    }
-                }
+        } else {
+            if (answerSelected == '{{ correct_answer }}') {
+                explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
+            } else {
+                explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
             }
-        </script>
-    </div>
+            explanation.innerHTML += "<e style=\"color:gray\">Each token in the group conservation account equals $0.10 dollars. The dollar value of the group conservation account is contributed to Carbonfund.org.</e>"
+        }
+    }
+}
+</script>
+</div>
 </div>
 {% endblock %}

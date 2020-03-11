@@ -11,14 +11,16 @@
     <h1>COMPREHENSION QUIZ 1/4</h1>
   </div>
 
-
   <div class="card-body">
 
-    <p>Q1:</p>
+    <div>
+      <p>Q1:</p>
+      {{ form.quiz_1.label_tag }}
+      {{ form.quiz_1 }}
+      {{ form.quiz_1.errors }}
+      {% include './blocks/message-box.html' %}
+     </div>
 
-    {% formfield player.quiz_1 %}
-
-    {% include './blocks/message-box.html' %}
 
   </div>
 

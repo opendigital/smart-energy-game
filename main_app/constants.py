@@ -40,28 +40,30 @@ class Constants(BaseConstants):
         'DECEMBER'
     ]
 
-
-    quiz_hint = [
-        'To meet the 60% energy conservation goal, each player should contribute 6 energy tokens each month to the group conservation account, resulting in 900 energy tokens at the end of the game.',
-        'Each token in the group conservation account equals $0.01 dollars. The dollar value of the group conservation account is contributed to Carbonfund.org.',
-        'You will have greater earnings if you put all of your energy tokens in your private account, while others \
-            contribute all of their tokens in the group conservation account, because the group \
-            meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
-            $0.60 from your private account + $1.15 bonus = $1.75, while others will only earn the \
-            $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table',
+    quiz_hints = [
+        'To meet the 60% energy conservation goal, each player should contribute 6 energy tokens each month \
+            to the group conservation account, resulting in 900 energy tokens at the end of the game.',
+        'Each token in the group conservation account equals $0.01 dollars. The dollar value of the \
+            group conservation account is contributed to Carbonfund.org.',
+        'You will have greater earnings if you put all of your energy tokens \
+            in your private account, while others contribute all of their \
+            tokens in the group conservation account, because the group \
+            meets the goal and everybody is paid an equal share of the bonus. \
+            So, you will earn $0.60 from your private account + $1.15 bonus = $1.75,\
+            while others will only earn the $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table',
         'The group gets the maximum financial payment if all players contribute all 10 tokens in the \
             conservation account in each month (25 players x 10 tokens x 6 months x $.01 = \
             $15). Every player then gets an equal share of the maximum bonus possible, which is \
             double the value of the tokens in the conservation account (2 x $15 / 25 players = \
             $1.20).',
-        "$1.00",
-        "$18.18",
-        "$19.18",
-        "$1.00",
-        "$0.00",
-        "$1.00",
     ]
 
+        # "$1.00",
+        # "$18.18",
+        # "$19.18",
+        # "$1.00",
+        # "$0.00",
+        # "$1.00",
 
 
     quiz_default_hint = 'Please proceed to Review Instructions. \
@@ -89,9 +91,10 @@ class Constants(BaseConstants):
 
     q1_hints = [
         'To meet the 60% energy conservation goal, each player should contribute 6 energy \
-            tokens each month to the group conservation account, resulting in 900 energy \
-            tokens at the end of the game.',
+        tokens each month to the group conservation account, resulting in 900 energy \
+        tokens at the end of the game.',
     ]
+
 
     quiz_1_label = 'For each energy token in the group conservation \
         account $0.01 is contributed to Carbonfund.org to reduce actual \
@@ -106,7 +109,6 @@ class Constants(BaseConstants):
     quiz_3b_label = 'The group will maximize its benefits if all players \
         invest, on average, 6 of their energy tokens to the \
         group conservation account.'
-
 
 
     quiz_4a1_label = 'My payout from my personal account is'
