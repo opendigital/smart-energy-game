@@ -1,0 +1,106 @@
+<div class="card-footer quiz-buttons">
+  <button  id="checkButton" type="button" class="btn" >Check Answers</button>
+  <button  id="nextButton" class="otree-btn-next btn disabled" style="width: 100px">Continue</button>
+</div>
+
+<script>
+const checkButton = "#checkButton";
+const nextButton = "#nextButton";
+
+function formSuccess() {
+  toggleButton(checkButton);
+  enableButton(nextButton);
+}
+function formFail(data) {
+  disableButton(nextButton);
+}
+
+function disableButton(btn, data) {
+  console.log(data);
+  if (typeof btn === 'string') {
+    btn = document.querySelector(btn);
+  }
+  btn.classList.add('disabled');
+  btn.disabled = true;
+}
+function enableButton(btn, data) {
+  console.log(data);
+  if (typeof btn === 'string') {
+    btn = document.querySelector(btn);
+  }
+  btn.classList.remove('disabled');
+  btn.disabled = false;
+}
+
+function toggleButton(node) {
+  if (typeof node === 'string') {
+    console.log(node);
+    document.querySelector(node).classList.toggle('disabled');
+  } else {
+    console.log(node, 'toggle' );
+    node.classList.toggle('disabled');
+  }
+}
+
+
+
+
+// if ('{{ player.timesInstruction2 }}' == '0') {
+//     for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
+//         document.getElementsByClassName("form-check-input").item(i).checked = false;
+//     }
+//
+// } else {
+//     for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
+//         document.getElementsByClassName("form-check-input").item(i).checked = false;
+//     }
+// }
+//
+// if ('{{ player.attemptsq1 }}' == '0') {
+//   var fields = document.querySelectorAll('.form-check-input');
+//   for (var field of fields) {
+//     field.checked = false;
+//   }
+// }
+
+const checkForm = () => {
+  var fields = document.querySelectorAll('.form-check-input');
+  var fail = [];
+  var answers = [];
+
+  for (var field of fields)
+
+    if (!field.checked) {
+        if (field.value === 'True') {
+          console.log('fail');
+          fail.push(field);
+        }
+    }
+
+    if (field.checked) {
+      if (field.value === '{{ correct_answer }}') {
+        answers.push(field.value);
+      } else {
+        fail.push(field);
+
+      }
+    }
+
+    // field.classList.add('text-danger');
+    // field.classList.add('quiz-false');
+  if (fail.length > 0) {
+    console.log(`${fail.length} incorrect ansers`, {
+        'incorect': fail,
+        'correct': answers,
+        'correct': '{{ correct_answer }}'
+    });
+    return formFail(fail);
+  } else {
+    return formSuccess(fail);
+  }
+}
+
+var explanation = document.getElementById("message_box");
+document.querySelector(`${checkButton}`).onclick = checkForm;
+
+</script>

@@ -1,0 +1,16 @@
+
+<div id="message_box">
+
+  <div id="error_msg" class="">
+  <div class="text-danger">Wrong!</div>
+    {% if player.attemptsq1 >= 0 %}
+    {{ quiz_hint1 }}
+    {% else %}
+    {{ quiz_hint2 }}
+    {% endif %}
+  </div>
+
+   <div id="succcess_msg">
+    <div class="text-success">Correct!</div>
+  </div>
+</div>

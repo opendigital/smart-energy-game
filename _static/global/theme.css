@@ -1,3 +1,8 @@
+
+.percenttogoal {
+
+}
+
 .debug-info {
   display: none;
 }
@@ -45,14 +50,37 @@ body {
   padding: 0 10px;
   font-weight: bold;
 }
-
 .color-red { color: red }
+
+.flex { display: flex; }
 .flex-row { display: flex; }
 .flex-center { justify-content: center; }
-.flex-item { flex: 1; }
-.flex { display: flex; }
-.text-center { text-align: center; }
 .flex-vcenter { align-items: center; }
+.flex-item { flex: 1; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.text-center { text-align: center; }
+.flex-form-row .form-group { display: flex; }
+.flex-form-row .form-group label { padding-right: 1em; }
+.flex-distribute { justify-content: space-between; }
+
+.m0 { margin: 0; }
+.p0 { padding: 0; }
+
+.mx-0 { margin-left: 0; margin-right: 0; }
+.px-0 { padding-left: 0; padding-right: 0; }
+
+.my-0 { margin-top: 0; margin-bottom: 0; }
+.py-0 { padding-top: 0; padding-bottom: 0; }
+.my-1 { margin-top: .33em; margin-bottom: .33em; }
+.py-1 { padding-top: .33em; padding-bottom: .33em; }
+
+
+.mx-1 { margin-left: 0.33em; margin-right: 0.33em; }
+.mx-2 { margin-left: 0.66em; margin-right: 0.66em; }
+.mx-3 { margin-left: 0.99em; margin-right: 0.99em; }
+.mx-4 { margin-left: 1.33em; margin-right: 1.33em; }
+.mx-5 { margin-left: 1.66em; margin-right: 1.66em; }
 
 .model-card {
   font-size: 1.5em;
@@ -71,6 +99,31 @@ body {
   margin-bottom: 0;
   margin-top: 0;
   line-height: 1;
+}
+
+.card-title {
+
+}
+
+.game-title {
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1em 0 0 0;
+  margin: 0;
+  text-decoration: underline;
+}
+
+.game-card {
+  background:
+    linear-gradient(
+      to right,
+      #eef3f8,
+      #dae5f1,
+      #eef3f8
+    )
+    no-repeat;
 }
 
 blockquote {
@@ -93,23 +146,40 @@ p {
   border-top: transparent;
   border-left: transparent;
   border-right: transparent;
-  border-bottom: black;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-radius: 10%;
-  height: 20px;
-  margin-bottom: 10px;
-  text-align: center;
-  outline: none !important;
-  box-shadow: 0 0 10px transparent;
 }
+
+.token-box {
+  font-size: 1em;
+  width: 2em;
+  padding: 5px 2px;
+  border-bottom-color: inherit;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  display: block;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+  vertical-align: baseline;
+}
+
+.quiz-buttons .disabled {
+  display: none;
+}
+
+.color-personal,
 .pr {
-  color: #a700a8;
+  color: var(--purple);
+}
+
+.color-conserve {
+  color: var(--blue);
 }
 
 .others {
   color: #a700a8;
 }
+
+
 
 .tk_out {
   color: #0000ff;
@@ -119,7 +189,7 @@ p {
   text-align: center;
 }
 
-#htext1 {
+#htext1 {'
  color: #e36c09;
 }
 
@@ -206,14 +276,6 @@ input[type="radio"]:focus {
   outline-style: dotted;
 }
 
-.flex-form-row .form-group {
-  display: flex;
-}
-
-.flex-form-row .form-group label {
-  padding-right: 1em;
-}
-
 /* tables */
 
 .outline-row {
@@ -250,4 +312,8 @@ tr > td:first-of-type {
 
 tr > td:last-of-type {
   padding-right: 5px;
+}
+
+.text-small {
+  font-size: .9em;
 }

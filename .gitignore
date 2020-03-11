@@ -12,3 +12,5 @@ __pycache__/
 .DS_Store
 *.zip
 =2.5.1
+
+src/bootstrap/

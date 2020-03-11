@@ -6,215 +6,25 @@
 {% block content %}
 
 <div class="card bg-transparent">
-  <div class="card-body">
+
+  <div class="card-header">
     <h1>EXAMPLE 1: MINIMUM REQUIREMENT</h1>
+  </div>
+
+  <div class="card-body">
     <div class="container">
       <div class="row">
         <div class="col">
-          <table style="width:100%;">
-            <thead>
-              <tr>
-                <th>Scenario</th>
-                <th>
-                  Private Account<br>
-                  (PA)
-                </th>
-                <th>Other Accounts<br>
-                  (OA)
-                </th>
-                <th>
-                  Group Account<br>
-                  (GA)
-                </th>
-                <th>
-                  Bonus <br>
-                  (B)
-                </th>
-                <th>Goal</th>
-                <th>
-                  Total
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <!--  ROW 1 -->
-              <tr class="badge-success">
-                <td>
-                  <strong>MIN REQUIREMENT:</strong><br>
-                  ALL conserve 6 tokens each month
-                </td>
-                <td>
-                  24 tokens<br>
-                  ($0.24)
-                </td>
-                <td>
-                  24 tokens<br>
-                  ($0.24)
-                </td>
-                <td>
-                  900 tokens<br>
-                  (1,980 lbs)
-                </td>
-                <td>
-                  (2 &times; 9.00)  &divide; 25<br>
-                  &equals; $0.72
-                </td>
-                <td>YES</td>
-                <td>
-                  0.24 + 0.72<br>
-                  &equals; <strong>$0.96</strong>
-                </td>
-              </tr>
-              <!--  ROW 2 -->
-              <tr class="text-muted">
-                <td>
-                  <strong>NO CONSERVATION:</strong><br>
-                  ALL keep ALL tokens each month
-                </td>
-                <td>
-                  60 tokens<br>
-                  ($0.60)
-                </td>
-                <td>
-                  60 tokens<br>
-                  ($0.60)
-                </td>
-                <td>
-                  0 tokens<br>
-                  (0 lbs)
-                </td>
-                <td>
-                  No Bonus<br>
-                  &equals; $0.00
-                </td>
-                <td>NO</td>
-                <td>
-                  0.60 + 0.00<br>
-                  &equals; <strong>$0.60</strong>
-                </td>
-              </tr>
-              <!--  ROW 3 -->
-              <tr class="text-muted">
-                <td>
-                  <strong>MAX CONSERVATION:</strong><br>
-                  ALL conserve ALL tokens each month
-                </td>
-                <td>
-                  0 tokens<br>
-                  ($0.00)
-                </td>
-                <td>
-                  0 tokens<br>
-                  ($0.00)
-                </td>
-                <td>
-                  1,500 tokens<br>
-                  (3,300 lbs)
-                </td>
-                <td>
-                  (2 &times; 15.00)  &divide; 25<br>
-                  &equals; $1.20
-                </td>
-                <td>YES</td>
-                <td>
-                  0.00 + 1.20<br>
-                  &equals; <strong>$1.20</strong>
-                </td>
-              </tr>
-              <!--  ROW 4 -->
-              <tr class="text-muted">
-                <td>
-                  <strong>ONLY YOU DON'T CONSERVE:</strong><br>
-                  You keep ALL tokens<br>
-                  Others conserve ALL their tokens
-                </td>
-                <td>
-                  60 tokens<br>
-                  ($0.60)
-                </td>
-                <td>
-                  0 tokens<br>
-                  ($0.00)
-                </td>
-                <td>
-                  1,440 tokens<br>
-                  (3,168 lbs)
-                </td>
-                <td>
-                  (2 &times; 14.40) &divide; 25<br>
-                  &equals; $1.15
-                </td>
-                <td>YES</td>
-                <td>
-                  0.60 + 1.15<br>
-                  &equals; <strong>$1.75</strong>
-                </td>
-              </tr>
-              <!--  ROW 5 -->
-              <tr class="text-muted">
-                <td>
-                  <strong>ONLY YOU CONSERVE:</strong><br>
-                  You conserve ALL tokens<br>
-                  Others keep ALL their tokens
-                </td>
-                <td>0 tokens<br>
-                  ($0.00)
-                </td>
-                <td>60 tokens<br>
-                  ($0.60)
-                </td>
-                <td>
-                  60 tokens<br>
-                  (132 lbs)
-                </td>
-                <td>
-                  No Bonus<br>
-                  &equals; $0.00
-                </td>
-                <td>NO</td>
-                <td>
-                  0.00 &plus; 0.00<br>
-                  &equals; <strong>$0.00</strong>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
+          <p>Example 1 shows the result if all players contribute exactly <span class="game-variable">{{ game_goal }}%</span> of their energy tokens, consistent with the required group goal.</p>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <ul style="font-size: 18px;">
-            <li>
-              <b>All players conserve 6 energy tokens every month on average</b>
-            </li>
-            <li>
-              <b>You Private account</b>: Each player has 24 tokens left, earning them $2.40
-            </li>
-            <li>
-              <b>Group conservation account</b>:
-              The group has 900 tokens ($90.00). The group meets the conservation goal, so a bonus is paid by doubling the 900 tokens
-              (to 1,800 tokens) and dividing them equally among all players. Every player's bonus is 72 tokens ($7.20)
-            </li>
-            <li>
-              <i><b>Your total earnings</b>: $2.40 (private account) + $7.20 (group conservation bonus)
-              <b>= $9.60</b></i>.
-              </li>
-              <li>
-                <b>Pollution reduction</b>: The dollar value of the energy tokens in the conservation account ($90.00) is donated to
-                Carbonfund.org, reducing approximately 20,000 pounds of air pollution.
-            </li>
-          </ul>
-          <!-- <p style="font-size: .9em; margin-left: 2em; margin-top: 1em;">
-            Group Account = Air pollution saved (lbs)<br>
-            Bonus = Group Account (GA) * 2 / Number of Players<br>
-            If (900 token) goal is met, all players get a bonus<br>
-            Total Earnings = Private Account (PA) + Bonus
-          </p> -->
+          {% include './ExamplesTable.html' %}
         </div>
       </div>
     </div>
-    <button class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 200px; width: 100px">Next</button>
   </div>
+  {% include './blocks/next-button.html' %}
 </div>
 {% endblock %}

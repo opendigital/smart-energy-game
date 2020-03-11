@@ -6,95 +6,24 @@
 {% block content %}
 
 <div class="card bg-transparent">
+
+  <div class="card-header">
+    <h1>COMPREHENSION QUIZ 1/4</h1>
+  </div>
+
+
   <div class="card-body">
-    <h1>SAMPLE COMPREHENSION QUIZ 1/4</h1>
 
     <p>Q1:</p>
 
     {% formfield player.quiz_1 %}
 
-    <p id="Explanation"></p>
+    {% include './blocks/message-box.html' %}
 
-    <button style="display: block"
-      id="checkButton"
-      type="button"
-      class="btn"
-      style="background: #8d8d8d; margin-left: 80%; width: 100px">
-      Check Answer
-    </button>
-    <button
-      style="display: none"
-      id="nextButton"
-      class="otree-btn-next btn"
-      style="background: #8d8d8d; margin-left: 50%; width: 100px">
-      Next
-    </button>
   </div>
+
+  {% include './blocks/quiz-buttons.html' %}
+
 </div>
 
-<script>
-var checkButton = document.getElementById("checkButton");
-var nextButton = document.getElementById("nextButton");
-var explanation = document.getElementById("Explanation");
-
-if ('{{ player.timesInstruction1 }}' == '0') {
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
-
-  for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
-    document.getElementsByClassName("form-check-input").item(i).checked = false;
-  }
-
-} else {
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
-
-  for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
-    document.getElementsByClassName("form-check-input").item(i).checked = false;
-  }
-}
-
-checkButton.onclick = function () {
-  var radioInputs = document.getElementsByClassName("form-check-input")
-  var answerSelected = ""
-
-  for (i = 0; i < radioInputs.length; i++) {
-    if (radioInputs.item(i).checked) {
-      answerSelected = radioInputs.item(i).value;
-    }
-  }
-
-  if (answerSelected != "") {
-    explanation.style.display = "block"
-    nextButton.style.display = "block";
-    nextButton.style.background = "#8d8d8d";
-    nextButton.style.marginLeft = "80%";
-    nextButton.style.width = "100px";
-    checkButton.style.display = "none";
-
-    for (i = 0; i < radioInputs.length; i++) {
-      if (!radioInputs.item(i).checked) {
-        radioInputs.item(i).disabled = true;
-      }
-    }
-
-    if ('{{ player.timesInstruction1 }}' == '0') {
-      if (answerSelected != '{{ correct_answer }}') {
-        explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
-      } else {
-        explanation.innerHTML = "<e style=\"color:green\">Correct!</e>"
-      }
-    } else {
-      if (answerSelected == '{{ correct_answer }}') {
-        explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
-      }
-      explanation.innerHTML += "<e style=\"color:gray\">To meet the 60% energy conservation goal, each player should donate on average 6 energy tokens each month to the group conservation account, resulting in at least 900 energy tokens at the end of the game.</e>"
-    }
-  }
-}
-</script>
 {% endblock %}
