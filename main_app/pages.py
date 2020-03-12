@@ -11,6 +11,7 @@ class IntroConsent(Page):
     def is_displayed(self):
         return self.player.round_number == 1
 
+    """template variables"""
     def vars_for_template(self):
         return {'progress': 'Consent'}
 
@@ -20,6 +21,7 @@ class IntroOutline(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+    """template variables"""
     def vars_for_template(self):
         return {'progress': 'Introduction'}
 
@@ -30,6 +32,8 @@ class IntroIntroduction(Page):
         return (self.round_number == 1 and self.player.page_attempts == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz1)
 
+
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
@@ -55,6 +59,7 @@ class IntroGameplay(Page):
         return (self.round_number == 1 and self.player.timesInstruction2 == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz2)
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
@@ -75,6 +80,7 @@ class IntroFinancialOutcomes(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+    """template variables"""
     def vars_for_template(self):
         return  {
             'progress': 'Introduction',
@@ -97,6 +103,7 @@ class IntroEnvironOutcomes(Page):
     #     return (self.round_number == 1 and self.player.page_attempts == 0) \
     #         or (self.round_number == 2 and self.player.repeatQuiz2)
 
+    """template variables"""
     def vars_for_template(self):
         return {'progress': 'Introduction'}
 
@@ -109,6 +116,7 @@ class Examples(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+    """template variables"""
     def vars_for_template(self):
         return {'progress': 'Examples'}
 
@@ -119,6 +127,7 @@ class Example1(Page):
         return(self.round_number == 1 and self.player.timesInstruction4 == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz4)
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Examples',
@@ -142,6 +151,7 @@ class Example2(Page):
         return (self.round_number == 1 and self.player.timesInstruction3a == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz3a)
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Examples',
@@ -164,17 +174,18 @@ class Example3(Page):
         return (self.round_number == 1 and self.player.timesInstruction3b == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz3b)
 
-    def vars_for_template(self):
-        return {
-            'progress': 'Examples',
-            'classes': {
-                'row1': 'text-muted',
-                'row2': 'text-muted',
-                'row3': 'text-muted',
-                'row4': 'badge-success',
-                'row5': 'badge-danger',
-            }
+"""template variables"""
+def vars_for_template(self):
+    return {
+        'progress': 'Examples',
+        'classes': {
+            'row1': 'text-muted',
+            'row2': 'text-muted',
+            'row3': 'text-muted',
+            'row4': 'badge-success',
+            'row5': 'badge-danger',
         }
+    }
 
     def before_next_page(self):
         self.player.timesInstruction3b += 1
@@ -185,6 +196,7 @@ class PracticeIntro(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+    """template variables"""
     def vars_for_template(self):
         return {'progress': 'Practice'}
 
@@ -199,6 +211,7 @@ class PracticeGame(Page):
     def is_displayed(self):
         return self.round_number <= 2
 
+    """template variables""",
     def vars_for_template(self):
         return {
             'current_month': Constants.MONTHS[(self.round_number - 1) % 12],
@@ -225,6 +238,7 @@ class PracticeResults(Page):
     def is_displayed(self):
         return self.round_number <= 2
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'current_month': Constants.MONTHS[(self.round_number - 1) % 12],
@@ -234,12 +248,12 @@ class PracticeResults(Page):
         }
 
 
-
 class Quiz(Page):
     """Page Docstring"""
     def is_displayed(self):
         return self.round_number == 2
 
+    """template variables"""
     def vars_for_template(self):
         return {'progress': 'Quiz'}
 
@@ -249,7 +263,7 @@ class Quiz1(Page):
     form_model = 'player'
     form_fields = ['quiz_1']
 
-
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Quiz',
@@ -270,8 +284,8 @@ class Quiz1(Page):
         random.shuffle(choices)
         return choices
 
-
-    ### FALLBACK ON WRONG TO - INSTRUCTIONS: GAME STRUCTURE AND INCENTIVES
+    ### FALLBACK ON WRONG TO - INSTRUCTIONS:
+    ### GAME STRUCTURE AND INCENTIVES
     def before_next_page(self):
         if self.player.is_equilibrium_tokens_correct():
             self.player.repeatQuiz1 = False
@@ -284,6 +298,7 @@ class Quiz2(Page):
     form_model = 'player'
     form_fields = ['quiz_2']
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Quiz',
@@ -302,7 +317,6 @@ class Quiz2(Page):
             "True",
             "False"
         ]
-
         random.shuffle(choices)
         return choices
 
@@ -321,6 +335,7 @@ class Quiz3(Page):
         'quiz_3b'
     ]
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Quiz',
@@ -328,12 +343,12 @@ class Quiz3(Page):
             'correct_answer2': 'True',
             'quiz_hint1': Constants.quiz_default_hint,
             'quiz_hint2': Constants.quiz_hints[2],
-
         }
 
     def is_displayed(self):
         return self.round_number == 2 \
-            and (self.player.timesInstruction3a <= 1 or self.player.timesInstruction3b <= 1) \
+            and (self.player.timesInstruction3a <= 1 \
+            or self.player.timesInstruction3b <= 1) \
             and not self.player.is_both_Examples_right()
 
     def quiz_3a_choices(self):
@@ -374,6 +389,7 @@ class Quiz4(Page):
         'quiz_4b3'
     ]
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Quiz',
@@ -415,6 +431,7 @@ class Survey(Page):
     def is_displayed(self):
         return self.round_number >= 2
 
+    """template variables"""
     def vars_for_template(self):
         return {'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
                 'current_round': self.round_number - 1,
@@ -426,21 +443,25 @@ class ResultsWaitPage(WaitPage):
     title_text = "Waiting Room"
     body_text = "Please wait until the other participants are ready."
 
-    # models.Player.bot_contributions = [[10 for x in round_] for round_ in models.Player.bot_contributions]
+    # models.Player.bot_contributions =\
+    #    [[10 for x in round_] for round_ in models.Player.bot_contributions]
     # print(models.Player.bot_contributions)
 
     def is_displayed(self):
         return self.round_number >= 2
 
-    def after_all_players_arrive(self):
-        self.group.set_payoffs()
-        self.group.set_bots()
-        # self.models.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
-        # print(self.models.group.bot_contributions)
-
     # def before_next_page(self):
     #     self.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
     #     print("test")
+
+    # self.models.player.bot_contributions =\
+    #   [[10 for x in round_] for round_ in self.player.bot_contributions]
+    # print(self.models.group.bot_contributions)
+
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
+        self.group.set_bots()
+
 
 
 class Results(Page):
@@ -448,16 +469,17 @@ class Results(Page):
     def is_displayed(self):
         return self.round_number >= 2
 
+    # def before_next_page(self):
+    #     self.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
+    #     print("test")
+
+    """template variables"""
     def vars_for_template(self):
         return {
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
             'current_round': self.round_number - 1,
             'progress': 'Game'
         }
-
-    # def before_next_page(self):
-    #     self.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
-    #     print("test")
 
 
 class Congrats(Page):
@@ -466,6 +488,7 @@ class Congrats(Page):
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
@@ -474,6 +497,7 @@ class Congrats(Page):
             'lbs': str(self.group.all_rounds_contribution()/10*22).split(" ")[0] + " lbs",
             'amount': c(self.group.all_rounds_contribution()).to_real_world_currency(self.session)
         }
+
 
 class FinalResults(Page):
     """Page Docstring"""
@@ -520,6 +544,7 @@ class PostSurvey1(Page):
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
@@ -575,6 +600,7 @@ class PostSurvey3(Page):
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
@@ -602,6 +628,7 @@ class PostSurvey4(Page):
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 
+    """template variables"""
     def vars_for_template(self):
         return {
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
@@ -617,13 +644,15 @@ class PostSurvey4(Page):
 
 class Debriefing(Page):
     """Page Docstring"""
-    def vars_for_template(self):
-        return {'progress': 'End'}
-
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 
+    """template variables"""
+    def vars_for_template(self):
+        return {'progress': 'End'}
 
+
+"""APP PAGE SEQUECE"""
 page_sequence = [
     # IntroConsent,
     # IntroOutline,

@@ -14,3 +14,4 @@ __pycache__/
 =2.5.1
 
 src/bootstrap/
+node_modules/

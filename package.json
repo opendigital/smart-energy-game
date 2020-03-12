@@ -1,0 +1,30 @@
+{
+  "name": "rcodi-otree-enrergy-game",
+  "version": "1.0.0",
+  "description": "social games built with django for researh",
+  "main": "index.js",
+  "dependencies": {
+    "jest": "^25.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node .",
+    "lint": "pylint --load-plugins pylint_django --rcfile=.pylintrc main_app/",
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RCODI/base-game.git"
+  },
+  "keywords": [
+    "otree",
+    "python",
+    "django"
+  ],
+  "author": "Matt Harris <charrismatic@protonmail.com> (https://charrismatic.github.io/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RCODI/base-game/issues"
+  },
+  "homepage": "https://github.com/RCODI/base-game#readme"
+}
