@@ -6,75 +6,20 @@
 {% block content %}
 
 <div class="card bg-transparent">
-    <div class="card-body">
-        <h1>COMPREHENSION QUIZ 2/4</h1>
-        <p>Q2:</p>
-      
+  <div class="card-header">
+    <h1>COMPREHENSION QUIZ 2/4</h1>
+  </div>
 
-        <p id="Explanation"></p>
-        {% include './blocks/quiz-buttons.html' %}
-</div>
-<script>
-// var checkButton = document.getElementById("checkButton")
-// var nextButton = document.getElementById("nextButton")
-var explanation = document.getElementById("Explanation")
-if ('{{ player.timesInstruction2 }}' == '0') {
-    /*nextButton.style.display = "block";
-    nextButton.style.background = "#8d8d8d";
-    nextButton.style.marginLeft = "80%";
-    nextButton.style.width = "120px";
-    checkButton.style.display = "none";*/
-    // checkButton.style.background = "#8d8d8d";
-    // checkButton.style.marginLeft = "80%";
-    // checkButton.style.width = "120px";
-    for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
-        document.getElementsByClassName("form-check-input").item(i).checked = false;
-    }
-} else {
-    // checkButton.style.background = "#8d8d8d";
-    // checkButton.style.marginLeft = "80%";
-    // checkButton.style.width = "120px";
-    for (i = 0; i < document.getElementsByClassName("form-check-input").length; i++) {
-        document.getElementsByClassName("form-check-input").item(i).checked = false;
-    }
-}
-checkButton.onclick = function () {
-    var radioInputs = document.getElementsByClassName("form-check-input")
-    var answerSelected = ""
-    for (i = 0; i < radioInputs.length; i++) {
-        if (radioInputs.item(i).checked) {
-            answerSelected = radioInputs.item(i).value;
-        }
-    }
-    if (answerSelected != "") {
-        // explanation.style.display = "block"
-        // nextButton.style.display = "block";
-        // nextButton.style.background = "#8d8d8d";
-        // nextButton.style.marginLeft = "80%";
-        // nextButton.style.width = "100px";
-        // checkButton.style.display = "none";
-        for (i = 0; i < radioInputs.length; i++) {
-            if (!radioInputs.item(i).checked) {
-                radioInputs.item(i).disabled = true;
-            }
-        }
-        if ('{{ player.timesInstruction2 }}' == '0') {
-            if (answerSelected != '{{ correct_answer }}') {
-                explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
-            } else {
-                explanation.innerHTML = "<e style=\"color:green\">Correct!</e>"
-            }
-        } else {
-            if (answerSelected == '{{ correct_answer }}') {
-                explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
-            } else {
-                explanation.innerHTML = "<e style=\"color:red\">Wrong!</e> "
-            }
-            explanation.innerHTML += "<e style=\"color:gray\">Each token in the group conservation account equals $0.10 dollars. The dollar value of the group conservation account is contributed to Carbonfund.org.</e>"
-        }
-    }
-}
-</script>
-</div>
+  <div class="card-body">
+        <div class="form-group" id='{{ form.quiz_1.html_name }}'>
+        <p>Q2:</p>
+        {{ form.quiz_2 }}
+        {{ form.quiz_2.errors }}
+        {% include './blocks/message-box.html' with field_id=form.quiz_2.html_name hint_text=Constants.q2.0.hint %}
+
+      </div>
+    </div>
+    {% include './blocks/quiz-buttons.html' %}
+
 </div>
 {% endblock %}

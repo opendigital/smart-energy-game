@@ -6,23 +6,23 @@
 {% block content %}
 
 <div class="card bg-transparent">
-  <h1>SAMPLE COMPREHENSION QUIZ 3/4</h2>
+  <h1>COMPREHENSION QUIZ 3/4</h2>
     <div class="card-body">
 
-  <div>
+    <div class="form-group" id='{{ form.quiz_3a.html_name }}'>
     <p>Q3b:</p>
       {{ form.quiz_3a.label_tag }}
       {{ form.quiz_3a }}
       {{ form.quiz_3a.errors }}
-
-      {% include './blocks/message-box.html' %}
+      {% include './blocks/message-box.html' with field_id=form.quiz_3a.html_name hint_text=Constants.q3.0.hint %}
     </div>
+
+    <div class="form-group" id='{{ form.quiz_3b.html_name }}'>
     <p>Q3b:</p>
       {{ form.quiz_3b.label_tag }}
       {{ form.quiz_3b }}
       {{ form.quiz_3b.errors }}
-
-      {% include './blocks/message-box.html' %}
+      {% include './blocks/message-box.html' with field_id=form.quiz_3b.html_name hint_text=Constants.q3.1.hint %}
     </div>
 
   </div>
@@ -30,107 +30,5 @@
     {% include './blocks/quiz-buttons.html' %}
 
 </div>
-
-<script>
-// var checkButton = document.getElementById("checkButton")
-// var nextButton = document.getElementById("nextButton")
-var explanation = document.getElementById("message_box")
-var explanation2 = document.getElementById("message_box")
-
-if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '0'){
-
-  var radioInputs = document.getElementsByClassName("form-check-input")
-
-  for (i = 0; i < radioInputs.length; i++) {
-    var currentRadio = radioInputs.item(i)
-    currentRadio.checked = false;
-  }
-}else if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '1'){
-
-  var radioInputs = document.getElementsByClassName("form-check-input")
-
-  for (i = 0; i < radioInputs.length; i++) {
-    var currentRadio = radioInputs.item(i)
-    if(i<2){
-      if(!currentRadio.checked) currentRadio.disabled = true
-
-    }else{
-      currentRadio.checked = false;
-    }
-  }
-
-  } else if ( '{{ player.timesInstruction3a }}' == '1' && '{{ player.timesInstruction3b }}' == '0'){
-
-  var radioInputs = document.getElementsByClassName("form-check-input")
-
-  for (i = 0; i < radioInputs.length; i++) {
-    var currentRadio = radioInputs.item(i)
-    if(i>=2){
-      if(!currentRadio.checked) currentRadio.disabled = true
-
-    }else{
-      currentRadio.checked = false;
-    }
-  }
-
-} else {
-
-  var radioInputs = document.getElementsByClassName("form-check-input")
-
-  for (i = 0; i < radioInputs.length; i++) {
-    var currentRadio = radioInputs.item(i)
-    currentRadio.checked = false;
-  }
-}
-
-//#############  SUBMITION  ####################
-checkButton.onclick = function () {
-  var radioInputs = document.getElementsByClassName("form-check-input")
-  var answerSelected = ""
-  var answerSelected2 =""
-  for (i = 0; i < radioInputs.length; i++) {
-    if(radioInputs.item(i).checked && i<=1) {
-      answerSelected = radioInputs.item(i).value;
-    }else if(radioInputs.item(i).checked && i>1){
-      answerSelected2 = radioInputs.item(i).value;
-    }
-  }
-
-  if(answerSelected!=""&&answerSelected2!="") {
-
-    for (i = 0; i < radioInputs.length; i++) {
-      if (!radioInputs.item(i).checked) {
-        radioInputs.item(i).disabled = true;
-      }
-    }
-
-    if( '{{ player.timesInstruction3a }}' == '0' && '{{ player.timesInstruction3b }}' == '0') {
-      if (answerSelected != '{{ correct_answer }}') {
-
-      } else {
-
-      }if (answerSelected2 != '{{ correct_answer }}') {
-
-      } else {
-
-      }
-    }else {
-      if (answerSelected == '{{ correct_answer }}') {
-
-      } else {
-
-      }
-
-      if (answerSelected2 == '{{ correct_answer }}') {
-        explanation2.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        console.log(answerSelected2+","+ radioInputs.item(0).value +","+radioInputs.item(1).value   )
-
-      }
-
-    }
-  }
-}
-</script>
 
 {% endblock %}
