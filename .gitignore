@@ -15,3 +15,5 @@ __pycache__/
 
 src/bootstrap/
 node_modules/
+
+src/certificate/

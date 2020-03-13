@@ -39,7 +39,7 @@ DEMO_PAGE_INTRO_HTML = """
 In order to test
 </br>
 USER: admin</br>
-PASS: GoBoilers2018!
+PASS: admin
 </br></br>
 
 """
@@ -71,7 +71,7 @@ mturk_hit_settings = {
 
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.10,
+    'real_world_currency_per_point': 0.01,
     'participation_fee': 0.50,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -80,7 +80,7 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = [
     {
         'name': 'main_app',
-        'display_name': "Energy COnservation Game",
+        'display_name': "Energy Conservation Game",
         'num_demo_participants': 1,
         'app_sequence': ['main_app']
     },
