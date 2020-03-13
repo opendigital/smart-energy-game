@@ -4,8 +4,19 @@
 }
 
 .debug-info {
-  display: none;
+  display: block;
 }
+
+.quiz_message { display: none; }
+
+.quiz_message .success_msg { display: none; }
+.quiz_message.show-success { display: block; }
+.quiz_message.show-success .success_msg { display: block; }
+
+.quiz_message .hint_text { display: none; }
+.quiz_message.show-hint { display: block; }
+.quiz_message.show-hint .hint_text { display: block; }
+
 
 .hide {
   display: none;
@@ -29,6 +40,21 @@ body {
 #myBar {
   width: 1%;
   height: 30px;
+}
+
+#carbonfund_reduction_lbs {
+  font-size: 20px;
+  position: absolute;
+  top: 59%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+#carbonfund_reduction_date {
+  position: absolute;
+  bottom: 27%;
+  left: 11%;
+  font-weight: bold;
 }
 
 .otree-title {

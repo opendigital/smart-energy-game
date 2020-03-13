@@ -1,16 +1,22 @@
 
-<div id="message_box">
+{% if field_id %}
+<div id='id_{{ field_id }}_message' class="quiz_message">
+{% else %}
+<div class="quiz_message">
+{% endif %}
 
-  <div id="error_msg" class="">
-  <div class="text-danger">Wrong!</div>
-    {% if player.page_attempts >= 0 %}
-    {{ quiz_hint1 }}
-    {% else %}
-    {{ quiz_hint2 }}
-    {% endif %}
+  <div class="success_msg">
+    <span class="text-success">Correct!</span>
   </div>
 
-   <div id="succcess_msg">
-    <div class="text-success">Correct!</div>
+  <div class="quiz_hint">
+    <span class="text-danger">Wrong!</span>
+    <span id="hint_text">
+    {% if show_hint %}
+      {{ hint_text }}
+    {% else %}
+    Please proceed to Review Instructions. You will then return to this question and have one more opportunity to answer it
+    {% endif %}
+    </span>
   </div>
 </div>
