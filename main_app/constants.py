@@ -5,8 +5,6 @@ from otree.api import (
 
 
 class Constants(BaseConstants):
-    """model docstring"""
-
     def __init__(self):
         self.values = ''
 
@@ -18,10 +16,16 @@ class Constants(BaseConstants):
     num_actual_rounds = 6
     game_rounds = 6
     game_players = 25
+    game_goal = 900
     num_rounds = num_actual_rounds + 1
     endowment = c(100)
     group_goal = c(900)
     no_bonus = c(0)
+
+    true_false = [
+        "True",
+        "False"
+    ]
 
     MONTHS = [
         'JANUARY',
@@ -36,6 +40,63 @@ class Constants(BaseConstants):
         'OCTOBER',
         'NOVEMBER',
         'DECEMBER'
+    ]
+
+
+    q1 = [
+        dict(
+            label='On average, how many tokens will each player need \
+                to invest into the group conservation account in each round in order \
+                to meet the 60% group conservation goal?',
+            choices=[
+                "2 tokens",
+                "3 tokens",
+                "6 tokens",
+                "11 tokens"
+            ],
+            answer='6 tokens',
+            hint='To meet the 60% energy conservation goal, each player should contribute 6 energy \
+                tokens each month to the group conservation account, resulting in 900 energy \
+                tokens at the end of the game.',
+        )
+    ]
+
+    q2 = [
+        dict(
+            label='For each energy token in the group conservation \
+                account $0.01 is contributed to Carbonfund.org to reduce actual \
+                air pollution in the real world?',
+            choices=true_false,
+            answer='True',
+            hint='Each token in the group conservation account equals $0.01 dollars. The \
+                dollar value of the group conservation account is contributed to Carbonfund.org.',
+        )
+    ]
+
+    q3 = [
+        dict(
+            label="You will have greater earnings than others if you put all of your \
+                energy tokens in your private account, while others contribute all of theirs to the \
+                group conservation account.",
+            choices=true_false,
+            answer="True",
+            hint="You will have greater earnings if you put all of your energy tokens in your \
+                private account, while others contribute all of their tokens in the group conservation account, \
+                because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
+                $0.60 from your private account + $1.15 bonus = $1.75, while others will only earn the \
+                $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
+        ),
+        dict(
+            label='True or False: The group will maximize its earning if all players contribute 6 of \
+                their energy tokens to the group conservation account each month.',
+            choices=true_false,
+            answer="True",
+            hint="The group gets the maximum financial payment if all players contribute all 10 tokens in the \
+                conservation account in each month (25 players x 10 tokens x 6 months x $.01 = $15). \
+                Every player then gets an equal share of the maximum bonus possible, which is \
+                double the value of the tokens in the conservation account (2 x $15 / 25 players = $1.20). \
+                (If wrong take back to 2nd page of EXAMPLES: half a table)",
+        )
     ]
 
     answers = [
@@ -72,48 +133,38 @@ class Constants(BaseConstants):
             $1.20).',
     ]
 
-    # "$1.00",
-    # "$18.18",
-    # "$19.18",
-    # "$1.00",
-    # "$0.00",
-    # "$1.00",
-
-
     quiz_default_hint = 'Please proceed to Review Instructions. \
         You will then return to this question and have one \
         more opportunity to answer it'
 
-    q1_labels = [
-        'On average, how many tokens will each player need \
-        to invest into the group conservation account in each round in order \
-        to meet the 60% group conservation goal?'
-    ]
-
-    q1_choices = [
-        "2 tokens",
-        "3 tokens",
-        "6 tokens",
-        "11 tokens"
-    ]
-
-    q1_answers = [
-        '6 tokens'
-    ]
-
-    q1_hints = [
-        'To meet the 60% energy conservation goal, each player should contribute 6 energy \
-        tokens each month to the group conservation account, resulting in 900 energy \
-        tokens at the end of the game.',
-    ]
-
-    quiz_1_label = 'For each energy token in the group conservation \
-        account $0.01 is contributed to Carbonfund.org to reduce actual \
-        air pollution in the real world?'
-
-    quiz_2_label = 'For each energy token in the group conservation \
-        account $0.01 is contributed to Carbonfund.org to reduce actual \
-        air pollution in the real world?'
+    # # q1_labels = [
+    # #     'On average, how many tokens will each player need \
+    # #     to invest into the group conservation account in each round in order \
+    # #     to meet the 60% group conservation goal?'
+    # # ]
+    # #
+    # # q1_choices = [
+    # #     "2 tokens",
+    # #     "3 tokens",
+    # #     "6 tokens",
+    # #     "11 tokens"
+    # # ]
+    # #
+    # # q1_answers = [
+    # #     '6 tokens'
+    # # ]
+    #
+    # q1_hint = 'To meet the 60% energy conservation goal, each player should contribute 6 energy \
+    #     tokens each month to the group conservation account, resulting in 900 energy \
+    #     tokens at the end of the game.'
+    #
+    # quiz_1_label = 'For each energy token in the group conservation \
+    #     account $0.01 is contributed to Carbonfund.org to reduce actual \
+    # #     air pollution in the real world?'
+    #
+    # quiz_2_label = 'For each energy token in the group conservation \
+    #     account $0.01 is contributed to Carbonfund.org to reduce actual \
+    #     air pollution in the real world?'
 
     quiz_3a_label = 'You will have greater benefits than others if you \
         keep all of your energy tokens for yourself, while others invest \

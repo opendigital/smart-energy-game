@@ -4,7 +4,7 @@ from otree.api import currency_range
 from main_app import models
 from ._builtin import Page, WaitPage
 from .constants import Constants
-
+from .quiz import Quiz
 
 class IntroConsent(Page):
     """Introduction: Consent Form"""
@@ -39,7 +39,7 @@ class IntroIntroduction(Page):
             'progress': 'Introduction',
             'reduction_goal': '60',
             'game_players': '24',
-            'game_rounds': '6',
+            'game_rounds': Constants.game_rounds,
         }
 
     def before_next_page(self):
@@ -67,7 +67,7 @@ class IntroGameplay(Page):
             'game_tokens': '10',
             'optimal_contribution': '6',
             'reduction_goal': '60',
-            'game_rounds': '6',
+            'game_rounds': Constants.game_rounds,
             'token_value': '.01'
         }
 
@@ -88,8 +88,8 @@ class IntroFinancialOutcomes(Page):
             'game_tokens': '10',
             'optimal_contribution': '6',
             'reduction_goal': '60',
-            'game_rounds': '6',
-            'token_goal': '900',
+            'game_rounds': Constants.game_rounds,
+            'token_goal': Constants.game_goal,
             'token_value': '.01'
         }
 
@@ -174,21 +174,20 @@ class Example3(Page):
         return (self.round_number == 1 and self.player.timesInstruction3b == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz3b)
 
-"""template variables"""
-def vars_for_template(self):
-    return {
-        'progress': 'Examples',
-        'classes': {
-            'row1': 'text-muted',
-            'row2': 'text-muted',
-            'row3': 'text-muted',
-            'row4': 'badge-success',
-            'row5': 'badge-danger',
+    def vars_for_template(self):
+        return {
+            'progress': 'Examples',
+            'classes': {
+                'row1': 'text-muted',
+                'row2': 'text-muted',
+                'row3': 'text-muted',
+                'row4': 'badge-success',
+                'row5': 'badge-danger',
+            }
         }
-    }
 
-    def before_next_page(self):
-        self.player.timesInstruction3b += 1
+        def before_next_page(self):
+            self.player.timesInstruction3b += 1
 
 
 class PracticeIntro(Page):
@@ -253,7 +252,6 @@ class Quiz(Page):
     def is_displayed(self):
         return self.round_number == 2
 
-    """template variables"""
     def vars_for_template(self):
         return {'progress': 'Quiz'}
 
@@ -263,34 +261,24 @@ class Quiz1(Page):
     form_model = 'player'
     form_fields = ['quiz_1']
 
-    """template variables"""
+    def is_displayed(self):
+        return self.round_number == 2 \
+            and self.player.q1_attempts <= 3 \
+            and not self.player.q1_correct
+
     def vars_for_template(self):
         return {
             'progress': 'Quiz',
-            'correct_answer': Constants.answers[0],
-            'quiz_hint1': Constants.quiz_default_hint,
-            'quiz_hint2': Constants.quiz_hints[0],
-            'xINST': self.player.page_attempts,
-            'REP?': self.player.repeatQuiz1,
+            'q1_attempts': self.player.q1_attempts,
+            'q1_correct': self.player.q1_correct,
+            'show_hint': self.player.q1_attempts > 2,
+            'quiz_hint': Constants.quiz_default_hint,
+            'answer_key': [Constants.q1[0]["answer"]],
         }
 
-    def is_displayed(self):
-        return self.round_number == 2 \
-            and self.player.page_attempts <= 1 \
-            and not self.player.is_equilibrium_tokens_correct()
-
-    def quiz1_choices(self):
-        choices=self.player.form_fields.choices
-        random.shuffle(choices)
-        return choices
-
-    ### FALLBACK ON WRONG TO - INSTRUCTIONS:
-    ### GAME STRUCTURE AND INCENTIVES
-    def before_next_page(self):
-        if self.player.is_equilibrium_tokens_correct():
-            self.player.repeatQuiz1 = False
-        else:
-            self.player.repeatQuiz1 = True
+    # def error_message(self, values):
+    #     errors = self.player.validate_q1(values)
+    #     return False
 
 
 class Quiz2(Page):
@@ -298,19 +286,19 @@ class Quiz2(Page):
     form_model = 'player'
     form_fields = ['quiz_2']
 
-    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Quiz',
-            'correct_answer': Constants.answers[1],
-            'quiz_hint1': Constants.quiz_hints[0],
-            'quiz_hint2': Constants.quiz_hints[1],
+            'q2_attempts': self.player.q2_attempts,
+            'q2_correct': self.player.q2_correct,
+            'show_hint': self.player.q2_attempts > 3,
+            'answer_key': [Constants.q2[0]["answer"]],
         }
 
     def is_displayed(self):
         return self.round_number == 2 \
-            and self.player.page_attempts <= 1 \
-            and not self.player.is_donation_correct()
+            and self.player.page_attempts <= 5 \
+            and not self.player.q2_correct
 
     def quiz_2_choices(self):
         choices = [
@@ -321,10 +309,10 @@ class Quiz2(Page):
         return choices
 
     def before_next_page(self):
-        if self.player.is_donation_correct():
-            self.player.repeatQuiz2 = False
+        if self.player.validate_q2():
+            self.player.page_attempts = 0
         else:
-            self.player.repeatQuiz2 = True
+            self.player.page_attempts = 1
 
 
 class Quiz3(Page):
@@ -335,21 +323,28 @@ class Quiz3(Page):
         'quiz_3b'
     ]
 
-    """template variables"""
     def vars_for_template(self):
+        print('q3', Constants.q3)
         return {
             'progress': 'Quiz',
             'correct_answer': 'True',
             'correct_answer2': 'True',
-            'quiz_hint1': Constants.quiz_default_hint,
-            'quiz_hint2': Constants.quiz_hints[2],
+            'show_hint': self.player.q3_attempts > 3,
+            'answer_key': [
+                Constants.q3[0]["answer"],
+                Constants.q3[1]["answer"]
+            ],
+            'q3_attempts': self.player.q3_attempts,
+            'q3a_correct': self.player.q3a_correct,
+            'q3b_correct': self.player.q3b_correct,
+            'q3a_hint': Constants.quiz_default_hint,
+            'q3b_hint': Constants.quiz_default_hint,
         }
 
     def is_displayed(self):
         return self.round_number == 2 \
-            and (self.player.timesInstruction3a <= 1 \
-            or self.player.timesInstruction3b <= 1) \
-            and not self.player.is_both_Examples_right()
+            and (self.player.page_attempts <= 1) \
+            and not self.player.validate_q3()
 
     def quiz_3a_choices(self):
         choices = ["True", "False"]
@@ -362,19 +357,11 @@ class Quiz3(Page):
         return choices
 
     def before_next_page(self):
-        if self.player.is_both_Examples_right():
-            self.player.repeatQuiz3a = False
-            self.player.repeatQuiz3b = False
+        if self.player.validate_q2():
+            self.player.page_attempts = 0
         else:
-            if self.player.is_max_individual_correct():
-                self.player.repeatQuiz3a = False
-            else:
-                self.player.repeatQuiz3a = True
+            self.player.page_attempts = 1
 
-            if self.player.is_max_group_correct():
-                self.player.repeatQuiz3b = False
-            else:
-                self.player.repeatQuiz3b = True
 
 
 class Quiz4(Page):
@@ -414,7 +401,7 @@ class Quiz4(Page):
             self.player.repeatQuiz4 = True
 
 
-class RealGameTransition(Page):
+class EnergyGameIntro(Page):
     """Page Docstring"""
     def is_displayed(self):
         return self.round_number == 2
@@ -423,19 +410,25 @@ class RealGameTransition(Page):
         return {'progress': 'Game'}
 
 
-class Survey(Page):
+
+
+class EnergyGame(Page):
     """Page Docstring"""
     form_model = 'player'
-    form_fields = ['contribution', 'private_contribution']
+    form_fields = [
+        'contribution',
+        'private_contribution'
+    ]
 
     def is_displayed(self):
         return self.round_number >= 2
 
-    """template variables"""
     def vars_for_template(self):
-        return {'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
-                'current_round': self.round_number - 1,
-                'progress': 'Game'}
+        return {
+            'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
+            'current_round': self.round_number - 1,
+            'progress': 'Game'
+        }
 
 
 class ResultsWaitPage(WaitPage):
@@ -488,8 +481,9 @@ class Congrats(Page):
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 
-    """template variables"""
     def vars_for_template(self):
+        # let today = new Date();
+        # 'cert_date': ,
         return {
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
             'current_round': self.round_number - 1,
@@ -592,7 +586,6 @@ class PostSurvey3(Page):
         'survey_health',
         'survey_future',
         'survey_community',
-        'survey_humanrace',
         'survey_children',
         'survey_unitedstates',
     ]
@@ -652,7 +645,7 @@ class Debriefing(Page):
         return {'progress': 'End'}
 
 
-"""APP PAGE SEQUECE"""
+
 page_sequence = [
     # IntroConsent,
     # IntroOutline,
@@ -668,20 +661,20 @@ page_sequence = [
     # PracticeIntro,
     # PracticeGame,
     # PracticeResults,
-    Quiz,
-    Quiz1,
-    Quiz2,
-    IntroEnvironOutcomes,
-    Quiz2,
-    Quiz3,
-    Example2,
-    Example3,
-    Quiz3,
-    Quiz4,
-    Example1,
-    Quiz4,
-    RealGameTransition,
-    Survey,
+    # Quiz,
+    # Quiz1,
+    # Quiz2,
+    # IntroEnvironOutcomes,
+    # Quiz2,
+    # Quiz3,
+    # Example2,
+    # Example3,
+    # Quiz3,
+    # Quiz4,
+    # Example1,
+    # Quiz4,
+    EnergyGameIntro,
+    EnergyGame,
     ResultsWaitPage,
     Results,
     Congrats,

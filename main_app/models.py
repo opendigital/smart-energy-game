@@ -18,6 +18,7 @@ Solution for training problem
 """
 
 
+
 def get_int_field(_label='', _min=0, _max=9999, _initial=None):
     """Return otree text field type"""
     return models.IntegerField(
@@ -89,6 +90,45 @@ def get_likert_field(_label, _choices):
         widget=widgets.RadioSelect,
         choices=_choices
     )
+
+
+
+class Quiz(BaseSubsession):
+    def __init__(self):
+        self.values = ''
+
+    true_false = [
+        "True",
+        "False"
+    ]
+
+    quiz1a = dict(
+        label='On average, how many tokens will each player need \
+            to invest into the group conservation account in each round in order \
+            to meet the 60% group conservation goal?',
+        choices=[
+            "2 tokens",
+            "3 tokens",
+            "6 tokens",
+            "11 tokens"
+        ],
+        answer='6 tokens',
+        hint='To meet the 60% energy conservation goal, each player should contribute 6 energy \
+            tokens each month to the group conservation account, resulting in 900 energy \
+            tokens at the end of the game.',
+    )
+
+    q2 = dict(
+        label='For each energy token in the group conservation \
+            account $0.01 is contributed to Carbonfund.org to reduce actual \
+            air pollution in the real world?',
+        choices=true_false,
+        answer='True',
+        hint='Each token in the group conservation account equals $0.01 dollars. The \
+            dollar value of the group conservation account is contributed to Carbonfund.org.',
+    )
+
+
 
 
 
@@ -383,16 +423,16 @@ class Player(BasePlayer):
         return sum([p.contribution for p in self.in_rounds(Const.num_rounds / 2 + 1, self.round_number - 1)])
 
 
-    def check_answers(self):
-        if self.quiz_1 == Const.answers[0] \
-                and self.quiz_2 == Const.answers[1] \
-                and self.quiz_3a == Const.answers[2] \
-                and self.quiz_3b == Const.answers[3]:
-            self.everything_correct = True
-            return True
-
-        self.everything_correct = False
-        return False
+    # def check_answers(self):
+    #     if self.quiz_1 == Const.answers[0] \
+    #             and self.quiz_2 == Const.answers[1] \
+    #             and self.quiz_3a == Const.answers[2] \
+    #             and self.quiz_3b == Const.answers[3]:
+    #         self.everything_correct = True
+    #         return True
+    #
+    #     self.everything_correct = False
+    #     return False
 
 
     def is_equilibrium_tokens_correct(self):
@@ -402,11 +442,50 @@ class Player(BasePlayer):
         return self.quiz_1 == Const.answers[0]
 
 
-    def is_donation_correct(self):
-        if self.quiz_2 == Const.answers[1] and self.do_once3:
-            self.do_once3 = False
-            self.payoff += 5
+
+    def validate_q1(self, values):
+        if self.quiz_1 == None or self.q1_correct == True:
+            return False
+        else:
+            self.q1_attempts += 1
+            if self.quiz_1 == Const.answers[0]:
+                self.q1_correct = True
+                if self.q1_attempts <= 1:
+                    self.payoff += 5
+            else:
+                self.quiz_1 = None
+
+        return self.q1_correct
+
+    def validate_q2(self):
+        self.q2_attempts += 1
+        print("quiz 2 attempts", self.q2_attempts)
+
+        if self.quiz_2 == Const.answers[1]:
+            self.q2_correct = True
+
+            if self.q2_attempts == 1:
+                print("first try", self.q2_attempts)
+                self.payoff += 5
+
         return self.quiz_2 == Const.answers[1]
+
+
+    def validate_q3(self):
+        self.q3_attempts += 1
+
+        if self.quiz_3a == Const.answers[2]:
+            self.q3a_correct = True
+
+        if self.quiz_3b == Const.answers[3]:
+            self.q3b_correct = True
+
+        if self.q3b_correct == True and self.q3b_correct == True:
+            if self.q3_attempts == 1:
+                self.payoff += 5
+            return True
+        else:
+            return False
 
 
     def is_both_Examples_right(self):
@@ -507,22 +586,28 @@ class Player(BasePlayer):
     # QUIZES
     # ===========================================
     quiz_1 = models.StringField(
-        label=Const.quiz_1_label,
+        label=Const.q1[0]["label"],
+        choices=Const.q1[0]["choices"],
         widget=widgets.RadioSelect,
-        choices=Const.q1_choices,
     )
+
     quiz_2 = models.StringField(
-        label=Const.quiz_2_label,
+        label=Const.q2[0]["label"],
         widget=widgets.RadioSelect
     )
+
+    q2_attempts = models.IntegerField(initial=0)
+    q2_correct = models.BooleanField(initial=False)
+
     quiz_3a = models.StringField(
         label=Const.quiz_3a_label,
         widget=widgets.RadioSelect
     )
-    quiz_3b = models.StringField(
+    quiz_3b = models.BooleanField(
         label=Const.quiz_3b_label,
         widget=widgets.RadioSelect
     )
+
     quiz_4a1 = models.StringField(
         label=Const.quiz_4a1_label,
         widget=widgets.RadioSelectHorizontal,
@@ -579,6 +664,15 @@ class Player(BasePlayer):
     )
 
     page_attempts = models.IntegerField(initial=0)
+    q1_attempts = models.IntegerField(initial=0)
+    q1_correct = models.BooleanField(initial=False)
+
+
+    q3_attempts = models.IntegerField(initial=0)
+    q3a_correct = models.BooleanField(initial=False)
+    q3b_correct = models.BooleanField(initial=False)
+
+    timesInstruction1 = models.IntegerField(initial=0)
     timesInstruction2 = models.IntegerField(initial=0)
     timesInstruction3a = models.IntegerField(initial=0)
     timesInstruction3b = models.IntegerField(initial=0)
@@ -633,10 +727,14 @@ class Player(BasePlayer):
     survey_lifestyle = get_likert_field(Const.survey_3_items[5], Const.range_concerned)
     survey_health = get_likert_field(Const.survey_3_items[6], Const.range_concerned)
     survey_future = get_likert_field(Const.survey_3_items[7], Const.range_concerned)
-    survey_community = get_likert_field(Const.survey_3_items[8], Const.range_conc )
-    survey_children = get_likert_field(Const.survey_3_items[10], Const.range_concerned)
-    survey_unitedstates = get_likert_field(Const.survey_3_i, Const.range_concerned)
+    survey_community = get_likert_field(Const.survey_3_items[8], Const.range_concerned)
+    survey_children = get_likert_field(Const.survey_3_items[9], Const.range_concerned)
+    survey_unitedstates = get_likert_field(Const.survey_3_items[10], Const.range_concerned)
+
+
+
     # POST SURVEY 4
+
     survey_demographics_birthyear = get_int_field(Const.survey_4_items[0], 1900, 2020)
     survey_demographics_gender = get_select_field(Const.survey_4_items[1], Const.choice_demographics_gender)
     survey_demographics_ethnicity = get_select_field(Const.survey_4_items[2], Const.choices_demographics_ethnicity)
