@@ -8,14 +8,17 @@
 }
 
 .quiz_message { display: none; }
-
 .quiz_message .success_msg { display: none; }
 .quiz_message.show-success { display: block; }
+.quiz_message.show-hint { display: block; }
+.quiz_message.show-success .quiz_hint { display: none; }
 .quiz_message.show-success .success_msg { display: block; }
 
-.quiz_message .hint_text { display: none; }
-.quiz_message.show-hint { display: block; }
-.quiz_message.show-hint .hint_text { display: block; }
+
+
+.quiz_message .quiz_hint { display: none; }
+.quiz_message.show-hint .success_msg { display: block; }
+.quiz_message.show-hint .quiz_hint { display: block; }
 
 
 .hide {
