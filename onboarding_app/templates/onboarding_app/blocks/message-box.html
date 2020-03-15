@@ -1,0 +1,22 @@
+
+{% if field_id %}
+<div id='id_field_{{ field_id }}_message' class="quiz_message">
+{% else %}
+<div class="quiz_message">
+{% endif %}
+
+  <div class="success_msg">
+    <span class="text-success">Correct!</span>
+  </div>
+
+  <div class="quiz_hint">
+    <span class="text-danger">Wrong!</span>
+    <span id="hint_text">
+    {% if show_hint %}
+      {{ hint_text }}
+    {% else %}
+    Please proceed to Review Instructions. You will then return to this question and have one more opportunity to answer it
+    {% endif %}
+    </span>
+  </div>
+</div>

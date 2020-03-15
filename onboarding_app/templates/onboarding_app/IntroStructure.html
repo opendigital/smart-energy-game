@@ -1,0 +1,61 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}Game Structure{% endblock %}
+
+{% block content %}
+<div class="card bg-transparent">
+
+  <div class="card-header">
+    <h1>INSTRUCTIONS: GAME STRUCTURE AND INCENTIVES</h1>
+  </div>
+
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+        <ul>
+          <li>
+            There are <strong><span class="game-variable">{{ game_players }}</span> players</strong> who live in the same housing community.
+          </li>
+
+          <li>
+            At the start of each month, each player has <strong><span class="game-variable">{{ game_tokens }}</span>
+            energy tokens</strong> (worth<strong> $<span class="game-variable">{{ token_value }}</span>
+            each</strong>) that represent potential energy use beyond their basic needs.
+          </li>
+
+          <li>
+            Each month, every player faces the same <strong>decision problem</strong>:
+            how much energy to use for their personal benefit (by putting tokens in
+            their private account) versus how much to conserve (by putting tokens in the
+            group conservation account).
+          </li>
+
+          <li>
+            <strong>Players will be paid</strong> the value of all energy tokens in
+            their private account at the end of the game.
+          </li>
+          <li>
+            If the group meets the <span class="game-variable">{{ reduction_goal }}%</span> conservation goal by the end of the game, then the value of those tokens in
+            the group conservation account is doubled and given in equal shares to all
+            players as a <strong>reward</strong>.
+          </li>
+
+          <li>
+            To meet the <span class="game-variable">{{ reduction_goal }}%</span> energy reduction goal, each player should contribute
+            <strong><span class="game-variable">{{ optimal_contribution }}</span> energy tokens every month</strong> to the group conservation
+            account.
+          </li>
+        </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="otree-btn-next btn" style="width: 100px">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

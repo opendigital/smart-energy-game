@@ -1,0 +1,50 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}Examples{% endblock %}
+
+{% block content %}
+<div class="card bg-transparent">
+  <div class="card-body" >
+    <h1>EXAMPLES</h1>
+  </div>
+
+  <div class="card-body" >
+    <div class="container">
+      <div class="row">
+        <div class="col">
+        <p class="text-muted font-italic">
+          Next, we'll show you 5 examples of how the game might be played and what
+          the results would look like in each scenario.
+        </p>
+        <ul>
+          <li>
+            Example 1 shows the result if all players contribute exactly 60% of their
+            energy tokens, consistent with the required group goal.
+          </li>
+
+          <li>
+            Examples 2 and 3 show the results from MINIMUM CONTRIBUTION (everybody puts all of their
+            energy tokens in their private accounts), and MAXIMUM CONTRIBUTION (everybody contributes
+            100% of their energy tokens to conservation account).
+          </li>
+
+          <li>
+            Examples 4 and 5 show the results from unequal contributions: ONLY YOU CONTRIBUTE (you contribute all
+            of your tokens to group conservation account, but others do not contribute any of theirs)
+            or ONLY YOU DON'T CONTRIBUTE (you do not contribute any of your energy tokens to the
+            group conservation account, while all 24 players contribute all of theirs).
+          </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button class="otree-btn-next btn" style="width: 100px">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

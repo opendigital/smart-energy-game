@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}Examples 2-3{% endblock %}
+
+{% block content %}
+
+<div class="card bg-transparent">
+
+  <div class="card-header">
+    <h1>EXAMPLES 2, 3: MIN AND MAX CONSERVATION</h1>
+  </div>
+
+  <div class="card-body" style="padding-right: 0;">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p style="text-align: justify;">
+            The next two examples show outcome of the <strong>MINIMUM CONTRIBUTION</strong> where ALL players
+            put ALL their tokens into their own private accounts, while the <strong>MAXIMUM
+            CONTRIBUTION</strong> is when ALL players contribute ALL their energy tokens to
+            the conservation account.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          {% include './blocks/examples-table.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include './blocks/next-button.html' %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}Practice Game{% endblock %}
+
+{% block content %}
+
+<div class="card bg-transparent">
+
+  <div class="card-header">
+    <h1>PRACTICE GAME</h1>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <p class="color-red text-small">
+          Remember, the decisions of other players in this practice game are random
+          and DO NOT REPRESENT the actual decisions of other players.
+        </p>
+        <p class="color-red text-small">
+          Practice results DO NOT count toward your final payment.
+        </p>
+      </div>
+    </div>
+
+    <div id="errors" class="form-control-errors" style="display:none;">
+      {{ form.practice_contribution.errors }}
+    </div>
+
+    <div class="card game-card" style="">
+      <div class="card-title game-title">MONTH {{ current_round }} ({{ current_month }})</div>
+
+      <div class="card-body">
+        <h4>You have <span class="pr">10</span> energy tokens.</h4>
+
+        <h4 class="flex flex-vcenter">
+          <span>How much energy do you want to conserve this month?</span>
+          <input id="contribution_box"
+              class="token-box color-conserve mx-2"
+              name="practice_contribution"
+              onchange="document.getElementById('personal').setAttribute('value', 10-this.value)"
+              min="0"
+              max="10"
+              type="number">
+        </h4>
+        <h4 class="flex flex-vcenter">
+          <span>How much energy do you want to keep in your personal account this month?</span>
+          <div id="personal" class="color-personal token-box"></div>
+        </h4>
+      </div>
+    </div>
+
+    {% include './blocks/next-button.html' %}
+
+  </div>
+</div>
+<script src="{% static 'main_app/box.js' %}" ></script>
+{% endblock %}

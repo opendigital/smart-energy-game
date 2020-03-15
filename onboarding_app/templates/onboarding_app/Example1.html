@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}Example 1{% endblock %}
+
+{% block content %}
+
+<div class="card bg-transparent">
+
+  <div class="card-header">
+    <h1>EXAMPLE 1: MINIMUM REQUIREMENT</h1>
+  </div>
+
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p>Example 1 shows the result if all players contribute exactly <span class="game-variable">{{ game_goal }}%</span> of their energy tokens, consistent with the required group goal.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          {% include './blocks/examples-table.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include './blocks/next-button.html' %}
+</div>
+{% endblock %}
