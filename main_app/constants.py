@@ -14,6 +14,7 @@ class Constants(BaseConstants):
     # players_without_me = players_per_group - 1
     reduction_goal = 60
     num_actual_rounds = 6
+    game_tokens = 10
     game_rounds = 6
     game_players = 25
     game_goal = 900

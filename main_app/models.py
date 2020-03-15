@@ -18,6 +18,8 @@ Solution for training problem
 """
 
 
+# self.player.participant_vars_dump = str(self.participant.vars)
+
 
 def get_int_field(_label='', _min=0, _max=9999, _initial=None):
     """Return otree text field type"""
@@ -27,7 +29,6 @@ def get_int_field(_label='', _min=0, _max=9999, _initial=None):
         max=_max,
         initial=_initial,
     )
-
 
 def get_text_field(_label=''):
     """Return otree integer field type"""
@@ -133,18 +134,52 @@ class Quiz(BaseSubsession):
 
 
 class Subsession(BaseSubsession):
-    """model docstring"""
-    pass
+
+    def creating_session(self):
+        print('in creating_session', self.round_number)
+
+
+    def quiz(self):
+        true_false = [
+            "True",
+            "False"
+        ]
+        print('subsession quiz')
+        return dict(
+            q1=dict(
+                label='On average, how many tokens will each player need \
+                    to invest into the group conservation account in each round in order \
+                    to meet the 60% group conservation goal?',
+                choices=[
+                    "2 tokens",
+                    "3 tokens",
+                    "6 tokens",
+                    "11 tokens"
+                ],
+                answer='6 tokens',
+                hint='To meet the 60% energy conservation goal, each player should contribute 6 energy \
+                    tokens each month to the group conservation account, resulting in 900 energy \
+                    tokens at the end of the game.',
+            ),
+            q2=dict(
+                label='For each energy token in the group conservation \
+                    account $0.01 is contributed to Carbonfund.org to reduce actual \
+                    air pollution in the real world?',
+                choices=true_false,
+                answer='True',
+                hint='Each token in the group conservation account equals $0.01 dollars. The \
+                    dollar value of the group conservation account is contributed to Carbonfund.org.',
+            ),
+        )
+
 
 
 class Group(BaseGroup):
-    """model docstring"""
     total_contribution = models.CurrencyField()
     total_random_contribution = models.CurrencyField()
     bonus = models.CurrencyField(initial=c(0))
     do_once = models.BooleanField(initial=True)
     carbonFund = models.CurrencyField()
-
 
     def get_bot_contributions_string(self):
         bot_contributions_str = \
@@ -251,6 +286,7 @@ class Group(BaseGroup):
         player.bot_contributions_in_round = \
             str(self.session.vars["bot_contributions"][round_number])
 
+
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
 
@@ -272,6 +308,7 @@ class Group(BaseGroup):
                     self.bonus = self.all_rounds_contribution() * Const.multiplier / 26
                     player.payoff += self.bonus
 
+
     # It's used for after-survey queries.
     def pay_quizzes(self):
         if self.do_once and self.round_number == Const.num_rounds:
@@ -279,8 +316,10 @@ class Group(BaseGroup):
             for player in self.get_players():
                 player.payoff += player.how_many_good_answers()
 
+
     def pay_carbonfund(self):
         self.carbonFund = self.all_rounds_contribution()/10*22
+
 
     def all_rounds_contribution(self):
         player = self.get_players()[0]
@@ -323,6 +362,9 @@ class Group(BaseGroup):
 
     def bonus_in_dollars(self):
         return self.bonus.to_real_world_currency(self.session)
+
+
+
 
 
 
@@ -430,20 +472,20 @@ class Player(BasePlayer):
     #             and self.quiz_3b == Const.answers[3]:
     #         self.everything_correct = True
     #         return True
-    #
     #     self.everything_correct = False
     #     return False
 
 
-    def is_equilibrium_tokens_correct(self):
-        if self.quiz_1 == Const.answers[0] and self.do_once4:
-            self.payoff += 5
-            self.do_once4 = False
-        return self.quiz_1 == Const.answers[0]
+    #def is_equilibrium_tokens_correct(self):
+         # if self.quiz_1 == Const.answers[0] and self.do_once4:
+             # self.payoff += 5
+             # self.do_once4 = False
+         # return self.quiz_1 == Const.answers[0]
 
 
 
     def validate_q1(self, values):
+        print('CHECKING Q1 QUESTIONS', values)
         if self.quiz_1 == None or self.q1_correct == True:
             return False
         else:
@@ -523,10 +565,6 @@ class Player(BasePlayer):
         return self.quiz_3b == Const.answers[3]
 
 
-    def display_instructions_again(self):
-        display = self.in_round(Const.num_rounds / 2)
-        return display.everything_correct
-
 
     def display_instructions(self):
         if self.round_number == 1:
@@ -534,6 +572,11 @@ class Player(BasePlayer):
         if self.round_number == Const.num_rounds / 2 + 1:
             return not self.display_instructions_again()
         return False
+
+
+    def display_instructions_again(self):
+        display = self.in_round(Const.num_rounds / 2)
+        return display.everything_correct
 
 
     def how_many_good_answers(self):
@@ -666,8 +709,6 @@ class Player(BasePlayer):
     page_attempts = models.IntegerField(initial=0)
     q1_attempts = models.IntegerField(initial=0)
     q1_correct = models.BooleanField(initial=False)
-
-
     q3_attempts = models.IntegerField(initial=0)
     q3a_correct = models.BooleanField(initial=False)
     q3b_correct = models.BooleanField(initial=False)

@@ -4,7 +4,6 @@ from otree.api import currency_range
 from main_app import models
 from ._builtin import Page, WaitPage
 from .constants import Constants
-from .quiz import Quiz
 
 class IntroConsent(Page):
     """Introduction: Consent Form"""
@@ -29,16 +28,17 @@ class IntroOutline(Page):
 class IntroIntroduction(Page):
     """Page Docstring"""
     def is_displayed(self):
-        return (self.round_number == 1 and self.player.page_attempts == 0) \
-            or (self.round_number == 2 and self.player.repeatQuiz1)
+        return (self.round_number == 1 \
+            and self.player.page_attempts == 0) \
+            or (self.round_number == 2 \
+            and self.player.repeatQuiz1)
 
 
-    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
-            'reduction_goal': '60',
-            'game_players': '24',
+            'reduction_goal': Constants.reduction_goal,
+            'game_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
         }
 
@@ -64,7 +64,7 @@ class IntroGameplay(Page):
         return {
             'progress': 'Introduction',
             'game_players': '25',
-            'game_tokens': '10',
+            'game_tokens': Constants.game_tokens,
             'optimal_contribution': '6',
             'reduction_goal': '60',
             'game_rounds': Constants.game_rounds,
@@ -85,9 +85,9 @@ class IntroFinancialOutcomes(Page):
         return  {
             'progress': 'Introduction',
             'game_players': '25',
-            'game_tokens': '10',
             'optimal_contribution': '6',
             'reduction_goal': '60',
+            'game_tokens': Constants.game_tokens,
             'game_rounds': Constants.game_rounds,
             'token_goal': Constants.game_goal,
             'token_value': '.01'
@@ -404,7 +404,13 @@ class Quiz4(Page):
 class EnergyGameIntro(Page):
     """Page Docstring"""
     def is_displayed(self):
+        print('self.round_number', self.round_number)
+        print('self.player.', str(self.player))
+        # print('sesion.vars', self.session.vars)
+        # print('participant.vars', self.player.participant.vars)
+
         return self.round_number == 2
+
 
     def vars_for_template(self):
         return {'progress': 'Game'}
