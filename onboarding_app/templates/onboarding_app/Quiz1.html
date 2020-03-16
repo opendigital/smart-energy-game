@@ -4,6 +4,7 @@
 {% block title %} Quiz 1 {% endblock %}
 
 {% block content %}
+{% include './scripts/quiz.html' %}
 
 <div class="card bg-transparent">
   <div class="card-header">
@@ -25,6 +26,7 @@
   {% include './blocks/quiz-buttons.html' %}
 
 </div>
+
 <script>
 var fields = document.querySelectorAll('.form-check-input');
 for (var field of fields) {

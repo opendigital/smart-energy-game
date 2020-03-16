@@ -94,49 +94,14 @@ def get_likert_field(_label, _choices):
 
 
 
-class Quiz(BaseSubsession):
-    def __init__(self):
-        self.values = ''
-
-    true_false = [
-        "True",
-        "False"
-    ]
-
-    quiz1a = dict(
-        label='On average, how many tokens will each player need \
-            to invest into the group conservation account in each round in order \
-            to meet the 60% group conservation goal?',
-        choices=[
-            "2 tokens",
-            "3 tokens",
-            "6 tokens",
-            "11 tokens"
-        ],
-        answer='6 tokens',
-        hint='To meet the 60% energy conservation goal, each player should contribute 6 energy \
-            tokens each month to the group conservation account, resulting in 900 energy \
-            tokens at the end of the game.',
-    )
-
-    q2 = dict(
-        label='For each energy token in the group conservation \
-            account $0.01 is contributed to Carbonfund.org to reduce actual \
-            air pollution in the real world?',
-        choices=true_false,
-        answer='True',
-        hint='Each token in the group conservation account equals $0.01 dollars. The \
-            dollar value of the group conservation account is contributed to Carbonfund.org.',
-    )
-
-
-
-
-
 class Subsession(BaseSubsession):
 
     def creating_session(self):
         print('in creating_session', self.round_number)
+
+    def vars_for_admin_report(self):
+        payoffs = sorted([p.payoff for p in self.get_players()])
+        return dict(payoffs=payoffs)
 
 
     def quiz(self):

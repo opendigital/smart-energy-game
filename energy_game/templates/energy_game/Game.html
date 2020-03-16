@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}Energy Game{% endblock %}
+
+{% block content %}
+<style>
+
+</style>
+<div class="card bg-transparent">
+
+  <div class="card-header">
+    <h1>ENERGY GAME</h1>
+  </div>
+
+  <div class="card-body">
+
+    <div class="form-control-errors" id="errors">{{ form.contribution.errors }}</div>
+    <div class="card game-card z1 gradient_bg-lt">
+      <h2 class="card-title game-title">MONTH {{ current_round }} ({{ current_month }})</h2>
+
+      <div class="card-body">
+        <h4>You have <span class="pr">10</span> energy tokens.</h4>
+
+        <div class="game-row flex flex-vcenter">
+          <label>How much energy do you want to contribute to the group conservation account this month?</label>
+          <input id="contribution_box"
+            class="token-box color-conserve mx-2"
+            name="contribution"
+            onchange="document.getElementById('private_box').setAttribute('value', 10-this.value)"
+            min="0"
+            max="10"
+            type="number"
+            >
+        </div>
+
+      <div class="game-row flex flex-vcenter">
+        <label class="flex flex-vcenter">How much energy do you want to keep in your private account this month?</label>
+        <div id="personal" class="color-personal token-box input-paceholder"></div>
+          <input name="private_contribution"
+            id="private_box"
+            min="0"
+            max="10"
+            type="number"
+            style="display:none"
+            >
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% include './blocks/next-button.html' %}
+</div>
+<script src="{% static 'main_app/game.js' %}"></script>
+{% endblock %}

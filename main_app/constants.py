@@ -8,6 +8,11 @@ class Constants(BaseConstants):
     def __init__(self):
         self.values = ''
 
+    template_config = dict(
+        debug_vars=True,
+        debug_jsvars=False
+    )
+
     multiplier = 2
     name_in_url = 'energy-game'
     players_per_group = None

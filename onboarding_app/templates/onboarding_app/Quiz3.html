@@ -4,6 +4,8 @@
 {% block title %} Quiz 3 {% endblock %}
 
 {% block content %}
+{% include './scripts/quiz.html' %}
+
 <div class="card bg-transparent">
   <div class="card-header">
     <h1>COMPREHENSION QUIZ 3/4</h1>
@@ -23,18 +25,12 @@
       {{ form.q3b.label_tag }}
       {{ form.q3b }}
       {{ form.q3b.errors }}
+
       {% include './blocks/message-box.html' with field_id=form.q3b.html_name hint_text=q3_hint.1 %}
     </div>
-
   </div>
 
   {% include './blocks/quiz-buttons.html' %}
 
 </div>
-<script>
-var fields = document.querySelectorAll('.form-check-input');
-for (var field of fields) {
-  field.checked = false;
-}
-</script>
 {% endblock %}

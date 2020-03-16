@@ -1,3 +1,5 @@
+import json
+import inspect
 from otree.api import (
     models,
     widgets,
@@ -16,6 +18,21 @@ doc = """
 Your app description
 """
 
+def print_var(somevar, title=""):
+    if title is not "":
+        print(title)
+
+    variables = [i for i in dir(somevar) if not inspect.ismethod(i)]
+    print(json.dumps(somevar, separators=(". ", ":"), indent=4))
+
+def obj_dump(obj, title=""):
+    if title is not "":
+        print("")
+        print(title)
+
+    vars = obj.__dict__.keys()
+    for v in vars:
+        print(v, '\t\t', getattr(obj, v))
 
 def isset(arg):
     print("testing argument", arg)
@@ -34,6 +51,12 @@ def isset(arg):
 
 
 class Constants(BaseConstants):
+
+    template_config = dict(
+        debug_vars=True,
+        debug_jsvars=False
+    )
+
     name_in_url = 'onboarding_app'
     players_per_group = None
     num_rounds = 1
@@ -45,12 +68,10 @@ class Constants(BaseConstants):
     token_goal = 6
     token_value = .01
     quiz_max_attempts = 2
-
     true_false = [
         "True",
         "False"
     ]
-
     MONTHS = [
         'JANUARY',
         'FEBRUARY',
@@ -73,9 +94,7 @@ class Constants(BaseConstants):
 
     q1 = [
         dict(
-            label="On average, how many tokens will each player need \
-                to invest into the group conservation account in each round in order \
-                to meet the 60% group conservation goal?",
+            label="On average, how many tokens will each player need to invest into the group conservation account in each round in order to meet the 60% group conservation goal",
             choices=["2 tokens", "3 tokens", "6 tokens", "11 tokens"],
             answer="6 tokens",
             hint="To meet the 60% energy conservation goal, each player should contribute 6 energy \
@@ -86,9 +105,7 @@ class Constants(BaseConstants):
 
     q2 = [
         dict(
-            label='For each energy token in the group conservation \
-                account $0.01 is contributed to Carbonfund.org to reduce actual \
-                air pollution in the real world?',
+            label='For each energy token in the group conservation account $0.01 is contributed to Carbonfund.org to reduce actual air pollution in the real world',
             choices=true_false,
             answer='True',
             hint='Each token in the group conservation account equals $0.01 dollars. The \
@@ -98,9 +115,7 @@ class Constants(BaseConstants):
 
     q3 = [
         dict(
-            label="You will have greater earnings than others if you put all of your \
-                energy tokens in your private account, while others contribute all of theirs to the \
-                group conservation account.",
+            label="You will have greater earnings than others if you put all of your energy tokens in your private account, while others contribute all of theirs to the group conservation account",
             choices=true_false,
             answer="True",
             hint="You will have greater earnings if you put all of your energy tokens in your \
@@ -110,23 +125,26 @@ class Constants(BaseConstants):
                 $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
         ),
         dict(
-            label='True or False: The group will maximize its earning if all players contribute 6 of \
-                their energy tokens to the group conservation account each month.',
+            label='True or False: The group will maximize its earning if all players contribute 6 of their energy tokens to the group conservation account each month',
             choices=true_false,
             answer="True",
             hint="The group gets the maximum financial payment if all players contribute \
                 all 10 tokens in the conservation account in each month (25 players \
                 &times; 10 tokens &times; 6 months &times; $.01 = $15). Every player then gets an equal \
                 share of the maximum bonus possible, which is double the value of the \
-                tokens in the conservation account (2 &times; $15 / 25 players = $1.20).",
+                tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20).",
         )
     ]
 
     q4 = [
         dict(
-            label="My payout from my personal account is",
-            answer="$1.00",
-            choices=["$0.00", "$1.00", "$2.00"],
+            label="My payout from my private account is",
+            answer=2,
+            choices=[
+                [1, "$0.00"],
+                [2, "$0.30"],
+                [3, "$3.00"],
+            ],
             hint="You will have greater earnings if you put all of your energy tokens in your \
                 private account, while others contribute all of their tokens in the group conservation account, \
                 because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
@@ -134,23 +152,27 @@ class Constants(BaseConstants):
                 $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
         ),
         dict(
-            label='Total payou"$1.t is (personal plus conservation)',
-            choices=["$6.00", "$8.00", "$16.00"],
-            answer="$18.18",
+            label="My bonus payout from the group conservation account is",
+            answer=1,
+            choices=[
+                [1, "$0.72"],
+                [2, "$1.00"],
+                [3, "$2.72"],
+            ],
             hint="The group gets the maximum financial payment if all players contribute all 10 tokens in the \
                 conservation account in each month (25 players &times; 10 tokens &times; 6 months &times; $.01 = $15). \
                 Every player then gets an equal share of the maximum bonus possible, which is \
-                double the value of the tokens in the conservation account (2 &times; $15 / 25 players = $1.20). \
+                double the value of the tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20). \
                 (If wrong take back to 2nd page of EXAMPLES: half a table)",
         ),
         dict(
-            label="My payout from my personal account is",
+            label="Total payout is (private plus group conservation bonus)",
+            answer=2,
             choices=[
-                "$7.00",
-                "$10.00",
-                "$17.00"
-            ],
-            answer="$19.18",
+                [1, "$0.50"],
+                [2, "$1.02"],
+                [3, "$3.72"],
+             ],
             hint="You will have greater earnings if you put all of your energy tokens in your \
                 private account, while others contribute all of their tokens in the group conservation account, \
                 because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
@@ -158,19 +180,27 @@ class Constants(BaseConstants):
                 $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
         ),
         dict(
-            label='My payout from my personal account is',
-            choices=["$0.00", "$1.00", "$2.00"],
-            answer="$1.00",
+            label="My payout from my personal account is",
+            answer=2,
+            choices=[
+                [1, "$0.00"],
+                [2, "$0.30"],
+                [3, "$3.00"],
+            ],
             hint="The group gets the maximum financial payment if all players contribute all 10 tokens in the \
                 conservation account in each month (25 players &times; 10 tokens &times; 6 months &times; $.01 = $15). \
                 Every player then gets an equal share of the maximum bonus possible, which is \
-                double the value of the tokens in the conservation account (2 &times; $15 / 25 players = $1.20). \
+                double the value of the tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20). \
                 (If wrong take back to 2nd page of EXAMPLES: half a table)",
         ),
         dict(
             label="My payout from the group conservation account is",
-            choices=["$0.00", "$0.80", "$2.00"],
-            answer="$0.00",
+            answer=1,
+            choices=[
+                [1, "$0.00"],
+                [2, "$1.00"],
+                [3, "$2.00"],
+            ],
             hint="You will have greater earnings if you put all of your energy tokens in your \
                 private account, while others contribute all of their tokens in the group conservation account, \
                 because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
@@ -178,13 +208,17 @@ class Constants(BaseConstants):
                 $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
         ),
         dict(
-            label='Total payout is (personal plus conservation)',
-            choices=["$1.00", "$1.80", "$3.00"],
-            answer="$1.00",
+            label="Total payout is (private plus group conservation bonus)",
+            answer=2,
+            choices=[
+                [1, "$0.00"],
+                [2, "$0.30"],
+                [3, "$3.00"]
+            ],
             hint="The group gets the maximum financial payment if all players contribute all 10 tokens in the \
                 conservation account in each month (25 players &times; 10 tokens &times; 6 months &times; $.01 = $15). \
                 Every player then gets an equal share of the maximum bonus possible, which is \
-                double the value of the tokens in the conservation account (2 &times; $15 / 25 players = $1.20). \
+                double the value of the tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20). \
                 (If wrong take back to 2nd page of EXAMPLES: half a table)",
         )
     ]
@@ -192,11 +226,35 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
+
+    def get_quiz_group(self, index):
+        return [ Constants.q1, Constants.q2,
+            Constants.q3, Constants.q4
+            ][index]
+
+    def get_keys_from_quiz_group(self, index):
+        answers = []
+        group = self.get_quiz_group(index)
+        for field in group:
+            answers.append(field["answer"])
+        print(answers)
+        return answers
+
+    def get_all_keys_from_quiz_group(self):
+        return [
+            self.get_keys_from_quiz_group(0),
+            self.get_keys_from_quiz_group(1),
+            self.get_keys_from_quiz_group(2),
+            self.get_keys_from_quiz_group(3),
+        ]
+
     def creating_session(self):
         print('in creating_session', self.round_number)
         self.session.vars["quizdata"] = 'test'
-        for p in self.get_players():
-            p.payoff = c(10)
+        session_answers = self.get_all_keys_from_quiz_group()
+        self.session.vars["answer_key"] = session_answers
+
+
 
     def review_rulepage(self):
         print('review_rulepage')
@@ -209,12 +267,12 @@ class Subsession(BaseSubsession):
             q2=0,
             q3a=0,
             q3b=0,
-            q4a1=0,
-            q4a2=0,
-            q4a3=0,
-            q4b1=0,
-            q4b2=0,
-            q4b3=0,
+            q4a=0,
+            q4b=0,
+            q4c=0,
+            q4d=0,
+            q4e=0,
+            q4f=0,
         )
 
 
@@ -224,17 +282,22 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
     page_attempts = models.IntegerField(initial=0)
     review_rules = models.IntegerField(initial=0)
 
+    def validate_field(self, test, address):
+        print(self.session_answers)
 
     def dump(obj):
         for attr in dir(obj):
             print("obj.%s = %r" % (attr, getattr(obj, attr)))
 
+    def quiz_bonus(self):
+        self.payoff += 5
+        print("Bonus Paid: New Value is", self.payoff)
+
     def init_quiz_count(self):
-        self.participant.vars['blah'] = [1, 2, 3]
+        self.participant.vars['object has no attribute blah'] = [1, 2, 3]
 
     def var_exists(self, arg):
         print("test player.vars", arg, self.player.vars)
@@ -247,124 +310,142 @@ class Player(BasePlayer):
 
     def validate_field(self, id, value, answer):
         print('validating field', id)
-        print(self.id)
-        # if value == True:
-
 
     def validate_page(self, value_set, key_set):
         print('validating field', id)
-        print(self.id)
-
-
+        print(self)
 
     def valid_q1(self, values):
-        print('CHECKING Q1 QUESTIONS', values)
-        print('q1_current', self.q1)
-        print('q1_correct', self.q1_correct)
-        print('q1_attempts', self.q1_attempts)
-        print('q1_answer', Constants.q1[0]["answer"])
+        print('CHECKING Q1 QUESTIONS')
         if self.q1_correct == True:
-            print('already correct returning')
             return True
 
-        if isset(self.q1) is not True:
-            return False
+        self.q1_attempts += 1
+        quiz_index = 0
+        answers = self.session.vars["answer_key"][quiz_index]
 
-        if self.q1 == Constants.q1[0]["answer"]:
-            print('q1 is the correct answer')
-            self.q1_attempts += 1
+        if self.q1 == answers[0] or values["q1"] == answers[0]:
             self.q1_correct = True
-
             if self.q1_attempts <= 1:
-                print('got it on the fist attempt for bonus')
-                self.payoff += 5
-
-            print('returning q1_is_valid')
+                self.quiz_bonus()
             return True
-
         else:
-            print('not returning q1_is_valid')
             return False
-
-        return self.q1_correct
-
 
     def valid_q2(self, values):
-        print('CHECKING Q2 QUESTIONS', values)
-        print('q2_current', self.q2)
-        print('q2_correct', self.q2_correct)
-        print('q2_attempts', self.q2_attempts)
-        print('q2_answer', Constants.q2[0]["answer"])
+        print('CHECKING Q2 QUESTIONS')
         if self.q2_correct == True:
-            print('already correct returning')
             return True
 
-        if isset(self.q2) is not True:
-            return False
+        self.q2_attempts += 1
+        quiz_index = 1
+        answers = self.session.vars["answer_key"][quiz_index]
 
-        if self.q2 == Constants.q2[0]["answer"]:
-            print('q2 is the correct answer')
-            self.q2_attempts += 1
+        if self.q2 == answers[0] or values["q2"] == answers[0]:
             self.q2_correct = True
             if self.q2_attempts <= 1:
-                print('got it on the fist attempt for bonus')
-                self.payoff += 5
-
-            print('returning q1_is_valid')
+                self.quiz_bonus()
             return True
-
-        print("quiz 2 attempts", self.q2_attempts)
-        self.q2_attempts += 1
-
-        if self.q2 == Constants.q2[0]["answer"]:
-            self.q2_correct = True
-
-            if self.q2_attempts == 1:
-                print("first try", self.q2_attempts)
-                self.payoff += 5
-
-        return self.q2 == Constants.q2[0]["answer"]
+        else:
+            return False
 
 
     def valid_q3(self, values):
-        print('CHECKING Q3 QUESTIONS', values)
-        print('q3_current', self.q3a, self.q3b)
-        print('q3a_correct', self.q3a_correct, self.q3b_correct)
-        print('q3a_attempts', self.q3a_attempts)
-        print('q3b_attempts', self.q3b_attempts)
-        print('q3_answer', Constants.q3[0]["answer"])
-        print('q3_answer', Constants.q3[1]["answer"])
-
-        if self.q3a_correct == True and self.q3b_correct == True:
-            print('already correct returning')
+        if self.q3a_correct and self.q3b_correct:
             return True
 
-        if isset(self.q3a) is not True or isset(self.q3b) is not True:
-            return False
+        quiz_index = 2
+        answers = self.session.vars["answer_key"][quiz_index]
 
-        if self.q3a == Constants.q3[0]["answer"]:
-            print('q3a is the correct answer')
+        if self.q3a_correct is not True:
             self.q3a_attempts += 1
-            self.q3a_correct = True
+            if self.q3a == answers[0] or values["q3a"] == answers[0]:
+                self.q3a_correct = True
+                if self.q3a_attempts <= 1:
+                    self.quiz_bonus()
 
-        if self.q3b == Constants.q3[0]["answer"]:
-            print('q3a is the correct answer')
-            self.q3a_attempts += 1
-            self.q3a_correct = True
+        if self.q3b_correct is not True:
+            self.q3b_attempts += 1
+            if self.q3b == answers[1] or values["q3b"] == answers[1]:
+                self.q3b_correct = True
+                if self.q3b_attempts <= 1:
+                    self.quiz_bonus()
+
+        return [
+            self.q3a_correct,
+            self.q3b_correct
+        ]
 
 
-            if self.q3a_attempts <= 1:
-                print('got it on the fist attempt for bonus')
-                self.payoff += 5
 
-            print('returning q1_is_valid')
-            return True
+    def valid_q4(self, values):
+        print('CHECKING Q4 QUESTIONS', values)
+        quiz_index = 3
+        answers = self.session.vars["answer_key"][quiz_index]
 
-        self.q3a_attempts += 1
-        print("quiz 2 attempts", self.q3a_attempts)
-        #         if self.q3_attempts == 1:
-        #             self.payoff += 5
-        return self.q3 == Constants.q3[0]["answer"]
+        if self.q4a_correct is not True:
+            self.q4a_attempts += 1
+            if self.q4a == answers[0] or values["q4a"] == answers[0]:
+                self.q4a_correct = True
+                if self.q4a_attempts <= 1:
+                    self.quiz_bonus()
+
+        if self.q4b_correct is not True:
+            print('4b not correct', self.q4a_correct)
+            print('4b attempts', self.q4a_attempts)
+            self.q4b_attempts += 1
+            print('q4b is', self.q4b)
+            print('answer is', answers[1])
+            print('new value is', values["q4b"])
+
+            if self.q4b == answers[1] or values["q4b"] == answers[1]:
+                self.q4b_correct = True
+                if self.q4b_attempts <= 1:
+                    self.quiz_bonus()
+
+        if self.q4c_correct is not True:
+            self.q4c_attempts += 1
+            if self.q4c == answers[2] or values["q4c"] == answers[2]:
+                self.q4c_correct = True
+                if self.q4c_attempts <= 1:
+                    self.quiz_bonus()
+
+
+        if self.q4d_correct is not True:
+            self.q4d_attempts += 1
+            if self.q4d == answers[3] or values["q4d"] == answers[3]:
+                self.q4d_correct = True
+                if self.q4d_attempts <= 1:
+                    self.quiz_bonus()
+
+        if self.q4e_correct is not True:
+            self.q4e_attempts += 1
+            if self.q4e == answers[4] or values["q4e"] == answers[4]:
+                self.q4e_correct = True
+                if self.q4e_attempts <= 1:
+                    self.quiz_bonus()
+
+        if self.q4f_correct is not True:
+            self.q4f_attempts += 1
+            if self.q4f == answers[5] or values["q4f"] == answers[5]:
+                self.q4f_correct = True
+                if self.q4f_attempts <= 1:
+                    self.quiz_bonus()
+
+        q4_all_correct = [
+            self.q4a_correct,
+            self.q4b_correct,
+            self.q4c_correct,
+            self.q4d_correct,
+            self.q4e_correct,
+            self.q4f_correct,
+        ]
+
+        return q4_all_correct
+
+
+
+
 
 
     # QUIZES
@@ -390,55 +471,63 @@ class Player(BasePlayer):
     q3a_correct = models.BooleanField(initial=False)
     q3a_attempts = models.IntegerField(initial=0)
 
-    q3b = models.BooleanField(
+    q3b = models.StringField(
         label=Constants.q3[1]["label"],
         widget=widgets.RadioSelect
     )
     q3b_correct = models.BooleanField(initial=False)
     q3b_attempts = models.IntegerField(initial=0)
 
-    q4a1 = models.StringField(
+
+    q4a = models.IntegerField(
         label=Constants.q4[0]["label"],
         widget=widgets.RadioSelectHorizontal,
+        choices=Constants.q4[0]["choices"]
     )
-    q4a1_correct = models.BooleanField(initial=False)
-    q4a1_attempts = models.IntegerField(initial=0)
 
-    q4a2 = models.StringField(
+    q4b = models.IntegerField(
         label=Constants.q4[1]["label"],
         widget=widgets.RadioSelectHorizontal,
+        choices=Constants.q4[1]["choices"]
     )
-    q4a2_correct = models.BooleanField(initial=False)
-    q4a2_attempts = models.IntegerField(initial=0)
 
-    q4a3 = models.StringField(
+    q4c = models.IntegerField(
         label=Constants.q4[2]["label"],
         widget=widgets.RadioSelectHorizontal,
+        choices=Constants.q4[2]["choices"]
     )
-    q4a3_correct = models.BooleanField(initial=False)
-    q4a3_attempts = models.IntegerField(initial=0)
 
-    q4b1 = models.StringField(
+    q4d = models.IntegerField(
         label=Constants.q4[3]["label"],
         widget=widgets.RadioSelectHorizontal,
+        choices=Constants.q4[3]["choices"]
     )
-    q4b1_correct = models.BooleanField(initial=False)
-    q4b1_attempts = models.IntegerField(initial=0)
 
-    q4b2 = models.StringField(
+    q4e = models.IntegerField(
         label=Constants.q4[4]["label"],
         widget=widgets.RadioSelectHorizontal,
+        choices=Constants.q4[4]["choices"]
     )
-    q4b2_correct = models.BooleanField(initial=False)
-    q4b2_attempts = models.IntegerField(initial=0)
 
-    q4b3 = models.StringField(
+    q4f = models.IntegerField(
         label=Constants.q4[5]["label"],
         widget=widgets.RadioSelectHorizontal,
+        choices=Constants.q4[5]["choices"]
     )
 
-    q4b3_correct = models.BooleanField(initial=False)
-    q4b3_attempts = models.IntegerField(initial=0)
+    q4a_attempts = models.IntegerField(initial=0)
+    q4a_correct = models.BooleanField(initial=False)
+    q4b_attempts = models.IntegerField(initial=0)
+    q4b_correct = models.BooleanField(initial=False)
+    q4c_attempts = models.IntegerField(initial=0)
+    q4c_correct = models.BooleanField(initial=False)
+    q4d_attempts = models.IntegerField(initial=0)
+    q4d_correct = models.BooleanField(initial=False)
+    q4e_attempts = models.IntegerField(initial=0)
+    q4e_correct = models.BooleanField(initial=False)
+    q4f_attempts = models.IntegerField(initial=0)
+    q4f_correct = models.BooleanField(initial=False)
+
 
     def all_rounds_group_random_contribution(self):
         return sum([p.group_random_total_contribution for p in self.in_rounds(1, self.round_number)])
@@ -458,3 +547,4 @@ class Player(BasePlayer):
     group_random_total_contribution = models.CurrencyField()
 
     participant_vars_dump = models.LongStringField()
+    quiz_result = models.LongStringField()

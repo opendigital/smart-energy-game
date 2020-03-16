@@ -1,0 +1,59 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}Survey #2{% endblock %}
+
+{% block content %}
+<style>
+.form-group .controls > ul {
+  flex: 1;
+
+}
+</style>
+<div class="card bg-transparent">
+
+  <div class="card-header">
+    <h1>POST-GAME SURVEY 2/4</h1>
+  </div>
+  <div class="card-body">
+    <strong>Please answer as honestly as possible. Remember your responses are anonymous.</strong>
+
+    <table class="table" style="text-align: center;">
+      <tr style="background: linear-gradient(to right,#EFF0F0,#b5b5b5)">
+        <th>Not at all concerned<br>0</th>
+        <th></th>
+        <th></th>
+        <th>--></th>
+        <th></th>
+        <th></th>
+        <th>Moderately concerned <br>3</th>
+        <th></th>
+        <th></th>
+        <th>--></th>
+        <th></th>
+        <th></th>
+        <th>Extremely concerned<br>6</th>
+      </tr>
+    </table>
+
+    <table style="width: 100%">
+      {% formfields %}
+    </table>
+  </div>
+
+  {% include './blocks/next-button.html' %}
+</div>
+
+<script>
+errors = document.getElementsByClassName("otree-form-errors alert alert-danger").item(0)
+if (errors != null) {
+  errors.style.background = "red"
+  errors.style.borderColor = "transparent"
+  errors.style.textAlign = "center"
+
+  errors.innerHTML="<e style=\"color:white;\"><B>Please fill this form completely.</b></e>"
+}else{
+  console.log(errors)
+}
+</script>
+{% endblock %}

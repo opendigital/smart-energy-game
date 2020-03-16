@@ -1,26 +1,20 @@
 import random
+import json
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-
-class MyPage(Page):
-    def is_displayed(self):
-        print('self.round_number', self.round_number)
-        return self.round_number == 1
-
-    def vars_for_template(self):
-        return {'progress': 'Consent'}
-
+def print_var(somevar, title=""):
+    if title is not "":
+        print(title)
+    print(json.dumps(somevar, separators=(". ", ":"), indent=4))
 
 class Results(Page):
     def vars_for_template(self):
         return {'progress': 'Consent'}
 
 
-
-
-class IntroConsent(Page):
+class Intro1(Page):
     """Introduction: Consent Form"""
     def is_displayed(self):
         return self.player.round_number == 1
@@ -29,7 +23,7 @@ class IntroConsent(Page):
         return {'progress': 'Consent'}
 
 
-class IntroOutline(Page):
+class Intro2(Page):
     def is_displayed(self):
         return self.round_number == 1
 
@@ -37,11 +31,10 @@ class IntroOutline(Page):
         return {'progress': 'Introduction'}
 
 
-class IntroOverview(Page):
+class Intro3(Page):
     def is_displayed(self):
         return (self.round_number == 1 \
-            and self.player.page_attempts == 0) \
-            or (self.round_number == 2 \
+            or (self.round_number == 2) \
             and self.player.repeatQuiz1)
 
 
@@ -53,11 +46,9 @@ class IntroOverview(Page):
             'game_rounds': Constants.game_rounds,
         }
 
-    def before_next_page(self):
-        self.player.page_attempts += 1
 
 
-class IntroStructure(Page):
+class Intro4(Page):
     def is_displayed(self):
         return self.round_number == 1
 
@@ -75,7 +66,7 @@ class IntroStructure(Page):
 
 
 
-class IntroGameplay(Page):
+class Intro5(Page):
     def is_displayed(self):
         return (self.round_number == 1)
 
@@ -93,7 +84,7 @@ class IntroGameplay(Page):
 
 
 
-class IntroFinancialOutcomes(Page):
+class Intro6(Page):
     def is_displayed(self):
         return self.round_number == 1
 
@@ -111,7 +102,7 @@ class IntroFinancialOutcomes(Page):
         }
 
 
-class IntroEnvironOutcomes(Page):
+class Intro7(Page):
     def is_displayed(self):
         return self.round_number == 1
 
@@ -126,10 +117,6 @@ class IntroEnvironOutcomes(Page):
             'reduction_goal': Constants.reduction_goal,
             'token_value': Constants.token_value,
         }
-
-
-    # def before_next_page(self):
-    #     self.player.page_attempts += 1
 
 
 class Examples(Page):
@@ -148,17 +135,15 @@ class Example1(Page):
         return {
             'progress': 'Examples',
             'game_goal': '60',
+            '_debuger_vars': '789987070',
             'classes': {
                 'row1': 'badge-success',
                 'row2': 'hide',
                 'row3': 'hide',
                 'row4': 'hide',
                 'row5': 'hide',
-            }
+             }
         }
-
-    # def before_next_page(self):
-    #     self.player.timesInstruction4 += 1
 
 
 class Example2(Page):
@@ -176,9 +161,6 @@ class Example2(Page):
                 'row5': 'hide',
             }
         }
-
-    # def before_next_page(self):
-    #     self.player.timesInstruction3a += 1
 
 
 class Example3(Page):
@@ -241,6 +223,7 @@ class PracticeGame(Page):
 
 
 
+
 class PracticeResults(Page):
     def is_displayed(self):
         return self.round_number <= 1
@@ -270,6 +253,7 @@ class Quiz1(Page):
     def is_displayed(self):
         print('self.session.vars', self.session.vars)
         print('self.player', self.player.participant.vars)
+        print_var(self.session.vars)
 
         return self.round_number == 1 \
             and self.player.q1_attempts <= Constants.quiz_max_attempts \
@@ -277,7 +261,10 @@ class Quiz1(Page):
 
 
     def vars_for_template(self):
+        player_string = json.dumps(self.session.vars, separators=(". ", ":"), indent=4)
+        print('self.player', player_string)
         return {
+            'js_vars': json.dumps(Constants.template_config),
             'progress': 'Quiz',
             'q1_attempts': self.player.q1_attempts,
             'q1_correct': self.player.q1_correct,
@@ -310,9 +297,9 @@ class Quiz2(Page):
 
     def vars_for_template(self):
         print('self.session.vars', self.session.vars)
-        print('self.player')
         return {
             'progress': 'Quiz',
+            'debug_vars': json.dumps(self.session.vars),
             'show_hint': self.player.q2_attempts > Constants.quiz_max_attempts,
             'q2_attempts': self.player.q2_attempts,
             'q2_correct': self.player.q2_correct,
@@ -362,6 +349,8 @@ class Quiz3(Page):
                 q3a=Constants.q3[0]["answer"],
                 q3b=Constants.q3[1]["answer"],
             ),
+            'q3a_choices': Constants.q3[0]["choices"],
+            'q3b_choices': Constants.q3[1]["choices"],
             'q3a_attempts': self.player.q3a_attempts,
             'q3b_attempts': self.player.q3b_attempts,
             'q3_hint': [
@@ -384,7 +373,7 @@ class Quiz3(Page):
         return choices1
 
     def q3b_choices(self):
-        choices2 = Constants.q3[1]["choices"],
+        choices2 = Constants.q3[1]["choices"]
         random.shuffle(choices2)
         return choices2
 
@@ -397,48 +386,80 @@ class Quiz3(Page):
             self.player.review_rules = 0
 
 
-    # def before_next_page(self):
-        # if self.player.valid_q3():
-        #     self.player.page_attempts = 0
-        # else:
-        #     self.player.page_attempts = 1
-
-
-
 
 class Quiz4(Page):
+    form_model = "player"
     form_fields = [
-        'quiz_4a1',
-        'quiz_4a2',
-        'quiz_4a3',
-        'quiz_4b1',
-        'quiz_4b2',
-        'quiz_4b3'
+        "q4a",
+        "q4b",
+        "q4c",
+        "q4d",
+        "q4e",
+        "q4f",
     ]
 
     def vars_for_template(self):
+        answer_key = dict(
+            q4a=Constants.q4[0]["answer"],
+            q4b=Constants.q4[1]["answer"],
+            q4c=Constants.q4[2]["answer"],
+            q4d=Constants.q4[3]["answer"],
+            q4e=Constants.q4[4]["answer"],
+            q4f=Constants.q4[5]["answer"],
+        )
+        hint_text = [
+            Constants.q4[0]["hint"],
+            Constants.q4[1]["hint"],
+            Constants.q4[2]["hint"],
+            Constants.q4[3]["hint"],
+            Constants.q4[4]["hint"],
+            Constants.q4[5]["hint"],
+        ]
         return {
+            'js_vars': Constants.q4,
             'progress': 'Quiz',
-            'correct_answer': '$1.00',
-            'correct_answer2': '$16.00',
-            'correct_answer3': '$17.00',
-            'correct_answer4': '$1.00',
-            'correct_answer5': '$0.00',
-            'correct_answer6': '$1.00'
+            'show_hint': self.player.q4a_attempts > 2,
+            'answer_key': answer_key,
+            'q4_hints': hint_text,
         }
 
+
     def is_displayed(self):
-        return self.round_number == 1
-        # return self.round_number == 2 \
-            # and self.player.timesInstruction4 <= 1 \
-            # and not self.player.is_all_values_right()
+        num_correct = 0
+        iscorrect = [
+            self.player.q4a_correct,
+            self.player.q4b_correct,
+            self.player.q4c_correct,
+            self.player.q4d_correct,
+            self.player.q4e_correct,
+            self.player.q4f_correct,
+        ]
+        for q in iscorrect:
+            if q is True:
+                num_correct += 1
 
-    # def before_next_page(self):
-    #     if self.player.is_all_values_right():
-    #         self.player.repeatQuiz4 = False
-    #     else:
-    #         self.player.repeatQuiz4 = True
+        print('\n\n\n 4 total correct is', num_correct, 'attempt', self.player.q4a_attempts)
+        if self.player.q4a_attempts < Constants.quiz_max_attempts \
+            and num_correct == 6:
+            return False
+        else:
+            return True
 
+
+    def error_message(self, values):
+        print("checking", values)
+        valid = self.player.valid_q4(values)
+        print(valid)
+        if valid[0] is not True \
+            or valid[1] is not True \
+            or valid[2] is not True \
+            or valid[3] is not True \
+            or valid[4] is not True \
+            or valid[5] is not True:
+            self.player.review_rules = 4
+            return "You did not get all the questoins correct"
+        else:
+            self.player.review_rules = 0
 
 
 
@@ -482,17 +503,39 @@ class ReviewGameRules(Page):
         self.player.review_rules = 0
 
 
+class GameIntro(Page):
+    def is_displayed(self):
+        return self.round_number >= 1
+
+    def before_next_page(self):
+        quiz_history = [
+            self.player.q1_attempts,
+            self.player.q2_attempts,
+            self.player.q3a_attempts,
+            self.player.q3b_attempts,
+            self.player.q4a_attempts,
+            self.player.q4b_attempts,
+            self.player.q4c_attempts,
+            self.player.q4d_attempts,
+            self.player.q4e_attempts,
+            self.player.q4f_attempts,
+        ]
+        self.player.quiz_result = str(quiz_history)
+
+    def vars_for_template(self):
+        return {'progress': 'Game'}
+
+
 
 
 page_sequence = [
-    MyPage,
-    IntroConsent,
-    IntroOutline,
-    IntroOverview,
-    IntroStructure,
-    IntroGameplay,
-    IntroFinancialOutcomes,
-    IntroEnvironOutcomes,
+    Intro1,
+    Intro2,
+    Intro3,
+    Intro4,
+    Intro5,
+    Intro6,
+    Intro7,
     Examples,
     Example1,
     Example2,
@@ -500,17 +543,17 @@ page_sequence = [
     PracticeIntro,
     PracticeGame,
     PracticeResults,
-    # QUIZ
-    Quiz,
-    Quiz1,     # Q1
-    Quiz2,     # Q2
-    ReviewGameRules, # IntroEnvironOutcomes,
+    Quiz,            # QUIZ
+    Quiz1,           # Q1
+    Quiz2,           # Q2
+    ReviewGameRules, # -- REVIEW
     Quiz2,
-    Quiz3,     # Q3
+    Quiz3,           # Q3
     ReviewGameRules, # Example2,
     ReviewGameRules, # Example3,
     Quiz3,
-    Quiz4,     # Q4
+    Quiz4,           # Q4
     ReviewGameRules, # Example1,
     Quiz4,
+    GameIntro,
 ]

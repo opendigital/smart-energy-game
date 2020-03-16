@@ -63,4 +63,7 @@ switch (progress) {
   break;
 }
 </script>
+{% if Constants.template_config.debug_jsvars %}
+  {% include './util/debug_to_js.html' %}
+{% endif %}
 {% endblock %}

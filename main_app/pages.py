@@ -127,7 +127,6 @@ class Example1(Page):
         return(self.round_number == 1 and self.player.timesInstruction4 == 0) \
             or (self.round_number == 2 and self.player.repeatQuiz4)
 
-    """template variables"""
     def vars_for_template(self):
         return {
             'progress': 'Examples',
@@ -401,24 +400,9 @@ class Quiz4(Page):
             self.player.repeatQuiz4 = True
 
 
-class EnergyGameIntro(Page):
-    """Page Docstring"""
-    def is_displayed(self):
-        print('self.round_number', self.round_number)
-        print('self.player.', str(self.player))
-        # print('sesion.vars', self.session.vars)
-        # print('participant.vars', self.player.participant.vars)
-
-        return self.round_number == 2
 
 
-    def vars_for_template(self):
-        return {'progress': 'Game'}
-
-
-
-
-class EnergyGame(Page):
+class Game(Page):
     """Page Docstring"""
     form_model = 'player'
     form_fields = [
@@ -639,8 +623,6 @@ class PostSurvey4(Page):
 
 
 
-
-
 class Debriefing(Page):
     """Page Docstring"""
     def is_displayed(self):
@@ -679,8 +661,8 @@ page_sequence = [
     # Quiz4,
     # Example1,
     # Quiz4,
-    EnergyGameIntro,
-    EnergyGame,
+    GameIntro,
+    Game,
     ResultsWaitPage,
     Results,
     Congrats,

@@ -4,239 +4,66 @@
 {% block title %} Quiz 4 {% endblock %}
 
 {% block content %}
+{% include './scripts/quiz.html' %}
 
 <div class="card bg-transparent">
-  <h1>SAMPLE COMPREHENSION QUIZ 4/4</h1>
-  <div class="card-body">
-    <p>Q4.a:</p>
-    <p>
-      If there are 900 tokens in the group conservation account at the end of the
-      game (worth $9.00) and you have 30 tokens left in your private account, then
-      how much will you receive at the end of the game?
-    </p>
-    {% formfield player.quiz_4a1 %}
-
-    <p id="Explanation"></p>
-
-    {% formfield player.quiz_4a2 %}
-
-    <p id="Explanation2"></p>
-
-    {% formfield player.quiz_4a3 %}
-
-    <p id="Explanation3"></p>
-
-    <p>Q4.b:</p>
-    <p>How would your payout at the end of the game change if the total in the group conservation account had only 850 tokens?</p>
-
-    {% formfield player.quiz_4b1 %}
-
-    <p id="Explanation4"></p>
-
-    {% formfield player.quiz_4b2 %}
-
-    <p id="Explanation5"></p>
-
-    {% formfield player.quiz_4b3 %}
-
-    <p id="Explanation6"></p>
-
-    <button style="display: block" id="checkButton" type="button" class="btn" style="background: #8d8d8d; margin-left: 80%; width: 100px">
-      Check Answer
-    </button>
-    <button style="display: none" id="nextButton" class="otree-btn-next btn" style="background: #8d8d8d; margin-left: 50%; width: 100px">
-      Next
-    </button>
+  <div class="card-header">
+    <h1>COMPREHENSION QUIZ 4/4</h1>
   </div>
+
+
+  <div class="card-body">
+    <p>Q4a: <strong>If there are 900 tokens in the group conservation account at the end of the
+      game (worth $9.00) and you have 30 tokens left in your private account (worth
+      $.30), then how much will you receive at the end of the game?</strong>
+    </p>
+    <div class="form-group" id='id_field_{{ form.q4a.html_name }}'>
+      {{ form.q4a.label_tag }}<br>
+      {{ form.q4a }}
+      {{ form.q4a.errors }}
+      {% include './blocks/message-box.html' with field_id=form.q4a.html_name hint_text=q4_hints.0 %}
+    </div>
+
+    <div class="form-group" id='id_field_{{ form.q4b.html_name }}'>
+      {{ form.q4b.label_tag }}<br>
+      {{ form.q4b }}
+      {{ form.q4b.errors }}
+      {% include './blocks/message-box.html' with field_id=form.q4b.html_name hint_text=q4_hints.1 %}
+    </div>
+
+    <div class="form-group" id='id_field_{{ form.q4c.html_name }}'>
+      {{ form.q4c.label_tag }}<br>
+      {{ form.q4c }}
+      {{ form.q4c.errors }}
+      {% include './blocks/message-box.html' with field_id=form.q4c.html_name hint_text=q4_hints.2 %}
+    </div>
+
+    <p>Q4b: <strong>How would your payout at the end of the game change if the total in the group
+conservation account had only 850 tokens?</strong>
+    </p>
+    <div class="form-group" id='id_field_{{ form.q4d.html_name }}'>
+      {{ form.q4d.label_tag }}<br>
+      {{ form.q4d }}
+      {{ form.q4d.errors }}
+      {% include './blocks/message-box.html' with field_id=form.q4d.html_name hint_text=q4_hints.3 %}
+    </div>
+    <div class="form-group" id='id_field_{{ form.q4e.html_name }}'>
+      {{ form.q4e.label_tag }}<br>
+      {{ form.q4e }}
+      {{ form.q4e.errors }}
+      {% include './blocks/message-box.html' with field_id=form.q4e.html_name hint_text=q4_hints.4 %}
+    </div>
+    <div class="form-group" id='id_field_{{ form.q4f.html_name }}'>
+      {{ form.q4f.label_tag }}<br>
+      {{ form.q4f }}
+      {{ form.q4f.errors }}
+      {% include './blocks/message-box.html' with field_id=form.q4f.html_name hint_text=q4_hints.5 %}
+    </div>
+
+  {{ form.non_field_errors }}
+
+  </div>
+  {% include './blocks/quiz-buttons.html' %}
 </div>
-<script>
-var checkButton = document.getElementById("checkButton")
-var nextButton = document.getElementById("nextButton")
-var explanation = document.getElementById("Explanation")
-var explanation2 = document.getElementById("Explanation2")
-var explanation3 = document.getElementById("Explanation3")
-var explanation4 = document.getElementById("Explanation4")
-var explanation5 = document.getElementById("Explanation5")
-var explanation6 = document.getElementById("Explanation6")
-var radioInputs = document.getElementsByClassName("form-check-input")
-
-if ('{{ player.timesInstruction4 }}' == '0') {//INITIAL FIRST TRY
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
-} else {                                       //SECOND TRY
-  checkButton.style.background = "#8d8d8d";
-  checkButton.style.marginLeft = "80%";
-  checkButton.style.width = "120px";
-
-
-  for (i = 0; i < radioInputs.length; i++) {
-    var currentRadio = radioInputs.item(i)
-    switch (i) {
-      case 0:
-      case 1:
-      case 2:
-      if (radioInputs.item(1).checked) {
-        if (!currentRadio.checked) currentRadio.disabled = true
-        explanation.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        currentRadio.checked = false;
-      }
-      break;
-      case 3:
-      case 4:
-      case 5:
-      if (radioInputs.item(3).checked) {
-        if (!currentRadio.checked) currentRadio.disabled = true
-        explanation2.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        currentRadio.checked = false;
-      }
-      break;
-      case 6:
-      case 7:
-      case 8:
-      if (radioInputs.item(8).checked) {
-        if (!currentRadio.checked) currentRadio.disabled = true
-        explanation3.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        currentRadio.checked = false;
-      }
-      break;
-      case 9:
-      case 10:
-      case 11:
-      if (radioInputs.item(10).checked) {
-        if (!currentRadio.checked) currentRadio.disabled = true
-        explanation4.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        currentRadio.checked = false;
-      }
-      break;
-      case 12:
-      case 13:
-      case 14:
-      if (radioInputs.item(12).checked) {
-        if (!currentRadio.checked) currentRadio.disabled = true
-        explanation5.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        currentRadio.checked = false;
-      }
-      break;
-      case 15:
-      case 16:
-      case 17:
-      if (radioInputs.item(1).checked) {
-        if (!currentRadio.checked) currentRadio.disabled = true
-        explanation6.innerHTML = "<e style=\"color:green\">Correct!</e> "
-      } else {
-        currentRadio.checked = false;
-      }
-      break;
-      default:
-      currentRadio.checked = false;
-    }
-  }
-}
-
-checkButton.onclick = function () {
-
-  var radioInputs = document.getElementsByClassName("form-check-input")
-  var answerSelected = ""
-  var answerSelected2 = ""
-  var answerSelected3 = ""
-  var answerSelected4 = ""
-  var answerSelected5 = ""
-  var answerSelected6 = ""
-
-  for (let i = 0; i < radioInputs.length; i++) {
-    let currentRadio = radioInputs.item(i)
-
-    switch (i) {
-      case 0:
-      case 1:
-      case 2:
-      if (currentRadio.checked) answerSelected = currentRadio.value;
-      break;
-      case 3:
-      case 4:
-      case 5:
-      if (currentRadio.checked) answerSelected2 = currentRadio.value;
-      break;
-      case 6:
-      case 7:
-      case 8:
-      if (currentRadio.checked) answerSelected3 = currentRadio.value;
-      break;
-      case 9:
-      case 10:
-      case 11:
-      if (currentRadio.checked) answerSelected4 = currentRadio.value;
-      break;
-      case 12:
-      case 13:
-      case 14:
-      if (currentRadio.checked) answerSelected5 = currentRadio.value;
-      break;
-      case 15:
-      case 16:
-      case 17:
-      if (currentRadio.checked) answerSelected6 = currentRadio.value;
-      break;
-      default:
-      //DO NOTHING
-    }
-  }
-
-  if (answerSelected != "" && answerSelected2 != "" && answerSelected3 != "" && answerSelected4 != "" && answerSelected5 != "" && answerSelected6 != "") {
-    nextButton.style.display = "block";
-    nextButton.style.background = "#8d8d8d";
-    nextButton.style.marginLeft = "80%";
-    nextButton.style.width = "100px";
-    checkButton.style.display = "none";
-
-    var answers = [answerSelected, answerSelected2, answerSelected3, answerSelected4, answerSelected5, answerSelected6]
-    var correct_answers = ["{{ correct_answer }}", "{{ correct_answer2 }}", "{{ correct_answer3 }}",
-    "{{ correct_answer4 }}", "{{ correct_answer5 }}", "{{ correct_answer6 }}"]
-    var explanations = [explanation, explanation2, explanation3, explanation4, explanation5, explanation6]
-    var textExplain = [
-      "The correct answer is $1.00. You are paid $0.10 for each of the 10 energy tokens left in your private account.",
-      "The correct answer is $16.00. The 2000 energy tokens meets the conservation goal, so they are doubled to 4000 tokens and then distributed equally to all 25 players, resulting in $16.00 bonus pay per player.",
-      "The correct answer is $17.00. Add the energy token values in your personal account ($1.00) and the bonus ($16.00) to get your final pay of $17.00.",
-      "The correct answer is $1.00. You are paid $0.10 for each of the energy tokens left in your private account, even if the group does not meet the conservation goal of 900 tokens.",
-      "The correct answer is $0.00. The 200 energy tokens do not meet the group conservation goal of 900 energy tokens, so no group bonus is paid.",
-      "The correct answer is $1.00. Add the energy token values in your private account ($1.00) and the bonus from the group conservation account ($0.00) to get your final pay of $1.00"
-    ]
-
-    for (let i = 0; i < radioInputs.length; i++) {
-      let currentRadio = radioInputs.item(i)
-      if (!currentRadio.checked) {
-        currentRadio.disabled = true;
-      }
-    }
-
-    for (i = 0; i < 6; i++) {
-      explanations[i].style.display = "block"
-      explanations[i].style.whiteSpace = "normal"
-
-      if ('{{ player.timesInstruction4 }}' == '0') {
-        if (answers[i] == correct_answers[i]) {
-          explanations[i].innerHTML = "<e style=\"color:green\">Correct!</e> "
-        } else {
-          explanations[i].innerHTML = "<e style=\"color:red\">Wrong!</e> <e style=\"color:gray\">Proceed to introduction to revise the rules of the game.</e>"
-        }
-      } else {
-        if (answers[i] == correct_answers[i]) {
-          explanations[i].innerHTML = "<e style=\"color:green\">Correct!</e> "
-        } else {
-          explanations[i].innerHTML = "<e style=\"color:red\">Wrong!</e> "
-        }
-        explanations[i].innerHTML += "<e style=\"color:gray\">" + textExplain[i] + "</e>"
-      }
-
-    }
-  }
-}
-</script>
 
 {% endblock %}
