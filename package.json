@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node .",
     "bump": "npm version patch",
-    "lint": "pylint --load-plugins pylint_django --rcfile=.pylintrc main_app/",
+    "lint": "pylint --load-plugins pylint_django --rcfile=.pylintrc main_app onboarding_app",
     "lint:fix": "autopep8 --in-place --aggressive --aggressive $TARGET_FILEPATH",
     "test": "standard"
   },

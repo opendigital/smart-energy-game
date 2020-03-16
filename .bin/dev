@@ -1,7 +1,11 @@
 #!/bin/bash
 
+
+OTREE_SERVER_VERBOSITY=2
+
 __run__() {
-  /usr/local/bin/otree devserver
+  /usr/local/bin/otree devserver --force-color --verbosity="${OTREE_SERVER_VERBOSITY}"
+
   google-chrome http://localhost:8000
 }
 
