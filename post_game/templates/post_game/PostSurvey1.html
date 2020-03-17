@@ -1,44 +1,9 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %}SAMPLE POST-GAME SURVEY 1/4{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-<style>
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group {
-  display: block;
-  justify-content: flex-start;
-}
-
-.form-group ul {
-  display: flex;
-  justify-content: space-around;
-}
-.form-group .controls {
-  justify-content: flex-start;
-}
-.flex-form-group .form-group {
-  display: flex;
-  justify-content: stretch;
-}
-.flex-form-group .form-group .controls {
-  flex: 1;
-  justify-content: space-around;
-}
-.survey-section {
-  padding: 1em;
-}
-</style>
-
-<div class="card bg-transparent">
-  <div class="card-header">
-    <h1>POST-GAME SURVEY 1/4</h1>
-  </div>
-  <div class="card-body">
+{% block page_content %}
     <section class="survey-section">
       <h2 class="survey-section-title">Please answer the below questions as honestly as possible.
         <br><span>Remember your responses are anonymous.</span>
@@ -115,10 +80,5 @@
       </div>
 
     </section>
-  </div>
-
-  {% include './blocks/next-button.html' %}
-
-</div>
 
 {% endblock %}

@@ -28,13 +28,13 @@ class PostSurvey1(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': 'Post-Game Survey 1/4',
             'progress': 'Survey'
         }
 
 
 
 class PostSurvey2(Page):
-    """Page Docstring"""
     form_model = 'player'
     form_fields = [
         's2a0',
@@ -50,6 +50,7 @@ class PostSurvey2(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': 'Post-Game Survey 2/4',
             'progress': 'Survey',
         }
 
@@ -73,13 +74,13 @@ class PostSurvey3(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': 'Post-Game Survey 3/4',
             'progress': 'Survey',
         }
 
 
 
 class PostSurvey4(Page):
-    """Page Docstring"""
     form_model = 'player'
     form_fields = [
         's4a1',
@@ -94,6 +95,7 @@ class PostSurvey4(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': 'Post-Game Survey 4/4',
             'progress': 'Survey',
         }
 
@@ -106,7 +108,10 @@ class Debriefing(Page):
         return self.player.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        return {'progress': 'End'}
+        return {
+            'page_title': 'Debriefing',
+            'progress': 'End'
+        }
 
 
 
