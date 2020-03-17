@@ -50,5 +50,8 @@ fi
 # BUILD NORMALLY
 _build_stylesheet
 
-# START WATCHING FOLDER FOR CHANGES AFTER BUILDING 
-[[ "${BUILD_OPTION}" == "dev" ]] && _build_stylesheet_dev
+# START WATCHING FOLDER FOR CHANGES AFTER BUILDING
+[[ "${BUILD_OPTION}" == "watch" ]] && _build_stylesheet_dev
+
+
+ exit 0
