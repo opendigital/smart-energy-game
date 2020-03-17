@@ -1,0 +1,54 @@
+#!/bin/bash
+
+BASE_PATH="$(npm prefix)"
+[[ -f "${BASE_PATH}/./.npmrc" ]] && . ${BASE_PATH}/./.npmrc
+
+
+# IF RUN VIA 'NPM-RUN' COMMAND INIT_CWD WILL BE THE CURRENT DIR
+# BASE_PATH IS ALWAYS THE ROOT PROJECT DIRECTORY WHERE THE
+# PROJECT.JSON FILE LIVES. YOU CAN STILL RUN THE SCRIPT DIRECTLY
+# BUT THE NPM ENVIRONMENT FEATURES OFFER SOME RELIABLE STARTING
+# POINTS FOR MOVING THROUGHOUT THE PROJECT
+
+THEME_STYLE_PATH="_static/global"
+THEME_STYLE_FILENAME="theme.scss"
+
+BUILD_OPTION="$1"
+
+# BUILD ONCE IN MINIFIED FORMAT
+_build_stylesheet() {
+  node-sass \
+    --output-style compressed \
+    --output "${BASE_PATH}/${THEME_STYLE_PATH}" \
+    "${BASE_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
+}
+
+# LIVE COMPILE FOR DEVELOPMENT
+_build_stylesheet_test() {
+  node-sass \
+    --output-style expanded \
+    "${BASE_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
+}
+
+_build_stylesheet_dev() {
+  node-sass \
+    --watch \
+    --output-style expanded \
+    --output "${BASE_PATH}/${THEME_STYLE_PATH}" \
+    "${BASE_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
+
+}
+
+
+if [ "$BASE_PATH" != "$INIT_CWD" ]; then
+  cd ${INIT_CWD}
+fi
+
+# BUILD AND DUMP OUTPUT TO SCREEN
+[[ "${BUILD_OPTION}" == "test" ]] && _build_stylesheet_test && exit 0
+
+# BUILD NORMALLY
+_build_stylesheet
+
+# START WATCHING FOLDER FOR CHANGES AFTER BUILDING 
+[[ "${BUILD_OPTION}" == "dev" ]] && _build_stylesheet_dev
