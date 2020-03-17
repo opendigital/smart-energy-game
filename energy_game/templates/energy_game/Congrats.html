@@ -1,16 +1,9 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %}Air Polltion Reduction{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-
-<div class="card bg-transparent">
-  <div class="card-header">
-    <h1>YOUR GROUP'S AIR POLLUTION REDUCTION RESULT</h1>
-  </div>
-
-    <div class="card-body">
+{% block page_content %}
         <div class="card" style="background:transparent; border-color: transparent">
             <div class="card-body">
               <img src="{% static 'assets/carbonfund.jpg' %}" class="img-fluid" alt="Carbonfund Certificate" />
@@ -18,8 +11,4 @@
                 <div id="carbonfund_reduction_date" class=""><strong>{% now "m/d/Y" %}</strong></div>
             </div>
         </div>
-    </div>
-    {% include './blocks/next-button.html' %}
-</div>
-
 {% endblock %}

@@ -215,6 +215,7 @@ class Group(BaseGroup):
         return models.IntegerField(initial=self.all_rounds_contribution())
 
 
+
     def previous_rounds_contribution(self):
         return sum([g.total_contribution for g in self.in_previous_rounds()])
 
@@ -337,6 +338,22 @@ class Player(BasePlayer):
             + self.remaining_tokens_in_dollars() \
             + c(5).to_real_world_currency(self.session) \
             + c(self.how_many_good_answers()).to_real_world_currency(self.session)
+
+
+
+    def how_many_good_answers(self):
+        counter = 0
+        # answers = [
+        #     self.in_round(2).q1 == Const.answers[0],
+        #     self.in_round(2).q2 == Const.answers[1],
+        #     self.in_round(2).is_both_Examples_right(),
+        #     self.in_round(2).is_all_values_right(),
+        # ]
+        # for answer_is_correct in answers:
+        #     if answer_is_correct:
+        #         counter += 5
+        # return c(counter)
+        return 0
 
 
     # bot_contributions = [

@@ -7,7 +7,6 @@ from .constants import Constants
 from .utils import Utils
 
 class Game(Page):
-    """Page Docstring"""
     form_model = 'player'
     form_fields = [
         'contribution',
@@ -20,9 +19,9 @@ class Game(Page):
         Utils.dump_obj(self.session, 'session')
         return self.round_number >= 2
 
-
     def vars_for_template(self):
         return {
+            'page_title': 'Energy Game',
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
             'current_round': self.round_number - 1,
             'progress': 'Game'
@@ -69,6 +68,7 @@ class Results(Page):
         print('get_total_contribution', self.group.get_total_contribution())
         print('self.group.get_avg_contribution()', self.group.get_avg_contribution())
         return {
+            'page_title': 'Energy Game Results',
             'others_contribution': self.player.others_contribution,
             'total_contribution': self.group.get_total_contribution(),
             'avg_contrib': str(self.group.get_avg_contribution()),
@@ -86,7 +86,8 @@ class Congrats(Page):
         # let today = new Date();
         # 'cert_date': ,
         return {
-            'all_rounds_others_contribution': self.player.all_rounds_others_contribution,
+            'page_title': 'Your Group\'s Air Pollution Reduction Result',
+            'all_rounds_others_contribution': self.player.all_rounds_others_contribution(),
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
             'current_round': self.round_number - 1,
             'progress': 'Game',
@@ -97,11 +98,14 @@ class Congrats(Page):
 
 class FinalResults(Page):
     def vars_for_template(self):
+        Utils.dump_obj(self.player._state, 'player_state')
+        Utils.dump_obj(self.player.participant, 'participant')
         return {
+            'page_title': 'Energy Game Results',
+            'progress': 'Game',
             'js_vars': str(self.participant.vars),
             'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
             'current_round': self.round_number - 1,
-            'progress': 'Game',
             'goal_meet': Constants.group_goal <= self.group.all_rounds_contribution(),
             'carbonfund': self.group.all_rounds_contribution_in_dollars(),
             'quiz': c(self.player.how_many_good_answers()).to_real_world_currency(self.session)

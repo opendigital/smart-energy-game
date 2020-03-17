@@ -5,12 +5,22 @@ class Utils():
     def __init__(self):
         self.values = ''
 
+
     def print_var(somevar, title=""):
         if title is not "":
             print(title)
 
         variables = [i for i in dir(somevar) if not inspect.ismethod(i)]
         print(json.dumps(somevar, separators=(". ", ":"), indent=4))
+
+
+    def dump(obj):
+        if title is not "":
+            print("")
+            print(title)
+
+        for attr in dir(obj):
+            print("obj.%s = %r" % (attr, getattr(obj, attr)))
 
 
     def dump_obj(obj, title=""):
