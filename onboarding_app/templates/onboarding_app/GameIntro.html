@@ -1,25 +1,13 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %}Real Game{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-<div class="card bg-transparent">
-  <div class="card-header">
-    <h1>ENERGY CONSERVATION GAME</h1>
-  </div>
-
-  <div class="card-body">
-    <div class="container">
-      <p>
-          This concludes our game instruction, practice, and quiz.
-      </p>
-      <p>
-          Now, you will play the energy conservation game.
-      </p>
-    </div>
-  </div>
-    {% include './blocks/next-button.html' %}
-</div>
-
+{% block page_content %}
+  <p>
+      This concludes our game instruction, practice, and quiz.
+  </p>
+  <p>
+      Now, you will play the energy conservation game.
+  </p>
 {% endblock %}

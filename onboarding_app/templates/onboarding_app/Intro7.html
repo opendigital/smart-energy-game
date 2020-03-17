@@ -1,17 +1,9 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %} Real Environmental Impact {% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-<div class="card bg-transparent">
-
-  <div class="card-header">
-    <h1>INSTRUCTIONS: ENVIRONMENTAL OUTCOMES</h1>
-  </div>
-
-  <div class="card-body">
-    <div class="container">
+{% block page_content %}
       <div class="my-5 flex-row flex-center">
         <div class="model-card flex flex-vcenter text-center flex-center flex-item">Tokens in Group Conservation Account</div>
         <div class="icon-type">x</div>
@@ -44,15 +36,4 @@
           </ul>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col">
-          <button class="otree-btn-next btn" style="width: 100px">Next</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
 {% endblock %}

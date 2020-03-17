@@ -3,15 +3,12 @@ import json
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
+from .utils import Utils
 
 def print_var(somevar, title=""):
     if title is not "":
         print(title)
     print(json.dumps(somevar, separators=(". ", ":"), indent=4))
-
-class Results(Page):
-    def vars_for_template(self):
-        return {'progress': 'Consent'}
 
 
 class Intro1(Page):
@@ -20,7 +17,10 @@ class Intro1(Page):
         return self.player.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'Consent'}
+        return {
+            'progress': 'Consent',
+            'page_title': Constants.page_titles[0]
+        }
 
 
 class Intro2(Page):
@@ -28,7 +28,10 @@ class Intro2(Page):
         return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'Introduction'}
+        return {
+            'progress': 'Introduction',
+            'page_title': Constants.page_titles[1]
+        }
 
 
 class Intro3(Page):
@@ -41,6 +44,7 @@ class Intro3(Page):
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
+            'page_title': Constants.page_titles[2],
             'reduction_goal': Constants.reduction_goal,
             'game_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
@@ -49,12 +53,16 @@ class Intro3(Page):
 
 
 class Intro4(Page):
+
     def is_displayed(self):
         return self.round_number == 1
 
     def vars_for_template(self):
+        Utils.dump_obj(self)
         return {
             'progress': 'Introduction',
+            'page_title': Constants.page_titles[3],
+            'page_index': 2,
             'reduction_goal': Constants.reduction_goal,
             'optimal_contribution': '6',
             'game_tokens': Constants.game_tokens,
@@ -74,6 +82,7 @@ class Intro5(Page):
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
+            'page_title': Constants.page_titles[4],
             'optimal_contribution': '6',
             'game_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
@@ -91,6 +100,7 @@ class Intro6(Page):
     def vars_for_template(self):
         return  {
             'progress': 'Introduction',
+            'page_title': Constants.page_titles[5],
             'optimal_contribution': '6',
             'game_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
@@ -109,6 +119,7 @@ class Intro7(Page):
     def vars_for_template(self):
         return  {
             'progress': 'Introduction',
+            'page_title': Constants.page_titles[6],
             'game_players': '25',
             'optimal_contribution': '6',
             'game_players': Constants.game_players - 1,
@@ -124,7 +135,10 @@ class Examples(Page):
         return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'Examples'}
+        return {
+            'page_title': Constants.page_titles[7],
+            'progress': 'Examples'
+        }
 
 
 class Example1(Page):
@@ -133,6 +147,7 @@ class Example1(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': Constants.page_titles[8],
             'progress': 'Examples',
             'game_goal': '60',
             '_debuger_vars': '789987070',
@@ -152,6 +167,7 @@ class Example2(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': Constants.page_titles[9],
             'progress': 'Examples',
             'classes': {
                 'row1': 'text-muted',
@@ -169,6 +185,7 @@ class Example3(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': Constants.page_titles[10],
             'progress': 'Examples',
             'classes': {
                 'row1': 'text-muted',
@@ -186,7 +203,10 @@ class PracticeIntro(Page):
         return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'Practice'}
+        return {
+            'page_title': Constants.page_titles[11],
+            'progress': 'Practice'
+        }
 
 
 
@@ -202,6 +222,7 @@ class PracticeGame(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': Constants.page_titles[12],
             'progress': 'Practice',
             'current_month': Constants.MONTHS[(self.round_number - 1) % 12],
             'current_round': self.round_number % 12,
@@ -230,6 +251,7 @@ class PracticeResults(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': Constants.page_titles[13],
             'progress': 'Practice',
             'current_month': Constants.MONTHS[(self.round_number - 1) % 12],
             'current_round': self.round_number % 12,
@@ -243,7 +265,10 @@ class Quiz(Page):
         return self.round_number == 1
 
     def vars_for_template(self):
-        return {'progress': 'Quiz'}
+        return {
+            'page_title': Constants.page_titles[13],
+            'progress': 'Quiz'
+        }
 
 
 class Quiz1(Page):
@@ -264,6 +289,7 @@ class Quiz1(Page):
         player_string = json.dumps(self.session.vars, separators=(". ", ":"), indent=4)
         print('self.player', player_string)
         return {
+            'page_title': Constants.page_titles[14],
             'js_vars': json.dumps(Constants.template_config),
             'progress': 'Quiz',
             'q1_attempts': self.player.q1_attempts,
@@ -298,6 +324,7 @@ class Quiz2(Page):
     def vars_for_template(self):
         print('self.session.vars', self.session.vars)
         return {
+            'page_title': Constants.page_titles[15],
             'progress': 'Quiz',
             'debug_vars': json.dumps(self.session.vars),
             'show_hint': self.player.q2_attempts > Constants.quiz_max_attempts,
@@ -343,6 +370,7 @@ class Quiz3(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': Constants.page_titles[16],
             'progress': 'Quiz',
             'show_hint': self.player.q3a_attempts > 2 or self.player.q3b_attempts > 2,
             'answer_key': dict(
@@ -416,6 +444,7 @@ class Quiz4(Page):
             Constants.q4[5]["hint"],
         ]
         return {
+            'page_title': Constants.page_titles[17],
             'js_vars': Constants.q4,
             'progress': 'Quiz',
             'show_hint': self.player.q4a_attempts > 2,
@@ -489,6 +518,7 @@ class ReviewGameRules(Page):
 
     def vars_for_template(self):
         return {
+            'page_title': 'Review Game Rules',
             'progress': 'Examples',
             'classes': {
                 'row1': 'text-muted',
@@ -508,24 +538,13 @@ class GameIntro(Page):
         return self.round_number >= 1
 
     def before_next_page(self):
-        quiz_history = [
-            self.player.q1_attempts,
-            self.player.q2_attempts,
-            self.player.q3a_attempts,
-            self.player.q3b_attempts,
-            self.player.q4a_attempts,
-            self.player.q4b_attempts,
-            self.player.q4c_attempts,
-            self.player.q4d_attempts,
-            self.player.q4e_attempts,
-            self.player.q4f_attempts,
-        ]
-        self.player.quiz_result = str(quiz_history)
+        self.player.finalize_data()
 
     def vars_for_template(self):
-        return {'progress': 'Game'}
-
-
+        return {
+            'page_title': Constants.page_titles[17],
+            'progress': 'Game'
+        }
 
 
 page_sequence = [

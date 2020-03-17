@@ -1,18 +1,9 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %}Examples 2-3{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-
-<div class="card bg-transparent">
-
-  <div class="card-header">
-    <h1>EXAMPLES 2, 3: MIN AND MAX CONSERVATION</h1>
-  </div>
-
-  <div class="card-body" style="padding-right: 0;">
-    <div class="container">
+{% block page_content %}
       <div class="row">
         <div class="col">
           <p style="text-align: justify;">
@@ -29,10 +20,4 @@
           {% include './blocks/examples-table.html' %}
         </div>
       </div>
-    </div>
-  </div>
-
-  {% include './blocks/next-button.html' %}
-
-</div>
 {% endblock %}

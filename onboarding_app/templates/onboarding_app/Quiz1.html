@@ -1,31 +1,22 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %} Quiz 1 {% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-{% include './scripts/quiz.html' %}
+{% block page_content %}
 
-<div class="card bg-transparent">
-  <div class="card-header">
-    <h1>COMPREHENSION QUIZ 1/4</h1>
-  </div>
-
-  {{ form.non_field_errors }}
-
-  <div class="card-body">
-    <div class="form-group" id='id_field_{{ form.q1.html_name }}'>
-      <p>Q1:</p>
-      {{ form.q1.label_tag }}
-      {{ form.q1 }}
-      {{ form.q1.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q1.html_name hint_text=Constants.q1.0.hint %}
-    </div>
-  </div>
-
-  {% include './blocks/quiz-buttons.html' %}
-
+<div class="form-group" id='id_field_{{ form.q1.html_name }}'>
+  <p>Q1:</p>
+  {{ form.q1.label_tag }}
+  {{ form.q1 }}
+  {{ form.q1.errors }}
+  {% include './blocks/message-box.html' with field_id=form.q1.html_name hint_text=Constants.q1.0.hint %}
 </div>
+{{ form.non_field_errors }}
+</div>
+
+{% include './blocks/quiz-buttons.html' %}
+{% include './scripts/quiz.html' %}
 
 <script>
 var fields = document.querySelectorAll('.form-check-input');

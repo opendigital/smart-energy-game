@@ -1,17 +1,9 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %} Quiz 3 {% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-{% include './scripts/quiz.html' %}
-
-<div class="card bg-transparent">
-  <div class="card-header">
-    <h1>COMPREHENSION QUIZ 3/4</h1>
-  </div>
-
-  <div class="card-body">
+{% block page_content %}
     <div class="form-group" id='id_field_{{ form.q3a.html_name }}'>
       <p>Q3a:</p>
       {{ form.q3a.label_tag }}
@@ -25,11 +17,9 @@
       {{ form.q3b.label_tag }}
       {{ form.q3b }}
       {{ form.q3b.errors }}
-
       {% include './blocks/message-box.html' with field_id=form.q3b.html_name hint_text=q3_hint.1 %}
     </div>
-  </div>
-
+  {% include './scripts/quiz.html' %}
   {% include './blocks/quiz-buttons.html' %}
 
 </div>

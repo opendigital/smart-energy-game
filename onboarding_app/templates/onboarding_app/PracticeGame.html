@@ -1,17 +1,9 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %}Practice Game{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-
-<div class="card bg-transparent">
-
-  <div class="card-header">
-    <h1>PRACTICE GAME</h1>
-  </div>
-
-  <div class="card-body">
+{% block page_content %}
     <div class="row">
       <div class="col">
         <p class="color-red text-small">
@@ -46,14 +38,9 @@
         </h4>
         <h4 class="flex flex-vcenter">
           <span>How much energy do you want to keep in your personal account this month?</span>
-          <div id="personal" class="color-personal token-box"></div>
+          <div id="personal" class="color-private  token-box"></div>
         </h4>
       </div>
     </div>
-
-    {% include './blocks/next-button.html' %}
-
-  </div>
-</div>
-<script src="{% static 'main_app/box.js' %}" ></script>
+    <script src="{% static 'main_app/box.js' %}" ></script>
 {% endblock %}

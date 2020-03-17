@@ -1,18 +1,10 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block title %} Quiz 4 {% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block content %}
-{% include './scripts/quiz.html' %}
+{% block page_content %}
 
-<div class="card bg-transparent">
-  <div class="card-header">
-    <h1>COMPREHENSION QUIZ 4/4</h1>
-  </div>
-
-
-  <div class="card-body">
     <p>Q4a: <strong>If there are 900 tokens in the group conservation account at the end of the
       game (worth $9.00) and you have 30 tokens left in your private account (worth
       $.30), then how much will you receive at the end of the game?</strong>
@@ -59,11 +51,9 @@ conservation account had only 850 tokens?</strong>
       {{ form.q4f.errors }}
       {% include './blocks/message-box.html' with field_id=form.q4f.html_name hint_text=q4_hints.5 %}
     </div>
+    {% include './scripts/quiz.html' %}
+    {{ form.non_field_errors }}
+    {% include './blocks/quiz-buttons.html' %}
 
-  {{ form.non_field_errors }}
-
-  </div>
-  {% include './blocks/quiz-buttons.html' %}
-</div>
 
 {% endblock %}

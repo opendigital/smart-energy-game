@@ -1,23 +1,9 @@
-{% extends "global/Page.html" %}
+{% extends "blocks/main-card.html" %}
 {% load static otree %}
 
-{% block styles %}
-<link href="{% static 'main_app/style.css' %}" rel="stylesheet"> {% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
-{% block title %} Practice Feedback {% endblock %}
-
-{% block content %}
-
-<div class="card">
-
-  <div class="card-header">
-    <h1>PRACTICE GAME</h1>
-  </div>
-
-  <!-- <div class="card" style="background: #f2f2f2;"> -->
-  <div class="card-body">
-
-    <div class="card game-card">
+{% block page_content %}
       <div class="card-title game-title">MONTH {{ current_round }} FEEDBACK</div>
 
       <table class="table">
@@ -29,7 +15,7 @@
           <th>Cumulative to date<br> (all past rounds)</th>
         </tr>
 
-        <tr class="color-personal">
+        <tr class="color-private ">
           <td></td>
           <td></td>
           <td>You put into your private account:</td>
@@ -100,12 +86,8 @@
           <td id="percentage"></td>
         </tr>
       </table>
-    </div>
-  </div>
-  {% include './blocks/next-button.html' %}
-</div>
-<script>
 
+<script>
 var percentage = document.getElementById("percentage")
 var value = Math.floor(parseInt("{{ player.all_rounds_group_random_contribution }}".split(" ")[0], 10) * 100 / 900)
 percentage.innerHTML = "<div class='percenttogoal'>" + value + "% of the annual energy <br>reduction goal of 60% (900)</div>"

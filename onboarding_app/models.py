@@ -11,44 +11,11 @@ from otree.api import (
     currency_range,
 )
 
-
 author = 'Your name here'
 
 doc = """
 Your app description
 """
-
-def print_var(somevar, title=""):
-    if title is not "":
-        print(title)
-
-    variables = [i for i in dir(somevar) if not inspect.ismethod(i)]
-    print(json.dumps(somevar, separators=(". ", ":"), indent=4))
-
-def obj_dump(obj, title=""):
-    if title is not "":
-        print("")
-        print(title)
-
-    vars = obj.__dict__.keys()
-    for v in vars:
-        print(v, '\t\t', getattr(obj, v))
-
-def isset(arg):
-    print("testing argument", arg)
-    try:
-        arg
-    except NameError:
-        arg = None
-        print("except NameError", arg)
-
-    if arg is None:
-        print("arg is None", arg)
-        return False
-    else:
-        print("returning argument", arg)
-        return True
-
 
 class Constants(BaseConstants):
 
@@ -57,7 +24,7 @@ class Constants(BaseConstants):
         debug_jsvars=False
     )
 
-    name_in_url = 'onboarding_app'
+    name_in_url = 'onboarding'
     players_per_group = None
     num_rounds = 1
     reduction_goal = 60
@@ -68,10 +35,36 @@ class Constants(BaseConstants):
     token_goal = 6
     token_value = .01
     quiz_max_attempts = 2
+
+    page_titles = [
+        "Energy Conservation Game",
+        "Research Participant Consent Form",
+        "Game: Outline",
+        "Instruction: Game Structure and Incentives",
+        "Instruction: Gameplay",
+        "Instruction: Financial Outcomes",
+        "Instruction: Environmental Outcomes",
+        "Examples: Overview",
+        "Examples: 1. Minimum Requirement",
+        "Examples: 2, 3. Min and Max Conservation",
+        "Examples: 4, 5. Only You and Everyone But You",
+        "Practice: Game Intro",
+        "Practice: Game",
+        "Practice: Game Result",
+        "Comprehension: Quiz",
+        "Comprehension: Quiz 1/4",
+        "Comprehension: Quiz 2/4",
+        "Comprehension: Quiz 3/4",
+        "Comprehension: Quiz 4/4",
+        "Game: Introduction",
+    ]
+
+
     true_false = [
         "True",
         "False"
     ]
+
     MONTHS = [
         'JANUARY',
         'FEBRUARY',
@@ -172,7 +165,7 @@ class Constants(BaseConstants):
                 [1, "$0.50"],
                 [2, "$1.02"],
                 [3, "$3.72"],
-             ],
+            ],
             hint="You will have greater earnings if you put all of your energy tokens in your \
                 private account, while others contribute all of their tokens in the group conservation account, \
                 because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
@@ -225,19 +218,40 @@ class Constants(BaseConstants):
 
 
 
+# _ Session
+# num_participants
+# config
+# vars
+
 class Subsession(BaseSubsession):
+    # BUILTIN:
+    # __ session
+    # __ round_number
+    # __ creating_session()
+    # __ get_groups()
+    # __ get_players()
+    # __ group_randomly()
+    # __ group_like_round()
+    # __ get_group_matrix()
+    # __ set_group_matrix()
+    # __ in_all_rounds()
+    # __ in_previous_rounds()
+    # __ in_rounds(first, last)
+    # __ in_round(round_number)
 
     def get_quiz_group(self, index):
-        return [ Constants.q1, Constants.q2,
-            Constants.q3, Constants.q4
-            ][index]
+        return [
+            Constants.q1,
+            Constants.q2,
+            Constants.q3,
+            Constants.q4
+        ][index]
 
     def get_keys_from_quiz_group(self, index):
         answers = []
         group = self.get_quiz_group(index)
         for field in group:
             answers.append(field["answer"])
-        print(answers)
         return answers
 
     def get_all_keys_from_quiz_group(self):
@@ -253,8 +267,6 @@ class Subsession(BaseSubsession):
         self.session.vars["quizdata"] = 'test'
         session_answers = self.get_all_keys_from_quiz_group()
         self.session.vars["answer_key"] = session_answers
-
-
 
     def review_rulepage(self):
         print('review_rulepage')
@@ -278,19 +290,64 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
+    # BUILTIN:
+    # __ session/subsession
+    # __ in_all_rounds()
+    # __ in_previous_rounds()
+    # __ in_rounds(first, last)
+    # __ in_round(round_number)
+    # __ get_player_by_role(role)
+    # __ get_player_by_id(id_in_group)
+    # __ get_players()
     pass
 
 
+# _ Participant
+# id_in_session
+# vars
+# label
+# payoff
+# payoff_plus_participation_fee
+#
 class Player(BasePlayer):
+    # BUILTIN:
+    # __ payoff
+    # __ session/subsession/group/participant
+    # __ id_in_group
+    # __ role()
+    # __ in_all_rounds()
+    # __ in_previous_rounds()
+    # __ in_rounds(first, last)
+    # __ in_round(round_number)
+    # __ get_others_in_subsession()
+    # __ get_others_in_group()
+    #
+
+    participant_vars_dump = models.LongStringField()
+    quiz_result = models.LongStringField()
     page_attempts = models.IntegerField(initial=0)
     review_rules = models.IntegerField(initial=0)
+    practice_contribution = models.CurrencyField(min=0, max=10)
+    practice_private_contribution = models.CurrencyField(min=0, max=10)
+    random_others_contribution = models.CurrencyField()
+    group_random_total_contribution = models.CurrencyField()
 
-    def validate_field(self, test, address):
-        print(self.session_answers)
 
-    def dump(obj):
-        for attr in dir(obj):
-            print("obj.%s = %r" % (attr, getattr(obj, attr)))
+    def finalize_data(self):
+        self.participant.vars['quiz_result'] = str([
+            self.q1_attempts,
+            self.q2_attempts,
+            self.q3a_attempts,
+            self.q3b_attempts,
+            self.q4a_attempts,
+            self.q4b_attempts,
+            self.q4c_attempts,
+            self.q4d_attempts,
+            self.q4e_attempts,
+            self.q4f_attempts,
+        ])
+        self.participant.vars['quiz_bonus'] = self.payoff
+        print(self.participant.vars)
 
     def quiz_bonus(self):
         self.payoff += 5
@@ -299,24 +356,26 @@ class Player(BasePlayer):
     def init_quiz_count(self):
         self.participant.vars['object has no attribute blah'] = [1, 2, 3]
 
-    def var_exists(self, arg):
-        print("test player.vars", arg, self.player.vars)
-        if arg in self.player.vars:
-            return self.player[arg]
-
     def dump_participant_vars(self):
         self.player.participant_vars_dump = str(self.participant.vars)
+
+    def all_rounds_group_random_contribution(self):
+        return sum([p.group_random_total_contribution for p in self.in_rounds(1, self.round_number)])
+
+    def all_rounds_random_contribution(self):
+        return sum([p.random_others_contribution for p in self.in_rounds(1, self.round_number)])
+
+    def all_rounds_practice_contribution(self):
+        return sum([p.practice_contribution for p in self.in_rounds(1, self.round_number)])
+
+    def all_rounds_practice_private_contribution(self):
+        return sum([p.practice_private_contribution for p in self.in_rounds(1, self.round_number)])
 
 
     def validate_field(self, id, value, answer):
         print('validating field', id)
 
-    def validate_page(self, value_set, key_set):
-        print('validating field', id)
-        print(self)
-
     def valid_q1(self, values):
-        print('CHECKING Q1 QUESTIONS')
         if self.q1_correct == True:
             return True
 
@@ -332,8 +391,8 @@ class Player(BasePlayer):
         else:
             return False
 
+
     def valid_q2(self, values):
-        print('CHECKING Q2 QUESTIONS')
         if self.q2_correct == True:
             return True
 
@@ -379,7 +438,6 @@ class Player(BasePlayer):
 
 
     def valid_q4(self, values):
-        print('CHECKING Q4 QUESTIONS', values)
         quiz_index = 3
         answers = self.session.vars["answer_key"][quiz_index]
 
@@ -391,13 +449,7 @@ class Player(BasePlayer):
                     self.quiz_bonus()
 
         if self.q4b_correct is not True:
-            print('4b not correct', self.q4a_correct)
-            print('4b attempts', self.q4a_attempts)
             self.q4b_attempts += 1
-            print('q4b is', self.q4b)
-            print('answer is', answers[1])
-            print('new value is', values["q4b"])
-
             if self.q4b == answers[1] or values["q4b"] == answers[1]:
                 self.q4b_correct = True
                 if self.q4b_attempts <= 1:
@@ -409,7 +461,6 @@ class Player(BasePlayer):
                 self.q4c_correct = True
                 if self.q4c_attempts <= 1:
                     self.quiz_bonus()
-
 
         if self.q4d_correct is not True:
             self.q4d_attempts += 1
@@ -444,10 +495,6 @@ class Player(BasePlayer):
         return q4_all_correct
 
 
-
-
-
-
     # QUIZES
     # ===========================================
     q1 = models.StringField(
@@ -477,7 +524,6 @@ class Player(BasePlayer):
     )
     q3b_correct = models.BooleanField(initial=False)
     q3b_attempts = models.IntegerField(initial=0)
-
 
     q4a = models.IntegerField(
         label=Constants.q4[0]["label"],
@@ -527,24 +573,3 @@ class Player(BasePlayer):
     q4e_correct = models.BooleanField(initial=False)
     q4f_attempts = models.IntegerField(initial=0)
     q4f_correct = models.BooleanField(initial=False)
-
-
-    def all_rounds_group_random_contribution(self):
-        return sum([p.group_random_total_contribution for p in self.in_rounds(1, self.round_number)])
-
-    def all_rounds_random_contribution(self):
-        return sum([p.random_others_contribution for p in self.in_rounds(1, self.round_number)])
-
-    def all_rounds_practice_contribution(self):
-        return sum([p.practice_contribution for p in self.in_rounds(1, self.round_number)])
-
-    def all_rounds_practice_private_contribution(self):
-        return sum([p.practice_private_contribution for p in self.in_rounds(1, self.round_number)])
-
-    practice_contribution = models.CurrencyField(min=0, max=10)
-    practice_private_contribution = models.CurrencyField(min=0, max=10)
-    random_others_contribution = models.CurrencyField()
-    group_random_total_contribution = models.CurrencyField()
-
-    participant_vars_dump = models.LongStringField()
-    quiz_result = models.LongStringField()
