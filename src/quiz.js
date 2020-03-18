@@ -1,11 +1,3 @@
-<script>
-// unset when reloading
-var fields = document.querySelectorAll('.form-check-input');
-for (var field of fields) {
-  field.checked = false;
-}
-</script>
-<script>
 // https://ourcodeworld.com/articles/read/188/encode-and-decode-html-entities-using-pure-javascript
 (function(window){
   window.htmlentities = {
@@ -38,13 +30,12 @@ function reset_form_fields(){
   var fields = document.querySelectorAll('.form-check-input');
 
   for (field of fields) {
-    console.log('field', field.checked);
     if (field.checked === true) {
-      console.log('field checked', field.value);
       field.checked = false;
     }
   }
 }
+
 
 function parseTemplateObject(str) {
   str = htmlentities.decode(str);
@@ -110,8 +101,8 @@ function checkForm(){
   console.log(reports, errors);
   for (var field of Object.keys(reports)) {
     console.log(reports[field], field);
-    var box_class = reports[field] ? box_good_class : box_warn_class
-    var msg_class = reports[field] ? msg_good_class : msg_warn_class
+    var box_class = reports[field] ? box_good_class : box_warn_class;
+    var msg_class = reports[field] ? msg_good_class : msg_warn_class;
     document.querySelector(`#id_${field}`).classList.add(box_class);
     document.querySelector(`#id_${field}_message`).classList.add(msg_class);
 
@@ -151,4 +142,3 @@ function formFail() {
   disableButton(checkButton);
   enableButton(reviewButton);
 }
-</script>
