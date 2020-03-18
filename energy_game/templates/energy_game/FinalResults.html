@@ -1,0 +1,80 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+    <table class="table text-left">
+      <tr class="bg-primary color-white text-upper">
+        <th class="valign-middle py-2 px-0 text-center"><span>YOUR FINAL RESULTS</span></th>
+        <th class="valign-middle py-2 px-0 text-center w-15"><span>Energy Tokens</span></th>
+        <th class="valign-middle py-2 px-0 text-center w-10"><span>USD</span></th>
+      </tr>
+
+      <tr class="text-reg font-bold">
+        <td><span class="text-upper">Total contributions to the group conservation account:</h3></td>
+        <td class="w-15 text-right"><span class="text-right color-conserve">{{ player.group.all_rounds_contribution }}</span></td>
+        <td class="w-10"></td>
+      </tr>
+
+      <tr class="text-reg color-carbon font-italic">
+        <td><span class="">Your group's donation to Carbonfund.org to reduce air pollution:</span></td>
+        <td class="w-15 text-right"></td>
+        <td class="w-10"><span class="font-bold">{{ carbonfund }}</span></td>
+      </tr>
+
+
+      <tr class="text-reg font-bold">
+        {% if goal_meet %}
+        <td><span class="">Congratulations, you met the 60% group energy conservation goal of 900 energy tokens.</span></td>
+        {% else %}
+        <td><span class="">Sorry, you did not meet the 60% group energy conservation goal of 900 energy tokens.</span></td>
+        {% endif %}
+        <td class="w-15 text-right bd-dashed-bottom-2"></td>
+        <td class="w-10 bd-dashed-bottom-2"></td>
+      </tr>
+
+      <tr class="text-reg color-conserve">
+        <td>Group bonus for meeting the goal: </td>
+        <td class="w-15 text-right">
+          {% if goal_meet %}<span class="text-right font-bold color-conserve">{{ group.bonus }}</span>
+          {% else %}<span class="text-right font-bold color-conserve">{{ Constants.no_bonus }}</span>
+          {% endif %}
+        </td>
+        <td class="w-10">
+          {% if goal_meet %}<span class="color-conserve">{{ group.bonus_in_dollars }}</span>
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr class="text-reg color-conserve">
+        <td>Energy tokens in your personal account:</td>
+        <td class="w-15 text-right"><span class="text-right font-bold color-conserve">{{ player.all_tokens_left }}</span></td>
+        <td class="w-10"><span class="color-conserve">{{ player.remaining_tokens_in_dollars }}</span></td>
+      </tr>
+
+      <tr class="text-reg color-conserve">
+        <td>Additional pay for correct answers on the quiz:</td>
+        <td class="w-15 text-right"></td>
+        <td class="w-10"><span class="">{{ quiz }}</span></td>
+      </tr>
+
+      <tr class="text-reg">
+        <td>Your participation pay: </td>
+        <td class="w-15 text-right bd-dashed-bottom-2"></td>
+        <td class="w-10 bd-dashed-bottom-2">$0.50</td>
+      </tr>
+
+      <tr class="text-reg">
+        <td><span class="font-bold text-upper">TOTAL PAY TO YOU:</span></td>
+        <td class="w-15 text-right"></td>
+        <td class="w-10"><span class="text-reg">{{ player.total_pay}}</span></td>
+      </tr>
+    </table>
+
+{% endblock %}
+
+{% block page_footer_message %}
+    <span class="color-red text-reg font-italic font-bold">NOTE: Before you receive your pay, you will need to answer a brief survey.</span>
+{% endblock %}

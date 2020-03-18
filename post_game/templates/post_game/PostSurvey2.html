@@ -1,0 +1,38 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+<div class="">
+  <p>Please answer as honestly as possible. Remember your responses are anonymous.</p>
+</div>
+<section class="likert-form" style="width: 100%">
+  <div class="form-header form-group py-1 bg-grey900">
+    <label class="invisible" style="margin:0 0 0 0;" for="example-form">Rate the following:</label>
+    <div class="controls text-center text-upper">
+      <ul class="color-white mx-0 my-0 px-0 py-1">
+        <li><label class="my-0">Definitely false</label></li>
+        <li><label class="my-0">Probably false</label></li>
+        <li><label class="my-0">Not sure</label></li>
+        <li><label class="my-0">Definitely true</label></li>
+        <li><label class="my-0">Probably true</label></li>
+      </ul>
+    </div>
+  </div>
+    {% formfields %}
+</section>
+<script>
+
+errors = document.getElementsByClassName("otree-form-errors alert alert-danger").item(0)
+if (errors != null) {
+  errors.style.background = "red"
+  errors.style.borderColor = "transparent"
+  errors.style.textAlign = "center"
+  errors.innerHTML="<e style=\"color:white;\"><B>Please fill this form completely.</b></e>"
+}else{
+  console.log(errors)
+}
+</script>
+{% endblock %}

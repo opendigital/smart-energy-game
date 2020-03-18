@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load static otree %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="card page-card shadow-lg">
+
+  <div class="card-header bg-grey800 card-header color-white">
+    <h1 class="card-title">{% block page_title %}{% endblock %}</h1>
+  </div>
+
+  <div class="card-body">
+    <div class="container card-content">{% block page_content %}{% endblock %}</div>
+  </div>
+  <div class="card-footer bg-inherit text-right flex flex-distribute flex-vcenter">
+    <div class="card-message">{% block page_footer_message %}{% endblock %}</div>
+    {% block page_footer_buttons %}
+    <button class="otree-btn-next btn btn-lg btn-info px-5 depth-1">Next</button>
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

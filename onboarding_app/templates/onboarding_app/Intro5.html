@@ -1,0 +1,32 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+      <div class="row">
+        <div class="col">
+          <ul>
+            <li><p>
+              <strong>In each month</strong> all players are asked simultaneously: "How
+              much energy do you want to contribute to group conservation account this month?"<br>
+              You may choose to contribute anywhere from <span class="game-variable">0</span>
+              to <span class="game-variable">{{ game_tokens }}</span> of your monthly energy tokens.<br>
+              The remaining tokens will be put in your private account.
+            </p></li>
+
+            <li><p>
+              <strong>After each month</strong> (once all players have made their choices)
+              the month's results will be displayed to all players. You'll get updates on
+              the <strong>group conservation account</strong>, other player's
+              contributions, and your private account. This feedback is anonymized.
+            </p></li>
+
+            <li><p>
+              <strong>At the end of the game</strong> (after <span class="game-variable">{{ game_rounds }}</span> months) each player will be
+              paid based on the rules described on the next page.
+            </p></li>
+          </ul>
+        </div>
+      </div>
+{% endblock %}

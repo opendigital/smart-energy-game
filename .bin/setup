@@ -1,0 +1,13 @@
+#!/bin/bash
+
+__run__() {
+  echo "PYTHONPATH $PYTHONPATH"
+  echo "PYTHONHOME $PYTHONHOME"
+  alias python=/usr/bin/python3.7
+  alias python3=/usr/bin/python3.7
+  pip3 install -U otree
+}
+
+export PYTHONPATH=/usr/bin/python3.7
+export PYTHONHOME=/usr/lib/python3:/usr/lib/python3.7:/home/icarus/.local/lib/python3.7/site-packages
+__run__

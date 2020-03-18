@@ -1,0 +1,85 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+    <section class="survey-section">
+      <h2 class="survey-section-title">Please answer the below questions as honestly as possible.
+        <br><span>Remember your responses are anonymous.</span>
+      </h2>
+
+      {% formfield player.s1a1 %}
+      <div class="form-control-errors">{{ form.s1a1.errors }}</div>
+      {% formfield player.s1a2 %}
+      <div class="form-control-errors">{{ form.s1a2.errors }}</div>
+      {% formfield player.s1a3 %}
+      <div class="form-control-errors">{{ form.s1a3.errors }}</div>
+      {% formfield player.s1a4 %}
+      <div class="form-control-errors">{{ form.s1a4.errors }}</div>
+      {% formfield player.s1a5 %}
+      <div class="form-control-errors">{{ form.s1a5.errors }}</div>
+
+    </section>
+
+    <section class="survey-section">
+
+      <h2 class="survey-section-title">
+        Please indicate your level of agreement with the following four statements<br>
+        <p>1 (Strongly Disagree) to 5 (Strongly Agree)</p>
+      </h2>
+
+      <div class="flex-form-group">
+        {% formfield player.s1b1 %}
+        <div class="form-control-errors">{{ form.s1b1.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1b2 %}
+        <div class="form-control-errors">{{ form.s1b2.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1b3 %}
+        <div class="form-control-errors">{{ form.s1b3.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1b4 %}
+        <div class="form-control-errors">{{ form.s1b4.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1b5 %}
+        <div class="form-control-errors">{{ form.s1b5.errors }}</div>
+      </div>
+
+    </section>
+    
+    <section class="survey-section">
+
+      <h2 class="survey-section-title">
+        Please rate how much each piece of information informed your decisions during the game:<br>
+        <p>1 (Not At All Important) to 5 (Very Important):</p>
+      </h2>
+
+      <div class="flex-form-group">
+        {% formfield player.s1c1 %}
+        <div class="form-control-errors">{{ form.s1c1.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1c2 %}
+        <div class="form-control-errors">{{ form.s1c2.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1c3 %}
+        <div class="form-control-errors">{{ form.s1c3.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1c4 %}
+        <div class="form-control-errors">{{ form.s1c4.errors }}</div>
+      </div>
+      <div class="flex-form-group">
+        {% formfield player.s1c5 %}
+        <div class="form-control-errors">{{ form.s1c5.errors }}</div>
+      </div>
+
+    </section>
+
+{% endblock %}

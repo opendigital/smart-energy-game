@@ -1,0 +1,30 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+    <div class="container flex flex-col mx-0 p0">
+      <p>Now that you have read the instructions and played 2 practice rounds, we will give
+      you a basic quiz to confirm that you understand the rules of the game.</p>
+
+      <ul class="flex flex-col mx-0 my-0" style="line-height: 1.2;">
+        <li class="py-1 my-1">
+          You'll be paid an additional
+          <strong>$0.05 for each correct question</strong>
+        </li>
+
+        <li class="py-1 my-1">
+          <strong>If you answer a question incorrectly</strong>, you will be directed
+          back to the relevant section of instructions. You will get a second chance
+          to answer the question and will get paid for answering it correctly.
+        </li>
+
+        <li class="py-1 my-1">
+          <strong>After a second incorrect answer</strong>, the computer will tell you
+          the correct answer and you will NOT get the payment for that question.
+        </li>
+      </ul>
+    </div>
+{% endblock %}

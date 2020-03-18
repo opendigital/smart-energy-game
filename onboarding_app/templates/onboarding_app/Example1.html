@@ -1,0 +1,15 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+  {% include './blocks/examples-table.html' %}
+
+  <hr>
+
+  <div class="explanation-content bc-inherit color-cyan shadow-md">
+    <p>Example 1 benchmarks the minimum conservation needed for the group to meet the goal and for the players to get a bonus.</p>
+  </div>  
+{% endblock %}

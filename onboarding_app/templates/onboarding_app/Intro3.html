@@ -1,0 +1,32 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+<div class="row">
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <h3>Game Structure</h3>
+    <p>
+      In this energy conservation game, you and <span class="game-variable">{{ game_players }}</span> other players live in an
+      apartment building that is <strong>trying to reduce the excess energy use by </strong> <span class="game-variable">{{ reduction_goal }}%</span>.
+    </p>
+    <p>You have <span class="game-variable">{{ game_rounds }}</span> months (<span class="game-variable">{{ game_rounds }}</span> decision rounds) to try to achieve it.</p>
+    <p>
+      Your decisions affect both: <strong>your cash earnings</strong> from the
+      experiment, and <strong>actual air pollution in the US</strong>.
+    </p>
+    <p>
+      Note that all money dedicated to energy conservation will be
+      <strong>invested through Carbonfund.org</strong> to a program that actually
+      eliminates pollution from the air in the US.
+    </p>
+  </div>
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <img src="{% static 'assets/environmental-impact.jpg' %}" class="img-fluid" style="border: 1px solid #ddd" alt="Responsive image" />
+  </div>
+</div>
+
+{% endblock %}

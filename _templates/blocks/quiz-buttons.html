@@ -1,0 +1,25 @@
+<div id="form_btn_box" class="quiz-buttons text-right">
+  <button id="checkButton" type="button" class="btn btn-primary">Check Answers</button>
+  <button id="reviewButton" class="otree-btn-next btn disabled btn-warning">Review Instructions</button>
+  <button id="nextButton" class="otree-btn-next btn disabled btn-success" style="width: 100px">Continue</button>
+</div>
+
+<script>
+const checkButton = "#checkButton";
+const nextButton = "#nextButton";
+const reviewButton = "#reviewButton";
+const formBtnBox = "#form_btn_box";
+document.querySelector(`${checkButton}`).onclick = checkForm;
+const page_form_keys = '{{ answer_key }}';
+const FORM_KEY = parseTemplateObject(page_form_keys);
+const CAN_REVIEW = '{{ can_review }}';
+// document.querySelector('#form').onsubmit = function(event){
+//   console.log('prevented');
+//   event.preventDefault();
+//   result = checkForm();
+//   console.log('result', result);
+//   if (result) {
+//     return false;
+//   }
+// }
+</script>

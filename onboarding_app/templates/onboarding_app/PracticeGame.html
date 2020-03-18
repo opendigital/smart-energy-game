@@ -1,0 +1,112 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+<div class="card game-card z1" style="">
+
+  <div class="card-title game-title bg-success color-white py-2">MONTH {{ current_round }} ({{ current_month }})</div>
+
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col h2 py-1">
+        <h4 class="fs-inherit lh-1 my-0">You have <span class="game-variable color-tokens">10</span> energy tokens.</h4>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col flex flex-valign flex-distribute h2 py-1">
+        <h4 class="fs-inherit lh-1 my-0">How much energy do you want to contribute to the group conservation account this month?</h4>
+        <input
+        id="contribution_box"
+        type="number"
+        name="practice_contribution"
+        class="token-box color-conserve mx-2 game-variable fs-inherit"
+        min="0"
+        max="10"
+        onchange="document.getElementById('personal').setAttribute('value', 10-this.value)"
+        autofocus
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col flex flex-valign flex-distribute h2 py-1">
+        <h4 class="fs-inherit lh-1 my-0">How much energy do you want to put in your private account this month?</h4>
+
+        <div id="personal" class="color-private mx-2 game-variable token-box fs-inherit"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row my-2 mt-4">
+  <div class="col">
+    <p class="color-red h3">Remember, the decisions of other players in this practice game are random
+      and DO NOT REPRESENT the actual decisions of other players.</p>
+    <p class="color-red h3">Practice results DO NOT count toward your final payment.</p>
+  </div>
+</div>
+
+<div id="errors" class="form-control-errors" style="display:none; font-size: 30px">
+  {{ form.practice_contribution.errors }}
+</div>
+
+<script>
+var contribution_box = document.getElementById("contribution_box");
+var personal_output = document.getElementById("personal");
+var errors = document.getElementById("errors")
+var other_errors = document.getElementsByClassName("otree-form-errors").item(0)
+
+if (other_errors != null) {
+  other_errors.style.display = "none"
+  errors.style.display = "block";
+  errors.style.color = "#CC444B";
+  errors.style.fontSize = "30px";
+  errors.innerHTML = "Please enter a number of energy tokens";
+  errors.style.background = "transparent"
+  errors.style.marginBottom = "10px"
+  errors.style.borderRadius = "15px"
+}
+
+contribution_box.oninput = function () {
+  if (0 <= this.value && this.value <= 10) {
+
+    errors.innerHTML = "";
+
+    personal_output.innerHTML = 10 - this.value;
+    errors.style.display = "none";
+    if (other_errors !== null) {
+      other_errors.style.display = "none";
+    }
+
+    contribution_box.style.background = "";
+    contribution_box.style.color = '';
+
+  } else if (this.value && this.value > 10) {
+    errors.innerHTML = "You only have a number of 10 energy tokens";
+    errors.style.display = "block";
+    errors.style.color = "#CC444B";
+
+    // errors.style.fontSize = "30px";
+    // errors.style.background = "transparent"
+    // errors.style.marginBottom = "10px"
+    // errors.style.borderRadius = "15px"
+    contribution_box.style.background = "#CC444B";
+    contribution_box.style.color = 'white';
+
+    personal_output.innerHTML = null;
+  } else {
+    personal_output.innerHTML = null;
+    errors.innerHTML = "Therer was an error;";
+  }
+}
+
+</script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+<table id="table" class="game-card table my-0 shadow-md" style="text-align:left;">
+  <tr class="bg-grey200 text-left shadow">
+    <th class="text-left">MONTH: {{ current_round }} ({{ current_month }})</th>
+    <th>{{ current_month }}</th>
+    <th>CUMULATIVE</th>
+    <th></th>
+  </tr>
+
+  <tr>
+    <td class="text-left"><span class="row-title">You put into your private account::</span></td>
+    <td class="text-right"><span class="font-bold color-private">{{ player.private_contribution }}</span></td>
+    <td class="text-right"><span class="font-bold color-private">{{ player.all_rounds_private_contribution }}</span></td>
+    <td></td>
+  </tr>
+
+  <tr class="bd-dashed-bottom-2 bc-inherit">
+    <td class="text-left"><span class="row-title">Your contribution to the group conservation account:</span></td>
+    <td class="text-right"><span class="font-bold color-conserve">{{ player.contribution}}</span></td>
+    <td class="text-right"><span class="font-bold color-conserve">{{ player.all_rounds_contribution }}</span></td>
+    <td></td>
+  </tr>
+
+  <tr class="text-muted">
+    <td class="text-left"><span class="row-title">Other residents total contributions to the group conservation account:</span></td>
+    <td class="text-right"><span class="">{{ total_contribution }}</span></td>
+    <td class="text-right"><span class="">{{ player.all_rounds_others_contribution }}</span></td>
+    <td id-="token_avg"><span class="text-muted">Avg: {{ avg_contrib }}</span></td>
+  </tr>
+
+  <tr>
+    <td class="text-left"><span class="row-title">Total group conservation account contributions:</span></td>
+    <td class="text-right"><span class="font-bold">{{ group.total_contribution }}</span></td>
+    <td class="text-right"><span class="font-bold">{{ group.all_rounds_contribution }}</span></td>
+    <td><span id="percentage" class="text-muted"></span></td>
+  </tr>
+</table>
+
+<script>
+let user_id = parseInt("{{ player.id_in_group }}");
+let current_round = {{ player.round_number }} - 2
+let user_contribution = parseInt("{{ player.contribution }}");
+let raw_contribution_string = "{{ player.contribution }}"
+let player_contribution = parseInt(raw_contribution_string.split(" ")[0])
+let user_total_contribution = parseInt("{{ player.all_rounds_contribution }}");
+let all_rounds_contribution = {{ session.vars.bot_contributions }}
+let current_round_contributions = all_rounds_contribution[current_round]
+let total_contributions = {{ session.vars.bot_contributions }}
+var group_total_string = "{{ group.all_rounds_contribution }}";
+var group_total = parseInt(group_total_string.split(" ")[0], 10)
+
+var prct_to_goal = Math.floor(group_total * 100 / 900);
+var percentage = document.getElementById("percentage")
+percentage.innerHTML = `${prct_to_goal}% of goal`;
+total_contributions = total_contributions[current_round]
+let cumulative_contributions = []
+</script>
+
+{% endblock %}

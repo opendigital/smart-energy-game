@@ -1,0 +1,32 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+<p>
+  People often express concern about environmental problems, but some people
+  differ as to which consequences concern them the most. We are going to list
+  different areas where environmental problems could have harmful consequences.
+  <strong>Please rate how concerned you are about environmental harms in each area below.</strong>
+</p>
+
+<section class="likert-form fb-4060" style="width: 100%">
+  <div class="bg-grey900">
+    <div class="form-header form-group">
+      <label class="fb-40"></label>
+      <div class="controls text-center text-upper">
+        <ul class="color-white mx-0 my-0 px-0 py-1">
+          <li><label>Not at all concerned</label></li>
+          <li><label>A little concerned</label></li>
+          <li><label>Moderately concerned</label></li>
+          <li><label>Very concerned</label></li>
+          <li><label>Extremely concerned</label></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% formfields %}
+</section>
+
+{% endblock %}

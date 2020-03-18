@@ -1,0 +1,67 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+<div class="row content-area">
+  <div class="col">
+    <h2>
+      Thank you for participating in our study!
+    </h2>
+
+    <blockquote><i>
+      Feedback Design for Sustainable Home Energy Management<br>
+      PI: Sabine Brunswicker, Technology Leadership and Innovation<br>
+      Co-PIs: Dr. Leigh Raymond, Political Science, and Marlen Promann, Computer Graphics Technology<br>
+      Purdue University<br>
+      <b>#IRB-2019-540</b><br>
+    </i>
+  </blockquote>
+
+  <p class="card-text">
+    <strong>This study involved deception.</strong> This means that we did not provide you with the complete description of the purpose of the study and some of the methods or instruments used had a different purpose than how we described them. Deception is used in research when knowledge of the purpose of the study or certain aspects of the study may bias participant responses. Deception involves either false information – a "cover story" – or omission of certain information. The purpose of this form is to explain the true purpose of the study and/or provide information that had been omitted. You also will be asked permission to use the information we obtained from you during your participation.
+  </p>
+
+  <hr>
+
+  <p class="card-text">
+    <strong>IN SHORT:</strong> We did not tell you that you played against agents (vs. other people) that were programmed to play with specific levels of cooperation in order to better analyze participants' conservation choices. We initially omitted this information from you because we did not want to bias your responses.
+  </p>
+
+  <p class="card-text">
+    <strong>LONG EXPLANATION:</strong> We seek to understand how visual and textual cues in energy feedback affect peoples’ cooperative decisions in social energy conservation contexts. To do this, we have to study individual decision making in a group context. Group dynamics; however, often leads to high variability making it very difficult to get statistically significant results. To be able to test our hypotheses we held the social context constant for all of our participants. Meaning, all participants played with the exact same set of agents whose behaviors emulated actual human behavior based on past empirical research. We initially omitted this information from you because we did not want to bias your responses.
+  </p>
+
+  <hr>
+
+  <p class="card-text">
+    Now that you understand the true nature of our study, you have the chance to refuse the use of the data we collected from you for research purposes. You are free to ask us not to use your data in our study analysis. If you decline to let us use your data, you will still receive the monetary compensation just as you would if we use your data in our analysis. This is entirely voluntary, but we hope to analyze as much data as possible to better understand how textual and visual cues may enhance sustainable cooperation in communities.
+  </p>
+
+  <p class="card-text">
+    <strong>Because this experiment is ongoing, we request that you not share the true nature and purpose of this experiment with others who might potentially participate in our study.</strong>
+  </p>
+
+  <h3>Who can I contact if I have questions about the study?</h3>
+
+  <p class="card-text">
+    <strong>If you have questions, comments or concerns about this research project</strong>, you can talk to one of the researchers via email: <a href="mailto:opendigital@purdue.edu">opendigital@purdue.edu</a>. If you have questions about your rights while taking part in the study or have concerns about the treatment of research participants, please call the Human Research Protection Program at <a href="tel:765-494-5942">(765) 494-5942</a>, email (<a href="mailto:irb@purdue.edu">irb@purdue.edu</a>) or report anonymously via Purdue's Hotline: <a href="https://purdue.edu/hotline">www.purdue.edu/hotline.</a>
+  </p>
+
+
+  <h3>Documentation of Informed Consent:</h3>
+
+  <p class="card-text">I HAVE HAD THE OPPORTUNITY TO READ THIS CONSENT FORM AND HAVE THE RESEARCH STUDY MORE FULLY EXPLAINED, INCLUDING THE NEED FOR AND USE OF DECEPTION. I CAN SCREEN PRINT THIS INFORMED CONSENT DOCUMENT FOR MY OWN RECORDS. BY SELECTING “YES” BELOW AND CLICKING THE SUBMIT BUTTON, I GIVE MY PERMISSION FOR THE RESEARCHERS TO USE MY DATA.</p>
+
+  <div class="content-confirmation" style="padding:1em 1em 0em 1em; border: 1px solid #a58c8c; margin:2em;font-weight:bold;">
+
+  {{ form.survey_consent }}
+
+  </div>
+
+  <hr>
+
+  <p class="card-text"><strong>Please LEAVE THE Amazon Turk WINDOW OPEN as you complete the study</strong>. When finished, you will return to that page to paste the study completion CODE into the Amazon Turk box. This is technically needed for you to receive your payment.</p>
+
+  {% endblock %}
