@@ -1,6 +1,6 @@
 {
   "name": "rcodi-otree-energy-game",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "social games built with django for researh",
   "main": "index.js",
   "dependencies": {
