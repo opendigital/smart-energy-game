@@ -152,7 +152,7 @@ class Example1(Page):
             'game_goal': '60',
             '_debuger_vars': '789987070',
             'classes': {
-                'row1': 'badge-success',
+                'row1': '',
                 'row2': 'hide',
                 'row3': 'hide',
                 'row4': 'hide',
@@ -171,8 +171,8 @@ class Example2(Page):
             'progress': 'Examples',
             'classes': {
                 'row1': 'text-muted',
-                'row2': 'badge-danger',
-                'row3': 'badge-success',
+                'row2': '',
+                'row3': '',
                 'row4': 'hide',
                 'row5': 'hide',
             }
@@ -191,8 +191,8 @@ class Example3(Page):
                 'row1': 'text-muted',
                 'row2': 'text-muted',
                 'row3': 'text-muted',
-                'row4': 'badge-success',
-                'row5': 'badge-danger',
+                'row4': '',
+                'row5': '',
             }
         }
 
@@ -250,11 +250,34 @@ class PracticeResults(Page):
         return self.round_number <= 1
 
     def vars_for_template(self):
+        game_round = 1
+        player_contribution = self.player.practice_contribution
+        player_contribution_total = player_contribution
+        player_withheld = 10 - self.player.practice_contribution
+        player_withheld_total = player_withheld
+        group_contribution = c(147)
+        group_contribution_total = group_contribution
+        contributions_round = group_contribution + player_contribution
+        contributions_total = contributions_round
+        group_contribution_total
+        percent_goal = group_contribution_total * 100 / 900
+
         return {
-            'page_title': Constants.page_titles[13],
             'progress': 'Practice',
-            'current_month': Constants.MONTHS[(self.round_number - 1) % 12],
-            'current_round': self.round_number % 12,
+            'page_title': Constants.page_titles[13],
+            'current_month': Constants.MONTHS[game_round],
+            'game_round': game_round,
+            'current_round': game_round,
+            'player_contribution': player_contribution,
+            'player_contribution_total': player_contribution_total,
+            'player_withheld': player_withheld,
+            'player_withheld_total': player_withheld_total,
+            'group_contribution': group_contribution,
+            'group_contribution_total': group_contribution_total,
+            'contributions_round': contributions_round,
+            'contributions_total': contributions_total,
+            'avg_contrib': contributions_total / Constants.game_players,
+            'percent_goal': int(group_contribution_total * 100 / 900)
         }
 
 
@@ -266,7 +289,7 @@ class Quiz(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[13],
+            'page_title': Constants.page_titles[14],
             'progress': 'Quiz'
         }
 
@@ -276,22 +299,17 @@ class Quiz1(Page):
     form_fields = ['q1']
 
     def is_displayed(self):
-        print('self.session.vars', self.session.vars)
-        print('self.player', self.player.participant.vars)
-        print_var(self.session.vars)
+        print('can review',  0 >= self.player.q1_attempts)
 
-        return self.round_number == 1 \
-            and self.player.q1_attempts <= Constants.quiz_max_attempts \
+        return self.player.q1_attempts <= 2 \
             and not self.player.q1_correct
 
 
     def vars_for_template(self):
-        player_string = json.dumps(self.session.vars, separators=(". ", ":"), indent=4)
-        print('self.player', player_string)
         return {
-            'page_title': Constants.page_titles[14],
-            'js_vars': json.dumps(Constants.template_config),
+            'page_title': Constants.page_titles[15],
             'progress': 'Quiz',
+            'can_review': 0 >= self.player.q1_attempts,
             'q1_attempts': self.player.q1_attempts,
             'q1_correct': self.player.q1_correct,
             'show_hint': self.player.q1_attempts > Constants.quiz_max_attempts,
@@ -307,14 +325,8 @@ class Quiz1(Page):
     def error_message(self, values):
         valid = self.player.valid_q1(values)
         if not valid:
-            self.session.vars["quizdata"] = 'change'
-            return 'errors'
-
-    def before_next_page(self):
-        print(self.session.vars["quizdata"])
-        self.session.vars["quizdata"] = 'change'
-
-
+            if self.player.q1_attempts <= 1:
+                self.player.review_rules = 1
 
 
 class Quiz2(Page):
@@ -322,11 +334,11 @@ class Quiz2(Page):
     form_fields = ['q2']
 
     def vars_for_template(self):
-        print('self.session.vars', self.session.vars)
+
         return {
-            'page_title': Constants.page_titles[15],
             'progress': 'Quiz',
-            'debug_vars': json.dumps(self.session.vars),
+            'page_title': Constants.page_titles[16],
+            'can_review': 0 >= self.player.q2_attempts,
             'show_hint': self.player.q2_attempts > Constants.quiz_max_attempts,
             'q2_attempts': self.player.q2_attempts,
             'q2_correct': self.player.q2_correct,
@@ -335,8 +347,8 @@ class Quiz2(Page):
         }
 
     def is_displayed(self):
-        return self.round_number == 1 \
-            and self.player.q2_attempts <= Constants.quiz_max_attempts \
+        print('can review', 0 >= self.player.q2_attempts)
+        return self.player.q2_attempts <= Constants.quiz_max_attempts \
             and not self.player.q2_correct
 
     def q2_choices(self):
@@ -347,17 +359,8 @@ class Quiz2(Page):
     def error_message(self, values):
         valid = self.player.valid_q2(values)
         if not valid:
-            self.player.review_rules = 2
-            return 'errors'
-
-        self.player.review_rules = 0
-
-    def before_next_page(self):
-        print(self.session.vars["quizdata"])
-        self.session.vars["quizd2222"] = 'olddata'
-        self.session.vars["quizdata3"] = 'newvalue'
-
-
+            if self.player.q2_attempts <= 1:
+                self.player.review_rules = 2
 
 
 
@@ -370,9 +373,10 @@ class Quiz3(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[16],
+            'can_review': 0 >= self.player.q3a_attempts,
+            'page_title': Constants.page_titles[17],
             'progress': 'Quiz',
-            'show_hint': self.player.q3a_attempts > 2 or self.player.q3b_attempts > 2,
+            'show_hint': self.player.q3a_attempts > 1 or self.player.q3b_attempts > 1,
             'answer_key': dict(
                 q3a=Constants.q3[0]["answer"],
                 q3b=Constants.q3[1]["answer"],
@@ -408,10 +412,8 @@ class Quiz3(Page):
     def error_message(self, values):
         valid = self.player.valid_q3(values)
         if not valid:
-            self.player.review_rules = 2
-            return 'errors'
-        else:
-            self.player.review_rules = 0
+            if self.player.q3a_attempts <= 1:
+                self.player.review_rules = 3
 
 
 
@@ -444,10 +446,11 @@ class Quiz4(Page):
             Constants.q4[5]["hint"],
         ]
         return {
-            'page_title': Constants.page_titles[17],
-            'js_vars': Constants.q4,
+            'can_review': 0 >= self.player.q4a_attempts,
+            'page_title': Constants.page_titles[18],
             'progress': 'Quiz',
-            'show_hint': self.player.q4a_attempts > 2,
+            'show_hint': self.player.q4a_attempts > 1,
+            'attempts': self.player.q4a_attempts,
             'answer_key': answer_key,
             'q4_hints': hint_text,
         }
@@ -467,7 +470,6 @@ class Quiz4(Page):
             if q is True:
                 num_correct += 1
 
-        print('\n\n\n 4 total correct is', num_correct, 'attempt', self.player.q4a_attempts)
         if self.player.q4a_attempts < Constants.quiz_max_attempts \
             and num_correct == 6:
             return False
@@ -476,7 +478,6 @@ class Quiz4(Page):
 
 
     def error_message(self, values):
-        print("checking", values)
         valid = self.player.valid_q4(values)
         print(valid)
         if valid[0] is not True \
@@ -485,10 +486,9 @@ class Quiz4(Page):
             or valid[3] is not True \
             or valid[4] is not True \
             or valid[5] is not True:
-            self.player.review_rules = 4
-            return "You did not get all the questoins correct"
-        else:
-            self.player.review_rules = 0
+            if self.player.q4a_correct <= 1:
+                self.player.review_rules = 4
+
 
 
 
@@ -496,22 +496,24 @@ class ReviewGameRules(Page):
     template_name = 'onboarding_app/Example3.html'
 
     def is_displayed(self):
-        if self.round_number > 1:
-            return False
-
+        print('Should we review the rule', self.player.review_rules)
         if self.player.review_rules <= 0:
             return False
         elif self.player.review_rules == 1:
-            template_name = 'onboarding_app/IntroEnvironOutcomes.html'
+            template_name = 'onboarding_app/Intro3.html'
+            page_title = 'Review: Game Structure'
             return True
-        elif self.player.review_rules == 2 or self.player.review_rules == 23:
-            template_name = 'onboarding_app/Example2.html'
+        elif self.player.review_rules == 2:
+            template_name = 'onboarding_app/Intro7.html'
+            page_title = 'Review: Game Outcomes'
             return True
-        elif self.player.review_rules == 3 or self.player.review_rules == 23:
-            template_name = 'onboarding_app/Example3.html'
+        elif self.player.review_rules == 3:
+            template_name = 'onboarding_app/ExampleAll.html'
+            page_title = 'Review: Examples'
             return True
         elif self.player.review_rules == 4:
             template_name = 'onboarding_app/Example1.html'
+            page_title = 'Review: Example 1'
             return True
         else:
             return False
@@ -521,11 +523,11 @@ class ReviewGameRules(Page):
             'page_title': 'Review Game Rules',
             'progress': 'Examples',
             'classes': {
-                'row1': 'text-muted',
+                'row1': 'outline-row',
                 'row2': 'text-muted',
                 'row3': 'text-muted',
-                'row4': 'badge-success',
-                'row5': 'badge-danger',
+                'row4': 'text-muted',
+                'row5': 'text-muted',
             }
         }
 
@@ -542,7 +544,7 @@ class GameIntro(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[17],
+            'page_title': Constants.page_titles[19],
             'progress': 'Game'
         }
 
@@ -563,6 +565,8 @@ page_sequence = [
     PracticeGame,
     PracticeResults,
     Quiz,            # QUIZ
+    Quiz1,           # Q1
+    ReviewGameRules, # -- REVIEW
     Quiz1,           # Q1
     Quiz2,           # Q2
     ReviewGameRules, # -- REVIEW

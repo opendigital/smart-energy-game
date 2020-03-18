@@ -37,17 +37,17 @@ class Constants(BaseConstants):
     quiz_max_attempts = 2
 
     page_titles = [
-        "Energy Conservation Game",
         "Research Participant Consent Form",
-        "Game: Outline",
+        "Instruction: Game Outline",
         "Instruction: Game Structure and Incentives",
+        "Instruction: Introduction",
         "Instruction: Gameplay",
         "Instruction: Financial Outcomes",
         "Instruction: Environmental Outcomes",
         "Examples: Overview",
         "Examples: 1. Minimum Requirement",
-        "Examples: 2, 3. Min and Max Conservation",
-        "Examples: 4, 5. Only You and Everyone But You",
+        "Examples: 2 and 3. Min and Max Conservation",
+        "Examples: 4 and 5. Only You and Everyone But You",
         "Practice: Game Intro",
         "Practice: Game",
         "Practice: Game Result",
@@ -273,7 +273,6 @@ class Subsession(BaseSubsession):
         return []
 
     def init_attempts(self):
-        print('init_attempts')
         return dict(
             q1=0,
             q2=0,
@@ -374,6 +373,7 @@ class Player(BasePlayer):
 
     def validate_field(self, id, value, answer):
         print('validating field', id)
+
 
     def valid_q1(self, values):
         if self.q1_correct == True:
