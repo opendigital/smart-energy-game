@@ -4,38 +4,52 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-<ul>
+
+<ul class="text-list my-3">
   <li>
-    There are <strong><span class="game-variable">{{ game_players }}</span> players</strong> who live in the same housing community.
+    <p>
+      There are <strong><span class="game-variable">{{ game_players }}</span> players</strong> who live in the same housing community.
+    </p>
   </li>
 
   <li>
-    At the start of each month, each player has <strong><span class="game-variable">{{ game_tokens }}</span>
-    energy tokens</strong> (worth<strong> $<span class="game-variable">{{ token_value }}</span>
-    each</strong>) that represent potential energy use beyond their basic needs.
+    <p>
+      At the start of each month, each player has <strong><span class="game-variable">{{ game_tokens }}</span>
+      energy tokens</strong> (worth<strong> $<span class="game-variable">{{ token_value }}</span>
+      each</strong>) that represent potential energy use beyond their basic needs.
+    </p>
   </li>
+    
+    <li>
+      <p>
+        Each month, every player faces the same <strong>decision problem</strong>:
+        how much energy to use for their personal benefit (by putting tokens in
+        their private account) versus how much to conserve (by putting tokens in the
+        group conservation account).
+      </p>
+    </li>
 
-  <li>
-    Each month, every player faces the same <strong>decision problem</strong>:
-    how much energy to use for their personal benefit (by putting tokens in
-    their private account) versus how much to conserve (by putting tokens in the
-    group conservation account).
-  </li>
+    <li>
+      <p>
+        <strong>Players will be paid</strong> the value of all energy tokens in
+        their private account at the end of the game.
+      </p>
+    </li>
+    <li>
+      <p>
+        If the group meets the <span class="game-variable">{{ reduction_goal }}%</span> conservation goal by the end of the game, then the value of those tokens in
+        the group conservation account is doubled and given in equal shares to all
+        players as a <strong>reward</strong>.
+      </p>
+    </li>
 
-  <li>
-    <strong>Players will be paid</strong> the value of all energy tokens in
-    their private account at the end of the game.
-  </li>
-  <li>
-    If the group meets the <span class="game-variable">{{ reduction_goal }}%</span> conservation goal by the end of the game, then the value of those tokens in
-    the group conservation account is doubled and given in equal shares to all
-    players as a <strong>reward</strong>.
-  </li>
+    <li>
+        <p>
+          To meet the <span class="game-variable">{{ reduction_goal }}%</span> energy reduction goal, each player should contribute
+          <strong><span class="game-variable">{{ optimal_contribution }}</span> energy tokens every month</strong> to the group conservation
+          account.
+        </p>
+      </li>
+    </ul>
 
-  <li>
-    To meet the <span class="game-variable">{{ reduction_goal }}%</span> energy reduction goal, each player should contribute
-    <strong><span class="game-variable">{{ optimal_contribution }}</span> energy tokens every month</strong> to the group conservation
-    account.
-  </li>
-</ul>
 {% endblock %}

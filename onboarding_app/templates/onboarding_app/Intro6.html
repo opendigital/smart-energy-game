@@ -4,7 +4,7 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-      <div class="my-5 flex-row flex-center">
+      <div class="my-5 flex flex-row flex-center">
         <div class="model-card flex flex-vcenter text-center flex-center flex-item color-private bc-inherit">Tokens in Private Account</div>
         <div class="icon-type">+</div>
         <div class="model-card flex flex-vcenter text-center flex-center flex-item color-conserve bc-inherit">Group Conservation Bonus</div>
@@ -14,31 +14,26 @@
       <div class="row">
         <div class="col">
           <ul>
-            <li>
-              Regardless of the group goal, all players receive <span class="game-variable">${{ token_value }}</span> for every energy
-              token left in their <span class="priv">private accounts</span> at the end of the game.
-            </li>
 
             <li>
-              If the <span class="priv"><span class="game-variable">{{ reduction_goal }}</span>% group conservation goal is met
-              (i.e., there are at least <span class="game-variable">{{ token_goal }}</span> tokens</span> in the
-              group conservation account at the end of the game), then the building owner doubles the monetary
-              value of the conserved tokens and divides them equally among all
-              <span class="game-variable">{{ game_players }}</span> players as a bonus.
+              <p>Regrdless of the group goal, all players receive <span class="game-variable">${{ token_value }}</span> for every energy
+              token left in their <span class="color-private font-bold">private accounts</span> at the end of the game.</p>
             </li>
 
-            <blockquote>
-              <p>
-                For example, if exactly <span class="game-variable">{{ token_goal }}</span> tokens are
-                contributed to the group conservation account, each player will receive an additional
-                bonus pay of $0.72, which is their equal share of the $18 group bonus ($18 = <span class="game-variable">{{ token_goal }}</span> tokens
-                in the group conservation account x <span class="game-variable">2</span> x <span class="game-variable">${{ token_value }}</span> per token).
-              </p>
-            </blockquote>
-          </li>
 
+            <li>
+              <p>If the <span class="color-conserve font-bold"><span class="game-variable color-conserve">{{ reduction_goal }}</span>% group conservation </span>goal is met
+              (i.e., there are at least <span class="game-variable">{{ token_goal }}</span> tokens</span> in the group conservation account
+              at the end of the game), then the building owner doubles the monetary
+              value of the conserved tokens and divides them equally among all<span class="game-variable">{{ game_players }}</span>
+               players as a bonus.</p>
+
+              <blockquote>
+                <p>For example, if exactly <span class="game-variable">{{ token_goal }}</span> tokens are contributed to the group conservation account, each player will receive an additional bonus pay of $0.72, which is their equal share of the $18 group bonus ($18 = <span class="game-variable">{{ token_goal }}</span> tokens in the group conservation account x <span class="game-variable">2</span> x <span class="game-variable">${{ token_value }}</span> per token).</p>
+              </blockquote>
+            </li>
           <li>
-             If the group fails to meet its group conservation goal, no bonus will be paid to any player.
+            <p>If the group fails to meet its group conservation goal, no bonus will be paid to any player.</p>
           </li>
 
           </ul>
