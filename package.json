@@ -9,8 +9,9 @@
   "devDependencies": {},
   "scripts": {
     "start": "node .",
+    "dev": ".bin/dev",
     "bump": "npm version patch",
-    "lint": "pylint --load-plugins pylint_django --rcfile=.pylintrc main_app onboarding_app",
+    "lint": "pylint --load-plugins pylint_django --rcfile=.pylintrc  onboarding_app",
     "lint:fix": "autopep8 --in-place --aggressive --aggressive $TARGET_FILEPATH",
     "styles": ".bin/styles",
     "styles:test": ".bin/styles test",

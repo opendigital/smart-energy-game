@@ -1,7 +1,6 @@
 import random
 from otree.api import Currency as c
 from otree.api import currency_range
-from main_app import models
 from ._builtin import Page, WaitPage
 from .constants import Constants
 from .utils import Utils

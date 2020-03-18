@@ -8,7 +8,8 @@ from os import environ
 # AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
-DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
+# DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
+
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
@@ -56,26 +57,26 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
-        'name': 'main_app',
-        'display_name': "Energy Conservation Game",
+        'name': 'main',
+        'display_name': "MAIN: Full Game",
         'num_demo_participants': 1,
         'app_sequence': ['onboarding_app' ,'energy_game', 'post_game']
     },
     {
         'name': 'onboarding',
-        'display_name': "Introduction, Practice Round, and Quiz",
+        'display_name': "Section | ONBOARDING: Teach and Practice Module",
         'num_demo_participants': 1,
         'app_sequence': ['onboarding_app'],
     },
     {
         'name': 'energy_game',
-        'display_name': "Game Only",
+        'display_name': "Section | GAMEPLAY: Conservation Energy (Game Rounds Only)",
         'num_demo_participants': 1,
         'app_sequence': ['energy_game'],
     },
     {
         'name': 'post_game',
-        'display_name': "Post-Game Survey Only",
+        'display_name': "Section | EXIT SURVEY: Post-Game Survey",
         'num_demo_participants': 1,
         'app_sequence': ['post_game'],
     }
