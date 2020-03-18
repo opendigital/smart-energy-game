@@ -5,65 +5,16 @@
 <link rel="stylesheet" type="text/css" href="{% static 'global/fonts.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
 <link rel="icon" type="image/x-icon" href="{% static 'global/favicon.ico' %}">
-<script src="{% static 'global/form2js.js' %}"></script>
 <script src="{% static 'global/scripts.js' %}"></script>
 {% endblock %}
 
 
 {% block global_scripts %}
-<div id="myProgress">
-  <div id="myBar">
-    <center>
-      <b style="color: white">{% if progress != "End" %}{{ progress }}{% else %}{% endif %}</b>
-    </center>
-  </div>
-</div>
-<script>
-var elem = document.getElementById("myBar");
-var width = 1;
+  {% include 'blocks/progress.html' %}
 
-elem.style.background = 'gray';
-var progress = '{{ progress }}';
-switch (progress) {
-  case 'Consent':
-  elem.style.width = '5%';
-  break;
-  case 'Introduction':
-  elem.style.marginLeft = '5%';
-  elem.style.width = '15%';
-  break;
-  case 'Examples':
-  elem.style.marginLeft = '20%';
-  elem.style.width = '15%';
-  break;
-  case 'Practice':
-  elem.style.marginLeft = '35%';
-  elem.style.width = '7%';
-  break;
-  case 'Quiz':
-  elem.style.marginLeft = '42%';
-  elem.style.width = '17%';
-  break;
-  case 'Game':
-  elem.style.marginLeft = '59%';
-  elem.style.width = '31%';
-  break;
-  case 'Survey':
-  elem.style.marginLeft = '90%';
-  elem.style.width = '10%';
-  break;
-  case 'End':
-  elem.style.marginLeft = '0';
-  elem.style.width = '100%';
-  break;
-  default:
-  //DO NOTHING.
-  elem.style.marginLeft = '10%';
-  elem.style.width = '80%';
-  break;
-}
-</script>
 {% if Constants.template_config.debug_jsvars %}
   {% include './util/debug_to_js.html' %}
 {% endif %}
+
+
 {% endblock %}
