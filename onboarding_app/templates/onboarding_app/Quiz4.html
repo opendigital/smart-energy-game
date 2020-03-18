@@ -5,55 +5,76 @@
 
 {% block page_content %}
 
+<section class="quiz-section flex-form-group py-2">
     <p>Q4a: <strong>If there are 900 tokens in the group conservation account at the end of the
       game (worth $9.00) and you have 30 tokens left in your private account (worth
       $.30), then how much will you receive at the end of the game?</strong>
     </p>
+    <hr>
     <div class="form-group" id='id_field_{{ form.q4a.html_name }}'>
-      {{ form.q4a.label_tag }}<br>
-      {{ form.q4a }}
+      {{ form.q4a.label_tag }}
+      <div class="group-interflexer">{{ form.q4a }}</div>
       {{ form.q4a.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q4a.html_name hint_text=q4_hints.0 %}
     </div>
+    {% include 'blocks/message-box.html' with field_id=form.q4a.html_name hint_text=q4_hints.0 %}
 
     <div class="form-group" id='id_field_{{ form.q4b.html_name }}'>
       {{ form.q4b.label_tag }}<br>
-      {{ form.q4b }}
+      <div class="group-interflexer">{{ form.q4b }}</div>
       {{ form.q4b.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q4b.html_name hint_text=q4_hints.1 %}
     </div>
+    {% include 'blocks/message-box.html' with field_id=form.q4b.html_name hint_text=q4_hints.1 %}
 
     <div class="form-group" id='id_field_{{ form.q4c.html_name }}'>
       {{ form.q4c.label_tag }}<br>
-      {{ form.q4c }}
+      <div class="group-interflexer">{{ form.q4c }}</div>
       {{ form.q4c.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q4c.html_name hint_text=q4_hints.2 %}
     </div>
 
+    {% include 'blocks/message-box.html' with field_id=form.q4c.html_name hint_text=q4_hints.2 %}
+
+    <hr>
+
+</section>
+<section class="quiz-section flex-form-group">
     <p>Q4b: <strong>How would your payout at the end of the game change if the total in the group
 conservation account had only 850 tokens?</strong>
     </p>
+    <hr>
     <div class="form-group" id='id_field_{{ form.q4d.html_name }}'>
       {{ form.q4d.label_tag }}<br>
-      {{ form.q4d }}
+      <div class="group-interflexer">{{ form.q4d }}</div>
       {{ form.q4d.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q4d.html_name hint_text=q4_hints.3 %}
     </div>
+
+    {% include 'blocks/message-box.html' with field_id=form.q4d.html_name hint_text=q4_hints.3 %}
+
     <div class="form-group" id='id_field_{{ form.q4e.html_name }}'>
       {{ form.q4e.label_tag }}<br>
-      {{ form.q4e }}
+      <div class="group-interflexer">{{ form.q4e }}</div>
       {{ form.q4e.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q4e.html_name hint_text=q4_hints.4 %}
     </div>
+
+    {% include 'blocks/message-box.html' with field_id=form.q4e.html_name hint_text=q4_hints.4 %}
+
     <div class="form-group" id='id_field_{{ form.q4f.html_name }}'>
       {{ form.q4f.label_tag }}<br>
-      {{ form.q4f }}
+    <div class="group-interflexer">{{ form.q4f }}</div>
       {{ form.q4f.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q4f.html_name hint_text=q4_hints.5 %}
     </div>
-    {% include './scripts/quiz.html' %}
-    {{ form.non_field_errors }}
-    {% include './blocks/quiz-buttons.html' %}
+
+    {% include 'blocks/message-box.html' with field_id=form.q4f.html_name hint_text=q4_hints.5 %}
+
+    <hr>
+</section>
+
+    <div class="otree-form-errors">
+      {{ form.non_field_errors }}
+    </div>
+{% endblock %}
 
 
+
+{% block page_footer_buttons %}
+{% include 'blocks/quiz-buttons.html' %}
 {% endblock %}

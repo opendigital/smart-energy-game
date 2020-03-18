@@ -4,23 +4,30 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-    <div class="form-group" id='id_field_{{ form.q3a.html_name }}'>
-      <p>Q3a:</p>
-      {{ form.q3a.label_tag }}
-      {{ form.q3a }}
-      {{ form.q3a.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q3a.html_name hint_text=q3_hint.0 %}
-    </div>
-
-    <div class="form-group" id='id_field_{{ form.q3b.html_name }}'>
-      <p>Q3b:</p>
-      {{ form.q3b.label_tag }}
-      {{ form.q3b }}
-      {{ form.q3b.errors }}
-      {% include './blocks/message-box.html' with field_id=form.q3b.html_name hint_text=q3_hint.1 %}
-    </div>
-  {% include './scripts/quiz.html' %}
-  {% include './blocks/quiz-buttons.html' %}
-
+<section class="quiz-section">
+<div class="form-group" id='id_field_{{ form.q3a.html_name }}'>
+  <p>Q3a:</p>
+  {{ form.q3a.label_tag }}
+  {{ form.q3a }}
+  {{ form.q3a.errors }}
+  {% include 'blocks/message-box.html' with field_id=form.q3a.html_name hint_text=q3_hint.0 %}
 </div>
+</section>
+<section class="quiz-section">
+<div class="form-group" id='id_field_{{ form.q3b.html_name }}'>
+  <p>Q3b:</p>
+  {{ form.q3b.label_tag }}
+  {{ form.q3b }}
+  {{ form.q3b.errors }}
+  {% include 'blocks/message-box.html' with field_id=form.q3b.html_name hint_text=q3_hint.1 %}
+</div>
+</section>
+<div class="otree-form-errors">
+  {{ form.non_field_errors }}
+</div>
+
+{% endblock %}
+
+{% block page_footer_buttons %}
+{% include 'blocks/quiz-buttons.html' %}
 {% endblock %}

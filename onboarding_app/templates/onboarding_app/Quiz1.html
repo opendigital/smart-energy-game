@@ -4,24 +4,22 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-
-<div class="form-group" id='id_field_{{ form.q1.html_name }}'>
+<section class="quiz-section">
   <p>Q1:</p>
-  {{ form.q1.label_tag }}
-  {{ form.q1 }}
-  {{ form.q1.errors }}
-  {% include './blocks/message-box.html' with field_id=form.q1.html_name hint_text=Constants.q1.0.hint %}
-</div>
-{{ form.non_field_errors }}
+  <div class="form-group horiz-select" id='id_field_{{ form.q1.html_name }}'>
+    {{ form.q1.label_tag }}
+    {{ form.q1 }}
+    {{ form.q1.errors }}
+    {% include 'blocks/message-box.html' with field_id=form.q1.html_name hint_text=Constants.q1.0.hint %}
+  </div>
+</section>
+
+<div class="otree-form-errors">
+  {{ form.non_field_errors }}
 </div>
 
-{% include './blocks/quiz-buttons.html' %}
-{% include './scripts/quiz.html' %}
+{% endblock %}
 
-<script>
-var fields = document.querySelectorAll('.form-check-input');
-for (var field of fields) {
-  field.checked = false;
-}
-</script>
+{% block page_footer_buttons %}
+  {% include 'blocks/quiz-buttons.html' %}
 {% endblock %}
