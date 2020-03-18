@@ -4,20 +4,17 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-      <div class="row">
-        <div class="col">
-          <p style="text-align: justify;">
-            The next two examples show outcome of the <strong>MINIMUM CONTRIBUTION</strong> where ALL players
-            put ALL their tokens into their own private accounts, while the <strong>MAXIMUM
-            CONTRIBUTION</strong> is when ALL players contribute ALL their energy tokens to
-            the conservation account.
-          </p>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col">
           {% include './blocks/examples-table.html' %}
-        </div>
+
+      <hr>
+
+      <div class="explanation-content bc-inherit color-cyan shadow-md">
+        <p>The next two examples show outcome of the:</p>
+        <p>
+          <strong>MINIMUM CONTRIBUTION</strong> where ALL players put ALL their tokens into their own private accounts, <br>
+        </p>
+        <p>while the <strong>MAXIMUM CONTRIBUTION</strong> is when ALL players contribute ALL their energy tokens to the conservation account.</p>
       </div>
+      
 {% endblock %}
