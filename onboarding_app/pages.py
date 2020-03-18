@@ -53,7 +53,6 @@ class Intro3(Page):
 
 
 class Intro4(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
@@ -150,14 +149,13 @@ class Example1(Page):
             'page_title': Constants.page_titles[8],
             'progress': 'Examples',
             'game_goal': '60',
-            '_debuger_vars': '789987070',
             'classes': {
                 'row1': '',
                 'row2': 'hide',
                 'row3': 'hide',
                 'row4': 'hide',
                 'row5': 'hide',
-             }
+            },
         }
 
 
@@ -299,10 +297,7 @@ class Quiz1(Page):
     form_fields = ['q1']
 
     def is_displayed(self):
-        print('can review',  0 >= self.player.q1_attempts)
-
-        return self.player.q1_attempts <= 2 \
-            and not self.player.q1_correct
+        return self.player.q1_attempts <= 2 and not self.player.q1_correct
 
 
     def vars_for_template(self):
@@ -334,7 +329,6 @@ class Quiz2(Page):
     form_fields = ['q2']
 
     def vars_for_template(self):
-
         return {
             'progress': 'Quiz',
             'page_title': Constants.page_titles[16],
@@ -347,7 +341,6 @@ class Quiz2(Page):
         }
 
     def is_displayed(self):
-        print('can review', 0 >= self.player.q2_attempts)
         return self.player.q2_attempts <= Constants.quiz_max_attempts \
             and not self.player.q2_correct
 

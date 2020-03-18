@@ -11,16 +11,16 @@ from otree.api import (
     currency_range,
 )
 
-author = 'Your name here'
+author = 'Matt Harris'
 
 doc = """
-Your app description
+RCODI Energy Game Pre-game training
 """
 
 class Constants(BaseConstants):
 
     template_config = dict(
-        debug_vars=True,
+        debug_vars=False,
         debug_jsvars=False
     )
 
@@ -350,7 +350,6 @@ class Player(BasePlayer):
 
     def quiz_bonus(self):
         self.payoff += 5
-        print("Bonus Paid: New Value is", self.payoff)
 
     def init_quiz_count(self):
         self.participant.vars['object has no attribute blah'] = [1, 2, 3]
@@ -430,10 +429,10 @@ class Player(BasePlayer):
                 if self.q3b_attempts <= 1:
                     self.quiz_bonus()
 
-        return [
-            self.q3a_correct,
-            self.q3b_correct
-        ]
+        if self.q3a_correct and self.q3b_correct:
+            return True
+        return False
+
 
 
 

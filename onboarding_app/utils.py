@@ -14,7 +14,7 @@ class Utils():
         print(json.dumps(somevar, separators=(". ", ":"), indent=4))
 
 
-    def dump(obj):
+    def dump(obj, title=''):
         if title is not "":
             print("")
             print(title)
