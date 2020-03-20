@@ -341,8 +341,6 @@ class Quiz3(Page):
             ),
             'q3a_choices': Constants.q3[0]["choices"],
             'q3b_choices': Constants.q3[1]["choices"],
-            'q3a_attempts': self.player.qattempts("q3a"),
-            'q3b_attempts': self.player.qattempts("q3b"),
             'q3_hint': [
                 Constants.q3[0]["hint"],
                 Constants.q3[1]["hint"],
@@ -371,21 +369,17 @@ class Quiz4(Page):
 
 
     def is_displayed(self):
-        iscorrect = [
-            self.player.qcorrect("q4a"),
-            self.player.qcorrect("q4b"),
-            self.player.qcorrect("q4c"),
-            self.player.qcorrect("q4d"),
-            self.player.qcorrect("q4e"),
-            self.player.qcorrect("q4f"),
-        ]
-        num_correct = 0
-        for q in iscorrect:
-            if q is True:
-                num_correct += 1
-        return self.player.qattempts("q4a") <= 2 \
-            and not num_correct == 6
-
+        if self.player.qcorrect("q4a") \
+            and self.player.qcorrect("q4b") \
+            and self.player.qcorrect("q4c") \
+            and self.player.qcorrect("q4d") \
+            and self.player.qcorrect("q4e") \
+            and self.player.qcorrect("q4f"):
+            return False
+        else:
+            if self.player.q4_total_attempts() <= 6:
+                return True
+            return False
 
 
     def vars_for_template(self):
@@ -420,31 +414,17 @@ class Quiz4(Page):
     def error_message(self, values):
         valid = self.player.valid_q4(values)
         if valid is not True:
-            print("valid", valid)
-            if valid[0] is not True \
-                or valid[1] is not True \
-                or valid[2] is not True \
-                or valid[3] is not True \
-                or valid[4] is not True \
-                or valid[5] is not True:
-                if self.player.qattempts("q4a") <= 1:
-                    self.player.review_rules = 4
-
-    def before_next_page(self):
-        self.player.finalize_data()
-
+            if self.player.q4_total_attempts() <= 6:
+                self.player.review_rules = 4
 
 
 class ReviewGameRules(Page):
 
     def is_displayed(self):
-        if self.player.review_rules == 1:
-            return True
-        elif self.player.review_rules == 2:
-            return True
-        elif self.player.review_rules == 3:
-            return True
-        elif self.player.review_rules == 4:
+        if self.player.review_rules == 1 \
+            or self.player.review_rules == 2 \
+            or self.player.review_rules == 3 \
+            or self.player.review_rules == 4:
             return True
         else:
             return False
@@ -474,9 +454,8 @@ class ReviewGameRules(Page):
                 'row4': 'text-muted',
                 'row5': 'text-muted',
             }
-
         return {
-        'page_title': page_title,
+            'page_title': page_title,
             'reduction_goal': Constants.reduction_goal,
             'game_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,

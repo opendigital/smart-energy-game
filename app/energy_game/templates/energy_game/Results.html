@@ -29,15 +29,15 @@
 
   <tr class="text-muted">
     <td class="text-left"><span class="row-title">Other residents total contributions to the group conservation account:</span></td>
-    <td class="text-right"><span class="">{{ total_contribution }}</span></td>
-    <td class="text-right"><span class="">{{ player.all_rounds_others_contribution }}</span></td>
-    <td id-="token_avg"><span class="text-muted">Avg: {{ avg_contrib }}</span></td>
+    <td class="text-right"><span class="font-bold color-conserve">{{ total_contribution }}</span></td>
+    <td class="text-right"><span class="font-bold color-conserve">{{ player.all_rounds_others_contribution }}</span></td>
+    <td id-="token_avg"><span class="text-muted">Average {{ avg_contrib }}</span></td>
   </tr>
 
   <tr>
     <td class="text-left"><span class="row-title">Total group conservation account contributions:</span></td>
-    <td class="text-right"><span class="font-bold">{{ group.total_contribution }}</span></td>
-    <td class="text-right"><span class="font-bold">{{ group.all_rounds_contribution }}</span></td>
+    <td class="text-right"><span class="font-bold color-conserve">{{ group.total_contribution }}</span></td>
+    <td class="text-right"><span class="font-bold color-conserve">{{ group.all_rounds_contribution }}</span></td>
     <td><span id="percentage" class="text-muted"></span></td>
   </tr>
 </table>
@@ -57,8 +57,8 @@ var group_total = parseInt(group_total_string.split(" ")[0], 10)
 
 var prct_to_goal = Math.floor(group_total * 100 / 900);
 var percentage = document.getElementById("percentage")
-percentage.innerHTML = `${prct_to_goal}% of goal`;
 total_contributions = total_contributions[current_round]
+percentage.innerHTML = `${group.all_rounds_contribution}/900=${prct_to_goal}% of goal achieved`;
 let cumulative_contributions = []
 </script>
 

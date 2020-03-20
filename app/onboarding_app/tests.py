@@ -54,3 +54,4 @@ class PlayerBot(Bot):
                 'q4e': 3,
                 'q4f': 3
             })
+            yield (pages.GameIntro)

@@ -1,4 +1,4 @@
-.debug-info { display: block; }
+.debug-info { display: none;; }
 .otree-form-errors { display: none; }
 html { height: 100%; }
 
@@ -413,7 +413,7 @@ p {
   ul {
     list-style: none;
   }
-  
+
   .form-check-input {
     margin-left: -1em;
   }

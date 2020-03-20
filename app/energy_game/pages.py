@@ -4,6 +4,7 @@ from ._builtin import Page, WaitPage
 from .constants import Constants
 from .utils import Utils
 
+
 class Game(Page):
     form_model = 'player'
     form_fields = [
@@ -12,16 +13,19 @@ class Game(Page):
     ]
 
     def is_displayed(self):
-        Utils.dump_obj(self.player, 'player')
-        Utils.dump_obj(self.group, 'group')
-        Utils.dump_obj(self.session, 'session')
         return self.round_number >= 1
 
     def vars_for_template(self):
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
+
+        print("self.round_number", self.round_number)
+        print("MONTH", round_month)
+        print("index", index)
         return {
             'page_title': 'Energy Game',
-            'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
-            'current_round': self.round_number - 1,
+            'current_month': round_month,
+            'current_round': self.round_number,
             'progress': 'Game'
         }
 
@@ -65,13 +69,15 @@ class Results(Page):
         Utils.dump_obj(self.group, 'group')
         print('get_total_contribution', self.group.get_total_contribution())
         print('self.group.get_avg_contribution()', self.group.get_avg_contribution())
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
         return {
             'page_title': 'Energy Game Results',
             'others_contribution': self.player.others_contribution,
             'total_contribution': self.group.get_total_contribution(),
             'avg_contrib': str(self.group.get_avg_contribution()),
-            'current_month': Constants.MONTHS[(self.round_number - 2) % 12],
-            'current_round': self.round_number - 1,
+            'current_month': round_month,
+            'current_round': self.round_number,
             'progress': 'Game'
         }
 

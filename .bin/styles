@@ -10,6 +10,7 @@ BASE_PATH="$(npm prefix)"
 # BUT THE NPM ENVIRONMENT FEATURES OFFER SOME RELIABLE STARTING
 # POINTS FOR MOVING THROUGHOUT THE PROJECT
 
+APP_PATH="app"
 THEME_STYLE_PATH="_static/global"
 THEME_STYLE_FILENAME="theme.scss"
 
@@ -19,23 +20,23 @@ BUILD_OPTION="$1"
 _build_stylesheet() {
   node-sass \
     --output-style compressed \
-    --output "${BASE_PATH}/${THEME_STYLE_PATH}" \
-    "${BASE_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
+    --output "${BASE_PATH}/${APP_PATH}/${THEME_STYLE_PATH}" \
+    "${BASE_PATH}/${APP_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
 }
 
 # LIVE COMPILE FOR DEVELOPMENT
 _build_stylesheet_test() {
   node-sass \
     --output-style expanded \
-    "${BASE_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
+    "${BASE_PATH}/${APP_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
 }
 
 _build_stylesheet_dev() {
   node-sass \
     --watch \
     --output-style expanded \
-    --output "${BASE_PATH}/${THEME_STYLE_PATH}" \
-    "${BASE_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
+    --output "${BASE_PATH}/${APP_PATH}/${THEME_STYLE_PATH}" \
+    "${BASE_PATH}/${APP_PATH}/${THEME_STYLE_PATH}/${THEME_STYLE_FILENAME}"
 
 }
 

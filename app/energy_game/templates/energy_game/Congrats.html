@@ -4,11 +4,42 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-        <div class="card" style="background:transparent; border-color: transparent">
+
+      <script src="{% static 'global/jspdf.min.js' %}"></script>
+      <script src="{% static 'global/html2canvas.min.js' %}"></script>
+        <div id="cert_frame" class="card" style="background:transparent; border-color: transparent">
             <div class="card-body">
               <img src="{% static 'assets/carbonfund.jpg' %}" class="img-fluid" alt="Carbonfund Certificate" />
                 <div id="carbonfund_reduction_lbs">Thank you for reducing <strong>{{ lbs }}</strong> tonnes of CO2 emissions by donating <strong>{{ amount }}</strong></div>
                 <div id="carbonfund_reduction_date" class=""><strong>{% now "m/d/Y" %}</strong></div>
             </div>
         </div>
+{% endblock %}
+
+
+{% block page_footer_buttons %}
+<button id="html2pdf" onclick="toPdf()" class="hide btn-success btn btn-lg bg-cyan">Download PDF</button>
+<button class="otree-btn-next btn px-4 btn-lg btn-info px-5 depth-1">Next</button>
+<script>
+
+html2canvas(document.querySelector("#cert_frame")).then(canvas => {
+  document.body.appendChild(canvas)
+});
+function toPdf(){
+  var pdf = new jsPDF("l", "mm", "a4");
+  // var imgData = canvas.toDataURL('image/jpeg', 1.0);
+  // due to lack of documentation; try setting w/h based on unit
+  pdf.addImage(imgData, 'JPEG', 10, 10, 180, 150);  // 180x150 mm @ (10,10)mm
+  pdf.html(document.querySelector('#cert_frame'), {
+        callback: function (doc) {
+      doc.save();
+    }
+  });
+//   pdf = new jsPDF('landscape');
+// pdf.addHTML(document.body, function() {
+//   pdf.save('stacking-plan.pdf');
+// });
+}
+</script>
+
 {% endblock %}
