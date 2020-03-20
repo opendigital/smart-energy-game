@@ -5,7 +5,6 @@ class Utils():
     def __init__(self):
         self.values = ''
 
-
     def print_var(somevar, title=""):
         if title is not "":
             print(title)
@@ -14,7 +13,7 @@ class Utils():
         print(json.dumps(somevar, separators=(". ", ":"), indent=4))
 
 
-    def dump(obj, title=''):
+    def dump(obj):
         if title is not "":
             print("")
             print(title)
@@ -35,12 +34,6 @@ class Utils():
 
     def isset(arg):
         print("testing argument", arg)
-        try:
-            arg
-        except NameError:
-            arg = None
-            print("except NameError", arg)
-
         if arg is None:
             print("arg is None", arg)
             return False

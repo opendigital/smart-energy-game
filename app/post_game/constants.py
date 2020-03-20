@@ -1,6 +1,5 @@
 from otree.api import (
     BaseConstants,
-    Currency as c,
 )
 
 
@@ -19,8 +18,8 @@ class Constants(BaseConstants):
     game_rounds = 1
 
     true_false = [
-        "True",
-        "False"
+        [1, "True" ],
+        [0, "False" ],
     ]
 
     MONTHS = [
@@ -49,7 +48,8 @@ class Constants(BaseConstants):
         "This experiment requires a lot of concentration.",
         "The rules of the game were explained clearly.",
         "In this experiment one must try to work together with others to have everyone end up with more money.",
-        "In this experiment, the air pollution impact was more important to me than the financial incentive for meeting the group conservation goal (i.e. the bonus).",
+        "In this experiment, the air pollution impact was more important to me than the financial incentive for \
+            meeting the group conservation goal (i.e. the bonus).",
         "In this experiment, everyone\'s earnings depend on the decisions of all members of the group.",
     ]
     survey_1c_items = [
@@ -128,38 +128,38 @@ class Constants(BaseConstants):
     ]
 
     choice_demographics_gender = [
-        'Male',
-        'Female',
-        'Other'
+        [1, 'Male' ],
+        [2, 'Female' ],
+        [3, 'Other' ],
     ]
 
     choices_demographics_ethnicity = [
-        'American Indian/Alaska Native',
-        'Asian',
-        'Black or African-American',
-        'Native Hawaiian/Pacific Islander',
-        'White',
-        'Other',
+        [1, 'American Indian/Alaska Native'],
+        [2, 'Asian'],
+        [3, 'Black or African-American'],
+        [4, 'Native Hawaiian/Pacific Islander'],
+        [5, 'White'],
+        [6, 'Other'],
     ]
 
     choices_demographics_employment = [
-        'Full time employed',
-        'Full time student',
-        'Part time employed',
-        'Part time student',
-        'Other'
+        [1, 'Full time employed'],
+        [2, 'Full time student'],
+        [3, 'Part time employed'],
+        [4, 'Part time student'],
+        [5, 'Other'],
     ]
 
     choices_demographics_experience = [
-        'None',
-        '1-2 previous',
-        '3-5 previous',
-        'More than 5 previous'
+        [1, 'None'],
+        [2, '1-2 previous'],
+        [3, '3-5 previous'],
+        [4, 'More than 5 previous'],
     ]
 
     choices_demographics_political = [
-        'Democrat',
-        'Republican',
-        'Independent',
-        'Other'
+        [1, 'Democrat'],
+        [2, 'Republican'],
+        [3, 'Independent'],
+        [4, 'Other'],
     ]

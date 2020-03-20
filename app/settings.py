@@ -10,6 +10,8 @@ from os import environ
 
 # DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
 
+# POINTS_CUSTOM_NAME = 'tokens'
+# BROWSER_COMMAND = ''
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
@@ -32,7 +34,7 @@ ROOMS = [{
 }]
 
 
-mturk_hit_settings = {
+MTURK_HIT_SETTINGS = {
     'keywords': ['bonus', 'study'],
     'title': 'Title for your experiment',
     'description': 'Description for your experiment',
@@ -52,7 +54,7 @@ SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
     'participation_fee': 0.50,
     'doc': "",
-    'mturk_hit_settings': mturk_hit_settings,
+    'mturk_hit_settings': MTURK_HIT_SETTINGS,
 }
 
 SESSION_CONFIGS = [
@@ -60,7 +62,7 @@ SESSION_CONFIGS = [
         'name': 'main',
         'display_name': "MAIN: Full Game",
         'num_demo_participants': 1,
-        'app_sequence': ['onboarding_app' ,'energy_game', 'post_game']
+        'app_sequence': ['onboarding_app', 'energy_game', 'post_game']
     },
     {
         'name': 'onboarding',
@@ -86,7 +88,6 @@ SESSION_CONFIGS = [
 DEMO_PAGE_INTRO_HTML = """
 In order to test
 </br>
-USER: admin</br>
-PASS: admin
-</br></br>
+</br>
+</br>
 """

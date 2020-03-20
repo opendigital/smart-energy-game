@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BASE_PATH="$(npm prefix)"
+[[ -f "${BASE_PATH}/./.npmrc" ]] && . ${BASE_PATH}/./.npmrc
+
+APP_DIR="app"
+JUNK_PATHS="__temp_bots:__temp_migrations:__pycache_"
+
+__run__() {
+  echo "$PWD"
+  echo "${JUNK_PATHS//:/* }*"
+  mkdir ".tmp_cleanup"
+  find "./${APP_DIR}" -name "__temp_*" -type d -exec mv "{}" ".tmp_cleanup/" \;
+  find "./${APP_DIR}" -depth -name "__pycache_*" -type d -exec  rm -rf \;
+  cd ${APP_DIR} && otree resetdb --noinput
+}
+
+
+export PYTHONPATH=/usr/bin/python3.7 \
+  && __run__ ${TEST_NAME} ${TEST_PLAYERS}
+
+
+exit 0

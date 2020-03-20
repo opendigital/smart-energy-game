@@ -22,7 +22,7 @@
 
       <input id="contribution_box"
       class="token-box color-conserve mx-2 game-variable fs-inherit"
-      name="contribution"
+      name="contributed"
       onchange="document.getElementById('private_box').setAttribute('value', 10-this.value)"z
       min="0"
       max="10"
@@ -37,14 +37,14 @@
 
       <div id="personal" class="mx-2 color-private game-variable token-box input-placeholder"></div>
 
-      <input name="private_contribution" id="private_box" min="0" max="10" type="number" style="display:none">
+      <input name="withheld" id="private_box" min="0" max="10" type="number" style="display:none">
 
     </div>
 
   </div>
 </div>
 
-<div class="form-control-errors" id="errors">{{ form.contribution.errors }}</div>
+<div class="form-control-errors" id="errors">{{ form.contributed.errors }}</div>
 
 <script>
 

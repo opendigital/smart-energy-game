@@ -1,20 +1,26 @@
+from datetime import date
 import json
 import inspect
 
 class Utils():
-    def __init__(self):
-        self.values = ''
+    # def __init__(self):
 
+    def get_date():
+        today = date.today()
+        return today
+
+    def get_month():
+        today = date.month()
 
     def print_var(somevar, title=""):
-        if title is not "":
+        if title:
             print(title)
 
         variables = [i for i in dir(somevar) if not inspect.ismethod(i)]
         print(json.dumps(somevar, separators=(". ", ":"), indent=4))
 
 
-    def dump(obj):
+    def dump(obj, title=''):
         if title is not "":
             print("")
             print(title)

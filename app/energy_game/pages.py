@@ -1,6 +1,5 @@
 import random
-from otree.api import Currency as c
-from otree.api import currency_range
+from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .constants import Constants
 from .utils import Utils
@@ -8,15 +7,15 @@ from .utils import Utils
 class Game(Page):
     form_model = 'player'
     form_fields = [
-        'contribution',
-        'private_contribution'
+        'contributed',
+        'withheld'
     ]
 
     def is_displayed(self):
         Utils.dump_obj(self.player, 'player')
         Utils.dump_obj(self.group, 'group')
         Utils.dump_obj(self.session, 'session')
-        return self.round_number >= 2
+        return self.round_number >= 1
 
     def vars_for_template(self):
         return {
@@ -36,7 +35,7 @@ class ResultsWaitPage(WaitPage):
     # print(models.Player.bot_contributions)
 
     def is_displayed(self):
-        return self.round_number >= 2
+        return self.round_number >= 1
 
     def before_next_page(self):
         self.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
@@ -54,7 +53,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number >= 2
+        return self.round_number >= 1
 
     # def before_next_page(self):
     #     self.player.bot_contributions = [[10 for x in round_] for round_ in self.player.bot_contributions]
@@ -96,6 +95,10 @@ class Congrats(Page):
 
 
 class FinalResults(Page):
+
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds
+
     def vars_for_template(self):
         Utils.dump_obj(self.player._state, 'player_state')
         Utils.dump_obj(self.player.participant, 'participant')
@@ -110,13 +113,12 @@ class FinalResults(Page):
             'quiz': c(self.player.how_many_good_answers()).to_real_world_currency(self.session)
         }
 
-    def is_displayed(self):
-        return self.player.round_number == Constants.num_rounds
 
     def before_next_page(self):
         self.player.participant_vars_dump = str(self.participant.vars)
         self.group.pay_carbonfund()
         self.group.pay_quizzes()
+
 
 page_sequence = [
     Game,
