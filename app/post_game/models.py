@@ -107,13 +107,13 @@ class Player(BasePlayer):
     # random_others_contribution = models.CurrencyField()
     # group_random_total_contribution = models.CurrencyField()
     # bot_contributions_in_round = models.LongStringField()
-
+    # ------------------
     # SURVEY FORM FIELDS
     # ------------------
     survey_consent = models.BooleanField(
         label="",
         choices=[
-            [True, 'Yes, I give my permission for the researchers to use my data.'] ,
+            [True, 'Yes, I give my permission for the researchers to use my data.'],
             [False, 'No, I do not give permission for the researchers to use my data. Please discard the data you obtained from me.']
         ],
         widget=widgets.RadioSelect

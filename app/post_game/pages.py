@@ -1,7 +1,5 @@
-import random
 from otree.api import Currency as c
-from otree.api import currency_range
-from ._builtin import Page, WaitPage
+from ._builtin import Page
 from .constants import Constants
 
 
@@ -100,8 +98,8 @@ class PostSurvey4(Page):
 
 
 class Debriefing(Page):
-    form_model="player"
-    form_fields=["survey_consent"]
+    form_model = "player"
+    form_fields = ["survey_consent"]
 
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds

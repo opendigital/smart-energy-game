@@ -15,14 +15,14 @@
 
   <tr>
     <td class="text-left"><span class="row-title">You put into your private account::</span></td>
-    <td class="text-right"><span class="font-bold color-private">{{ player.private_contribution }}</span></td>
-    <td class="text-right"><span class="font-bold color-private">{{ player.all_rounds_private_contribution }}</span></td>
+    <td class="text-right"><span class="font-bold color-private">{{ player.withheld }}</span></td>
+    <td class="text-right"><span class="font-bold color-private">{{ player.all_rounds_withheld }}</span></td>
     <td></td>
   </tr>
 
   <tr class="bd-dashed-bottom-2 bc-inherit">
-    <td class="text-left"><span class="row-title">Your contribution to the group conservation account:</span></td>
-    <td class="text-right"><span class="font-bold color-conserve">{{ player.contribution}}</span></td>
+    <td class="text-left"><span class="row-title">Your contributed to the group conservation account:</span></td>
+    <td class="text-right"><span class="font-bold color-conserve">{{ player.contributed}}</span></td>
     <td class="text-right"><span class="font-bold color-conserve">{{ player.all_rounds_contribution }}</span></td>
     <td></td>
   </tr>
@@ -45,8 +45,8 @@
 <script>
 let user_id = parseInt("{{ player.id_in_group }}");
 let current_round = {{ player.round_number }} - 2
-let user_contribution = parseInt("{{ player.contribution }}");
-let raw_contribution_string = "{{ player.contribution }}"
+let user_contribution = parseInt("{{ player.contributed }}");
+let raw_contribution_string = "{{ player.contributed }}"
 let player_contribution = parseInt(raw_contribution_string.split(" ")[0])
 let user_total_contribution = parseInt("{{ player.all_rounds_contribution }}");
 let all_rounds_contribution = {{ session.vars.bot_contributions }}

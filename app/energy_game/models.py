@@ -13,8 +13,9 @@ from .utils import Utils
 from .constants import Constants
 
 Const = Constants
-author = 'Matt Harris <m@harr.is>'
-doc = """
+AUTHOR = 'Matt Harris <m@harr.is>'
+
+DOC = """
 RCODI Energy Game - Main App
 """
 
@@ -33,16 +34,13 @@ class Group(BaseGroup):
 
     total_contribution = models.CurrencyField()
     total_random_contribution = models.CurrencyField()
-
-    def get_avg_contribution(self):
-        print('total_contribution', self.total_contribution)
-        return 100 * self.total_contribution / Constants.game_players
-
-
     bonus = models.CurrencyField(initial=c(0))
     do_once = models.BooleanField(initial=True)
     carbonFund = models.CurrencyField()
 
+    def get_avg_contribution(self):
+        print('total_contribution', self.total_contribution)
+        return 100 * self.total_contribution / Constants.game_players
 
     def get_bot_contributions_string(self):
         bot_contributions_str = \
@@ -73,12 +71,11 @@ class Group(BaseGroup):
         else:
             player_last_round = player.in_round(self.round_number - 1)
             player_two_rounds_ago = player.in_round(self.round_number - 2)
-            player_contribution_last_round = int(player_last_round.contribution)
-            player_contribution_two_rounds_ago = int(player_two_rounds_ago.contribution)
+            player_contribution_last_round = int(player_last_round.contributed)
+            player_contribution_two_rounds_ago = int(player_two_rounds_ago.contributed)
             bot_contribution_last_round = self.session.vars["bot_contributions"][-1]
             bot_contribution_two_rounds_ago = self.session.vars["bot_contributions"][-2]
 
-            # initialize basic constants
             NUM_RECIPROCATORS = 3
             NUM_FREE_RIDERS = 5
             NUM_CONDITIONALS = 16
@@ -87,15 +84,12 @@ class Group(BaseGroup):
             NUM_CCS_BELOW = 2
             new_contributions = []
 
-            # cooperator contributions
             for _ in range(NUM_RECIPROCATORS):
                 new_contributions.append(randint(8, 10))
 
-            # free rider contributions
             for _ in range(NUM_FREE_RIDERS):
                 new_contributions.append(randint(0, 2))
 
-            # identify factors needed to see if agents should be adjusted
             is_upward_trend = \
                 player_contribution_last_round + sum(bot_contribution_last_round) \
                 > player_contribution_two_rounds_ago + sum(bot_contribution_two_rounds_ago)
@@ -138,27 +132,24 @@ class Group(BaseGroup):
                 # code to make sure no contributions are negative or > 10
                 new_contributions[-1] = min(10, max(0, new_contributions[-1]))
 
-            # send to the bot contribution array
             self.session.vars["bot_contributions"].append(new_contributions)
 
-        # store bot contributions
-        player.bot_contributions_in_round = \
-            str(self.session.vars["bot_contributions"][round_number])
+        player.bot_contributions_in_round = str(self.session.vars["bot_contributions"][round_number])
 
 
     def set_payoffs(self):
-        self.total_contribution = sum([p.contribution for p in self.get_players()])
+        self.total_contribution = sum([p.contributed for p in self.get_players()])
 
         for player in self.get_players():
             if self.total_random_contribution:
                 self.total_random_contribution = \
-                    player.contribution + player.random_others_contribution
+                    player.contributed + player.random_others_contribution
 
-            player.payoff = c(10) - player.contribution
+            player.payoff = c(10) - player.contributed
 
             if self.round_number == Const.num_rounds:
                 if Const.group_goal <= self.all_rounds_contribution():
-                    print("all rounds contribution:")
+                    print("all rounds contributed:")
                     print(self.all_rounds_contribution())
                     print("mulitplier:")
                     print(Const.multiplier)
@@ -168,13 +159,12 @@ class Group(BaseGroup):
                     player.payoff += self.bonus
 
 
-    # It's used for after-survey queries.
-    def pay_quizzes(self):
-        if self.do_once and self.round_number == Const.num_rounds:
-            self.do_once = False
-            for player in self.get_players():
-                player.payoff += player.how_many_good_answers()
-
+    # # It's used for after-survey queries.
+    # def pay_quizzes(self):
+    #     if self.do_once and self.round_number == Const.num_rounds:
+    #         self.do_once = False
+    #         for player in self.get_players():
+    #             player.payoff += player.how_many_good_answers()
 
     def pay_carbonfund(self):
         self.carbonFund = self.all_rounds_contribution()/10*22
@@ -186,22 +176,20 @@ class Group(BaseGroup):
         player_sum = 0
 
         for i in range(len(player_in_all_rounds)):
-            if player_in_all_rounds[i].contribution != None:
-                player_sum += player_in_all_rounds[i].contribution
+            if player_in_all_rounds[i].contributed != None:
+                player_sum += player_in_all_rounds[i].contributed
 
         group_sum = sum([sum(x) for x in self.session.vars["bot_contributions"]])
-        # print(int(player.contribution))
-        # player_sum = sum([int(x.contribution) for x in player_in_all_rounds])
+        # print(int(player.contributed))
+        # player_sum = sum([int(x.contributed) for x in player_in_all_rounds])
         return c(group_sum + player_sum)
-
 
     def all_rounds_others_contribution(self):
         return sum([sum(x) for x in self.session.vars["bot_contributions"]])
 
-
     def get_total_contribution(self):
         player = self.get_players()[0]
-        player_contribution = int(player.contribution)
+        player_contribution = int(player.contributed)
         group_contributions = sum(self.session.vars["bot_contributions"][self.round_number - 2])
         #     return sum([g.total_contribution for g in self.in_rounds(2, self.round_number)])
         return c(player_contribution + group_contributions)
@@ -214,11 +202,8 @@ class Group(BaseGroup):
     def all_rounds_contribution_donation(self):
         return models.IntegerField(initial=self.all_rounds_contribution())
 
-
-
     def previous_rounds_contribution(self):
         return sum([g.total_contribution for g in self.in_previous_rounds()])
-
 
     def bonus_in_dollars(self):
         return self.bonus.to_real_world_currency(self.session)
@@ -234,17 +219,14 @@ class Group(BaseGroup):
 # - in_all_rounds()
 # - in_rounds()
 # - in_round()
-#
 # -- player.in_all_rounds() is almost the same but the list will have 10 objects, because it includes the current round’s player.
 # -- player.in_rounds(m, n) returns a list of players representing the same participant from rounds m to n.
 # -- player.in_round(m)
-
 class Player(BasePlayer):
-
-
     payoff = 0
-    contribution = models.CurrencyField(min=0, max=10)
-    private_contribution = models.CurrencyField(min=0, max=10)
+    contributed = models.CurrencyField(min=0, max=10)
+    withheld = models.CurrencyField(min=0, max=10)
+
     random_others_contribution = models.CurrencyField()
     bot_contributions_in_round = models.LongStringField()
 
@@ -258,19 +240,19 @@ class Player(BasePlayer):
         return c(120) - self.previous_rounds_contribution()
 
     def all_rounds_contribution(self):
-        return sum([p.contribution for p in self.in_rounds(2, self.round_number)])
+        return sum([p.contributed for p in self.in_rounds(2, self.round_number)])
 
     # def all_rounds_practice_contribution(self):
     #     return sum([p.practice_contribution for p in self.in_rounds(1, self.round_number)])
 
-    def all_rounds_practice_private_contribution(self):
-        return sum([p.practice_private_contribution for p in self.in_rounds(1, self.round_number)])
+    def all_rounds_practice_withheld(self):
+        return sum([p.practice_withheld for p in self.in_rounds(1, self.round_number)])
 
-    def all_rounds_private_contribution(self):
+    def all_rounds_withheld(self):
         # for p in self.in_rounds(1, self.round_number):
         #     print('round_number', self.round_number)
         #     print('p', Utils.dump_obj(p))
-        return sum([p.private_contribution for p in self.in_rounds(2, self.round_number)])
+        return sum([p.withheld for p in self.in_rounds(2, self.round_number)])
 
 
 
@@ -283,13 +265,13 @@ class Player(BasePlayer):
     def previous_rounds_contribution(self):
         if self.round_number <= Const.num_rounds / 2:
             return sum([
-                p.contribution for p in self.in_rounds(
+                p.contributed for p in self.in_rounds(
                     1,
                     self.round_number - 1
                 )
             ])
         return sum([
-            p.contribution for p in self.in_rounds(
+            p.contributed for p in self.in_rounds(
                 Const.num_rounds / 2 + 1,
                 self.round_number - 1
             )
@@ -311,10 +293,10 @@ class Player(BasePlayer):
         return c(sum([sum(x) for x in self.session.vars["bot_contributions"]]))
 
     # def others_contribution(self):
-    #     return sum([p.contribution for p in self.get_others_in_group()])
+    #     return sum([p.contributed for p in self.get_others_in_group()])
 
     # def others_contribution_array(self):
-    #     return [p.contribution for p in self.get_others_in_group()]
+    #     return [p.contributed for p in self.get_others_in_group()]
 
     # def all_rounds_others_contribution(self):
     #     return sum([p.all_rounds_contribution() for p in self.get_others_in_group()])
@@ -330,8 +312,8 @@ class Player(BasePlayer):
 
     def total_contribution(self):
         if self.round_number <= Const.num_rounds / 2:
-            return sum([p.contribution for p in self.in_rounds(1, self.round_number - 1)])
-        return sum([p.contribution for p in self.in_rounds(Const.num_rounds / 2 + 1, self.round_number - 1)])
+            return sum([p.contributed for p in self.in_rounds(1, self.round_number - 1)])
+        return sum([p.contributed for p in self.in_rounds(Const.num_rounds / 2 + 1, self.round_number - 1)])
 
     def total_pay(self):
         return self.group.bonus_in_dollars() \
@@ -353,6 +335,7 @@ class Player(BasePlayer):
         #     if answer_is_correct:
         #         counter += 5
         # return c(counter)
+        self.participant_vars["quiz_bonus"]
         return 0
 
 
