@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+TEST_NAME="${1:-'main'}"
+TEST_PLAYERS="${2:-1}"
+TEST_EXPORT="no"
+
+__run__() {
+  if [ $TEST_EXPORT == "yes" ]; then
+    /usr/local/bin/otree test "$1" $2 --export
+  else
+    /usr/local/bin/otree test "$1" $2
+  fi
+}
+
+
+export PYTHONPATH=/usr/bin/python3.7 \
+  && __run__ ${TEST_NAME} ${TEST_PLAYERS}
