@@ -1,6 +1,10 @@
 #!/bin/bash
 
 
+BASE_PATH="$(npm prefix)"
+[[ -f "${BASE_PATH}/./.npmrc" ]] && . ${BASE_PATH}/./.npmrc
+
+APP_DIR="app"
 TEST_NAME="${1:-'main'}"
 TEST_PLAYERS="${2:-1}"
 TEST_EXPORT="no"
@@ -13,6 +17,10 @@ __run__() {
   fi
 }
 
+cd "${APP_DIR}"
 
 export PYTHONPATH=/usr/bin/python3.7 \
   && __run__ ${TEST_NAME} ${TEST_PLAYERS}
+
+
+exit 0
