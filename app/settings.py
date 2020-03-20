@@ -88,7 +88,6 @@ SESSION_CONFIGS = [
 DEMO_PAGE_INTRO_HTML = """
 In order to test
 </br>
-USER: admin</br>
-PASS: admin
-</br></br>
+</br>
+</br>
 """
