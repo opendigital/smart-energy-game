@@ -1,2 +1,2 @@
-web: otree runprodserver1of2
-worker: otree runprodserver2of2
+web: cd app && otree runprodserver1of2
+worker: cd app && otree runprodserver2of2
