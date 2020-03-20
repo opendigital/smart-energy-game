@@ -1,9 +1,22 @@
 import json
 import inspect
+from datetime import date
+from .constants import Constants
 
 class Utils():
     def __init__(self):
         self.values = ''
+
+    def get_date():
+        today = date.today()
+        return today
+
+    def get_month(index):
+        today = date.today()
+        start_month = today.month - 1
+        return Constants.MONTHS[(12 + start_month + index) % 12]
+
+
 
     def print_var(somevar, title=""):
         if title is not "":

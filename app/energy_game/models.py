@@ -23,10 +23,14 @@ RCODI Energy Game - Main App
 
 class Subsession(BaseSubsession):
 
+
     def creating_session(self):
+        mock_quiz = "{'correct': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attempts': [2, 2, 2, 2, 2, 2, 2, 2, 2, 2], 'bonus': Currency(0)}";
         print('in creating_session', self.round_number)
         for p in self.get_players():
+            print(p.participant.vars)
             p.participant.vars['foo'] = 1
+            p.participant.vars["quiz_bonus"] = mock_quiz
 
 
 
@@ -159,12 +163,13 @@ class Group(BaseGroup):
                     player.payoff += self.bonus
 
 
-    # # It's used for after-survey queries.
-    # def pay_quizzes(self):
-    #     if self.do_once and self.round_number == Const.num_rounds:
-    #         self.do_once = False
-    #         for player in self.get_players():
-    #             player.payoff += player.how_many_good_answers()
+    # It's used for after-survey queries.
+    def pay_quizzes(self):
+        return False
+        # if self.do_once and self.round_number == Const.num_rounds:
+        #     self.do_once = False
+        #     for player in self.get_players():
+        #         player.payoff += player.how_many_good_answers()
 
     def pay_carbonfund(self):
         self.carbonFund = self.all_rounds_contribution()/10*22
@@ -335,7 +340,7 @@ class Player(BasePlayer):
         #     if answer_is_correct:
         #         counter += 5
         # return c(counter)
-        self.participant_vars["quiz_bonus"]
+        # self.participant.vars["quiz_bonus"]
         return 0
 
 

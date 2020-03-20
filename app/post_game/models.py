@@ -46,6 +46,13 @@ def get_select_field(_label, _choices):
         choices=_choices,
     )
 
+def get_selectint_field(_label, _choices):
+    """Return otree select field type"""
+    return models.IntegerField(
+        label=_label,
+        choices=_choices,
+    )
+
 
 def get_radiorange_field(_label, _choices, _horiz=False):
     """Return otree select field type"""
@@ -164,10 +171,10 @@ class Player(BasePlayer):
 
     # POST SURVEY 4
     s4a1 = get_int_field(_c_.survey_4_items[0], 1900, 2020)
-    s4a2 = get_select_field(_c_.survey_4_items[1], _c_.choice_demographics_gender)
-    s4a3 = get_select_field(_c_.survey_4_items[2], _c_.choices_demographics_ethnicity)
-    s4a4 = get_select_field(_c_.survey_4_items[3], _c_.choices_demographics_employment)
-    s4a5 = get_select_field(_c_.survey_4_items[4], _c_.choices_demographics_experience)
+    s4a2 = get_selectint_field(_c_.survey_4_items[1], _c_.choice_demographics_gender)
+    s4a3 = get_selectint_field(_c_.survey_4_items[2], _c_.choices_demographics_ethnicity)
+    s4a4 = get_selectint_field(_c_.survey_4_items[3], _c_.choices_demographics_employment)
+    s4a5 = get_selectint_field(_c_.survey_4_items[4], _c_.choices_demographics_experience)
     s4a6 = get_yesno_field(_c_.survey_4_items[5])
-    s4a7 = get_select_field(_c_.survey_4_items[6], _c_.choices_demographics_political)
+    s4a7 = get_selectint_field(_c_.survey_4_items[6], _c_.choices_demographics_political)
     s4a8 = get_int_field(_c_.survey_4_items[7], 0, 120)
