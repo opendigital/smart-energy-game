@@ -173,12 +173,11 @@ class Player(BasePlayer):
         self.quiz_result = str(result)
         self.participant.vars["quiz_result"] = str(result)
         print(str(result))
+        return result
 
-    def quiz_bonus(self):
+    def pay_bonus(self):
         self.payoff += 5
 
-    def dump_participant_vars(self):
-        self.player.participant_vars_dump = str(self.participant.vars)
 
     def all_rounds_group_random_contribution(self):
         return sum([p.group_random_total_contribution for p in self.in_rounds(1, self.round_number)])
@@ -204,7 +203,7 @@ class Player(BasePlayer):
         if self.q1 == answers[0] or values["q1"] == answers[0]:
             self.set_qcorrect("q1", 1)
             if self.qattempts("q1") <= 2:
-                self.quiz_bonus()
+                self.pay_bonus()
             return True
         else:
             return False
@@ -222,7 +221,7 @@ class Player(BasePlayer):
             self.set_qcorrect("q2", 1)
 
             if self.qattempts("q2") <= 2:
-                self.quiz_bonus()
+                self.pay_bonus()
             return True
         else:
             return False
@@ -245,7 +244,7 @@ class Player(BasePlayer):
 
         if self.qcorrect("q3a") and self.qcorrect("q3b"):
             if self.qattempts("q3a") <= 2:
-                self.quiz_bonus()
+                self.pay_bonus()
             return True
         return False
 
@@ -299,7 +298,7 @@ class Player(BasePlayer):
             + correct["q4e"] + correct["q4f"]
 
         if sum == 6 and self.qattempts("q4a") <= 2:
-            self.quiz_bonus()
+            self.pay_bonus()
             return True
 
         return [
