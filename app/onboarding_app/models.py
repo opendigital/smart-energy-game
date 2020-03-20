@@ -251,6 +251,13 @@ class Player(BasePlayer):
 
 
 
+    def q4_total_attempts(self):
+        return self.qattempts("q4a") \
+            + self.qattempts("q4b") \
+            + self.qattempts("q4c") \
+            + self.qattempts("q4d") \
+            + self.qattempts("q4e") \
+            + self.qattempts("q4f")
 
     def valid_q4(self, values):
         quiz_index = 3
