@@ -10,13 +10,14 @@
   "scripts": {
     "start": "node .",
     "dev": ".bin/dev",
+    "clean": ".bin/clean",
     "bump": "npm version patch",
     "lint": "pylint --load-plugins pylint_django --rcfile=.pylintrc ./app",
     "lint:fix": "autopep8 --in-place --aggressive --aggressive $TARGET_FILEPATH",
     "styles": ".bin/styles",
     "styles:test": ".bin/styles test",
     "styles:watch": ".bin/styles watch",
-    "test": "standard"
+    "test": ".bin/test onboarding && .bin/test energy_game && .bin/test post_game"
   },
   "repository": {
     "type": "git",
