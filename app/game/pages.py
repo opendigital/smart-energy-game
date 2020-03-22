@@ -55,12 +55,11 @@ class Results(Page):
         round_month = Utils.get_month(index)
         group_round_total = self.session.vars["round_total"]
         player_contributed = self.player.contributed
-        avg_contrib = float((group_round_total - player_contributed) / Constants.game_players)
         game_total = self.session.vars["game_total"]
         group_goal = Constants.group_goal
         percent_complete = str("%.2f" % round(float(100 * game_total / group_goal),2))
         templatevars = {
-            "avg_contrib": avg_contrib,
+            "avg_contrib": self.group.group_round_avg,
             "group_goal": group_goal,
             "current_month": round_month,
             "percent_complete": percent_complete,
@@ -81,25 +80,8 @@ class Results(Page):
             "player_total_witheld":     self.player.participant.vars["total_witheld"],
             "player_total_contributed": self.player.participant.vars["total_contributed"],
         }
-        print('=========================================================')
-        print('game_total                   \t', templatevars["game_total"])
-        print('=========================================================')
-        print('player_withheld              \t', templatevars["player_withheld"])
-        print('player_total_witheld         \t', templatevars["player_total_witheld"])
-        print('player_contributed           \t', templatevars["player_contributed"])
-        print('player_total_contributed     \t', templatevars["player_total_contributed"])
-        print('--------------------------------------------------------')
-        print('group_round_contributions    \t', templatevars["group_round_contributions"])
-        print('group_total_withheld         \t', templatevars["group_total_withheld"])
-        print('group_round_total            \t', templatevars["group_round_total"])
-        print('--------------------------------------------------------')
-        print('game_total                  \t',  templatevars["game_total"])
-        print('--------------------------------------------------------')
-        print('player_past_contributions    \t', templatevars["player_past_contributions"])
-        print('player_past_witholdings      \t', templatevars["player_past_witholdings"])
-        print('group_round_withholdings     \t', templatevars["group_round_withholdings"])
-        print('group_round_sums        \t',      templatevars["round_sums"])
-        print('\n\n')
+        self.player.print_round_results(templatevars)
+        self.group.print_round_bot_contributions()
         return templatevars
 
 
@@ -110,15 +92,20 @@ class Congrats(Page):
     def vars_for_template(self):
         index = self.round_number - 1
         round_month = Utils.get_month(index)
+        game_total = self.session.vars["game_total"]
+        if game_total >= Constants.group_goal:
+            game_bonus = game_total
+        else:
+            game_bonus = 0;
+        carbonfund_total = game_bonus + game_total
+
         return {
             'progress': 'Game',
             'current_round': index,
             'current_month': round_month,
             'page_title': 'Your Group\'s Air Pollution Reduction Result',
-            'player_withheld': self.player.participant.vars["total_witheld"],
-            'player_withheld_usd': c(self.player.participant.vars["total_witheld"]).to_real_world_currency(self.session),
-            'lbs': str(self.group.all_rounds_contribution()/10*22).split(" ")[0] + " lbs",
-            'amount': c(self.group.all_rounds_contribution()).to_real_world_currency(self.session)
+            'lbs': str(game_total/10*22).split(" ")[0] + " lbs",
+            'amount': self.group.tokens_to_dollars(carbonfund_total),
         }
 
 
@@ -132,11 +119,7 @@ class FinalResults(Page):
     def vars_for_template(self):
         index = self.round_number - 1
         round_month = Utils.get_month(index)
-        quiz_bonus = 0
-        quiz_data = "{\"correct\": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], \"attempts\": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2], \"quiz_bonus\": 15}"
-        quiz_data = json.loads(quiz_data)
-        # quiz_bonus = quiz_data["quiz_bonus"]
-
+        quiz_bonus = self.player.participant.vars["quiz_bonus"]
         game_total = self.session.vars["game_total"]
         player_withheld = self.player.participant.vars["total_witheld"]
 
@@ -181,7 +164,7 @@ class FinalResults(Page):
 
 
     def before_next_page(self):
-        self.player.finalize_game_player_data()
+        self.player.finalize_game_data()
 
 
 page_sequence = [

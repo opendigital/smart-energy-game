@@ -215,7 +215,7 @@ class PracticeGame(Page):
             'page_title': Constants.page_titles[12],
             'progress': 'Practice',
             'current_month': round_month,
-            'current_round': index,
+            'current_round': self.round_number,
         }
 
 
@@ -224,8 +224,8 @@ class PracticeResults(Page):
         return self.round_number <= 1
 
     def vars_for_template(self):
+        game_round = self.round_number
         index = self.round_number - 1
-        game_round = index
         round_month = Utils.get_month(index)
         player_contribution = self.player.practice_contribution
         player_contribution_total = player_contribution

@@ -11,8 +11,8 @@ class PlayerBot(Bot):
     def play_round(self):
 
         # if self.round_number < 4:
-        #     contribute = c(10 - self.round_number)
-        #     withhold = c(0 + self.round_number)
+        # contribute = c(10 - self.round_number)
+        # withhold = c(0 + self.round_number)
         contribute = c(10)
         withhold = c(0)
 

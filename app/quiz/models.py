@@ -115,11 +115,11 @@ class Player(BasePlayer):
                 self.participant.vars["qattempts"]["q4e"],
                 self.participant.vars["qattempts"]["q4f"],
             ],
-            quiz_bonus=self.quiz_bonus,
         )
-        quiz_data = str(result)
-        self.participant.vars["quiz_data"] = quiz_data
-        print(quiz_data)
+        self.quiz_data = str(result)
+        self.participant.vars["quiz_data"] = str(result)
+        self.participant.vars["quiz_bonus"] = self.quiz_bonus
+        print(str(result))
 
 
     def pay_bonus(self):
