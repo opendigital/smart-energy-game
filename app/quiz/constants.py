@@ -3,7 +3,6 @@ from otree.api import (
 )
 
 
-
 class Constants(BaseConstants):
     def __init__(self):
         self.values = ''
@@ -13,21 +12,17 @@ class Constants(BaseConstants):
         debug_jsvars=False
     )
 
-    name_in_url = 'onboarding'
-    players_per_group = None
-    num_rounds = 1
-    reduction_goal = 60
-
-    game_rounds = 6
-
-    game_tokens = 10
-    game_players = 25
+    name_in_url = 'training'
     game_goal = 900
-
+    game_players = 25
+    game_rounds = 6
+    game_tokens = 10
+    num_rounds = 1
+    players_per_group = None
+    quiz_max_attempts = 2
+    reduction_goal = 60
     token_goal = 6
     token_value = .01
-
-    quiz_max_attempts = 2
 
     page_titles = [
         "Research Participant Consent Form",

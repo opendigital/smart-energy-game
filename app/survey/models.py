@@ -106,14 +106,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    # payoff = 0
-    # contribution = models.CurrencyField(min=0, max=10)
-    # practice_contribution = models.CurrencyField(min=0, max=10)
-    # private_contribution = models.CurrencyField(min=0, max=10)
-    # practice_private_contribution = models.CurrencyField(min=0, max=10)
-    # random_others_contribution = models.CurrencyField()
-    # group_random_total_contribution = models.CurrencyField()
-    # bot_contributions_in_round = models.LongStringField()
     # ------------------
     # SURVEY FORM FIELDS
     # ------------------
@@ -178,3 +170,6 @@ class Player(BasePlayer):
     s4a6 = get_yesno_field(_c_.survey_4_items[5])
     s4a7 = get_selectint_field(_c_.survey_4_items[6], _c_.choices_demographics_political)
     s4a8 = get_int_field(_c_.survey_4_items[7], 0, 120)
+
+    def finalize_game_survey_data(self):
+        print("done")

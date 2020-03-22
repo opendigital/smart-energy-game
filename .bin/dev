@@ -1,20 +1,18 @@
 #!/bin/bash
 
-
 BASE_PATH="$(npm prefix)"
-[[ -f "${BASE_PATH}/./.npmrc" ]] && . ${BASE_PATH}/./.npmrc
+  [[ -f "${BASE_PATH}/./.npmrc" ]] && . "${BASE_PATH}/./.npmrc"
 
-OTREE_SERVER_VERBOSITY=2
+OTREE_SERVER_VERBOSITY=3
 APP_DIR="app"
 
-
-__run__() {
-
-  cd "${BASE_PATH}/app" && \
+__run__(){
   /usr/local/bin/otree devserver --force-color --verbosity="${OTREE_SERVER_VERBOSITY}"
 
   google-chrome http://localhost:8000
 }
 
-export PYTHONPATH=/usr/bin/python3.7 \
-  && __run__
+[[ "$INIT_CWD" == "${BASE_PATH}" ]] && \
+  cd $APP_DIR
+
+export PYTHONPATH=/usr/bin/python3.7 &&  __run__

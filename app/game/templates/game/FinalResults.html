@@ -1,0 +1,67 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+
+
+
+    <h2 class="h3 text-upper font-bold bg-success py-2 text-center">{{ result_message }}</h2>
+    <table class="table text-left">
+      <tr class="bg-primary color-white text-upper">
+        <th class="valign-middle py-2 p-l2 text-left"><span>YOUR FINAL RESULTS</span></th>
+        <th class="valign-middle py-2 px-0 text-right w-15"><span>Energy Tokens</span></th>
+        <th class="valign-middle py-2 p-r2 text-center w-10"><span>USD</span></th>
+      </tr>
+
+      <tr class="text-reg">
+        <td class="text-upper text-upper">Total contributions to the group conservation account:</td>
+        <td class="bg-grey100 w-15 text-right color-conserve font-bold">{{ game_total }}</td>
+        <td class="bg-grey200 w-10 text-center color-conserve font-bold">{{ game_total_usd }}</td>
+      </tr>
+
+      <tr class="text-reg ">
+        <td class="text-upper color-conserve">Group bonus for meeting the goal:</td>
+        <td class="color-conserve w-15 text-right">+{{ bonus_tokens }}</td>
+        <td class="color-conserve bg-grey200 w-10 font-bold text-center">+{{ bonus_tokens_usd }}</td>
+      </tr>
+
+      <tr class="text-reg">
+        <td class="text-upper bd-dashed-bottom-2">Your group's donation to Carbonfund.org to reduce air pollution:</td>
+        <td class="bg-grey100 w-15 bd-dashed-bottom-2 color-conserve text-right">{{ carbonfund_total }}</td>
+        <td class="bg-grey200 w-10 bd-dashed-bottom-2 color-conserve font-bold text-center">{{ carbonfund_total_usd }}</td>
+      </tr>
+
+
+      <tr class="text-reg">
+        <td class="text-upper">Energy tokens in your personal account:</td>
+        <td class="bg-grey100 w-15 color-private text-right font-bold">{{ player_withheld }}</td>
+        <td class="bg-grey200 w-10 color-private text-center">{{ player_withheld_usd }}</td>
+      </tr>
+
+      <tr class="text-reg">
+        <td class="text-upper">Additional pay ($.05 / question) for correct answers on quiz:</td>
+        <td class="color-private w-15 text-right">{{ quiz_bonus }}</td>
+        <td class="bg-grey200 font-bold  color-private w-10 text-center">{{ quiz_bonus_usd }}</td>
+      </tr>
+
+      <tr class="text-reg">
+        <td class="text-upper bd-dashed-bottom-2">Your participation pay: </td>
+        <td class="bd-dashed-bottom-2 w-15 color-private text-right"></td>
+        <td class="bd-dashed-bottom-2 bg-grey200 w-10 color-private text-center">{{ participation_pay_usd }}</td>
+      </tr>
+
+      <tr class="text-reg">
+        <td class="font-bold text-upper">TOTAL PAY TO YOU:</td>
+        <td class="bg-grey100 w-15 text-right"></td>
+        <td class="w-10 font-bold text-bigger text-center">{{ total_pay }}</td>
+      </tr>
+
+    </table>
+{% endblock %}
+
+{% block page_footer_message %}
+    <span class="color-red text-biggerfont-italic font-bold">NOTE: Before you receive your pay, you will need to answer a brief survey.</span>
+{% endblock %}
