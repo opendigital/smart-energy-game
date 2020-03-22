@@ -110,6 +110,8 @@ class Debriefing(Page):
             'progress': 'End'
         }
 
+    def before_next_page(self):
+        self.player.finalize_game_survey_data()
 
 
 page_sequence = [

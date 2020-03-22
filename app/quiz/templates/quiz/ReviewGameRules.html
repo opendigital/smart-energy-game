@@ -1,0 +1,16 @@
+{% if player.review_rules == 1 %}
+    {% include "quiz/Intro3.html" %}
+
+{% elif player.review_rules == 2 %}
+    {% include "quiz/Intro7.html" %}
+
+{% elif player.review_rules == 3 %}
+    {% include "quiz/ExampleAll.html" %}
+
+{% elif player.review_rules == 4 %}
+    {% include "quiz/Example1.html" %}
+
+{% else %}
+    {% include "quiz/ExampleAll.html" %}
+
+{% endif %}
