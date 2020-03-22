@@ -7,11 +7,10 @@ from os import environ
 # SENTRY_DSN = environ.get('SENTRY_DSN')
 # AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
-
 # DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
-
 # POINTS_CUSTOM_NAME = 'tokens'
 # BROWSER_COMMAND = ''
+
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
@@ -34,53 +33,53 @@ ROOMS = [{
 }]
 
 
-MTURK_HIT_SETTINGS = {
-    'keywords': ['bonus', 'study'],
-    'title': 'Title for your experiment',
-    'description': 'Description for your experiment',
-    'frame_height': 500,
-    'preview_template': 'global/MTurkPreview.html',
-    'minutes_allotted_per_assignment': 60,
-    'expiration_hours': 7*24,
-    'grant_qualification_id': '31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY',
-    'qualification_requirements': [{
-        'QualificationTypeId': "31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY",
-        'Comparator': "DoesNotExist",
-    }]
-}
+# MTURK_HIT_SETTINGS = {
+#     'keywords': ['bonus', 'study'],
+#     'title': 'Title for your experiment',
+#     'description': 'Description for your experiment',
+#     'frame_height': 500,
+#     'preview_template': 'global/MTurkPreview.html',
+#     'minutes_allotted_per_assignment': 60,
+#     'expiration_hours': 7*24,
+#     'grant_qualification_id': '31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY',
+#     'qualification_requirements': [{
+#         'QualificationTypeId': "31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY",
+#         'Comparator': "DoesNotExist",
+#     }]
+# }
+# 'mturk_hit_settings': MTURK_HIT_SETTINGS,
 
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
     'participation_fee': 0.50,
     'doc': "",
-    'mturk_hit_settings': MTURK_HIT_SETTINGS,
 }
 
 SESSION_CONFIGS = [
     {
         'name': 'main',
-        'display_name': "MAIN: Full Game",
+        'display_name': "MAIN: Full Game Sequence",
         'num_demo_participants': 1,
-        'app_sequence': ['onboarding_app', 'energy_game', 'post_game']
+        'app_sequence': ['quiz', 'game', 'survey']
     },
     {
-        'name': 'onboarding',
-        'display_name': "Section | ONBOARDING: Teach and Practice Module",
+        'name': 'quiz',
+        'display_name': "QUIZ: Pregame Training and Practice",
         'num_demo_participants': 1,
-        'app_sequence': ['onboarding_app'],
+        'app_sequence': ['quiz'],
     },
     {
-        'name': 'energy_game',
-        'display_name': "Section | GAMEPLAY: Conservation Energy (Game Rounds Only)",
+        'name': 'game',
         'num_demo_participants': 1,
-        'app_sequence': ['energy_game'],
+        'display_name': "GAME:  Energy Conservation Game",
+        'app_sequence': ['game'],
     },
     {
-        'name': 'post_game',
-        'display_name': "Section | EXIT SURVEY: Post-Game Survey",
+        'name': 'survey',
+        'display_name': "SURVEY: Postgame Survey",
         'num_demo_participants': 1,
-        'app_sequence': ['post_game'],
+        'app_sequence': ['survey'],
     }
 ]
 

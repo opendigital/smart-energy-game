@@ -209,11 +209,13 @@ class PracticeGame(Page):
         return self.round_number <= 1
 
     def vars_for_template(self):
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
         return {
             'page_title': Constants.page_titles[12],
             'progress': 'Practice',
-            'current_month': Constants.MONTHS[(self.round_number - 1) % 12],
-            'current_round': self.round_number % 12,
+            'current_month': round_month,
+            'current_round': index,
         }
 
 
@@ -222,7 +224,9 @@ class PracticeResults(Page):
         return self.round_number <= 1
 
     def vars_for_template(self):
-        game_round = 1
+        index = self.round_number - 1
+        game_round = index
+        round_month = Utils.get_month(index)
         player_contribution = self.player.practice_contribution
         player_contribution_total = player_contribution
         player_withheld = c(10) - self.player.practice_contribution
@@ -231,23 +235,23 @@ class PracticeResults(Page):
         group_contribution_total = group_contribution
         contributions_round = group_contribution + player_contribution
         contributions_total = contributions_round
-
+        percent_goal = int(group_contribution_total * 100 / 900)
         return {
             'progress': 'Practice',
             'page_title': Constants.page_titles[13],
-            'current_month': Constants.MONTHS[game_round],
+            'current_month': round_month,
             'game_round': game_round,
             'current_round': game_round,
             'player_contribution': player_contribution,
             'player_contribution_total': player_contribution_total,
             'player_withheld': player_withheld,
             'player_withheld_total': player_withheld_total,
-            'group_contribution': group_contribution,
+            'group_contribution': c(147),
             'group_contribution_total': group_contribution_total,
             'contributions_round': contributions_round,
             'contributions_total': contributions_total,
             'avg_contrib': contributions_total / Constants.game_players,
-            'percent_goal': int(group_contribution_total * 100 / 900)
+            'percent_goal': percent_goal
         }
 
 
@@ -351,8 +355,10 @@ class Quiz3(Page):
     def error_message(self, values):
         valid = self.player.valid_q3(values)
         if not valid:
+            print("q3 valid", valid)
             if self.player.qattempts("q3a") <= 1:
                 self.player.review_rules = 3
+                print("review ", self.player.review_rules)
 
 
 
@@ -367,7 +373,6 @@ class Quiz4(Page):
         "q4f",
     ]
 
-
     def is_displayed(self):
         if self.player.qcorrect("q4a") \
             and self.player.qcorrect("q4b") \
@@ -381,7 +386,6 @@ class Quiz4(Page):
                 return True
             return False
 
-
     def vars_for_template(self):
         answer_key = dict(
             q4a=Constants.q4[0]["answer"],
@@ -391,6 +395,7 @@ class Quiz4(Page):
             q4e=Constants.q4[4]["answer"],
             q4f=Constants.q4[5]["answer"],
         )
+
         hint_text = [
             Constants.q4[0]["hint"],
             Constants.q4[1]["hint"],
@@ -399,6 +404,7 @@ class Quiz4(Page):
             Constants.q4[4]["hint"],
             Constants.q4[5]["hint"],
         ]
+
         return {
             'participant_vars': self.player.participant.vars,
             'can_review': self.player.qattempts("q4a"),
@@ -410,12 +416,12 @@ class Quiz4(Page):
             'q4_hints': hint_text,
         }
 
-
     def error_message(self, values):
         valid = self.player.valid_q4(values)
         if valid is not True:
             if self.player.q4_total_attempts() <= 6:
                 self.player.review_rules = 4
+
 
 
 class ReviewGameRules(Page):
@@ -471,15 +477,16 @@ class GameIntro(Page):
     def is_displayed(self):
         return self.round_number >= 1
 
-    def before_next_page(self):
-        self.player.finalize_data()
 
     def vars_for_template(self):
         return {
-            'participant.vars': self.player.participant.vars,
+            'participantvars': self.player.participant.vars,
             'page_title': Constants.page_titles[19],
             'progress': 'Game'
         }
+
+    def before_next_page(self):
+        self.player.finalize_data()
 
 
 page_sequence = [

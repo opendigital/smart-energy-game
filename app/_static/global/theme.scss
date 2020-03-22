@@ -216,6 +216,13 @@ body {
   &-dotted { border-style: dotted; }
 }
 
+.bd {
+  &-t { border-top: 1px solid; }
+  &-r { border-right: 1px solid; }
+  &-b { border-bottom: 1px solid; }
+  &-l { border-left: 1px solid; }
+}
+
 .w-100 { width: 100%; }
 .w-90 { width: 90%; }
 .w-80 { width: 80%; }
@@ -251,6 +258,17 @@ body {
 .mx-3 { margin-left: 0.99em !important; margin-right: 0.99em !important; }
 .mx-4 { margin-left: 1.33em !important; margin-right: 1.33em !important; }
 .mx-5 { margin-left: 1.66em !important; margin-right: 1.66em !important; }
+
+.m-r1 { margin-right: 0.33em !important; }
+.m-r2 { margin-right: 0.33em !important; }
+.p-r1 { padding-right: 0.33em !important; }
+.p-r2 { padding-right: 0.66em !important; }
+
+.mx-2 { margin-left: 0.66em !important; }
+.mx-3 { margin-left: 0.99em !important; }
+.mx-4 { margin-left: 1.33em !important; }
+.mx-5 { margin-left: 1.66em !important; }
+
 
 .h {
   &1 { font-size: 2.250em !important; line-height: 1.25em; }
@@ -321,7 +339,7 @@ body {
 .depth-5 { box-shadow:0  8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px  5px -3px rgba(0, 0, 0, 0.3); }
 .depth-6 { box-shadow:0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3); }
 .hover { transition: box-shadow 225ms; }
-.hover:hover{ box-shadow:0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+.hover:hover { box-shadow:0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
 .shadow-xs { box-shadow: 0 0 0 1px rgba(0,0,0,.05)!important }
 .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0,0,0,.05)!important }

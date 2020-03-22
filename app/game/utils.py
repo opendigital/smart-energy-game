@@ -17,7 +17,6 @@ class Utils():
         return Constants.MONTHS[(12 + start_month + index) % 12]
 
 
-
     def print_var(somevar, title=""):
         if title is not "":
             print(title)
