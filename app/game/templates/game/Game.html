@@ -4,6 +4,13 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
+
+<div class="row">
+  <div class="col">
+    {% include 'blocks/progress-steps.html' with step=current_round %}
+  </div>
+</div>
+
 <div class="card game-card z1">
 
   <h2 class="card-title game-title">MONTH {{ current_round }} ({{ current_month }})</h2>

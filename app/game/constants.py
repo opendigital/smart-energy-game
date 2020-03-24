@@ -28,6 +28,15 @@ class Constants(BaseConstants):
     endowment = 100
     group_goal = 900
 
+    game_progress = [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+    ]
+
     MONTHS = [
         'JANUARY',
         'FEBRUARY',
