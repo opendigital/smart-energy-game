@@ -1,50 +1,51 @@
 <div id="myProgress" class="bg-grey700">
   <div id="myBar" class="bg-info color-white">
     <div class="text-center text-small font-bold py-1">{% if progress != "End" %}{{ progress }}{% endif %}</div>
+    </div>
   </div>
 </div>
 <script>
-var width = 1;
-var elem = document.getElementById("myBar");
-
-elem.style.background = 'gray';
-var progress = '{{ progress }}';
+const progressMain = document.getElementById("myBar");
+const progress = '{{ progress }}';
+var width = 0;
 switch (progress) {
   case 'Consent':
-  elem.style.width = '5%';
+  marginLeft = '0%';
+  width = '15%';
   break;
   case 'Introduction':
-  elem.style.marginLeft = '5%';
-  elem.style.width = '15%';
+  marginLeft = '0%';
+  width = '20%';
   break;
   case 'Examples':
-  elem.style.marginLeft = '20%';
-  elem.style.width = '15%';
+  marginLeft = '0%';
+  width = '25%';
   break;
   case 'Practice':
-  elem.style.marginLeft = '35%';
-  elem.style.width = '7%';
+  marginLeft = '0%';
+  width = '30%';
   break;
   case 'Quiz':
-  elem.style.marginLeft = '42%';
-  elem.style.width = '17%';
+  marginLeft = '30%';
+  width = '20%';
   break;
   case 'Game':
-  elem.style.marginLeft = '59%';
-  elem.style.width = '31%';
+  marginLeft = '50%';
+  width = '25%';
   break;
   case 'Survey':
-  elem.style.marginLeft = '90%';
-  elem.style.width = '10%';
+  marginLeft = '75%';
+  width = '25%';
   break;
   case 'End':
-  elem.style.marginLeft = '0';
-  elem.style.width = '100%';
+  marginLeft = '0';
+  width = '100%';
   break;
   default:
-  //DO NOTHING.
-  elem.style.marginLeft = '10%';
-  elem.style.width = '80%';
+  marginLeft = '10%';
+  width = '80%';
   break;
 }
+progressMain.style.marginLeft = marginLeft;
+progressMain.style.width = width;
 </script>
