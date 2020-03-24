@@ -32,10 +32,7 @@ class Subsession(BaseSubsession):
         self.session.vars["round_total"] = 0
         self.session.vars["group_total"] = 0
         self.session.vars["game_total"] = 0
-
-        print("SESSION:", self.session.vars)
         for p in self.get_players():
-            print("PARTICIPANT:", p.participant.vars)
             p.participant.vars['contributions'] =[]
             p.participant.vars['witholdings'] =[]
             p.participant.vars['total_witheld'] = 0
@@ -50,15 +47,11 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     total_contribution = models.CurrencyField()
     total_random_contribution = models.CurrencyField()
-
     group_round_total = models.IntegerField()
     group_round_avg = models.FloatField()
-
     bot_round_total = models.FloatField()
     bot_round_avg = models.FloatField()
-
     bot_contributions = models.LongStringField()
-
     do_once = models.BooleanField(initial=True)
     bonus = models.CurrencyField(initial=c(0))
     carbonfund_total = models.IntegerField()
@@ -70,7 +63,6 @@ class Group(BaseGroup):
 
     def get_bot_contributions_string(self):
         bot_contributions_str = models.LongStringField(initial=str(self.session.vars["bot_contributions"][0]))
-
         for i in range(1, len(self.session.vars["bot_contributions"])):
             bot_contributions_str = bot_contributions_str + \
                 "\n" + models.LongStringField(initial=str(self.session.vars["bot_contributions"][i]))
@@ -103,93 +95,108 @@ class Group(BaseGroup):
 
 
 
-    def contribution_trend_isupward(self):
+    def get_contribution_trend(self):
         player = self.get_players()[0]
-        player_in_round1 = player.in_round(self.round_number - 1).contributed
-        player_in_round2 = player.in_round(self.round_number - 2).contributed
+        player_round_n1 = player.in_round(self.round_number - 1).contributed
+        player_round_n2 = player.in_round(self.round_number - 2).contributed
         bot_contribution_last = self.session.vars["bot_contributions"][-1]
         bot_contribution_last2 = self.session.vars["bot_contributions"][-2]
+        round_sum1 = player_round_n1 + sum(bot_contribution_last)
+        round_sum2 = player_round_n2 + sum(bot_contribution_last2)
 
-        round_sum1 = player_in_round1 + sum(bot_contribution_last)
-        round_sum2 = player_in_round2 + sum(bot_contribution_last2)
-        return round_sum1 > round_sum2
+        if round_sum1 > round_sum2:
+            return "upward"
+        elif round_sum1 < round_sum2:
+            return "downward"
+        else:
+            return "stable"
+
+    def set_contribution_range(self, minval, maxval, value):
+        return min(maxval, max(minval, value))
 
 
     def set_bots(self):
         player = self.get_players()[0]
         round_number = self.round_number
-        print("\n\n\nROUND NUMBER", round_number)
         NUM_AGENTS = Constants.game_players -1
-        NUM_RECIPROCATORS = 3
+        NUM_COOPERATORS = 3
         NUM_FREE_RIDERS = 5
-        NUM_CONDITIONALS = 16
-        NUM_CCS_ABOVE = 3
-        NUM_CCS_BELOW = 2
-        new_contributions = []
+        NUM_RECIPROCATORS = 16
+        NUM_RECIPROCATORS_ABOVE = 3
+        NUM_RECIPROCATORS_BELOW = 2
 
-        round_index = self.round_number - 2
-
-        if round_index <= 0:
-            new_contributions = [10,9,8,3,3,2,2,1,8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4]
-        elif round_index == 1:
-            new_contributions = [10,9,8,3,3,2,2,1,8, 9,10,9,8,7,7,7,5,6,6,6,5,4,5,4]
+        cooperator_list = [10,9,8]
+        freerider_list = [3,3,2,2,1]
+        if self.round_number <= 1:
+            reciprocator_list = [8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4]
+        elif self.round_number == 2:
+            reciprocator_list = [8, 9,10,9,8,7,7,7,5,6,6,6,5,4,5,4]
         else:
-            bot_contributions = self.session.vars["bot_contributions"]
+            bots_round_n1_contributions = self.session.vars["bot_contributions"][-1]
+            player_round_n1 = player.in_round(self.round_number-1)
+            player_round_n1_contributed = int(player_round_n1.contributed)
+            round_n1_sum = player_round_n1_contributed + sum(bots_round_n1_contributions)
+            round_n1_avg = float(round_n1_sum / (len(bots_round_n1_contributions) + 1))
 
-            player_last_round = player.in_round(self.round_number-1)
-            player_contribution_last_round = int(player_last_round.contributed)
-            bot_contribution_last_round = self.session.vars["bot_contributions"][-1]
+            trend = self.get_contribution_trend()
 
-            player_two_rounds_ago = player.in_round(self.round_number-2)
-            player_contribution_two_rounds_ago = int(player_two_rounds_ago.contributed)
+            prev_reciprocators = bots_round_n1_contributions[:NUM_RECIPROCATORS:]
 
+            rcp_below_avg=[]
+            rcp_above_avg=[]
 
-            # cooperator contributions
-            for _ in range(NUM_RECIPROCATORS):
-                new_contributions.append(randint(8, 10))
-            # free rider contributions
-            for _ in range(NUM_FREE_RIDERS):
-                new_contributions.append(randint(0, 2))
-
-            is_upward_trend = self.contribution_trend_isupward()
-            mean_last_round = float(player_contribution_last_round + sum(bot_contribution_last_round)) / float(NUM_AGENTS + 1)
-
-            # split agent list into those above mean and those below mean
-            cc_indices = list(range(NUM_RECIPROCATORS + NUM_FREE_RIDERS, NUM_AGENTS))
-            below_mean = []
-            above_mean = []
-
-            # randomly select NUM_CCS_ABOVE and NUM_CCS_BELOW from the appropriate agents
-            for i in cc_indices:
-                if bot_contribution_last_round[i] < mean_last_round:
-                    below_mean.append(i)
-                elif bot_contribution_last_round[i] > mean_last_round:
-                    above_mean.append(i)
-
-            shuffle(below_mean)
-            shuffle(above_mean)
-            modify_above = above_mean[:NUM_CCS_ABOVE:]
-            modify_below = below_mean[:NUM_CCS_BELOW:]
-
-            print(bot_contribution_last_round)
-            # copy contributions of conditional cooperators and adjust if they're supposed to be
-            for i in cc_indices:
-                if i in modify_below and is_upward_trend:
-                    new_contributions.append(bot_contribution_last_round[i] + 1)
-                elif i in modify_above and not is_upward_trend:
-                    new_contributions.append(bot_contribution_last_round[i] - 1)
+            for item in prev_reciprocators:
+                if item < round_n1_avg:
+                    rcp_below_avg.append(item)
+                elif item >= round_n1_avg:
+                    rcp_above_avg.append(item)
                 else:
-                    new_contributions.append(bot_contribution_last_round[i])
-                new_contributions[-1] = min(10, max(0, new_contributions[-1]))
-            print("\tPREV_AVG\t", mean_last_round)
+                    rcp_above_avg.append(item)
 
+            shuffle(rcp_below_avg)
+            shuffle(rcp_above_avg)
+            reciprocator_changelist = rcp_below_avg[:NUM_RECIPROCATORS_BELOW] + rcp_above_avg[-NUM_RECIPROCATORS_ABOVE:]
+            diff = []
+            new_set=[]
+            for value in prev_reciprocators:
+                delta=" "
+                # ----------------------
+                # RECIPROCITY NORM RULES: Trend is up/down
+                # SOCIAL NORM RULES: value vs group avg
+                # ----------------------
+                if value in reciprocator_changelist:
+                    delta="."
+                    reciprocator_changelist.remove(value)
+                    if trend == "upward" and value <= round_n1_avg:
+                        value = self.set_contribution_range(0, 10, value + 1)
+                        delta = "+"
+                    elif trend == "stable" and value <= round_n1_avg:
+                        value = self.set_contribution_range(0, 10, value + 1)
+                        delta = "+"
+                    elif trend == "downward" and value > round_n1_avg:
+                        value = self.set_contribution_range(0, 10, value - 1)
+                        delta = "-"
+                new_set.append(value)
+                diff.append(delta)
+
+            round_str=''
+            diff_str=''
+            for val in new_set:
+                round_str += str(val).rjust(4, ' ')
+            for val in diff:
+                diff_str += str(val).rjust(4, ' ')
+            round_str += "| trend: " + trend
+            round_str += "| avg: " + str(round_n1_avg)
+            print(round_str)
+            print(diff_str)
+
+            reciprocator_list = new_set
+        new_contributions = reciprocator_list + cooperator_list + freerider_list
         self.session.vars["round_contributions"] = new_contributions
         self.session.vars["bot_contributions"].append(new_contributions)
         self.bot_contributions = str(new_contributions)
         self.bot_round_total = sum(new_contributions)
         self.bot_round_avg = float(self.bot_round_total / len(new_contributions))
-        print("\tCURR_AVG\t", self.bot_round_avg)
-
 
 
     def set_payoffs(self):
@@ -262,6 +269,11 @@ class Player(BasePlayer):
     contributions = models.LongStringField()
     quiz_bonus = models.IntegerField()
 
+
+    # start is run when the player reaches the first page of the round, whereas creating_session is run before the whole session even starts
+    # def start(self):
+    #        self.endowment = self.participant.vars['endowment']
+
     def update_player_round(self):
         print("player", "sync_player_round", self.participant)
 
@@ -306,7 +318,7 @@ class Player(BasePlayer):
         print('\n\n')
 
     def finalize_game_data(self):
-        self.participant.vars["game_result"] = str(self.participant.vars)
+        # self.participant.vars["game_result"] = str(self.participant.vars)
         print(str(self.participant.vars))
         print('=======================FINAL=============================')
         print('game_total                   \t', self.session.vars["game_total"])
@@ -314,4 +326,11 @@ class Player(BasePlayer):
         print('total_contributed           \t', self.participant.vars["total_contributed"])
         print('total_witheld               \t', self.participant.vars["total_witheld"])
         print('quiz_bonus               \t', self.participant.vars["quiz_bonus"])
-        # print(self.session.vars["bot_contributions"])
+        bot_contributions = self.session.vars["bot_contributions"]
+        for round in bot_contributions:
+            # print(str(round).replace(",", "\t"))
+            round_str = ""
+            for val in round:
+                round_str += str(val).rjust(4, ' ')
+            # print(str(round).replace(",", " "), sum(round), len(round))
+            print(round_str, "| ", sum(round))
