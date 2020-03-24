@@ -18,7 +18,7 @@ class Constants(BaseConstants):
     players_per_group = None
     reduction_goal = 60
     token_value = .01
-    participation_pay = token_value * 50
+    participation_pay = 50
     game_tokens = 10
     game_rounds = 6
     game_max_score = 1750
@@ -27,6 +27,15 @@ class Constants(BaseConstants):
     num_rounds = 6
     endowment = 100
     group_goal = 900
+
+    game_progress = [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+    ]
 
     MONTHS = [
         'JANUARY',

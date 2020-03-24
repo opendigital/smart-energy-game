@@ -1,0 +1,95 @@
+body {
+  background-color: #ccc;
+  padding: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.off-screen {
+  height: 1px;
+  left: -50000px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+#progress-bar {
+  position: relative;
+  padding-top: 5px;
+  margin-bottom: 1.5em;
+  color: #4d483f;
+}
+
+#progress-bar #progress-steps {
+  height: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+  position: relative;
+  list-style-type: none;
+  counter-reset: item;
+}
+
+#progress-bar .progress-step {
+  width: 16.66%;
+  height: 8px;
+  float: left;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#progress-bar .count:before {
+  content: counter(item) " ";
+  counter-increment: item;
+  display: block;
+  width: 14px;
+  height: 18px;
+  background-color: #fff;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
+  top: -6px;
+  padding: 2px 0 0 6px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 999;
+}
+
+#progress-bar .highlight-index:before {
+  background-color: #3cb0a5;
+  color: #fff;
+}
+
+#progress-bar .highlight-index {
+  background-color: #3cb0a5;
+  display: block;
+  height: 100%;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#progress-bar .description {
+  display: block;
+  text-align: center;
+  width: 64%;
+  right: -32%;
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.9em;
+}
+
+#progress-bar .bolded-step {
+  font-weight: normal !important;
+}

@@ -24,7 +24,7 @@
         <input
         id="contribution_box"
         type="number"
-        name="practice_contribution"
+        name="{{ field_name }}"
         class="token-box color-conserve mx-2 game-variable fs-inherit"
         min="0"
         max="10"
@@ -55,7 +55,7 @@
 </div>
 
 <div id="errors" class="form-control-errors" style="display:none; font-size: 30px">
-  {{ form.practice_contribution.errors }}
+  {{ form.non_field_errors }}
 </div>
 
 <script>

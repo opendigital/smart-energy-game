@@ -12,12 +12,6 @@
       <th class="text-center">CUMULATIVE</th>
       <th></th>
     </tr>
-      <tr>
-        <td class="text-left"><span class="row-title">You put into your private account:</span></td>
-        <td class="text-right color-private font-bold">{{ player_contribution }}</td>
-        <td class="text-right color-private font-bold">{{ player_contribution_total }}</td>
-        <td></td>
-      </tr>
 
       <tr class="bd-dashed-bottom-2 bc-inherit">
         <td class="text-left"><span class="row-title">Your contribution to the group conservation account:</span></td>
@@ -26,11 +20,18 @@
         <td></td>
       </tr>
 
+      <tr>
+        <td class="text-left"><span class="row-title">You put into your private account:</span></td>
+        <td class="text-right color-private font-bold">{{ player_contribution }}</td>
+        <td class="text-right color-private font-bold">{{ player_contribution_total }}</td>
+        <td></td>
+      </tr>
+
       <tr class="text-muted">
         <td class="text-left"><span class="row-title">Other residents total contributions to the group conservation account:</span></td>
         <td class="text-right"><span class="">{{ group_contribution }}</span></td>
         <td class="text-right"><span class="">{{ group_contribution_total }}</span></td>
-        <td id-="token_avg"><span class="text-muted">Avg: {{ avg_contrib }}</span></td>
+        <td id-="token_avg"><span class="text-muted">{{ avg_contrib }} average</span></td>
       </tr>
 
       <tr>
