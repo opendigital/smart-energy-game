@@ -81,7 +81,7 @@ class Results(Page):
             "player_total_contributed": self.player.participant.vars["total_contributed"],
         }
         self.player.print_round_results(templatevars)
-        self.group.print_round_bot_contributions()
+        # self.group.print_round_bot_contributions()
         return templatevars
 
 
@@ -93,18 +93,14 @@ class Congrats(Page):
         index = self.round_number - 1
         round_month = Utils.get_month(index)
         game_total = self.session.vars["game_total"]
-        if game_total >= Constants.group_goal:
-            game_bonus = game_total
-        else:
-            game_bonus = 0;
-        carbonfund_total = game_bonus + game_total
-
+        carbonfund_total = game_total
+        lbs_reduced = int(game_total / 10 * 22)
         return {
             'progress': 'Game',
             'current_round': index,
             'current_month': round_month,
             'page_title': 'Your Group\'s Air Pollution Reduction Result',
-            'lbs': str(game_total/10*22).split(" ")[0] + " lbs",
+            'lbs': str(lbs_reduced) + " lbs",
             'amount': self.group.tokens_to_dollars(carbonfund_total),
         }
 
@@ -121,26 +117,28 @@ class FinalResults(Page):
         round_month = Utils.get_month(index)
         quiz_bonus = self.player.participant.vars["quiz_bonus"]
         game_total = self.session.vars["game_total"]
+        player_contributed = self.player.participant.vars["total_contributed"]
         player_withheld = self.player.participant.vars["total_witheld"]
 
         if game_total >= Constants.group_goal:
             result_message = 'Congratulations, you met the 60% group energy conservation goal of 900 energy tokens.'
             result_message_classes = '  '
             goal_meet = True
-            bonus_tokens = game_total
+            bonus_tokens = int(game_total * 2 / 25)
         else:
             result_message = 'Sorry, you did not meet the 60% group energy conservation goal of 900 energy tokens.'
             goal_meet = False
             bonus_tokens = 0
 
+        player_contributed_usd = self.group.tokens_to_dollars(player_contributed)
         game_total_usd = self.group.tokens_to_dollars(game_total)
         quiz_bonus_usd = self.group.tokens_to_dollars(quiz_bonus)
         bonus_tokens_usd = self.group.tokens_to_dollars(bonus_tokens)
         player_withheld_usd = self.group.tokens_to_dollars(player_withheld)
         participation_pay_usd = self.group.tokens_to_dollars(Constants.participation_pay)
-        carbonfund_total = game_total + bonus_tokens
+        carbonfund_total = game_total
         self.group.set_carbonfund_total(carbonfund_total)
-
+        print('participation_pay_usd', participation_pay_usd)
         return {
             'page_title': 'Final Game Result',
             'progress': 'Game',
@@ -156,10 +154,12 @@ class FinalResults(Page):
             'quiz_bonus_usd': quiz_bonus_usd,
             'player_withheld': c(player_withheld),
             'player_withheld_usd': player_withheld_usd,
+            'player_contributed': c(player_contributed),
+            'player_contributed_usd': player_contributed_usd,
             'carbonfund_total': c(carbonfund_total),
+            'carbonfund_total_usd': game_total_usd,
             'participation_pay_usd': participation_pay_usd,
-            'carbonfund_total_usd': game_total_usd + bonus_tokens_usd,
-            "total_pay": quiz_bonus_usd + player_withheld_usd + participation_pay_usd,
+            "total_pay": quiz_bonus_usd + player_withheld_usd + participation_pay_usd + bonus_tokens_usd,
         }
 
 
