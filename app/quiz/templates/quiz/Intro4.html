@@ -8,7 +8,8 @@
 <ul class="text-list my-3">
   <li>
     <p>
-      There are <strong><span class="game-variable">{{ game_players }}</span> players</strong> who live in the same housing community.
+      There are <strong><span class="game-variable">{{ game_players }}</span> players</strong>
+      who live in the same housing community.
     </p>
   </li>
 
@@ -19,13 +20,13 @@
       each</strong>) that represent potential energy use beyond their basic needs.
     </p>
   </li>
-    
+
     <li>
       <p>
-        Each month, every player faces the same <strong>decision problem</strong>:
+        Each month, every player faces the same decision problem
         how much energy to use for their personal benefit (by putting tokens in
-        their private account) versus how much to conserve (by putting tokens in the
-        group conservation account).
+        their <span class="font-bold color-private">private account</span>) versus how much to conserve (by putting tokens in the
+        <span class="font-bold color-conserve">group conservation account</span>).
       </p>
     </li>
 
@@ -37,17 +38,17 @@
     </li>
     <li>
       <p>
-        If the group meets the <span class="game-variable">{{ reduction_goal }}%</span> conservation goal by the end of the game, then the value of those tokens in
-        the group conservation account is doubled and given in equal shares to all
-        players as a <strong>reward</strong>.
+        If the group meets the <span class="game-variable">{{ reduction_goal }}%</span> conservation goal by the end of the game,
+        then the value of those tokens in the group conservation account is doubled
+        and given in equal shares to all players as a <strong>reward</strong>.
       </p>
     </li>
 
     <li>
         <p>
-          To meet the <span class="game-variable">{{ reduction_goal }}%</span> energy reduction goal, each player should contribute
-          <strong><span class="game-variable">{{ optimal_contribution }}</span> energy tokens every month</strong> to the group conservation
-          account.
+          To meet the <span class="game-variable">{{ reduction_goal }}%</span> energy reduction goal,
+          each player should contribute <strong><span class="game-variable">{{ optimal_contribution }}</span> energy tokens every month</strong>
+          to the group conservation account.
         </p>
       </li>
     </ul>

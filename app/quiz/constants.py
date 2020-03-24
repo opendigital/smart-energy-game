@@ -13,15 +13,15 @@ class Constants(BaseConstants):
     )
 
     name_in_url = 'training'
+    num_rounds = 1
+    players_per_group = None
     game_goal = 900
     game_players = 25
     game_rounds = 6
     game_tokens = 10
-    num_rounds = 1
-    players_per_group = None
     quiz_max_attempts = 2
     reduction_goal = 60
-    token_goal = 6
+    token_goal = 900
     token_value = .01
 
     page_titles = [
@@ -68,6 +68,13 @@ class Constants(BaseConstants):
         'DECEMBER'
     ]
 
+    quiz_progress = [
+        1,
+        2,
+        3,
+        4,
+    ]
+
     quiz_default_hint = 'Please proceed to Review Instructions. \
         You will then return to this question and have one \
         more opportunity to answer it'
@@ -108,7 +115,7 @@ class Constants(BaseConstants):
                 private account, while others contribute all of their tokens in the group conservation account, \
                 because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
                 $0.60 from your private account + $1.15 bonus = $1.75, while others will only earn the \
-                $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
+                $1.15 bonus.",
         ),
         dict(
             label='True or False: The group will maximize its earning if all players contribute 6 of their energy tokens to the group conservation account each month',
@@ -131,11 +138,7 @@ class Constants(BaseConstants):
                 [2, "$0.30"],
                 [3, "$3.00"],
             ],
-            hint="You will have greater earnings if you put all of your energy tokens in your \
-                private account, while others contribute all of their tokens in the group conservation account, \
-                because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
-                $0.60 from your private account + $1.15 bonus = $1.75, while others will only earn the \
-                $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
+            hint="The correct answer is $0.30. You are paid $0.01 for each of the 30 energy tokens left in your private account.",
         ),
         dict(
             label="My bonus payout from the group conservation account is",
@@ -145,11 +148,8 @@ class Constants(BaseConstants):
                 [2, "$1.00"],
                 [3, "$2.72"],
             ],
-            hint="The group gets the maximum financial payment if all players contribute all 10 tokens in the \
-                conservation account in each month (25 players &times; 10 tokens &times; 6 months &times; $.01 = $15). \
-                Every player then gets an equal share of the maximum bonus possible, which is \
-                double the value of the tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20). \
-                (If wrong take back to 2nd page of EXAMPLES: half a table)",
+            hint="The correct answer is $0.72. The 900 energy tokens meets the conservation goal, so the $9 is doubled to \
+                $18 and distributed equally to all 25 players, resulting in a $0.72 bonus pay.",
         ),
         dict(
             label="Total payout is (private plus group conservation bonus)",
@@ -159,11 +159,8 @@ class Constants(BaseConstants):
                 [2, "$1.02"],
                 [3, "$3.72"],
             ],
-            hint="You will have greater earnings if you put all of your energy tokens in your \
-                private account, while others contribute all of their tokens in the group conservation account, \
-                because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
-                $0.60 from your private account + $1.15 bonus = $1.75, while others will only earn the \
-                $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
+            hint=" The correct answer is $1.02. Add the energy token value in your \
+                private account ($0.30) and the bonus ($0.72) to get your final pay of $1.02.",
         ),
         dict(
             label="My payout from my personal account is",
@@ -173,11 +170,8 @@ class Constants(BaseConstants):
                 [2, "$0.30"],
                 [3, "$3.00"],
             ],
-            hint="The group gets the maximum financial payment if all players contribute all 10 tokens in the \
-                conservation account in each month (25 players &times; 10 tokens &times; 6 months &times; $.01 = $15). \
-                Every player then gets an equal share of the maximum bonus possible, which is \
-                double the value of the tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20). \
-                (If wrong take back to 2nd page of EXAMPLES: half a table)",
+            hint="The correct answer is $0.30. You are paid $0.01 for each of the 30 energy tokens \
+                left in your private account, even if the group does not meet the conservation goal of 900 tokens",
         ),
         dict(
             label="My payout from the group conservation account is",
@@ -187,11 +181,8 @@ class Constants(BaseConstants):
                 [2, "$1.00"],
                 [3, "$2.00"],
             ],
-            hint="You will have greater earnings if you put all of your energy tokens in your \
-                private account, while others contribute all of their tokens in the group conservation account, \
-                because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
-                $0.60 from your private account + $1.15 bonus = $1.75, while others will only earn the \
-                $1.15 bonus. (If wrong take back to 3rd page of EXAMPLES: full table",
+            hint="The correct answer is $0.00. The 850 energy tokens do not meet the \
+                group conservation goal of 900 energy tokens, so no conservation bonus is paid. ",
         ),
         dict(
             label="Total payout is (private plus group conservation bonus)",
@@ -201,10 +192,7 @@ class Constants(BaseConstants):
                 [2, "$0.30"],
                 [3, "$3.00"]
             ],
-            hint="The group gets the maximum financial payment if all players contribute all 10 tokens in the \
-                conservation account in each month (25 players &times; 10 tokens &times; 6 months &times; $.01 = $15). \
-                Every player then gets an equal share of the maximum bonus possible, which is \
-                double the value of the tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20). \
-                (If wrong take back to 2nd page of EXAMPLES: half a table)",
+            hint=") The correct answer is $0.30. Add the energy token values in your private account \
+                ($0.30) and the bonus from the group conservation account ($0.00) to get your final pay of $0.30.",
         )
     ]
