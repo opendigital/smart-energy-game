@@ -77,7 +77,8 @@ class Player(BasePlayer):
     quiz_data = models.LongStringField()
     quiz_bonus = models.IntegerField(initial=0)
     review_rules = models.IntegerField(initial=0)
-    practice_contribution = models.CurrencyField(min=0, max=10)
+    practice_contrib1 = models.CurrencyField(min=0, max=10)
+    practice_contrib2 = models.CurrencyField(min=0, max=10)
 
     def qattempts(self, q):
         return self.participant.vars["qattempts"][q]
@@ -189,8 +190,6 @@ class Player(BasePlayer):
         return False
 
 
-
-
     def q4_total_attempts(self):
         return self.qattempts("q4a") \
             + self.qattempts("q4b") \
@@ -198,7 +197,6 @@ class Player(BasePlayer):
             + self.qattempts("q4d") \
             + self.qattempts("q4e") \
             + self.qattempts("q4f")
-
 
 
     def valid_q4(self, values):

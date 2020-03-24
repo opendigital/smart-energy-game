@@ -197,12 +197,11 @@ class PracticeIntro(Page):
         }
 
 
-
-
-class PracticeGame(Page):
+class PracticeGame1(Page):
+    template_name = './quiz/PracticeGame.html'
     form_model = 'player'
     form_fields = [
-        'practice_contribution'
+        'practice_contrib1'
     ]
 
     def is_displayed(self):
@@ -214,12 +213,35 @@ class PracticeGame(Page):
         return {
             'page_title': Constants.page_titles[12],
             'progress': 'Practice',
+            'field_name': 'practice_contrib1',
             'current_month': round_month,
-            'current_round': self.round_number,
+            'current_round': 1,
+        }
+
+class PracticeGame2(Page):
+    template_name = './quiz/PracticeGame.html'
+    form_model = 'player'
+    form_fields = [
+        'practice_contrib2'
+    ]
+
+    def is_displayed(self):
+        return self.round_number <= 1
+
+    def vars_for_template(self):
+        index = self.round_number - 1
+        round_month = Utils.get_month(index + 1)
+        return {
+            'page_title': Constants.page_titles[12],
+            'progress': 'Practice',
+            'field_name': 'practice_contrib2',
+            'current_month': round_month,
+            'current_round': 2,
         }
 
 
-class PracticeResults(Page):
+class PracticeResults1(Page):
+    template_name = './quiz/PracticeResults.html'
     def is_displayed(self):
         return self.round_number <= 1
 
@@ -227,9 +249,9 @@ class PracticeResults(Page):
         game_round = self.round_number
         index = self.round_number - 1
         round_month = Utils.get_month(index)
-        player_contribution = self.player.practice_contribution
+        player_contribution = self.player.practice_contrib1
         player_contribution_total = player_contribution
-        player_withheld = c(10) - self.player.practice_contribution
+        player_withheld = c(10) - self.player.practice_contrib1
         player_withheld_total = player_withheld
         group_contribution = c(147)
         group_contribution_total = group_contribution
@@ -240,13 +262,13 @@ class PracticeResults(Page):
             'progress': 'Practice',
             'page_title': Constants.page_titles[13],
             'current_month': round_month,
-            'game_round': game_round,
-            'current_round': game_round,
+            'game_round': 1,
+            'current_round': 1,
             'player_contribution': player_contribution,
             'player_contribution_total': player_contribution_total,
             'player_withheld': player_withheld,
             'player_withheld_total': player_withheld_total,
-            'group_contribution': c(147),
+            'group_contribution': group_contribution,
             'group_contribution_total': group_contribution_total,
             'contributions_round': contributions_round,
             'contributions_total': contributions_total,
@@ -254,6 +276,41 @@ class PracticeResults(Page):
             'percent_goal': percent_goal
         }
 
+class PracticeResults2(Page):
+    template_name = './quiz/PracticeResults.html'
+    def is_displayed(self):
+        return self.round_number <= 2
+
+    def vars_for_template(self):
+        game_round = self.round_number
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
+        player_contribution = self.player.practice_contrib2
+        player_contribution_total = self.player.practice_contrib1 + self.player.practice_contrib2
+        player_withheld = c(10) - self.player.practice_contrib2
+        player_withheld_total = c(20) - player_contribution_total
+        group_contribution = c(143)
+        group_contribution_total = c(147) + group_contribution
+        contributions_round = group_contribution + player_contribution
+        contributions_total = c(143) + c(147) + player_contribution_total
+        percent_goal = int(group_contribution_total * 100 / 900)
+        return {
+            'progress': 'Practice',
+            'page_title': Constants.page_titles[13],
+            'current_month': round_month,
+            'game_round': 2,
+            'current_round': 2,
+            'player_contribution': player_contribution,
+            'player_contribution_total': player_contribution_total,
+            'player_withheld': player_withheld,
+            'player_withheld_total': player_withheld_total,
+            'group_contribution': group_contribution,
+            'group_contribution_total': group_contribution_total,
+            'contributions_round': contributions_round,
+            'contributions_total': contributions_total,
+            'avg_contrib': contributions_total / 2 / Constants.game_players,
+            'percent_goal': percent_goal
+        }
 
 class Quiz(Page):
     def is_displayed(self):
@@ -502,8 +559,10 @@ page_sequence = [
     Example2,
     Example3,
     PracticeIntro,
-    PracticeGame,
-    PracticeResults,
+    PracticeGame1,
+    PracticeResults1,
+    PracticeGame2,
+    PracticeResults2,
     Quiz,
     Quiz1,
     ReviewGameRules,
