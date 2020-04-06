@@ -1,0 +1,54 @@
+#!/bin/bash
+
+
+
+() {
+  STATUS=$(git status 2>&1 | tee)
+      DIRTY=$(echo -n "${STATUS}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
+  UNTRACKED=$(echo -n "${STATUS}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
+      AHEAD=$(echo -n "${STATUS}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
+    NEWFILE=$(echo -n "${STATUS}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
+    RENAMED=$(echo -n "${STATUS}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
+    DELETED=$(echo -n "${STATUS}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
+  BITS=""
+  [[ "${RENAMED}" == "0" ]] && BITS=">${BITS}"
+  [[ "${AHEAD}" == "0" ]] && BITS="*${BITS}"
+  [[ "${NEWFILE}" == "0" ]] && BITS="+${BITS}"
+  [[ "${UNTRACKED}" == "0" ]] && BITS="?${BITS}"
+  [[ "${DELETED}" == "0" ]] && BITS="X${BITS}"
+  [[ "${DIRTY}" == "0" ]] && BITS="!${BITS}"
+  [[ ! "${BITS}" == "" ]] && echo " ${BITS}"
+  echo ""
+}
+
+_git_is_clean () {
+  RETVAL=$?
+  [ $RETVAL -ne 0 ] && echo "$RETVAL"
+}
+
+
+__prerun__() {
+  # ensure clean branch before merge  
+  _git_status
+  _git_is_clean  
+ 
+  # check for errors and style formatting issues
+  run lint:python
+  run lint:json
+
+  if [ "$?" ];  then
+      exit 1
+  fi
+  
+}
+
+__run__() {
+  git merge --commit --stat --summary development master
+  
+}
+
+
+
+
+
+__prerun__ && __run__
