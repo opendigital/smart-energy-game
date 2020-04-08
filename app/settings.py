@@ -9,11 +9,12 @@ from os import environ
 # BROWSER_COMMAND = ''
 
 OTREE_PRODUCTION='1'
-ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME') 
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD') 
+ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
+ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
+# DEBUG = False
 POINTS_CUSTOM_NAME = 'tokens'
 AUTH_LEVEL = 'STUDY'
 SECRET_KEY = '68j-5$9@d=m0_*pb0n=_3u6%33fng(738yww&w^ttk136n(4vz'
@@ -69,6 +70,7 @@ SESSION_CONFIGS = [
     {
         'name': 'game',
         'num_demo_participants': 1,
+        'wait_for_all_groups': False,
         'display_name': "GAME:  Energy Conservation Game",
         'app_sequence': ['game'],
     },

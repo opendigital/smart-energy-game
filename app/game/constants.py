@@ -14,6 +14,7 @@ class Constants(BaseConstants):
     )
 
     multiplier = 2
+    print_game_result_table = True
     name_in_url = 'energy-game'
     players_per_group = None
     reduction_goal = 60
@@ -24,7 +25,7 @@ class Constants(BaseConstants):
     game_max_score = 1750
     game_players = 25
     game_goal = 900
-    num_rounds = 6
+    num_rounds = game_rounds + 1
     endowment = 100
     group_goal = 900
 
