@@ -6,7 +6,6 @@ staticfiles
 *.sqlite3
 _static_root
 _bots*s
-__temp*
 __pycache__/
 *.py[cod]
 .DS_Store

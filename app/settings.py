@@ -1,8 +1,5 @@
 from os import environ
 
-
-# ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-# ADMIN_PASSWORD = 'GoBoilers2018!'
 # OTREE_PRODUCTION Consider '', None, and '0' to be empty/false
 # SENTRY_DSN = environ.get('SENTRY_DSN')
 # AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
@@ -11,13 +8,15 @@ from os import environ
 # POINTS_CUSTOM_NAME = 'tokens'
 # BROWSER_COMMAND = ''
 
+OTREE_PRODUCTION='1'
+ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
+ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
+# DEBUG = False
 POINTS_CUSTOM_NAME = 'tokens'
-AUTH_LEVEL = 'DEMO'
-ADMIN_USERNAME = 'admin'
-ADMIN_PASSWORD = 'admin'
+AUTH_LEVEL = 'STUDY'
 SECRET_KEY = '68j-5$9@d=m0_*pb0n=_3u6%33fng(738yww&w^ttk136n(4vz'
 INSTALLED_APPS = [
     'otree',
@@ -31,7 +30,6 @@ ROOMS = [{
     'name': 'live_demo',
     'display_name': 'Room for live demo (no participant labels)',
 }]
-
 
 # MTURK_HIT_SETTINGS = {
 #     'keywords': ['bonus', 'study'],
@@ -72,6 +70,7 @@ SESSION_CONFIGS = [
     {
         'name': 'game',
         'num_demo_participants': 1,
+        'wait_for_all_groups': False,
         'display_name': "GAME:  Energy Conservation Game",
         'app_sequence': ['game'],
     },
