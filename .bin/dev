@@ -5,9 +5,15 @@ BASE_PATH="$(npm prefix)"
 
 OTREE_SERVER_VERBOSITY=3
 APP_DIR="app"
+DEV_USER="developer"
+DEV_PASS="developer"
 
 __run__(){
-  /usr/local/bin/otree devserver --force-color --verbosity="${OTREE_SERVER_VERBOSITY}"
+  echo "running otree game"
+  echo "admin_user:${DEV_PASS} admin_pass:${DEV_PASS}"
+  OTREE_ADMIN_USERNAME="${DEV_USER}" OTREE_ADMIN_PASSWORD="${DEV_PASS}" /usr/local/bin/otree devserver \
+  --force-color \
+  --verbosity="${OTREE_SERVER_VERBOSITY}"
 
   google-chrome http://localhost:8000
 }

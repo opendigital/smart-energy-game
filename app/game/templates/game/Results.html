@@ -14,23 +14,23 @@
     </tr>
   </thead>
 
-  <tr>
+  <tr class="bc-inherit">
+    <td class="text-left row-title">Your contributed to the group conservation account:</td>
+    <td class="text-right font-bold color-conserve">{{ player_contributed }}</td>
+    <td class="p-r2 text-right font-bold color-conserve">{{ player_contrib_total }}</td>
+  </tr>
+
+  <tr class="bd-dashed-bottom-2">
     <td class="text-left row-title">You put into your private account::</td>
     <td class="text-right font-bold color-private">{{ player_withheld }}</td>
     <td class="p-r2 text-right font-bold color-private">{{ player_total_witheld }}</td>
-  </tr>
-
-  <tr class="bd-dashed-bottom-2 bc-inherit">
-    <td class="text-left row-title">Your contributed to the group conservation account:</td>
-    <td class="text-right font-bold color-conserve">{{ player_contributed }}</td>
-    <td class="p-r2 text-right font-bold color-conserve">{{ player_total_contributed }}</td>
   </tr>
 
   <tr class="text-muted">
     <td class="text-left row-title">Other residents total contributions to the group conservation account:</td>
     <td class="text-right font-bold color-conserve">{{ group_round_contributions }}</td>
     <td class="p-r2 text-right font-bold">
-      <span class="font-bold color-conserve">{{ group_total_withheld }}</span>
+      <span class="font-bold color-conserve">{{ group_total_witheld }}</span>
     </td>
   </tr>
 
@@ -43,7 +43,7 @@
     </td>
     <td class="bd-b p-r2 text-right font-bold">
       <span class="font-bold color-conserve">
-        {{ game_total }}
+        {{ game_total_contrib }}
       </span>
     </td>
   </tr>
@@ -52,7 +52,7 @@
     <tr>
 
       <td class="color-secondary font-bold text-small">
-        <span class="font-bold color-info">{{ game_total }} </span>/<span class="font-bold color-green"> {{ group_goal }}</span>
+        <span class="font-bold color-info">{{ game_total_contrib }} </span>/<span class="font-bold color-green"> {{ group_goal }}</span>
         = <span class="font-bold color-dark">{{ percent_complete }}%</span> of goal achieved</td>
       <td></td>
       <td class="p-r2 text-right"><span class="font-bold">{{ avg_contrib }} average</span></td>
