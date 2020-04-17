@@ -13,6 +13,7 @@ class Constants(BaseConstants):
         debug_jsvars=False
     )
 
+    TESTS_EXPORT_HTML = True
     multiplier = 2
     print_game_result_table = True
     name_in_url = 'energy-game'

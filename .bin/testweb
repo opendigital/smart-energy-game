@@ -1,0 +1,46 @@
+#!/bin/bash
+
+
+BASE_PATH="$(npm prefix)"
+[[ -f "${BASE_PATH}/./.npmrc" ]] && . ${BASE_PATH}/./.npmrc
+
+APP_DIR="app"
+TEST_NAME="${1:-'main'}"
+TEST_PLAYERS="${2:-1}"
+TEST_EXPORT="no"
+
+DEV_USER="developer"
+DEV_PASS="developer"
+export OTREE_ADMIN_USERNAME="${DEV_USER}"
+export OTREE_ADMIN_PASSWORD="${DEV_PASS}"
+export ADMIN_USERNAME="${DEV_USER}"
+export ADMIN_PASSWORD="${DEV_PASS}"
+
+__run__web(){
+  echo "running otree game in browser"
+  echo "admin_user:${DEV_PASS} admin_pass:${DEV_PASS}"
+
+  export ADMIN_USERNAME="${DEV_USER}"
+  export ADMIN_PASSWORD="${DEV_PASS}"
+  ADMIN_USERNAME="${DEV_PASS}" ADMIN_PASSWORD="${DEV_PASS}"  \
+  /usr/local/bin/otree browser_bots "$1" $2
+}
+
+[[ "$INIT_CWD" == "${BASE_PATH}" ]] && \
+  cd $APP_DIR
+
+__run__() {
+  if [ $TEST_EXPORT == "yes" ]; then
+    /usr/local/bin/otree test "$1" $2 --export
+  else
+    /usr/local/bin/otree test "$1" $2
+  fi
+}
+
+cd "${APP_DIR}"
+
+export PYTHONPATH=/usr/bin/python3.7 \
+  && __run__web ${TEST_NAME} ${TEST_PLAYERS}
+
+
+exit 0

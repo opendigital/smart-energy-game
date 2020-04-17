@@ -3,8 +3,17 @@ from . import pages
 from ._builtin import Bot
 from .models import Constants
 
-
 class PlayerBot(Bot):
+    def dump_html(self,_html):
+        if Constants.TESTS_EXPORT_HTML:
+            print("\n\n\n")
+            print("<article>")
+            print(_html)
+            print("</article>")
+            print("\n\n\n")
+            print("<hr />\n\n\n")
+
+
     def play_round(self):
         yield (pages.PostSurvey1, {
              's1a1': 'test',
@@ -23,6 +32,9 @@ class PlayerBot(Bot):
              's1c4': 1,
              's1c5': 1,
         })
+
+        self.dump_html(self.html)
+
         yield (pages.PostSurvey2, {
             's2a0': 1,
             's2a1': 1,
@@ -34,6 +46,9 @@ class PlayerBot(Bot):
             's2a7': 1,
             's2a8': 1,
         })
+
+        self.dump_html(self.html)
+
         yield (pages.PostSurvey3, {
             's3a0':1,
             's3a1':1,
@@ -47,6 +62,9 @@ class PlayerBot(Bot):
             's3a9':1,
             's3a10':1 ,
         })
+
+        self.dump_html(self.html)
+
         yield (pages.PostSurvey4, {
             's4a1': 1901,
             's4a2': 1,
@@ -57,6 +75,11 @@ class PlayerBot(Bot):
             's4a7': 1,
             's4a8': 1,
         })
+
+        self.dump_html(self.html)
+
         yield (pages.Debriefing, {
             'survey_consent': True
         })
+
+        self.dump_html(self.html)

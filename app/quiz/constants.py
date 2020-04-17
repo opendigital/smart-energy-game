@@ -12,6 +12,7 @@ class Constants(BaseConstants):
         debug_jsvars=False
     )
 
+    TESTS_EXPORT_HTML = True
     name_in_url = 'training'
     num_rounds = 1
     players_per_group = None
