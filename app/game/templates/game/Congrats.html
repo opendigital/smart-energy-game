@@ -4,7 +4,6 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-
       <script src="{% static 'global/jspdf.min.js' %}"></script>
       <script src="{% static 'global/html2canvas.min.js' %}"></script>
         <div id="cert_frame" class="card" style="background:transparent; border-color: transparent">
@@ -14,6 +13,10 @@
                 <div id="carbonfund_reduction_date" class=""><strong>{% now "m/d/Y" %}</strong></div>
             </div>
         </div>
+        <p>
+          Please note that we are playing hundreds of games. We will add all donations from individual games
+          and purchase the total pollution reduction credits from all games in August 2020.
+        </p>
 {% endblock %}
 
 
