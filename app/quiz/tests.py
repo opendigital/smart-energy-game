@@ -59,9 +59,10 @@ class PlayerBot(Bot):
             self.dump_html(self.html)
             yield (pages.Quiz1, {'q1': 2})
             self.dump_html(self.html)
-            yield (pages.Quiz2, {'q2': 1 }) #Constants.q2[0]["answer"] = true
-            # yield (pages.ReviewGameRules)
-            # yield (pages.Quiz2, {'q2': 0 })
+            yield (pages.Quiz2, {'q2': 0 }) #Constants.q2[0]["answer"] = true
+            self.dump_html(self.html)
+            yield (pages.ReviewGameRules)
+            self.dump_html(self.html)
             yield (pages.Quiz3, {
                 'q3a': 1,
                 'q3b': 0

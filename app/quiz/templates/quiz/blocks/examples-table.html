@@ -1,88 +1,94 @@
 <table style="width:100%;">
   <thead>
-    <tr class="bg-grey200 text-center shadow">
+    <tr class="bg-grey200 text-center shadow font-bold">
       <th>Scenario</th>
-      <th>Private Account</th>
-      <th>Other Accounts</th>
-      <th>Group Account</th>
-      <th>Bonus</th>
-      <th>Total</th>
+      <th class="color-private">Your Private Account</th>
+      <th>Others' Private Accounts</th>
+      <th>Group Conservation Account = Air Pollution saved (lbs)</th>
+      <th class="color-conserve">Goal</th>
+      <th class="color-conserve">Bonus</th>
+      <th>Your Total Earnings</th>
     </tr>
   </thead>
+
   <tbody>
 
     <!--  ROW 1 -->
 
     <tr class="{{ classes.row1 }}">
       <td>
-        <span class="color-success" style="margin-left:-1em;font-family: monospace">&#x2714;</span>
-        <strong>ALL CONTRIBUTE 60%:</strong><br>
+        <strong>(1) MIN REQUIREMENT TO MEET THE GOAL:</strong><br>
         ALL contribute 6 tokens each month
       </td>
-      <td class="text-center">24 <span class="text-small">tokens</span><br><span class="font-italic">$0.24</span></td>
-      <td class="text-center">24 <span class="text-small">tokens</span><br><span class="font-italic">$0.24</span></td>
-      <td class="text-center">900 <span class="text-small">tokens</span><br><span class="font-italic">1,980 lbs</span></td>
-      <td class="text-center">2&times;9.00&divide;25<br>&equals;<span class="font-italic">$0.72</span></td>
-      <td class="text-center">0.24+0.72<br><span class="">&equals; <strong>$0.96</strong></span></td>
+      <td class="text-center color-private">24 <span class="text-small">tokens</span><br><span class="text-small">$0.24</span></td>
+      <td class="text-center">24 <span class="text-small">tokens</span><br><span class="text-small">$0.24</span></td>
+      <td class="text-center">900 <span class="text-small">tokens</span><br><span class="text-small">1,980 lbs</span></td>
+      <td class="text-center color-conserve">YES</td>
+      <td class="text-center color-conserve">2&times;9.00&divide;25<br>&equals;<span class="text-small"><strong>$0.72</strong></span></td>
+      <td class="text-center"><span class="color-private">0.24</span>&plus;<span class="color-conserve">0.72</span><br>&equals; <strong>$0.96</strong></td>
     </tr>
 
     <!--  ROW 2 -->
+
     <tr class="{{ classes.row2 }}">
       <td>
-        <span class="color-red" style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;">X</span>
-        <strong>MIN CONTRIBUTION:</strong><br>
+        <strong>(2) MIN CONTRIBUTION:</strong><br>
         ALL put ALL tokens in<br>
-        private accounts each month
+        private accounts every month
       </td>
-      <td class="text-center">60 <span class="text-small">tokens</span><br><span class="font-italic">$0.60</span></td>
-      <td class="text-center">60 <span class="text-small">tokens</span><br><span class="font-italic">$0.60</span></td>
-      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="font-italic">0 lbs</span></td>
+      <td class="text-center color-private">60 <span class="text-small">tokens</span><br><span class="text-small">$0.60</span></td>
+      <td class="text-center">60 <span class="text-small">tokens</span><br><span class="text-small">$0.60</span></td>
+      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="text-small">0 lbs</span></td>
+      <td class="text-center">NO</td>
       <td class="text-center">No Bonus<br><span>-</span></td>
-      <td class="text-center">0.60+0.00<br>&equals; <strong>$0.60</strong></td>
+      <td class="text-center"><span class="color-private">0.60</span>&plus;<span class="color-conserve">0.00</span><br>&equals; <strong>$0.60</strong></td>
     </tr>
 
     <!--  ROW 3 -->
 
     <tr class="{{ classes.row3 }}">
       <td>
-        <span class="color-success" style="margin-left:-1em;font-family: monospace">&#x2714;</span>
-        <strong>MAX CONTRIBUTION:</strong><br>
-        ALL contribute ALL tokens each month
+        <strong>(3) MAX CONTRIBUTION:</strong><br>
+        ALL contribute ALL tokens every month
       </td>
-      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="font-italic">$0.00</span></td>
-      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="font-italic">$0.00</span></td>
-      <td class="text-center">1,500 <span class="text-small">tokens</span><br><span class="font-italic">3,300 lbs</span></td>
-      <td class="text-center">2&times;15.00&divide;25<br>&equals; $1.20</td>
-      <td class="text-center">0.00+1.20<br>&equals; <strong>$1.20</strong></td>
+      <td class="text-center color-private">0 <span class="text-small">tokens</span><br><span class="text-small">$0.00</span></td>
+      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="text-small">$0.00</span></td>
+      <td class="text-center">1,500 <span class="text-small">tokens</span><br><span class="text-small">3,300 lbs</span></td>
+      <td class="text-center color-conserve">YES</td>
+      <td class="text-cente color-conserve">2&times;15.00&divide;25<br>&equals; <strong>$1.20</strong></td>
+      <td class="text-center"><span class="color-private">0</span>&plus;<span class="color-conserve">1.20</span><br>&equals; <strong>$1.20</strong></td>
     </tr>
 
     <!--  ROW 4 -->
 
     <tr class="{{ classes.row5 }}">
       <td>
-        <span class="color-red" style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;">X</span>
-        <strong>ONLY YOU CONTRIBUTE:</strong><br>
-        You contribute ALL tokens <br>but others keep ALL of theirs
+        <strong>(4) ONLY YOU CONTRIBUTE:</strong><br>
+        You contribute ALL tokens <br>
+        but others put ALL their tokens in their private accounts
       </td>
-      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="font-italic">$0.00</span></td>
-      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="font-italic">$0.60</span></td>
-      <td class="text-center">60 <span class="text-small">tokens</span><br><span class="font-italic">132 lbs</span></td>
+      <td class="text-center color-private">0 <span class="text-small">tokens</span><br><span class="text-small">$0.00</span></td>
+      <td class="text-center">60 <span class="text-small">tokens</span><br><span class="text-small">$0.60</span></td>
+      <td class="text-center">60 <span class="text-small">tokens</span><br><span class="text-small">132 lbs</span></td>
+      <td class="text-center">NO</td>
       <td class="text-center">No Bonus<br>-</td>
-      <td class="text-center">0.00&plus;0.00<br>&equals; <strong>$0.00</strong></td>
+      <td class="text-center"><span class="color-private">0</span>&plus;<span class="color-conserve">0</span><br>&equals; <strong>$0.00</strong></td>
     </tr>
 
     <!--  ROW 5 -->
 
     <tr class="{{ classes.row4 }}">
-      <td><span class="color-success" style="margin-left:-1em;font-family: monospace">&#x2714;</span><strong>ONLY YOU DON'T CONTRIBUTE:</strong><br>EVERYONE except you contributes<br>
+      <td>
+        <strong>(5) ONLY YOU DON'T CONTRIBUTE:</strong><br>
+        Everyone but you contributes<br>
         ALL of their tokens each month
       </td>
-      <td class="text-center">60 <span class="text-small">tokens</span><br><span class="font-italic">$0.60</span></td>
-      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="font-italic">$0.00</span></td>
-      <td class="text-center">1,440 <span class="text-small">tokens</span><br><span class="font-italic">3,168 lbs</span></td>
-      <td class="text-center">2&times;14.40&divide;25<br>&equals; $1.15</td>
-      <td class="text-center">0.60+1.15<br>&equals; <strong>$1.75</strong></td>
+      <td class="text-center color-private">60 <span class="text-small">tokens</span><br><span class="text-small">$0.60</span></td>
+      <td class="text-center">0 <span class="text-small">tokens</span><br><span class="text-small">$0</span></td>
+      <td class="text-center">1,440 <span class="text-small">tokens</span><br><span class="text-small">3,168 lbs</span></td>
+      <td class="text-center color-conserve">YES</td>
+      <td class="text-center color-conserve">2&times;14.40&divide;25<br>&equals; <strong>$1.15</strong></td>
+      <td class="text-center"><span class="color-private">0.60</span>&plus;<span class="color-conserve">1.15</span><br>&equals; <strong>$1.75</strong></td>
     </tr>
-
   </tbody>
 </table>

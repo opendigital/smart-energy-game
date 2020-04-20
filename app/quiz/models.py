@@ -82,13 +82,15 @@ class Player(BasePlayer):
 
     def qattempts(self, q):
         return self.participant.vars["qattempts"][q]
+
     def bump_qattempt(self, q):
         self.participant.vars["qattempts"][q] += 1
+
     def qcorrect(self, q):
         return self.participant.vars["qcorrect"][q] == 1
+
     def set_qcorrect(self, q, value):
         self.participant.vars["qcorrect"][q] = value
-
 
     def finalize_data(self):
         result=dict(
@@ -120,7 +122,6 @@ class Player(BasePlayer):
         self.quiz_data = str(result)
         self.participant.vars["quiz_data"] = str(result)
         self.participant.vars["quiz_bonus"] = self.quiz_bonus
-        print(str(result))
 
 
     def pay_bonus(self):
@@ -168,8 +169,6 @@ class Player(BasePlayer):
     def valid_q3(self, values):
         quiz_index = 2
         answers = self.session.vars["answer_key"][quiz_index]
-        print("checking 3", values)
-        print("answers", answers)
 
         if self.qcorrect("q3a") is not True:
             self.bump_qattempt("q3a")
@@ -184,9 +183,7 @@ class Player(BasePlayer):
         if self.qcorrect("q3a") and self.qcorrect("q3b"):
             if self.qattempts("q3a") <= 2:
                 self.pay_bonus()
-            print("returning true")
             return True
-        print("returning false")
         return False
 
 
@@ -270,7 +267,7 @@ class Player(BasePlayer):
     q2 = models.BooleanField(
         label=Constants.q2[0]["label"],
         choices=Constants.q2[0]["choices"],
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
     )
 
     q3a = models.BooleanField(
@@ -282,41 +279,41 @@ class Player(BasePlayer):
     q3b = models.BooleanField(
         label=Constants.q3[1]["label"],
         choices=Constants.q3[1]["choices"],
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
     )
 
     q4a = models.IntegerField(
         label=Constants.q4[0]["label"],
+        choices=Constants.q4[0]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[0]["choices"]
     )
 
     q4b = models.IntegerField(
         label=Constants.q4[1]["label"],
+        choices=Constants.q4[1]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[1]["choices"]
     )
 
     q4c = models.IntegerField(
         label=Constants.q4[2]["label"],
+        choices=Constants.q4[2]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[2]["choices"]
     )
 
     q4d = models.IntegerField(
         label=Constants.q4[3]["label"],
+        choices=Constants.q4[3]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[3]["choices"]
     )
 
     q4e = models.IntegerField(
         label=Constants.q4[4]["label"],
+        choices=Constants.q4[4]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[4]["choices"]
     )
 
     q4f = models.IntegerField(
         label=Constants.q4[5]["label"],
+        choices=Constants.q4[5]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[5]["choices"]
     )

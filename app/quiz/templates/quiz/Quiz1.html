@@ -6,9 +6,9 @@
 {% block page_content %}
 
 <section class="quiz-section">
-  <p>Q1:</p>
+
   <div class="form-group horiz-select" id='id_field_{{ form.q1.html_name }}'>
-    {{ form.q1.label_tag }}
+    <strong>Q1:</strong>{{ form.q1.label_tag }}
     {{ form.q1 }}
     {{ form.q1.errors }}
     {% include 'blocks/message-box.html' with field_id=form.q1.html_name hint_text=Constants.q1.0.hint %}

@@ -6,8 +6,7 @@
 {% block page_content %}
 <section class="quiz-section">
 <div class="form-group" id='id_field_{{ form.q3a.html_name }}'>
-  <p>Q3a:</p>
-  {{ form.q3a.label_tag }}
+  <strong>Q3a:</strong> {{ form.q3a.label_tag }}
   {{ form.q3a }}
   {{ form.q3a.errors }}
   {% include 'blocks/message-box.html' with field_id=form.q3a.html_name hint_text=q3_hint.0 %}
@@ -15,8 +14,7 @@
 </section>
 <section class="quiz-section">
 <div class="form-group" id='id_field_{{ form.q3b.html_name }}'>
-  <p>Q3b:</p>
-  {{ form.q3b.label_tag }}
+  <strong>Q3b:</strong> {{ form.q3b.label_tag }}
   {{ form.q3b }}
   {{ form.q3b.errors }}
   {% include 'blocks/message-box.html' with field_id=form.q3b.html_name hint_text=q3_hint.1 %}

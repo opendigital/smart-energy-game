@@ -5,6 +5,7 @@ from ._builtin import Page
 from .utils import Utils
 
 
+
 class Intro1(Page):
     def is_displayed(self):
         return self.player.round_number == 1
@@ -12,8 +13,9 @@ class Intro1(Page):
     def vars_for_template(self):
         return {
             'progress': 'Consent',
-            'page_title': Constants.page_titles[0]
+            'page_title': Constants.page_titles["intro1"]
         }
+
 
 
 class Intro2(Page):
@@ -23,8 +25,9 @@ class Intro2(Page):
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
-            'page_title': Constants.page_titles[1]
+            'page_title': Constants.page_titles["intro2"]
         }
+
 
 
 class Intro3(Page):
@@ -37,9 +40,10 @@ class Intro3(Page):
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
-            'page_title': Constants.page_titles[2],
+            'page_title': Constants.page_titles["intro3"],
             'reduction_goal': Constants.reduction_goal,
-            'game_players': Constants.game_players - 1,
+            'game_players': Constants.game_players,
+            'other_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
         }
 
@@ -52,12 +56,13 @@ class Intro4(Page):
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
-            'page_title': Constants.page_titles[3],
+            'page_title': Constants.page_titles["intro4"],
             'page_index': 2,
             'reduction_goal': Constants.reduction_goal,
             'optimal_contribution': '6',
             'game_tokens': Constants.game_tokens,
-            'game_players': Constants.game_players - 1,
+            'game_players': Constants.game_players,
+            'other_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
             'token_goal': Constants.game_goal,
             'token_value': Constants.token_value,
@@ -72,7 +77,7 @@ class Intro5(Page):
     def vars_for_template(self):
         return {
             'progress': 'Introduction',
-            'page_title': Constants.page_titles[4],
+            'page_title': Constants.page_titles["intro5"],
             'optimal_contribution': '6',
             'game_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
@@ -90,15 +95,17 @@ class Intro6(Page):
     def vars_for_template(self):
         return  {
             'progress': 'Introduction',
-            'page_title': Constants.page_titles[5],
+            'page_title': Constants.page_titles["intro6"],
             'optimal_contribution': '6',
-            'game_players': Constants.game_players - 1,
+            'game_players': Constants.game_players,
+            'other_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
             'game_tokens': Constants.game_tokens,
             'reduction_goal': Constants.reduction_goal,
             'token_goal': Constants.token_goal,
             'token_value': Constants.token_value,
         }
+
 
 
 class Intro7(Page):
@@ -108,7 +115,7 @@ class Intro7(Page):
     def vars_for_template(self):
         return  {
             'progress': 'Introduction',
-            'page_title': Constants.page_titles[6],
+            'page_title': Constants.page_titles["intro7"],
             'game_players': '25',
             'optimal_contribution': '6',
             'game_players': Constants.game_players - 1,
@@ -119,15 +126,17 @@ class Intro7(Page):
         }
 
 
+
 class Examples(Page):
     def is_displayed(self):
         return self.round_number == 1
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[7],
+            'page_title': Constants.page_titles["examples"],
             'progress': 'Examples'
         }
+
 
 
 class Example1(Page):
@@ -136,11 +145,11 @@ class Example1(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[8],
+            'page_title': Constants.page_titles["example1"],
             'progress': 'Examples',
             'game_goal': '60',
             'classes': {
-                'row1': '',
+                'row1': 'bg-grey300',
                 'row2': 'hide',
                 'row3': 'hide',
                 'row4': 'hide',
@@ -149,22 +158,24 @@ class Example1(Page):
         }
 
 
+
 class Example2(Page):
     def is_displayed(self):
         return self.round_number == 1
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[9],
+            'page_title': Constants.page_titles["example2"],
             'progress': 'Examples',
             'classes': {
                 'row1': 'text-muted',
-                'row2': '',
-                'row3': '',
+                'row2': 'bg-grey300',
+                'row3': 'bg-grey300',
                 'row4': 'hide',
                 'row5': 'hide',
             }
         }
+
 
 
 class Example3(Page):
@@ -173,14 +184,14 @@ class Example3(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[10],
+            'page_title': Constants.page_titles["example3"],
             'progress': 'Examples',
             'classes': {
                 'row1': 'text-muted',
                 'row2': 'text-muted',
                 'row3': 'text-muted',
-                'row4': '',
-                'row5': '',
+                'row4': 'bg-grey300',
+                'row5': 'bg-grey300',
             }
         }
 
@@ -192,9 +203,10 @@ class PracticeIntro(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[11],
+            'page_title': Constants.page_titles["practiceintro"],
             'progress': 'Practice'
         }
+
 
 
 class PracticeGame1(Page):
@@ -211,12 +223,14 @@ class PracticeGame1(Page):
         index = self.round_number - 1
         round_month = Utils.get_month(index)
         return {
-            'page_title': Constants.page_titles[12],
+            'page_title': Constants.page_titles["practicegame1"],
             'progress': 'Practice',
             'field_name': 'practice_contrib1',
             'current_month': round_month,
-            'current_round': 1,
+            'current_round': 0,
         }
+
+
 
 class PracticeGame2(Page):
     template_name = './quiz/PracticeGame.html'
@@ -232,12 +246,13 @@ class PracticeGame2(Page):
         index = self.round_number - 1
         round_month = Utils.get_month(index + 1)
         return {
-            'page_title': Constants.page_titles[12],
+            'page_title': Constants.page_titles["practicegame2"],
             'progress': 'Practice',
             'field_name': 'practice_contrib2',
             'current_month': round_month,
-            'current_round': 2,
+            'current_round': 0,
         }
+
 
 
 class PracticeResults1(Page):
@@ -260,10 +275,10 @@ class PracticeResults1(Page):
         percent_goal = int(group_contribution_total * 100 / 900)
         return {
             'progress': 'Practice',
-            'page_title': Constants.page_titles[13],
+            'page_title': Constants.page_titles["practiceresults1"],
             'current_month': round_month,
             'game_round': 1,
-            'current_round': 1,
+            'current_round': 0,
             'player_contribution': player_contribution,
             'player_contribution_total': player_contribution_total,
             'player_withheld': player_withheld,
@@ -275,6 +290,8 @@ class PracticeResults1(Page):
             'avg_contrib': contributions_total / Constants.game_players,
             'percent_goal': percent_goal
         }
+
+
 
 class PracticeResults2(Page):
     template_name = './quiz/PracticeResults.html'
@@ -296,10 +313,10 @@ class PracticeResults2(Page):
         percent_goal = int(group_contribution_total * 100 / 900)
         return {
             'progress': 'Practice',
-            'page_title': Constants.page_titles[13],
+            'page_title': Constants.page_titles["practiceresults2"],
             'current_month': round_month,
             'game_round': 2,
-            'current_round': 2,
+            'current_round': 0,
             'player_contribution': player_contribution,
             'player_contribution_total': player_contribution_total,
             'player_withheld': player_withheld,
@@ -312,15 +329,18 @@ class PracticeResults2(Page):
             'percent_goal': percent_goal
         }
 
+
+
 class Quiz(Page):
     def is_displayed(self):
         return self.round_number == 1
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[14],
+            'page_title': Constants.page_titles["quiz"],
             'progress': 'Quiz'
         }
+
 
 
 class Quiz1(Page):
@@ -333,7 +353,7 @@ class Quiz1(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': Constants.page_titles[15],
+            'page_title': Constants.page_titles["quiz1"],
             'progress': 'Quiz',
             'can_review': self.player.qattempts("q1") <= 0,
             'show_hint': self.player.qattempts("q1") > 0,
@@ -348,6 +368,7 @@ class Quiz1(Page):
                 self.player.review_rules = 1
 
 
+
 class Quiz2(Page):
     form_model = 'player'
     form_fields = ['q2']
@@ -360,7 +381,7 @@ class Quiz2(Page):
         return {
             'progress': 'Quiz',
             'participant.vars': self.player.participant.vars,
-            'page_title': Constants.page_titles[16],
+            'page_title': Constants.page_titles["quiz2"],
             'can_review': self.player.qattempts("q2") <= 0,
             'show_hint': self.player.qattempts("q2") > 0,
             'q2_attempts': self.player.qattempts("q2"),
@@ -388,11 +409,10 @@ class Quiz3(Page):
         return (self.player.qattempts("q3a") <= 2) and not self.player.qcorrect("q3a") \
             or (self.player.qattempts("q3b") <= 2) and not self.player.qcorrect("q3b")
 
-
     def vars_for_template(self):
         return {
             'can_review': self.player.qattempts("q3a") <= 0,
-            'page_title': Constants.page_titles[17],
+            'page_title': Constants.page_titles["quiz3"],
             'participant_vars': self.player.participant.vars,
             'progress': 'Quiz',
             'show_hint': self.player.qattempts("q3a")  > 0 or self.player.qattempts("q3b") > 0,
@@ -407,7 +427,6 @@ class Quiz3(Page):
                 Constants.q3[1]["hint"],
             ]
         }
-
 
     def error_message(self, values):
         valid = self.player.valid_q3(values)
@@ -463,10 +482,10 @@ class Quiz4(Page):
         ]
 
         return {
+            'page_title': Constants.page_titles["quiz4"],
+            'progress': 'Quiz',
             'participant_vars': self.player.participant.vars,
             'can_review': self.player.qattempts("q4a"),
-            'page_title': Constants.page_titles[18],
-            'progress': 'Quiz',
             'show_hint': self.player.qattempts("q4a") > 0,
             'attempts': self.player.qattempts("q4a"),
             'answer_key': answer_key,
@@ -482,7 +501,6 @@ class Quiz4(Page):
 
 
 class ReviewGameRules(Page):
-
     def is_displayed(self):
         if self.player.review_rules == 1 \
             or self.player.review_rules == 2 \
@@ -493,12 +511,12 @@ class ReviewGameRules(Page):
             return False
 
     def vars_for_template(self):
-        page_title = 'Review Game Rules'
+        page_title = Constants.page_titles["reviewgamerules"]
         table_classes = {}
         if self.player.review_rules == 1:
-            page_title = 'Review: Game Structure'
+            page_title = 'Review: Game Structure and Incentives'
         elif self.player.review_rules == 2:
-            page_title = 'Review: Game Outcomes'
+            page_title = 'Review: Environmental Outcomes'
         elif self.player.review_rules == 3:
             page_title = 'Review: Examples Table'
             table_classes = {
@@ -518,9 +536,13 @@ class ReviewGameRules(Page):
                 'row5': 'text-muted',
             }
         return {
+            'optimal_contribution': '6',
+            'game_players': Constants.game_players,
+            'other_players': Constants.game_players - 1,
+            'game_tokens': Constants.game_tokens,
+            'token_value': Constants.token_value,
             'page_title': page_title,
             'reduction_goal': Constants.reduction_goal,
-            'game_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
             'progress': 'Examples',
             'classes': table_classes
@@ -528,6 +550,7 @@ class ReviewGameRules(Page):
 
     def before_next_page(self):
         self.player.review_rules = 0
+
 
 
 class GameIntro(Page):
@@ -538,12 +561,13 @@ class GameIntro(Page):
     def vars_for_template(self):
         return {
             'participantvars': self.player.participant.vars,
-            'page_title': Constants.page_titles[19],
+            'page_title': Constants.page_titles["gameintro"],
             'progress': 'Game'
         }
 
     def before_next_page(self):
         self.player.finalize_data()
+
 
 
 page_sequence = [
