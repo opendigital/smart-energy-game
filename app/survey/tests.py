@@ -15,6 +15,9 @@ class PlayerBot(Bot):
 
 
     def play_round(self):
+
+        self.dump_html(self.html)
+
         yield (pages.PostSurvey1, {
              's1a1': 'test',
              's1a2': True,

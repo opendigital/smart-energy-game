@@ -18,6 +18,14 @@ class Constants(BaseConstants):
     players_per_group = None
     game_rounds = 1
 
+    page_titles = dict(
+        PostSurvey1="Post-Game Survey 1/4",
+        PostSurvey2="Post-Game Survey 2/4",
+        PostSurvey3="Post-Game Survey 3/4",
+        PostSurvey4="Post-Game Survey 4/4",
+        Debriefing="Debriefing",
+    )
+
     true_false = [
         [1, "True" ],
         [0, "False" ],
@@ -45,6 +53,7 @@ class Constants(BaseConstants):
         "What were the other members of your group trying to do (what were their objectives)?",
         "What was the scope of this experiment (in other words, what were the experimenters trying to discover)?",
     ]
+
     survey_1b_items = [
         "This experiment requires a lot of concentration.",
         "The rules of the game were explained clearly.",
@@ -53,6 +62,7 @@ class Constants(BaseConstants):
             meeting the group conservation goal (i.e. the bonus).",
         "In this experiment, everyone\'s earnings depend on the decisions of all members of the group.",
     ]
+
     survey_1c_items = [
         "My past contributions to the group conservation account.",
         "Others' average contributions to the group conservation account.",
@@ -73,7 +83,6 @@ class Constants(BaseConstants):
         'I work better when I do it all myself',
     ]
 
-
     survey_3_items = [
         'Plants',
         'Marine life',
@@ -86,7 +95,6 @@ class Constants(BaseConstants):
         'People in my community',
         'The human race',
         'Children',
-        'People in the United States',
     ]
 
     survey_4_items = [
@@ -101,7 +109,6 @@ class Constants(BaseConstants):
         'Which political party do you most identify with?',
         'How many years have you lived in the US?',
     ]
-
 
     range_influence = [
         [1, '1 - Not At All Influential'],
@@ -119,6 +126,14 @@ class Constants(BaseConstants):
     ]
 
     range_5 = [1, 2, 3, 4, 5]
+
+    range_5_truth = [
+        [1, 'Definitely false'],
+        [2, 'Probably false'],
+        [3, 'Not sure'],
+        [4, 'Definitely true'],
+        [5, 'Probably true']
+    ]
 
     range_5_important = [
         [1, 'Not Important'],
@@ -148,7 +163,8 @@ class Constants(BaseConstants):
         [2, 'Full time student'],
         [3, 'Part time employed'],
         [4, 'Part time student'],
-        [5, 'Other'],
+        [5, 'Retired'],
+        [6, 'Other'],
     ]
 
     choices_demographics_experience = [

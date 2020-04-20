@@ -3,6 +3,7 @@ from ._builtin import Page
 from .constants import Constants
 
 
+
 class PostSurvey1(Page):
     form_model = 'player'
     form_fields = [
@@ -23,9 +24,10 @@ class PostSurvey1(Page):
         's1c5',
     ]
 
+
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 1/4',
+            'page_title': Constants.page_titles["PostSurvey1"],
             'progress': 'Survey'
         }
 
@@ -47,7 +49,7 @@ class PostSurvey2(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 2/4',
+            'page_title': Constants.page_titles["PostSurvey2"],
             'progress': 'Survey',
         }
 
@@ -71,7 +73,7 @@ class PostSurvey3(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 3/4',
+            'page_title': Constants.page_titles["PostSurvey3"],
             'progress': 'Survey',
         }
 
@@ -92,7 +94,7 @@ class PostSurvey4(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 4/4',
+            'page_title': Constants.page_titles["PostSurvey4"],
             'progress': 'Survey',
         }
 
@@ -106,7 +108,7 @@ class Debriefing(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': 'Debriefing',
+            'page_title': Constants.page_titles["Debriefing"],
             'progress': 'End'
         }
 
