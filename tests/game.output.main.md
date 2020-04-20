@@ -133,11 +133,7 @@ I agree
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -206,7 +202,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Instruction: Game Outline {#instruction-game-outline .card-title}
+Outline {#instruction-game-outline .card-title}
 =========================
 
 </div>
@@ -222,7 +218,7 @@ players. Before you play the game you will review the following:
 1.  Instructions on how to play the energy conservation game.
 2.  Example scenarios of different game outcomes.
 3.  A trial game (just 2 decision rounds)
-4.  A comprehension quiz (including payments for correct answers).
+4.  A comprehension quiz (includes extra pay for correct answers).
 
 **Please read the following rules carefully**, because they will
 influence how large a payment you earn at the end.
@@ -244,11 +240,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -261,7 +253,7 @@ Next
 <div class="scrollable">
 
   ------------- -------------------------------
-  page\_title   `'Instruction: Game Outline'`
+  page\_title   `'Outline'`
   progress      `'Introduction'`
   ------------- -------------------------------
 
@@ -317,7 +309,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Instruction: Game Structure and Incentives {#instruction-game-structure-and-incentives .card-title}
+Introduction {#instruction-game-structure-and-incentives .card-title}
 ==========================================
 
 </div>
@@ -330,14 +322,12 @@ Instruction: Game Structure and Incentives {#instruction-game-structure-and-ince
 
 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-### Game Structure
-
 In this energy conservation game, you and [24]{.game-variable} other
-players live in an apartment building that is **trying to reduce the
-excess energy use by** [60%]{.game-variable}.
+players live in an apartment building that is **trying to reduce its
+non-essential energy use by** [60%]{.game-variable}.
 
 You have [6]{.game-variable} months ([6]{.game-variable} decision
-rounds) to try to achieve it.
+rounds) to achieve this goal.
 
 Your decisions affect both: **your cash earnings** from the experiment,
 and **actual air pollution in the US**.
@@ -373,11 +363,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -392,7 +378,7 @@ Next
   ----------------- ------------------------------------------------
   game\_players     `24`
   game\_rounds      `6`
-  page\_title       `'Instruction: Game Structure and Incentives'`
+  page\_title       `'Introduction'`
   progress          `'Introduction'`
   reduction\_goal   `60`
   ----------------- ------------------------------------------------
@@ -449,7 +435,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Instruction: Introduction {#instruction-introduction .card-title}
+Instruction: Game Structure and Incentives {#instruction-introduction .card-title}
 =========================
 
 </div>
@@ -463,10 +449,10 @@ Instruction: Introduction {#instruction-introduction .card-title}
 
 -   At the start of each month, each player has **[10]{.game-variable}
     energy tokens** (worth **\$[0.01]{.game-variable} each**) that
-    represent potential energy use beyond their basic needs.
+    represent non-essential energy use beyond their basic needs.
 
--   Each month, every player faces the same decision problem how much
-    energy to use for their personal benefit (by putting tokens in their
+-   Each month, every player faces the same **decision problem:** how much
+    energy to use for their private benefit (by putting tokens in their
     [private account]{.font-bold .color-private}) versus how much to
     conserve (by putting tokens in the [group conservation
     account]{.font-bold .color-conserve}).
@@ -477,7 +463,7 @@ Instruction: Introduction {#instruction-introduction .card-title}
 -   If the group meets the [60%]{.game-variable} conservation goal by
     the end of the game, then the value of those tokens in the group
     conservation account is doubled and given in equal shares to all
-    players as a **reward**.
+    players as a **bonus**. If the 60% goal is not met, there is not bonus.
 
 -   To meet the [60%]{.game-variable} energy reduction goal, each player
     should contribute **[6]{.game-variable} energy tokens every month**
@@ -500,11 +486,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -522,7 +504,7 @@ Next
   game\_tokens            `10`
   optimal\_contribution   `'6'`
   page\_index             `2`
-  page\_title             `'Instruction: Introduction'`
+  page\_title             `'Instruction: Game Structure and Incentives'`
   progress                `'Introduction'`
   reduction\_goal         `60`
   token\_goal             `900`
@@ -603,7 +585,7 @@ Instruction: Gameplay {#instruction-gameplay .card-title}
 
 -   **After each month** (once all players have made their choices) the
     month's results will be displayed to all players. You'll get updates
-    on the **group conservation account**, other player's contributions,
+    on the group conservation account, other player's contributions,
     and your private account. This feedback is anonymized.
 
 -   **At the end of the game** (after [6]{.game-variable} months) each
@@ -630,11 +612,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -759,16 +737,19 @@ Your pay at the end of the game.
 
 <div class="col">
 
--   Regrdless of the group goal, all players receive
+-   Regardless of the group goal, all players receive
     [\$0.01]{.game-variable} for every energy token left in their
     [private accounts]{.color-private .font-bold} at the end of the
     game.
 
+-   If the group fails to meet its group conservation goal, **no bonus**
+    will be paid to any player.
+
 -   If the [[60]{.game-variable .color-conserve}% group conservation
     ]{.color-conserve .font-bold}goal is met (i.e., there are at least
     [900]{.game-variable} tokens in the group conservation account at
-    the end of the game), then the building owner doubles the monetary
-    value of the conserved tokens and divides them equally among
+    the end of the game), then the building owner **doubles** the monetary
+    value of the conserved tokens and **divides them equally** among
     all[24]{.game-variable} players as a bonus.
 
     > For example, if [900]{.game-variable} tokens are contributed to
@@ -778,8 +759,6 @@ Your pay at the end of the game.
     > group conservation account × [2]{.game-variable} ×
     > [\$0.01]{.game-variable} per token).
 
--   If the group fails to meet its group conservation goal, **no bonus**
-    will be paid to any player.
 
 </div>
 
@@ -802,11 +781,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -894,7 +869,7 @@ Instruction: Environmental Outcomes {#instruction-environmental-outcomes .card-t
 <div class="my-5 flex flex-row flex-center">
 
 <div
-class="model-card flex flex-vcenter text-center color-conserve bc-inherit flex-center flex-item">
+class="model-card flex flex-vcenter text-center color-carbon bc-inherit flex-center flex-item">
 
 Tokens in Group Conservation Account
 
@@ -907,7 +882,7 @@ x
 </div>
 
 <div
-class="model-card flex flex-vcenter text-center color-private bc-inherit flex-center flex-item">
+class="model-card flex flex-vcenter text-center color-carbon bc-inherit flex-center flex-item">
 
 \$0.01
 
@@ -933,14 +908,14 @@ Carbon Offset
 <div class="col">
 
 -   The monetary value of the energy tokens in the [group conservation
-    account]{.color-conserve .font-bold} at the end of the game will
+    account]{.color-carbon .font-bold} at the end of the game will
     used to pay for programs through Carbonfund.org that reduce air
     pollution in the US at the rate of 220 pounds for each 100 tokens
     (\$1.00).
 
 -   All contributions to the conservation account will go toward
-    [pollution reduction]{.color-carbon .font-bold}, even if the group
-    does not meet its conservation goal.
+    [pollution reduction]{.color-carbon .font-bold}, **even if the group
+    does not meet its conservation goal**.
 
 </div>
 
@@ -963,11 +938,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -1042,7 +1013,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Examples: Overview {#examples-overview .card-title}
+Examples {#examples-overview .card-title}
 ==================
 
 </div>
@@ -1075,11 +1046,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -1092,7 +1059,7 @@ Next
 <div class="scrollable">
 
   ------------- ------------------------
-  page\_title   `'Examples: Overview'`
+  page\_title   `'Examples'`
   progress      `'Examples'`
   ------------- ------------------------
 
@@ -1148,7 +1115,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Examples: 1. Minimum Requirement {#examples-1.-minimum-requirement .card-title}
+Example 1: Minimum Requirement to Meet the Goal {#examples-1.-minimum-requirement .card-title}
 ================================
 
 </div>
@@ -1157,90 +1124,71 @@ Examples: 1. Minimum Requirement {#examples-1.-minimum-requirement .card-title}
 
 <div class="container card-content">
 
-Scenario
-Private Account
-Other Accounts
-Group Account
-Bonus
-Total
-[✔]{.color-success style="margin-left:-1em;font-family: monospace"}
-**ALL CONTRIBUTE 60%:**\
+**Scenario**
+[Your Private Account]{.font-bold .color-private}
+**Others’ Private Accounts**
+**Group Conservation Account = Air Pollution saved (lbs)**
+[Bonus]{.color-conserve .font-bold}
+**Your Total Earnings**
+
+**(1) MIN REQUIREMENT TO MEET THE GOAL:**\
+
 ALL contribute 6 tokens each month
-24 [tokens]{.text-small}\
-[\$0.24]{.font-italic}
-24 [tokens]{.text-small}\
-[\$0.24]{.font-italic}
-900 [tokens]{.text-small}\
-[1,980 lbs]{.font-italic}
-2×9.00÷25\
-=[\$0.72]{.font-italic}
-0.24+0.72\
-[= **\$0.96**]{}
-[X]{.color-red
-style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;"}
-**MIN CONTRIBUTION:**\
+
+24 [tokens]{.text-small .color-private} [\$0.24]{.text-small .color-private}
+24 [tokens]{.text-small} [\$0.24]{.text-small}
+900 [tokens]{.text-small} [1,980 lbs]{.text-small}
+[2×**9.00**÷25]{.color-conserve} =[\$0.72]{.text-small .color-conserve}
+[0.24]{.color-private}+[0.72]{.color-conserve} = **\$0.96**
+
+**(2) MIN CONTRIBUTION:**\
+
 ALL put ALL tokens in\
-private accounts each month
-60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
-60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
-0 [tokens]{.text-small}\
-[0 lbs]{.font-italic}
-No Bonus\
-[-]{}
-0.60+0.00\
-= **\$0.60**
-[✔]{.color-success style="margin-left:-1em;font-family: monospace"}
-**MAX CONTRIBUTION:**\
-ALL contribute ALL tokens each month
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-1,500 [tokens]{.text-small}\
-[3,300 lbs]{.font-italic}
-2×15.00÷25\
-= \$1.20
-0.00+1.20\
-= **\$1.20**
-[X]{.color-red
-style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;"}
-**ONLY YOU CONTRIBUTE:**\
+private accounts every month
+
+60 [tokens]{.text-small .color-private} [\$0.60]{.text-small .color-private}
+60 [tokens]{.text-small} [\$0.60]{.text-small}
+0 [tokens]{.text-small} [0 lbs]{.text-small}
+No Bonus -
+[0.60]{.color-private}+[0]{.color-conserve} = **\$0.60**
+
+**(3) MAX CONTRIBUTION:**\
+
+ALL contribute ALL tokens every month
+
+0 [tokens]{.text-small .color-private} [\$0.00]{.text-small .color-private}
+0 [tokens]{.text-small} [\$0.00]{.text-small}
+1,500 [tokens]{.text-small} [3,300 lbs]{.text-small}
+[2×15.00÷25]{.color-conserve} [= \$1.20]{.color-conserve}
+[0]{.color-private}+[1.20]{.color-conserve} = **\$1.20**
+
+**(4) ONLY YOU CONTRIBUTE:**\
+
 You contribute ALL tokens\
-but others keep ALL of theirs
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-0 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
-60 [tokens]{.text-small}\
-[132 lbs]{.font-italic}
-No Bonus\
--
-0.00+0.00\
-= **\$0.00**
-[✔]{.color-success
-style="margin-left:-1em;font-family: monospace"}**ONLY YOU DON'T
-CONTRIBUTE:**\
-EVERYONE except you contributes\
+but others put ALL their tokens in their private accounts
+
+0 [tokens]{.text-small .color-private} [\$0]{.font-italic .color-private}
+60 [tokens]{.text-small} [\$0.60]{.font-italic}
+60 [tokens]{.text-small} [132 lbs]{.text-small}
+No Bonus -
+[0]{.color-private}+[0]{.color-conserve} = **\$0.00**
+
+**(5) ONLY YOU DON'T CONTRIBUTE:**\
+
+Everyone but you contributes\
 ALL of their tokens each month
-60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-1,440 [tokens]{.text-small}\
-[3,168 lbs]{.font-italic}
-2×14.40÷25\
-= \$1.15
-0.60+1.15\
-= **\$1.75**
+
+60 [tokens]{.text-small .color-private} [\$0.60]{.font-italic .color-private}
+0 [tokens]{.text-small} [\$0]{.font-italic}
+1,440 [tokens]{.text-small} [3,168 lbs]{.text-small}
+[2×14.40÷25]{.color-conserve} [= \$1.15]{.color-conserve}
+[0.60]{.color-private}+[1.15]{.color-conserve} = **\$1.75**
 
 ------------------------------------------------------------------------
 
 <div class="explanation-content bc-inherit shadow-md">
 
-Example 1 benchmarks the minimum conservation needed for the group to
-meet the goal and for the players to get a bonus.
+Example 1 shows the result if **everyone contributes 60%** of their energy tokens toward the conservation goal, the minimum required to meet the group goal.
 
 </div>
 
@@ -1261,11 +1209,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -1280,7 +1224,7 @@ Next
   ------------- --------------------------------------------------------------------------------
   classes       `{'row1': '', 'row2': 'hide', 'row3': 'hide', 'row4': 'hide', 'row5': 'hide'}`
   game\_goal    `'60'`
-  page\_title   `'Examples: 1. Minimum Requirement'`
+  page\_title   `'Example 1: Minimum Requirement to Meet the Goal'`
   progress      `'Examples'`
   ------------- --------------------------------------------------------------------------------
 
@@ -1336,7 +1280,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Examples: 2 and 3. Min and Max Conservation {#examples-2-and-3.-min-and-max-conservation .card-title}
+Examples 2 and 3: Min and Max Conservation {#examples-2-and-3.-min-and-max-conservation .card-title}
 ===========================================
 
 </div>
@@ -1345,95 +1289,89 @@ Examples: 2 and 3. Min and Max Conservation {#examples-2-and-3.-min-and-max-cons
 
 <div class="container card-content">
 
-Scenario
-Private Account
-Other Accounts
-Group Account
-Bonus
-Total
-[✔]{.color-success style="margin-left:-1em;font-family: monospace"}
-**ALL CONTRIBUTE 60%:**\
+**Scenario**
+Your [private account]{.font-bold .color-private}
+**Others’ Private Accounts**
+[Group Conservation Account]{.color-carbon .font-bold} = Air Pollution saved (lbs)
+[Bonus]{.color-conserve .font-bold}
+**Your Total Earnings**
+
+**(1) MIN REQUIREMENT TO MEET THE GOAL:**\
 ALL contribute 6 tokens each month
+24 [tokens]{.text-small .color-private}\
+[\$0.24]{.text-small .color-private}
 24 [tokens]{.text-small}\
-[\$0.24]{.font-italic}
-24 [tokens]{.text-small}\
-[\$0.24]{.font-italic}
+[\$0.24]{.text-small}
 900 [tokens]{.text-small}\
-[1,980 lbs]{.font-italic}
-2×9.00÷25\
-=[\$0.72]{.font-italic}
-0.24+0.72\
+[1,980 lbs]{.text-small}
+[2×**9.00**÷25]{.color-conserve}\
+=[\$0.72]{.text-small .color-conserve}
+[0.24]{.color-private}+[0.72]{.color-conserve}\
 [= **\$0.96**]{}
-[X]{.color-red
-style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;"}
-**MIN CONTRIBUTION:**\
+
+**(2) MIN CONTRIBUTION:**\
 ALL put ALL tokens in\
-private accounts each month
+private accounts every month
+60 [tokens]{.text-small .color-private}\
+[\$0.60]{.text-small .color-private}
 60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
-60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
+[\$0.60]{.text-small}
 0 [tokens]{.text-small}\
-[0 lbs]{.font-italic}
+[0 lbs]{.text-small}
 No Bonus\
 [-]{}
-0.60+0.00\
+[0.60]{.color-private}+[0]{.color-conserve}\
 = **\$0.60**
-[✔]{.color-success style="margin-left:-1em;font-family: monospace"}
-**MAX CONTRIBUTION:**\
-ALL contribute ALL tokens each month
+
+**(3) MAX CONTRIBUTION:**\
+ALL contribute ALL tokens every month
+0 [tokens]{.text-small .color-private}\
+[\$0.00]{.text-small .color-private}
 0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
+[\$0.00]{.text-small}
 1,500 [tokens]{.text-small}\
-[3,300 lbs]{.font-italic}
-2×15.00÷25\
-= \$1.20
-0.00+1.20\
+[3,300 lbs]{.text-small}
+[2×15.00÷25]{.color-conserve}\
+[= \$1.20]{.color-conserve}
+[0]{.color-private}+[1.20]{.color-conserve}\
 = **\$1.20**
-[X]{.color-red
-style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;"}
-**ONLY YOU CONTRIBUTE:**\
+
+**(4) ONLY YOU CONTRIBUTE:**\
 You contribute ALL tokens\
-but others keep ALL of theirs
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-0 [tokens]{.text-small}\
+but others put ALL their tokens in their private accounts
+0 [tokens]{.text-small .color-private}\
+[\$0]{.font-italic .color-private}
+60 [tokens]{.text-small}\
 [\$0.60]{.font-italic}
 60 [tokens]{.text-small}\
-[132 lbs]{.font-italic}
+[132 lbs]{.text-small}
 No Bonus\
 -
-0.00+0.00\
+[0]{.color-private}+[0]{.color-conserve}\
 = **\$0.00**
-[✔]{.color-success
-style="margin-left:-1em;font-family: monospace"}**ONLY YOU DON'T
-CONTRIBUTE:**\
-EVERYONE except you contributes\
+
+**(5) ONLY YOU DON'T CONTRIBUTE:**\
+Everyone but you contributes\
 ALL of their tokens each month
-60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
+60 [tokens]{.text-small .color-private}\
+[\$0.60]{.font-italic .color-private}
 0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
+[\$0]{.font-italic}
 1,440 [tokens]{.text-small}\
-[3,168 lbs]{.font-italic}
-2×14.40÷25\
-= \$1.15
-0.60+1.15\
+[3,168 lbs]{.text-small}
+[2×14.40÷25]{.color-conserve}\
+[= \$1.15]{.color-conserve}
+[0.60]{.color-private}+[1.15]{.color-conserve}\
 = **\$1.75**
 
 ------------------------------------------------------------------------
 
 <div class="explanation-content bc-inherit shadow-md">
 
-In examples 2 and 3 we show outcome of the:
-
-**MINIMUM CONTRIBUTION** where ALL players put ALL their tokens into
-their own private accounts,\
-
-while the **MAXIMUM CONTRIBUTION** is when ALL players contribute ALL
-their energy tokens to the conservation account.
+Example 2 shows the result if **everyone contributes NO energy tokens** 
+toward the conservation goal, and Example 3 shows the highest possible 
+pay to all players that results from **everyone contributing ALL of their energy tokens** 
+to the conservation goal.
 
 </div>
 
@@ -1454,11 +1392,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -1472,7 +1406,7 @@ Next
 
   ------------- ----------------------------------------------------------------------------------
   classes       `{'row1': 'text-muted', 'row2': '', 'row3': '', 'row4': 'hide', 'row5': 'hide'}`
-  page\_title   `'Examples: 2 and 3. Min and Max Conservation'`
+  page\_title   `'Examples 2 and 3: Min and Max Conservation'`
   progress      `'Examples'`
   ------------- ----------------------------------------------------------------------------------
 
@@ -1528,7 +1462,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Examples: 4 and 5. Only You and Everyone But You {#examples-4-and-5.-only-you-and-everyone-but-you .card-title}
+Examples 4 and 5: Only You vs. Everyone But You {#examples-4-and-5.-only-you-and-everyone-but-you .card-title}
 ================================================
 
 </div>
@@ -1537,96 +1471,89 @@ Examples: 4 and 5. Only You and Everyone But You {#examples-4-and-5.-only-you-an
 
 <div class="container card-content">
 
-Scenario
-Private Account
-Other Accounts
-Group Account
-Bonus
-Total
-[✔]{.color-success style="margin-left:-1em;font-family: monospace"}
-**ALL CONTRIBUTE 60%:**\
+**Scenario**
+Your [private account]{.font-bold .color-private}
+**Others’ Private Accounts**
+[Group Conservation Account]{.color-carbon .font-bold} = Air Pollution saved (lbs)
+[Bonus]{.color-conserve .font-bold}
+**Your Total Earnings**
+
+**(1) MIN REQUIREMENT TO MEET THE GOAL:**\
 ALL contribute 6 tokens each month
+24 [tokens]{.text-small .color-private}\
+[\$0.24]{.text-small .color-private}
 24 [tokens]{.text-small}\
-[\$0.24]{.font-italic}
-24 [tokens]{.text-small}\
-[\$0.24]{.font-italic}
+[\$0.24]{.text-small}
 900 [tokens]{.text-small}\
-[1,980 lbs]{.font-italic}
-2×9.00÷25\
-=[\$0.72]{.font-italic}
-0.24+0.72\
+[1,980 lbs]{.text-small}
+[2×**9.00**÷25]{.color-conserve}\
+=[\$0.72]{.text-small .color-conserve}
+[0.24]{.color-private}+[0.72]{.color-conserve}\
 [= **\$0.96**]{}
-[X]{.color-red
-style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;"}
-**MIN CONTRIBUTION:**\
+
+**(2) MIN CONTRIBUTION:**\
 ALL put ALL tokens in\
-private accounts each month
+private accounts every month
+60 [tokens]{.text-small .color-private}\
+[\$0.60]{.text-small .color-private}
 60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
-60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
+[\$0.60]{.text-small}
 0 [tokens]{.text-small}\
-[0 lbs]{.font-italic}
+[0 lbs]{.text-small}
 No Bonus\
 [-]{}
-0.60+0.00\
+[0.60]{.color-private}+[0]{.color-conserve}\
 = **\$0.60**
-[✔]{.color-success style="margin-left:-1em;font-family: monospace"}
-**MAX CONTRIBUTION:**\
-ALL contribute ALL tokens each month
+
+**(3) MAX CONTRIBUTION:**\
+ALL contribute ALL tokens every month
+0 [tokens]{.text-small .color-private}\
+[\$0.00]{.text-small .color-private}
 0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
+[\$0.00]{.text-small}
 1,500 [tokens]{.text-small}\
-[3,300 lbs]{.font-italic}
-2×15.00÷25\
-= \$1.20
-0.00+1.20\
+[3,300 lbs]{.text-small}
+[2×15.00÷25]{.color-conserve}\
+[= \$1.20]{.color-conserve}
+[0]{.color-private}+[1.20]{.color-conserve}\
 = **\$1.20**
-[X]{.color-red
-style="margin-left:-1em;font-size: 1em;font-family: monospace;font-weight: bold;"}
-**ONLY YOU CONTRIBUTE:**\
+
+**(4) ONLY YOU CONTRIBUTE:**\
 You contribute ALL tokens\
-but others keep ALL of theirs
-0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
-0 [tokens]{.text-small}\
+but others put ALL their tokens in their private accounts
+0 [tokens]{.text-small .color-private}\
+[\$0]{.font-italic .color-private}
+60 [tokens]{.text-small}\
 [\$0.60]{.font-italic}
 60 [tokens]{.text-small}\
-[132 lbs]{.font-italic}
+[132 lbs]{.text-small}
 No Bonus\
 -
-0.00+0.00\
+[0]{.color-private}+[0]{.color-conserve}\
 = **\$0.00**
-[✔]{.color-success
-style="margin-left:-1em;font-family: monospace"}**ONLY YOU DON'T
-CONTRIBUTE:**\
-EVERYONE except you contributes\
+
+**(5) ONLY YOU DON'T CONTRIBUTE:**\
+Everyone but you contributes\
 ALL of their tokens each month
-60 [tokens]{.text-small}\
-[\$0.60]{.font-italic}
+60 [tokens]{.text-small .color-private}\
+[\$0.60]{.font-italic .color-private}
 0 [tokens]{.text-small}\
-[\$0.00]{.font-italic}
+[\$0]{.font-italic}
 1,440 [tokens]{.text-small}\
-[3,168 lbs]{.font-italic}
-2×14.40÷25\
-= \$1.15
-0.60+1.15\
+[3,168 lbs]{.text-small}
+[2×14.40÷25]{.color-conserve}\
+[= \$1.15]{.color-conserve}
+[0.60]{.color-private}+[1.15]{.color-conserve}\
 = **\$1.75**
 
 ------------------------------------------------------------------------
 
 <div class="explanation-content bc-inherit shadow-md">
 
-Examples 4 and 5 show the result of unequal contribution where either:
-
-ONLY YOU CONTRIBUTE by giving ALL of your tokens to group conservation
-account, while ALL others do not contribute at all
-
-or where ONLY YOU DON'T CONTRIBUTE meaning you do not give any of your
-energy tokens to the group conservation account, but ALL OTHER players
-contribute ALL of theirs.
+Example 4 shows the results if **ONLY YOU contribute** tokens toward the 
+conservation goal (all others contribute 0 tokens in each round), 
+and Example 5 shows the results if **ONLY YOU DON’T contribute** any energy 
+tokens to the conservation goal, but all 24 other players contribute ALL of theirs.
 
 </div>
 
@@ -1647,11 +1574,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -1665,7 +1588,7 @@ Next
 
   ------------- ----------------------------------------------------------------------------------------------
   classes       `{'row1': 'text-muted', 'row2': 'text-muted', 'row3': 'text-muted', 'row4': '', 'row5': ''}`
-  page\_title   `'Examples: 4 and 5. Only You and Everyone But You'`
+  page\_title   `'Examples 4 and 5: Only You vs. Everyone But You'`
   progress      `'Examples'`
   ------------- ----------------------------------------------------------------------------------------------
 
@@ -1721,7 +1644,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Practice: Game Intro {#practice-game-intro .card-title}
+Practice Rounds {#practice-game-intro .card-title}
 ====================
 
 </div>
@@ -1737,7 +1660,7 @@ Practice: Game Intro {#practice-game-intro .card-title}
 Now, we'll ask you to play 2 practice rounds so that you can get
 familiar with the game set up.
 
-Remember, the decisions of other players in this practice game are
+Remember, the decisions of other players during this practice game are
 random and DO NOT REPRESENT the actual decisions of other players.
 
 Practice results DO NOT count toward your final payment.
@@ -1763,11 +1686,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -1780,7 +1699,7 @@ Next
 <div class="scrollable">
 
   ------------- --------------------------
-  page\_title   `'Practice: Game Intro'`
+  page\_title   `'Practice Rounds'`
   progress      `'Practice'`
   ------------- --------------------------
 
@@ -1836,7 +1755,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Practice: Game {#practice-game .card-title}
+Practice Rounds {#practice-game .card-title}
 ==============
 
 </div>
@@ -1849,7 +1768,7 @@ Practice: Game {#practice-game .card-title}
 
 <div class="card-title game-title bg-success color-white py-2">
 
-MONTH 1 (APRIL)
+MONTH 0
 
 </div>
 
@@ -1898,7 +1817,7 @@ class="color-private mx-2 game-variable token-box fs-inherit">
 
 <div class="col">
 
-Remember, the decisions of other players in this practice game are
+Remember, the decisions of other players during this practice are
 random and DO NOT REPRESENT the actual decisions of other players.
 
 Practice results DO NOT count toward your final payment.
@@ -1907,8 +1826,7 @@ Practice results DO NOT count toward your final payment.
 
 </div>
 
-<div id="errors" class="form-control-errors"
-style="display:none; font-size: 30px">
+<div id="errors" class="form-control-errors" style="display:none; font-size: 30px">
 
 </div>
 
@@ -1916,8 +1834,7 @@ style="display:none; font-size: 30px">
 
 </div>
 
-<div
-class="card-footer bg-inherit text-right flex flex-distribute flex-vcenter">
+<div class="card-footer bg-inherit text-right flex flex-distribute flex-vcenter">
 
 <div class="card-message">
 
@@ -1929,11 +1846,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -1984,7 +1897,7 @@ Next
 
 <div class="text-center text-small font-bold py-1">
 
-Practice
+Practice Round
 
 </div>
 
@@ -2005,7 +1918,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Practice: Game Result {#practice-game-result .card-title}
+Practice Rounds {#practice-game-result .card-title}
 =====================
 
 </div>
@@ -2015,38 +1928,34 @@ Practice: Game Result {#practice-game-result .card-title}
 <div class="container card-content">
 
 +-----------------+-----------------+-----------------+-----------------+
-| MONTH: 1        | APRIL           | CUMULATIVE      |                 |
-| (APRIL)         |                 |                 |                 |
+|                 | MONTH 0         |CUMULATIVE TO DATE|                |
+|                 |                 |                 |                 |
 +=================+=================+=================+=================+
-| [Your           | 0 tokens        | 0 tokens        |                 |
+| [**Your**       | 0 tokens        | 0 tokens        |                 |
 | contribution to |                 |                 |                 |
 | the group       |                 |                 |                 |
 | conservation    |                 |                 |                 |
 | account:]{.row- |                 |                 |                 |
 | title}          |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
-| [You put into   | 10 tokens       | 10 tokens       |                 |
+| [**You** put into| 10 tokens      | 10 tokens       |                 |
 | your private    |                 |                 |                 |
 | account:]{.row- |                 |                 |                 |
 | title}          |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
-| [Other          | [147 tokens]{}  | [147 tokens]{}  | [6 tokens       |
-| residents total |                 |                 | average]{.text- |
+| [**Other’s**    | 147 tokens      | 147 tokens      | [6 tokens       |
+|           total |                 |                 | average]{.text- |
 | contributions   |                 |                 | muted}          |
 | to the group    |                 |                 |                 |
 | conservation    |                 |                 |                 |
 | account:]{.row- |                 |                 |                 |
 | title}          |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
-| [Total group    | [157            | [157            | []{#percentage  |
-| conservation    | tokens]{.font-b | tokens]{.font-b | .text-muted}    |
-| account         | old}            | old}            | <div            |
-| contributions:] |                 |                 | class="percentt |
-| {.row-title}    |                 |                 | ogoal">         |
-|                 |                 |                 |                 |
-|                 |                 |                 | 16% to goal     |
-|                 |                 |                 |                 |
-|                 |                 |                 | </div>          |
+| [TOTAL group    | [157            | [157            |                 |
+| conservation    | tokens]{.font-b | tokens]{.font-b |                 |
+| account         | old}            | old}            | [16% to goal]   |
+| contributions:] |                 |                 | {.percenttogoal}|
+| {.row-title}    |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
 
 </div>
@@ -2066,11 +1975,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -2152,7 +2057,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Practice: Game {#practice-game-1 .card-title}
+Practice Rounds {#practice-game-1 .card-title}
 ==============
 
 </div>
@@ -2165,7 +2070,7 @@ Practice: Game {#practice-game-1 .card-title}
 
 <div class="card-title game-title bg-success color-white py-2">
 
-MONTH 2 (MAY)
+MONTH 0
 
 </div>
 
@@ -2214,7 +2119,7 @@ class="color-private mx-2 game-variable token-box fs-inherit">
 
 <div class="col">
 
-Remember, the decisions of other players in this practice game are
+Remember, the decisions of other players during this practice are
 random and DO NOT REPRESENT the actual decisions of other players.
 
 Practice results DO NOT count toward your final payment.
@@ -2245,11 +2150,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -2321,7 +2222,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Practice: Game Result {#practice-game-result-1 .card-title}
+Practice Rounds {#practice-game-result-1 .card-title}
 =====================
 
 </div>
@@ -2331,30 +2232,30 @@ Practice: Game Result {#practice-game-result-1 .card-title}
 <div class="container card-content">
 
 +-----------------+-----------------+-----------------+-----------------+
-| MONTH: 2        | APRIL           | CUMULATIVE      |                 |
-| (APRIL)         |                 |                 |                 |
+|                 | MONTH 0         | CUMULATIVE      |                 |
+|                 |                 |                 |                 |
 +=================+=================+=================+=================+
-| [Your           | 0 tokens        | 0 tokens        |                 |
+| [**Your**       | 0 tokens        | 0 tokens        |                 |
 | contribution to |                 |                 |                 |
 | the group       |                 |                 |                 |
 | conservation    |                 |                 |                 |
 | account:]{.row- |                 |                 |                 |
 | title}          |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
-| [You put into   | 10 tokens       | 20 tokens       |                 |
+| [**You** put into   | 10 tokens       | 20 tokens       |                 |
 | your private    |                 |                 |                 |
 | account:]{.row- |                 |                 |                 |
 | title}          |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
-| [Other          | [143 tokens]{}  | [290 tokens]{}  | [6 tokens       |
-| residents total |                 |                 | average]{.text- |
+| [**Other’s**    | [143 tokens]{}  | [290 tokens]{}  | [6 tokens       |
+|           total |                 |                 | average]{.text- |
 | contributions   |                 |                 | muted}          |
 | to the group    |                 |                 |                 |
 | conservation    |                 |                 |                 |
 | account:]{.row- |                 |                 |                 |
 | title}          |                 |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
-| [Total group    | [153            | [310            | []{#percentage  |
+| [TOTAL group    | [153            | [310            | []{#percentage  |
 | conservation    | tokens]{.font-b | tokens]{.font-b | .text-muted}    |
 | account         | old}            | old}            | <div            |
 | contributions:] |                 |                 | class="percentt |
@@ -2382,11 +2283,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -2468,7 +2365,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Comprehension: Quiz {#comprehension-quiz .card-title}
+Comprehension Quiz {#comprehension-quiz .card-title}
 ===================
 
 </div>
@@ -2510,11 +2407,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -2527,7 +2420,7 @@ Next
 <div class="scrollable">
 
   ------------- -------------------------
-  page\_title   `'Comprehension: Quiz'`
+  page\_title   `'Comprehension Quiz'`
   progress      `'Quiz'`
   ------------- -------------------------
 
@@ -2583,7 +2476,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Comprehension: Quiz 1/4 {#comprehension-quiz-14 .card-title}
+Comprehension Quiz 1/4 {#comprehension-quiz-14 .card-title}
 =======================
 
 </div>
@@ -2594,17 +2487,17 @@ Comprehension: Quiz 1/4 {#comprehension-quiz-14 .card-title}
 
 <div class="section quiz-section">
 
-Q1:
+
 
 <div id="id_field_q1" class="form-group horiz-select">
 
-On average, how many tokens will each player need to invest into the
+**Q1:** How many tokens will each player need to contribute to the
 group conservation account in each round in order to meet the 60% group
-conservation goal:
+conservation goal?
 -   2 tokens
 -   3 tokens
 -   6 tokens
--   11 tokens
+-   10 tokens
 
 <div id="id_field_q1_message" class="quiz_message">
 
@@ -2616,7 +2509,7 @@ conservation goal:
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -2655,11 +2548,7 @@ Continue
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -2674,9 +2563,9 @@ Continue
   ------------- -----------------------------------------------------------------------------------------------------------------------------
   answer\_key   `{'q1': 3}`
   can\_review   `True`
-  page\_title   `'Comprehension: Quiz 1/4'`
+  page\_title   `'Comprehension Quiz 1/4'`
   progress      `'Quiz'`
-  quiz\_hint    `'Please proceed to Review Instructions. You will then return to this question and have one more opportunity to answer it'`
+  quiz\_hint    `'Please proceed to review Instructions. You will then return to this question and have one more opportunity to answer it'`
   show\_hint    `False`
   ------------- -----------------------------------------------------------------------------------------------------------------------------
 
@@ -2732,7 +2621,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Review: Game Structure {#review-game-structure .card-title}
+Review {#instruction-introduction .card-title}
 ======================
 
 </div>
@@ -2745,21 +2634,30 @@ Review: Game Structure {#review-game-structure .card-title}
 
 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-### Game Structure
+-   There are **[24]{.game-variable} players** who live in the same
+    housing community.
 
-In this energy conservation game, you and [24]{.game-variable} other
-players live in an apartment building that is **trying to reduce the
-excess energy use by** [60%]{.game-variable}.
+-   At the start of each month, each player has **[10]{.game-variable}
+    energy tokens** (worth **\$[0.01]{.game-variable} each**) that
+    represent non-essential energy use beyond their basic needs.
 
-You have [6]{.game-variable} months ([6]{.game-variable} decision
-rounds) to try to achieve it.
+-   Each month, every player faces the same **decision problem:** how much
+    energy to use for their private benefit (by putting tokens in their
+    [private account]{.font-bold .color-private}) versus how much to
+    conserve (by putting tokens in the [group conservation
+    account]{.font-bold .color-conserve}).
 
-Your decisions affect both: **your cash earnings** from the experiment,
-and **actual air pollution in the US**.
+-   **Players will be paid** the value of all energy tokens in their
+    private account at the end of the game.
 
-Note that all money dedicated to energy conservation will be **invested
-through Carbonfund.org** to a program that actually eliminates pollution
-from the air in the US.
+-   If the group meets the [60%]{.game-variable} conservation goal by
+    the end of the game, then the value of those tokens in the group
+    conservation account is doubled and given in equal shares to all
+    players as a **bonus**. If the 60% goal is not met, there is not bonus.
+
+-   To meet the [60%]{.game-variable} energy reduction goal, each player
+    should contribute **[6]{.game-variable} energy tokens every month**
+    to the group conservation account.
 
 </div>
 
@@ -2788,11 +2686,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -2808,7 +2702,7 @@ Next
   classes           `{}`
   game\_players     `24`
   game\_rounds      `6`
-  page\_title       `'Review: Game Structure'`
+  page\_title       `'Review'`
   progress          `'Examples'`
   reduction\_goal   `60`
   ----------------- ----------------------------
@@ -2865,7 +2759,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Comprehension: Quiz 1/4 {#comprehension-quiz-14-1 .card-title}
+Comprehension Quiz 1/4 {#comprehension-quiz-14-1 .card-title}
 =======================
 
 </div>
@@ -2876,17 +2770,17 @@ Comprehension: Quiz 1/4 {#comprehension-quiz-14-1 .card-title}
 
 <div class="section quiz-section">
 
-Q1:
+
 
 <div id="id_field_q1" class="form-group horiz-select">
 
-On average, how many tokens will each player need to invest into the
+**Q1:** How many tokens will each player need to contribute to the
 group conservation account in each round in order to meet the 60% group
 conservation goal:
 -   2 tokens
 -   3 tokens
 -   6 tokens
--   11 tokens
+-   10 tokens
 
 <div id="id_field_q1_message" class="quiz_message">
 
@@ -2899,7 +2793,7 @@ conservation goal:
 <div class="quiz_hint">
 
 [Wrong!]{.text-danger} [ To meet the 60% energy conservation goal, each
-player should contribute 6 energy tokens each month to the group
+player should contribute **6 energy tokens** each month to the group
 conservation account, resulting in 900 energy tokens at the end of the
 game. ]{#hint_text}
 
@@ -2938,11 +2832,7 @@ Continue
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -2957,9 +2847,9 @@ Continue
   ------------- -----------------------------------------------------------------------------------------------------------------------------
   answer\_key   `{'q1': 3}`
   can\_review   `False`
-  page\_title   `'Comprehension: Quiz 1/4'`
+  page\_title   `'Comprehension Quiz 1/4'`
   progress      `'Quiz'`
-  quiz\_hint    `'Please proceed to Review Instructions. You will then return to this question and have one more opportunity to answer it'`
+  quiz\_hint    `'Please proceed to review Instructions. You will then return to this question and have one more opportunity to answer it'`
   show\_hint    `True`
   ------------- -----------------------------------------------------------------------------------------------------------------------------
 
@@ -3015,7 +2905,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Comprehension: Quiz 2/4 {#comprehension-quiz-24 .card-title}
+Comprehension Quiz 2/4 {#comprehension-quiz-24 .card-title}
 =======================
 
 </div>
@@ -3028,10 +2918,8 @@ Comprehension: Quiz 2/4 {#comprehension-quiz-24 .card-title}
 
 <div id="id_field_q2" class="form-group">
 
-Q2:
-
-For each energy token in the group conservation account \$0.01 is
-contributed to Carbonfund.org to reduce actual air pollution in the real
+**Q2:** For each energy token in the group conservation account \$0.01 is
+contributed to Carbonfund.org to reduce actual air pollution in the U.S.
 world:
 -   True
 -   False
@@ -3046,7 +2934,7 @@ world:
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -3085,11 +2973,7 @@ Continue
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -3104,12 +2988,12 @@ Continue
   ------------------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   answer\_key        `{'q2': 1}`
   can\_review        `True`
-  page\_title        `'Comprehension: Quiz 2/4'`
+  page\_title        `'Comprehension Quiz 2/4'`
   participant.vars   `{'qattempts': {'q1': 2, 'q2': 0, 'q3a': 0, 'q3b': 0, 'q4a': 0, 'q4b': 0, 'q4c': 0, 'q4d': 0, 'q4e': 0, 'q4f': 0}, 'qcorrect': {'q1': 0, 'q2': 0, 'q3a': 0, 'q3b': 0, 'q4a': 0, 'q4b': 0, 'q4c': 0, 'q4d': 0, 'q4e': 0, 'q4f': 0}, 'player_contributions': [], 'player_witholdings': [], 'player_total_witheld': 0, 'player_total_contrib': 0, 'quiz_bonus': 0}`
   progress           `'Quiz'`
   q2\_attempts       `0`
   q2\_correct        `False`
-  quiz\_hint         `'Please proceed to Review Instructions. You will then return to this question and have one more opportunity to answer it'`
+  quiz\_hint         `'Please proceed to review Instructions. You will then return to this question and have one more opportunity to answer it'`
   show\_hint         `False`
   ------------------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -3167,7 +3051,7 @@ checking 3 {'q3a': True, 'q3b': False} answers \[1, 0\] returning true
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Comprehension: Quiz 4/4 {#comprehension-quiz-44 .card-title}
+Comprehension Quiz 4/4 {#comprehension-quiz-44 .card-title}
 =======================
 
 </div>
@@ -3178,10 +3062,10 @@ Comprehension: Quiz 4/4 {#comprehension-quiz-44 .card-title}
 
 <div class="section quiz-section flex-form-group py-2">
 
-Q4a: **If there are 900 tokens in the group conservation account at the
-end of the game (\$9.00) and you have 30 tokens left in your private
-account (\$.30), then how much will you receive at the end of the
-game?**
+**Q4a:** If there are 900 tokens in the group conservation account at the
+end of the game (worth \$9.00) and you have 30 tokens left in your private
+account (worth \$.30), then how much will you receive at the end of the
+game?
 
 ------------------------------------------------------------------------
 
@@ -3222,7 +3106,7 @@ My payout from my private account is:
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -3237,19 +3121,19 @@ My bonus payout from the group conservation account is:\
 
 <div class="form-check form-check-inline">
 
+\$0.36
+
+</div>
+
+<div class="form-check form-check-inline">
+
 \$0.72
 
 </div>
 
 <div class="form-check form-check-inline">
 
-\$1.00
-
-</div>
-
-<div class="form-check form-check-inline">
-
-\$2.72
+\$0.90
 
 </div>
 
@@ -3267,7 +3151,7 @@ My bonus payout from the group conservation account is:\
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -3277,24 +3161,24 @@ then return to this question and have one more opportunity to answer it
 
 <div id="id_field_q4c" class="form-group">
 
-Total payout is (private plus group conservation bonus):\
+My total payout is (private + group conservation bonus):\
 <div class="group-interflexer">
 
 <div class="form-check form-check-inline">
 
-\$0.50
+\$0.36
+
+</div>
+
+<div class="form-check form-check-inline">
+
+\$0.66
 
 </div>
 
 <div class="form-check form-check-inline">
 
 \$1.02
-
-</div>
-
-<div class="form-check form-check-inline">
-
-\$3.72
 
 </div>
 
@@ -3312,7 +3196,7 @@ Total payout is (private plus group conservation bonus):\
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -3326,14 +3210,14 @@ then return to this question and have one more opportunity to answer it
 
 <div class="section quiz-section flex-form-group">
 
-Q4b: **How would your payout at the end of the game change if the total
-in the group conservation account had only 850 tokens?**
+**Q4b:** How would your payout at the end of the game change if the total
+in the group conservation account had only 850 tokens?
 
 ------------------------------------------------------------------------
 
 <div id="id_field_q4d" class="form-group">
 
-My payout from my personal account is:\
+My payout from my private account is:\
 <div class="group-interflexer">
 
 <div class="form-check form-check-inline">
@@ -3368,7 +3252,7 @@ My payout from my personal account is:\
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -3389,13 +3273,13 @@ My payout from the group conservation account is:\
 
 <div class="form-check form-check-inline">
 
-\$1.00
+\$0.34
 
 </div>
 
 <div class="form-check form-check-inline">
 
-\$2.00
+\$0.68
 
 </div>
 
@@ -3413,7 +3297,7 @@ My payout from the group conservation account is:\
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -3423,14 +3307,8 @@ then return to this question and have one more opportunity to answer it
 
 <div id="id_field_q4f" class="form-group">
 
-Total payout is (private plus group conservation bonus):\
+My total payout is (private + group conservation bonus):\
 <div class="group-interflexer">
-
-<div class="form-check form-check-inline">
-
-\$0.00
-
-</div>
 
 <div class="form-check form-check-inline">
 
@@ -3440,7 +3318,13 @@ Total payout is (private plus group conservation bonus):\
 
 <div class="form-check form-check-inline">
 
-\$3.00
+\$0.64
+
+</div>
+
+<div class="form-check form-check-inline">
+
+\$0.98
 
 </div>
 
@@ -3458,7 +3342,7 @@ Total payout is (private plus group conservation bonus):\
 
 <div class="quiz_hint">
 
-[Wrong!]{.text-danger} [ Please proceed to Review Instructions. You will
+[Wrong!]{.text-danger} [ Please proceed to review Instructions. You will
 then return to this question and have one more opportunity to answer it
 ]{#hint_text}
 
@@ -3497,11 +3381,7 @@ Continue
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -3517,10 +3397,10 @@ Continue
   answer\_key         `{'q4a': 2, 'q4b': 1, 'q4c': 2, 'q4d': 2, 'q4e': 1, 'q4f': 2}`
   attempts            `0`
   can\_review         `0`
-  page\_title         `'Comprehension: Quiz 4/4'`
+  page\_title         `'Comprehension Quiz 4/4'`
   participant\_vars   `{'qattempts': {'q1': 2, 'q2': 1, 'q3a': 1, 'q3b': 1, 'q4a': 0, 'q4b': 0, 'q4c': 0, 'q4d': 0, 'q4e': 0, 'q4f': 0}, 'qcorrect': {'q1': 0, 'q2': 1, 'q3a': 1, 'q3b': 1, 'q4a': 0, 'q4b': 0, 'q4c': 0, 'q4d': 0, 'q4e': 0, 'q4f': 0}, 'player_contributions': [], 'player_witholdings': [], 'player_total_witheld': 0, 'player_total_contrib': 0, 'quiz_bonus': 0}`
   progress            `'Quiz'`
-  q4\_hints           `['The correct answer is $0.30. You are paid $0.01 for each of the 30 energy tokens left in your private account.', 'The correct answer is $0.72. The 900 energy tokens meets the conservation goal, so the $9 is doubled to $18 and distributed equally to all 25 players, resulting in a $0.72 bonus pay.', ' The correct answer is $1.02. Add the energy token value in your private account ($0.30) and the bonus ($0.72) to get your final pay of $1.02.', 'The correct answer is $0.30. You are paid $0.01 for each of the 30 energy tokens left in your private account, even if the group does not meet the conservation goal of 900 tokens', 'The correct answer is $0.00. The 850 energy tokens do not meet the group conservation goal of 900 energy tokens, so no conservation bonus is paid. ', ') The correct answer is $0.30. Add the energy token values in your private account ($0.30) and the bonus from the group conservation account ($0.00) to get your final pay of $0.30.']`
+  q4\_hints           `['The correct answer is **$0.30**. You are paid $0.01 for each of the 30 energy tokens left in your private account.', 'The correct answer is **$0.72**. The 900 energy tokens meets the conservation goal, so the $9 is doubled to $18 and distributed equally to all 25 players, resulting in a $0.72 bonus pay.', ' The correct answer is **$1.02**. Add the energy token value in your private account ($0.30) and the bonus ($0.72) to get your final pay of $1.02.', 'The correct answer is **$0.30**. You are paid $0.01 for each of the 30 energy tokens left in your private account, even if the group does not meet the conservation goal of 900 tokens', 'The correct answer is **$0.00**. The 850 energy tokens do not meet the group conservation goal of 900 energy tokens, so no conservation bonus is paid. ', ') The correct answer is **$0.30**. Add the energy token values in your private account ($0.30) and the bonus from the group conservation account ($0.00) to get your final pay of $0.30.']`
   show\_hint          `False`
   ------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -3576,7 +3456,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Game: Introduction {#game-introduction .card-title}
+Energy Conservation Game {#game-introduction .card-title}
 ==================
 
 </div>
@@ -3586,8 +3466,8 @@ Game: Introduction {#game-introduction .card-title}
 <div class="container card-content">
 
 This concludes our game instruction, practice, and quiz.
-
 Now, you will play the energy conservation game.
+Please wait until the other players have completed the instructions and quiz.
 
 </div>
 
@@ -3606,11 +3486,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -3623,7 +3499,7 @@ Next
 <div class="scrollable">
 
   ----------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  page\_title       `'Game: Introduction'`
+  page\_title       `'Energy Conservation Game'`
   participantvars   `{'qattempts': {'q1': 2, 'q2': 1, 'q3a': 1, 'q3b': 1, 'q4a': 1, 'q4b': 1, 'q4c': 1, 'q4d': 1, 'q4e': 1, 'q4f': 1}, 'qcorrect': {'q1': 0, 'q2': 1, 'q3a': 1, 'q3b': 1, 'q4a': 1, 'q4b': 1, 'q4c': 1, 'q4d': 1, 'q4e': 1, 'q4f': 1}, 'player_contributions': [], 'player_witholdings': [], 'player_total_witheld': 0, 'player_total_contrib': 0, 'quiz_bonus': 0}`
   progress          `'Game'`
   ----------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3680,7 +3556,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game {#energy-game .card-title}
+Energy Conservation Game {#energy-game .card-title}
 ===========
 
 </div>
@@ -3739,8 +3615,8 @@ account this month?
 <div class="game-row flex flex-distribute flex-vcenter">
 
 How much energy do you want to keep in your private account this month?
-<div id="personal"
-class="mx-2 color-private game-variable token-box input-placeholder">
+
+<div id="personal" class="mx-2 color-private game-variable token-box input-placeholder">
 
 </div>
 
@@ -3771,11 +3647,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -3790,7 +3662,7 @@ Next
   ---------------- -----------------
   current\_month   `'APRIL'`
   current\_round   `1`
-  page\_title      `'Energy Game'`
+  page\_title      `'Energy Conservation Game'`
   progress         `'Game'`
   ---------------- -----------------
 
@@ -3846,7 +3718,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game Results {#energy-game-results .card-title}
+Energy Conservation Game {#energy-game-results .card-title}
 ===================
 
 </div>
@@ -3854,14 +3726,15 @@ Energy Game Results {#energy-game-results .card-title}
 <div class="card-body">
 
 <div class="container card-content">
-
-  MONTH: 1 (APRIL)                                                                                                     APRIL                                 CUMULATIVE
+                                                                                                     APRIL                                 CUMULATIVE
   -------------------------------------------------------------------------------------------------------------------- ------------------------------------- -------------------------------------
-  Your contributed to the group conservation account:                                                                  5                                     5
-  You put into your private account::                                                                                  5                                     5
-  Other residents total contributions to the group conservation account:                                               145                                   [105]{.font-bold .color-conserve}
-  Total group conservation account contributions:                                                                      [ 150 ]{.font-bold .color-conserve}   [ 150 ]{.font-bold .color-conserve}
-  [150 ]{.font-bold .color-info}/[ 900]{.font-bold .color-green} = [16.67%]{.font-bold .color-dark} of goal achieved                                         [6.0 average]{.font-bold}
+  **Your** contribution to the group conservation account:                                  [5]{.color-private}               [5]{.color-private}
+  **You** put into your private account:                                                    [5]{.color-private}              [5]{.color-private}
+  **Others’** total contributions to the group conservation account:                      [145]{.color-carbon}              [105]{.color-carbon}
+  **TOTAL group conservation account contributions:**                                     [150]{.font-bold .color-carbon}   [150]{.font-bold .color-carbon}
+
+Average contribution: [6.0 tokens]{.font-bold}
+Progress to date: 150 / 900 = [16.67%]{.font-bold} of goal achieved  
 
 </div>
 
@@ -3880,11 +3753,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -3906,7 +3775,7 @@ Next
   group\_round\_total           `150`
   group\_round\_withholdings    `[]`
   group\_total\_witheld         `105`
-  page\_title                   `'Energy Game Results'`
+  page\_title                   `'Energy Conservation Game'`
   percent\_complete             `'16.67'`
   player\_contrib\_total        `5`
   player\_contributed           `5`
@@ -3970,7 +3839,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game {#energy-game-1 .card-title}
+Energy Conservation Game {#energy-game-1 .card-title}
 ===========
 
 </div>
@@ -4061,11 +3930,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -4080,7 +3945,7 @@ Next
   ---------------- -----------------
   current\_month   `'MAY'`
   current\_round   `2`
-  page\_title      `'Energy Game'`
+  page\_title      `'Energy Conservation Game'`
   progress         `'Game'`
   ---------------- -----------------
 
@@ -4136,7 +4001,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game Results {#energy-game-results-1 .card-title}
+Energy Conservation Game {#energy-game-results-1 .card-title}
 ===================
 
 </div>
@@ -4145,13 +4010,15 @@ Energy Game Results {#energy-game-results-1 .card-title}
 
 <div class="container card-content">
 
-  MONTH: 2 (MAY)                                                                                                       MAY                                   CUMULATIVE
+                                                                                                       MAY                                   CUMULATIVE
   -------------------------------------------------------------------------------------------------------------------- ------------------------------------- -------------------------------------
-  Your contributed to the group conservation account:                                                                  7                                     12
-  You put into your private account::                                                                                  3                                     8
-  Other residents total contributions to the group conservation account:                                               144                                   [211]{.font-bold .color-conserve}
-  Total group conservation account contributions:                                                                      [ 151 ]{.font-bold .color-conserve}   [ 301 ]{.font-bold .color-conserve}
-  [301 ]{.font-bold .color-info}/[ 900]{.font-bold .color-green} = [33.44%]{.font-bold .color-dark} of goal achieved                                         [6.04 average]{.font-bold}
+  **Your** contribution to the group conservation account:                                                                  [7]{.color-private}                     [12]{.color-private}
+  **You** put into your private account:                                                                                  [3]{.color-private}                     [8]{.color-private}
+  **Others’** total contributions to the group conservation account:                                               [144]{.color-carbon}                    [211]{.color-carbon}
+  **TOTAL group conservation account contributions:**                                                                      [151]{.font-bold .color-carbon}         [301]{.font-bold .color-carbon}
+
+Average contribution: [6.04 tokens]{.font-bold}
+Progress to date: 301 / 900 = [33.44%]{.font-bold} of goal achieved                                        
 
 </div>
 
@@ -4170,11 +4037,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -4196,7 +4059,7 @@ Next
   group\_round\_total           `151`
   group\_round\_withholdings    `[]`
   group\_total\_witheld         `211`
-  page\_title                   `'Energy Game Results'`
+  page\_title                   `'Energy Conservation Game'`
   percent\_complete             `'33.44'`
   player\_contrib\_total        `12`
   player\_contributed           `7`
@@ -4260,7 +4123,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game {#energy-game-2 .card-title}
+Energy Conservation Game {#energy-game-2 .card-title}
 ===========
 
 </div>
@@ -4351,11 +4214,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -4370,7 +4229,7 @@ Next
   ---------------- -----------------
   current\_month   `'JUNE'`
   current\_round   `3`
-  page\_title      `'Energy Game'`
+  page\_title      `'Energy Conservation Game'`
   progress         `'Game'`
   ---------------- -----------------
 
@@ -4426,7 +4285,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game Results {#energy-game-results-2 .card-title}
+Energy Conservation Game {#energy-game-results-2 .card-title}
 ===================
 
 </div>
@@ -4434,14 +4293,15 @@ Energy Game Results {#energy-game-results-2 .card-title}
 <div class="card-body">
 
 <div class="container card-content">
-
-  MONTH: 3 (JUNE)                                                                                                      JUNE                                  CUMULATIVE
+                                                                                                     JUNE                                  CUMULATIVE
   -------------------------------------------------------------------------------------------------------------------- ------------------------------------- -------------------------------------
-  Your contributed to the group conservation account:                                                                  6                                     18
-  You put into your private account::                                                                                  4                                     12
-  Other residents total contributions to the group conservation account:                                               146                                   [315]{.font-bold .color-conserve}
-  Total group conservation account contributions:                                                                      [ 152 ]{.font-bold .color-conserve}   [ 453 ]{.font-bold .color-conserve}
-  [453 ]{.font-bold .color-info}/[ 900]{.font-bold .color-green} = [50.33%]{.font-bold .color-dark} of goal achieved                                         [6.08 average]{.font-bold}
+  **Your** contribution to the group conservation account:                                                                  [6]{ .color-private}        [18]{ .color-private}
+  **You** put into your private account:                                                                                  [4]{ .color-private}        [12]{ .color-private}
+  **Others’** total contributions to the group conservation account:                                               [146]{.font-bold .color-carbon}       [315]{.font-bold .color-carbon}
+  **TOTAL group conservation account contributions:**                                                                      [152]{.font-bold .color-carbon}       [453]{.font-bold .color-carbon}
+
+Average contribution: [6.08 tokens]{.font-bold}
+Progress to date: 453 / 900 = [50.33%]{.font-bold} of goal achieved                                        
 
 </div>
 
@@ -4460,11 +4320,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -4486,7 +4342,7 @@ Next
   group\_round\_total           `152`
   group\_round\_withholdings    `[]`
   group\_total\_witheld         `315`
-  page\_title                   `'Energy Game Results'`
+  page\_title                   `'Energy Conservation Game'`
   percent\_complete             `'50.33'`
   player\_contrib\_total        `18`
   player\_contributed           `6`
@@ -4550,7 +4406,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game {#energy-game-3 .card-title}
+Energy Conservation Game {#energy-game-3 .card-title}
 ===========
 
 </div>
@@ -4641,11 +4497,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -4660,7 +4512,7 @@ Next
   ---------------- -----------------
   current\_month   `'JULY'`
   current\_round   `4`
-  page\_title      `'Energy Game'`
+  page\_title      `'Energy Conservation Game'`
   progress         `'Game'`
   ---------------- -----------------
 
@@ -4716,7 +4568,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game Results {#energy-game-results-3 .card-title}
+Energy Conservation Game {#energy-game-results-3 .card-title}
 ===================
 
 </div>
@@ -4724,14 +4576,15 @@ Energy Game Results {#energy-game-results-3 .card-title}
 <div class="card-body">
 
 <div class="container card-content">
-
-  MONTH: 4 (JULY)                                                                                                      JULY                                  CUMULATIVE
+                                                                                                JULY                                  CUMULATIVE
   -------------------------------------------------------------------------------------------------------------------- ------------------------------------- -------------------------------------
-  Your contributed to the group conservation account:                                                                  4                                     22
-  You put into your private account::                                                                                  6                                     18
-  Other residents total contributions to the group conservation account:                                               148                                   [417]{.font-bold .color-conserve}
-  Total group conservation account contributions:                                                                      [ 152 ]{.font-bold .color-conserve}   [ 605 ]{.font-bold .color-conserve}
-  [605 ]{.font-bold .color-info}/[ 900]{.font-bold .color-green} = [67.22%]{.font-bold .color-dark} of goal achieved                                         [6.08 average]{.font-bold}
+  **Your** contribution to the group conservation account:                                                                  [4]{.color-private}                     [22]{.color-private}
+  **You** put into your private account:                                                                                  [6]{.color-private}                     [18]{.color-private}
+  **Others’** total contributions to the group conservation account:                                               [148]{.color-carbon}                    [417]{.color-carbon}
+  **TOTAL group conservation account contributions:**                                                                      [152]{.font-bold .color-carbon}       [605]{.font-bold .color-carbon}
+
+Average contribution: [6.08 tokens]{.font-bold}
+Progress to date: 605 / 900 = [67.22%]{.font-bold} of goal achieved                                        
 
 </div>
 
@@ -4750,11 +4603,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -4776,7 +4625,7 @@ Next
   group\_round\_total           `152`
   group\_round\_withholdings    `[]`
   group\_total\_witheld         `417`
-  page\_title                   `'Energy Game Results'`
+  page\_title                   `'Energy Conservation Game'`
   percent\_complete             `'67.22'`
   player\_contrib\_total        `22`
   player\_contributed           `4`
@@ -4840,7 +4689,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game {#energy-game-4 .card-title}
+Energy Conservation Game {#energy-game-4 .card-title}
 ===========
 
 </div>
@@ -4931,11 +4780,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -4950,7 +4795,7 @@ Next
   ---------------- -----------------
   current\_month   `'AUGUST'`
   current\_round   `5`
-  page\_title      `'Energy Game'`
+  page\_title      `'Energy Conservation Game'`
   progress         `'Game'`
   ---------------- -----------------
 
@@ -5006,7 +4851,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game Results {#energy-game-results-4 .card-title}
+Energy Conservation Game {#energy-game-results-4 .card-title}
 ===================
 
 </div>
@@ -5015,13 +4860,15 @@ Energy Game Results {#energy-game-results-4 .card-title}
 
 <div class="container card-content">
 
-  MONTH: 5 (AUGUST)                                                                                                    AUGUST                                CUMULATIVE
+                                                                                                    AUGUST                                CUMULATIVE
   -------------------------------------------------------------------------------------------------------------------- ------------------------------------- -------------------------------------
-  Your contributed to the group conservation account:                                                                  0                                     22
-  You put into your private account::                                                                                  10                                    28
-  Other residents total contributions to the group conservation account:                                               150                                   [517]{.font-bold .color-conserve}
-  Total group conservation account contributions:                                                                      [ 150 ]{.font-bold .color-conserve}   [ 755 ]{.font-bold .color-conserve}
-  [755 ]{.font-bold .color-info}/[ 900]{.font-bold .color-green} = [83.89%]{.font-bold .color-dark} of goal achieved                                         [6.0 average]{.font-bold}
+  **Your** contribution to the group conservation account:                                                                  [0]{ .color-private}                  [22]{ .color-private}
+  **You** put into your private account::                                                                                  [10]{ .color-private}                 [28]{ .color-private}
+  **Others’** total contributions to the group conservation account:                                               [150]{ .color-carbon}                 [517]{ .color-carbon}
+  **TOTAL group conservation account contributions:**                                                                      [150]{.font-bold .color-carbon}       [755]{.color-carbon}
+
+Average contribution: [6.0 tokens]{.font-bold}
+Progress to date: 755 / 900 = [83.89%]{.font-bold} of goal achieved                                        
 
 </div>
 
@@ -5040,11 +4887,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -5066,7 +4909,7 @@ Next
   group\_round\_total           `150`
   group\_round\_withholdings    `[]`
   group\_total\_witheld         `517`
-  page\_title                   `'Energy Game Results'`
+  page\_title                   `'Energy Conservation Game'`
   percent\_complete             `'83.89'`
   player\_contrib\_total        `22`
   player\_contributed           `0`
@@ -5130,7 +4973,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game {#energy-game-5 .card-title}
+Energy Conservation Game {#energy-game-5 .card-title}
 ===========
 
 </div>
@@ -5221,11 +5064,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -5240,7 +5079,7 @@ Next
   ---------------- -----------------
   current\_month   `'SEPTEMBER'`
   current\_round   `6`
-  page\_title      `'Energy Game'`
+  page\_title      `'Energy Conservation Game'`
   progress         `'Game'`
   ---------------- -----------------
 
@@ -5296,7 +5135,7 @@ Lost server connection
 
 <div class="card-header bg-grey800 card-header color-white">
 
-Energy Game Results {#energy-game-results-5 .card-title}
+Energy Conservation Game {#energy-game-results-5 .card-title}
 ===================
 
 </div>
@@ -5307,11 +5146,13 @@ Energy Game Results {#energy-game-results-5 .card-title}
 
   MONTH: 6 (SEPTEMBER)                                                                                                  SEPTEMBER                             CUMULATIVE
   --------------------------------------------------------------------------------------------------------------------- ------------------------------------- -------------------------------------
-  Your contributed to the group conservation account:                                                                   0                                     22
-  You put into your private account::                                                                                   10                                    38
-  Other residents total contributions to the group conservation account:                                                148                                   [619]{.font-bold .color-conserve}
-  Total group conservation account contributions:                                                                       [ 148 ]{.font-bold .color-conserve}   [ 903 ]{.font-bold .color-conserve}
-  [903 ]{.font-bold .color-info}/[ 900]{.font-bold .color-green} = [100.33%]{.font-bold .color-dark} of goal achieved                                         [5.92 average]{.font-bold}
+  **Your** contribution to the group conservation account:                                                                   [0]{.color-private}                  [22]{.color-private}
+  **You** put into your private account::                                                                                   [10]{.color-private}                 [38]{.color-private}
+  **Others’** total contributions to the group conservation account:                                                [148]{.color-carbon}                 [619]{.color-carbon}
+  **TOTAL group conservation account contributions:**                                                               [148]{.color-carbon}    	     [903]{.color-carbon}
+
+Average contribution: [5.92 tokens]{.font-bold}  
+Progress to date: 903 / 900 = [100.33%]{.font-bold} of goal achieved  
 
 </div>
 
@@ -5330,11 +5171,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -5356,7 +5193,7 @@ Next
   group\_round\_total           `148`
   group\_round\_withholdings    `[]`
   group\_total\_witheld         `619`
-  page\_title                   `'Energy Game Results'`
+  page\_title                   `'Energy Conservation Game'`
   percent\_complete             `'100.33'`
   player\_contrib\_total        `22`
   player\_contributed           `0`
@@ -5475,6 +5312,8 @@ Thank you for reducing **1986 lbs** tonnes of CO2 emissions by donating
 
 </div>
 
+Please note that we are playing hundreds of games. We will add all donations from individual games and purchase the total pollution reduction credits from all games in August 2020.  
+
 </div>
 
 </div>
@@ -5497,11 +5336,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -5586,15 +5421,14 @@ Final Game Result {#final-game-result .card-title}
 Congratulations, you met the 60% group energy conservation goal of 900 energy tokens. {#congratulations-you-met-the-60-group-energy-conservation-goal-of-900-energy-tokens. .h3 .text-upper .font-bold .bg-success .py-2 .text-center}
 -------------------------------------------------------------------------------------
 
-  [YOUR FINAL RESULTS]{}                                             [Energy Tokens]{}   [USD]{}
+                                               			[Energy Tokens]{}   [USD]{}
   ------------------------------------------------------------------ ------------------- ---------
-  Your total contributions to the group conservation account:        22 tokens           \$0.22
-  Your group's donation to Carbonfund.org to reduce air pollution:   903 tokens          \$9.03
-  Group bonus for meeting the goal:                                  +72 tokens          +\$0.72
-  Energy tokens in your personal account:                            38 tokens           \$0.38
-  Additional pay (\$.05 / question) for correct answers on quiz:     15 tokens           \$0.15
-  Your participation pay:                                                                \$0.50
-  TOTAL PAY TO YOU:                                                                      \$1.75
+  **Total GROUP CONSERVATION and DONATION to Carbonfund.org to reduce air pollution:** 903 tokens         \**$9.03 = xxx lbs **
+  BONUS for meeting the goal (2xtotal conservation):              72 tokens          +\$0.72
+  Your private account:                         	            	  38 tokens          +\$0.38
+  Your pay for correct quiz answers (\$.05 / question):                              +\$0.15
+  Your participation pay:                                                            +\$0.50
+  **TOTAL PAY TO YOU:**                                                           \**$1.75**
 
 </div>
 
@@ -5616,11 +5450,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -5716,8 +5546,9 @@ Post-Game Survey 2/4 {#post-game-survey-24 .card-title}
 
 <div>
 
-Please answer as honestly as possible. Remember your responses are
-anonymous.
+Please answer as honestly as possible. Your responses are anonymous.
+For each item, please choose ONE rating that best describes you:
+
 
 </div>
 
@@ -5892,11 +5723,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -6140,11 +5967,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -6332,11 +6155,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 
 <div class="card debug-info">
 
@@ -6429,6 +6248,8 @@ Thank you for participating in our study!
 > **\#IRB-2019-540**\
 > *
 
+Thank you for participating in this study.
+
 **This study involved deception.** This means that we did not provide
 you with the complete description of the purpose of the study and some
 of the methods or instruments used had a different purpose than how we
@@ -6488,27 +6309,20 @@ report anonymously via Purdue's Hotline:
 
 ### Documentation of Informed Consent:
 
-I HAVE HAD THE OPPORTUNITY TO READ THIS CONSENT FORM AND HAVE THE
-RESEARCH STUDY MORE FULLY EXPLAINED, INCLUDING THE NEED FOR AND USE OF
-DECEPTION. I CAN SCREEN PRINT THIS INFORMED CONSENT DOCUMENT FOR MY OWN
-RECORDS. BY SELECTING “YES” BELOW AND CLICKING THE SUBMIT BUTTON, I GIVE
-MY PERMISSION FOR THE RESEARCHERS TO USE MY DATA.
+I have had the opportunity to read this consent form and have the research study more fully explained, including the need for and use of deception. I can screen print this informed consent document for my own records. By selecting “yes” below and clicking the SUBMIT button, I give my permission for the researchers to use my data.
 
 <div class="content-confirmation"
 style="padding:1em 1em 0em 1em; border: 1px solid #a58c8c; margin:2em;font-weight:bold;">
 
--   Yes, I give my permission for the researchers to use my data.
--   No, I do not give permission for the researchers to use my data.
+-   **Yes**, I give my permission for the researchers to use my data.
+-   **No**, I do not give permission for the researchers to use my data.
     Please discard the data you obtained from me.
 
 </div>
 
 ------------------------------------------------------------------------
 
-**Please LEAVE THE Amazon Turk WINDOW OPEN as you complete the study**.
-When finished, you will return to that page to paste the study
-completion CODE into the Amazon Turk box. This is technically needed for
-you to receive your payment.
+**Please, COPY and PASTE the CODE presented to you at the end of the study to the HIT page on Amazon Mechanical Turk to receive your pay.**
 
 </div>
 
@@ -6529,11 +6343,7 @@ Next
 
 </div>
 
-\
-\
-\
-\
-\
+
 <div class="card debug-info">
 
 ##### Debug info {#debug-info-40 .card-header}
