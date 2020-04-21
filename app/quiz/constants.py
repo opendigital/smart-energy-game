@@ -47,6 +47,7 @@ class Constants(BaseConstants):
         quiz1="Comprehension Quiz 1/6",
         quiz2="Comprehension Quiz 2/6",
         quiz3="Comprehension Quiz 3/6",
+        quiz3b="Comprehension Quiz 3b/6",
         quiz4="Comprehension Quiz 4/6",
         quiz5="Comprehension Quiz 5/6",
         quiz6="Comprehension Quiz 6/6",
@@ -116,18 +117,18 @@ class Constants(BaseConstants):
 
     q3 = [
         dict(
-            label="You will have greater earnings than others if you put all of your energy tokens in \
-                your private account, while others contribute all of theirs to the group conservation account",
+            label="I will have greater earnings than others if I put all of my energy tokens in my private account, while others contribute ALL of theirs to the group conservation account",
             answer=1,
             choices=true_false,
-            hint="You will have greater earnings if you put all of your energy tokens in your \
-                private account, while others contribute all of their tokens in the group conservation account, \
-                because the group meets the goal and everybody is paid an equal share of the bonus. So, you will earn \
-                $0.60 from your private account + $1.15 bonus = $1.75, while others will only earn the \
-                $1.15 bonus.",
+            hint="You will earn more than others if you put all of your energy tokens in your private \
+                account, while others contribute all of their tokens in the group conservation account, \
+                because the group will meet the goal and everybody will be paid an equal share of the \
+                bonus. So, you will earn $0.60 from your private account + $1.15 bonus = $1.75, \
+                while others will only earn the $1.15 bonus.",
         ),
         dict(
-            label='True or False: The group will maximize its earning if all players contribute 6 of their energy tokens to the group conservation account each month',
+            label='Every player (including me) will get maximum possible earnings if players \
+                contribute 6 of their 10 energy tokens to the group conservation account each month',
             answer=0,
             choices=true_false,
             hint="The group gets the maximum financial payment if all players contribute \

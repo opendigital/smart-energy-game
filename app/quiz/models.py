@@ -175,13 +175,23 @@ class Player(BasePlayer):
             if self.q3a == answers[0] or values["q3a"] == answers[0]:
                 self.set_qcorrect("q3a", 1)
 
+        if self.qcorrect("q3a"):
+            if self.qattempts("q3a") <= 2:
+                self.pay_bonus()
+            return True
+        return False
+
+    def valid_q3b(self, values):
+        quiz_index = 2
+        answers = self.session.vars["answer_key"][quiz_index]
+
         if self.qcorrect("q3b") is not True:
             self.bump_qattempt("q3b")
             if self.q3b == answers[1] or values["q3b"] == answers[1]:
                 self.set_qcorrect("q3b", 1)
 
-        if self.qcorrect("q3a") and self.qcorrect("q3b"):
-            if self.qattempts("q3a") <= 2:
+        if self.qcorrect("q3b"):
+            if self.qattempts("q3b") <= 2:
                 self.pay_bonus()
             return True
         return False

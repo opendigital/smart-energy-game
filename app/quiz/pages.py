@@ -402,12 +402,10 @@ class Quiz3(Page):
     form_model = 'player'
     form_fields = [
         'q3a',
-        'q3b',
     ]
 
     def is_displayed(self):
-        return (self.player.qattempts("q3a") <= 2) and not self.player.qcorrect("q3a") \
-            or (self.player.qattempts("q3b") <= 2) and not self.player.qcorrect("q3b")
+        return (self.player.qattempts("q3a") <= 2) and not self.player.qcorrect("q3a")
 
     def vars_for_template(self):
         return {
@@ -421,10 +419,8 @@ class Quiz3(Page):
                 q3b=Constants.q3[1]["answer"],
             ),
             'q3a_choices': Constants.q3[0]["choices"],
-            'q3b_choices': Constants.q3[1]["choices"],
             'q3_hint': [
                 Constants.q3[0]["hint"],
-                Constants.q3[1]["hint"],
             ]
         }
 
@@ -433,6 +429,37 @@ class Quiz3(Page):
         if not valid:
             print("q3 valid", valid)
             if self.player.qattempts("q3a") <= 1:
+                self.player.review_rules = 3
+                print("review ", self.player.review_rules)
+
+class Quiz3b(Page):
+    form_model = 'player'
+    form_fields = [
+        'q3b',
+    ]
+
+    def is_displayed(self):
+        return (self.player.qattempts("q3b") <= 2) and not self.player.qcorrect("q3b")
+
+    def vars_for_template(self):
+        return {
+            'can_review': self.player.qattempts("q3b") <= 0,
+            'page_title': Constants.page_titles["quiz3"],
+            'participant_vars': self.player.participant.vars,
+            'progress': 'Quiz',
+            'show_hint': self.player.qattempts("q3b")  > 0,
+            'answer_key': dict(
+                q3b=Constants.q3[1]["answer"],
+            ),
+            'q3b_choices': Constants.q3[1]["choices"],
+            'q3_hint': Constants.q3[1]["hint"],
+        }
+
+    def error_message(self, values):
+        valid = self.player.valid_q3b(values)
+        if not valid:
+            print("q3 valid", valid)
+            if self.player.qattempts("q3b") <= 1:
                 self.player.review_rules = 3
                 print("review ", self.player.review_rules)
 
@@ -537,11 +564,11 @@ class ReviewGameRules(Page):
             }
         return {
             'optimal_contribution': '6',
+            'page_title': page_title,
             'game_players': Constants.game_players,
             'other_players': Constants.game_players - 1,
             'game_tokens': Constants.game_tokens,
             'token_value': Constants.token_value,
-            'page_title': page_title,
             'reduction_goal': Constants.reduction_goal,
             'game_rounds': Constants.game_rounds,
             'progress': 'Examples',
@@ -598,6 +625,10 @@ page_sequence = [
     ReviewGameRules,
     ReviewGameRules,
     Quiz3,
+    Quiz3b,
+    ReviewGameRules,
+    ReviewGameRules,
+    Quiz3b,
     Quiz4,
     ReviewGameRules,
     Quiz4,
