@@ -1,3 +1,4 @@
+from random import shuffle
 from otree.api import Currency as c
 from ._builtin import Page
 from .constants import Constants
@@ -47,6 +48,21 @@ class PostSurvey2(Page):
         's2a8',
     ]
 
+    def get_form_fields(self):
+        fields = [
+            's2a0',
+            's2a1',
+            's2a2',
+            's2a3',
+            's2a4',
+            's2a5',
+            's2a6',
+            's2a7',
+            's2a8',
+        ]
+        shuffle(fields)
+        return fields
+
     def vars_for_template(self):
         return {
             'page_title': Constants.page_titles["PostSurvey2"],
@@ -70,6 +86,23 @@ class PostSurvey3(Page):
         's3a9',
         's3a10',
     ]
+
+    def get_form_fields(self):
+        fields = [
+            's3a0',
+            's3a1',
+            's3a2',
+            's3a3',
+            's3a4',
+            's3a5',
+            's3a6',
+            's3a7',
+            's3a8',
+            's3a9',
+            's3a10',
+        ]
+        shuffle(fields)
+        return fields
 
     def vars_for_template(self):
         return {
