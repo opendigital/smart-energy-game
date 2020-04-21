@@ -3,9 +3,7 @@
   "version": "1.0.6",
   "description": "social games built with django for researh",
   "main": "./app",
-  "dependencies": {
-    "jest": "^25.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "scripts": {
     "start": "node .",
