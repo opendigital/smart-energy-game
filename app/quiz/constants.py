@@ -44,11 +44,12 @@ class Constants(BaseConstants):
         practiceresults1="Practice Rounds",
         practiceresults2="Practice Rounds",
         quiz="Comprehension Quiz",
-        quiz1="Comprehension Quiz 1/6",
-        quiz2="Comprehension Quiz 2/6",
-        quiz3="Comprehension Quiz 3/6",
-        quiz3b="Comprehension Quiz 3b/6",
-        quiz4="Comprehension Quiz 4/6",
+        quiz1="Comprehension Quiz 1/4",
+        quiz2="Comprehension Quiz 2/4",
+        quiz3="Comprehension Quiz 3a/4",
+        quiz3b="Comprehension Quiz 3b/4",
+        quiz4="Comprehension Quiz 4a/4",
+        quiz4b="Comprehension Quiz 4b/4",
         quiz5="Comprehension Quiz 5/6",
         quiz6="Comprehension Quiz 6/6",
         reviewgamerules="Review Game Rules",
@@ -152,7 +153,7 @@ class Constants(BaseConstants):
         ),
         dict(
             label="My bonus payout from the group conservation account is",
-            answer=1,
+            answer=2,
             choices=[
                 [1, "$0.36"],
                 [2, "$0.72"],
@@ -163,7 +164,7 @@ class Constants(BaseConstants):
         ),
         dict(
             label="My total payout is (private + group conservation bonus)",
-            answer=2,
+            answer=3,
             choices=[
                 [1, "$0.36"],
                 [2, "$0.66"],
@@ -202,7 +203,7 @@ class Constants(BaseConstants):
                 [2, "$0.64"],
                 [3, "$0.98"]
             ],
-            hint=") The correct answer is $0.30. Add the energy token values in your private account \
+            hint="The correct answer is $0.30. Add the energy token values in your private account \
                 ($0.30) and the bonus from the group conservation account ($0.00) to get your final pay of $0.30.",
         )
     ]

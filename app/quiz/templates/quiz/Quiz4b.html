@@ -1,0 +1,53 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+<section class="quiz-section flex-form-group">
+    <p>
+      <strong>Q4b</strong>: <strong>How would your payout at the end of the game change if the total in the group
+conservation account had only 850 tokens?</strong>
+    </p>
+
+    <hr>
+
+    <div class="form-group" id='id_field_{{ form.q4d.html_name }}'>
+      {{ form.q4d.label_tag }}<br>
+      <div class="group-interflexer">{{ form.q4d }}</div>
+      {{ form.q4d.errors }}
+    </div>
+
+    {% include 'blocks/message-box.html' with field_id=form.q4d.html_name hint_text=q4_hints.0 %}
+
+    <div class="form-group" id='id_field_{{ form.q4e.html_name }}'>
+      {{ form.q4e.label_tag }}<br>
+      <div class="group-interflexer">{{ form.q4e }}</div>
+      {{ form.q4e.errors }}
+    </div>
+
+    {% include 'blocks/message-box.html' with field_id=form.q4e.html_name hint_text=q4_hints.1 %}
+
+    <div class="form-group" id='id_field_{{ form.q4f.html_name }}'>
+      {{ form.q4f.label_tag }}<br>
+    <div class="group-interflexer">{{ form.q4f }}</div>
+      {{ form.q4f.errors }}
+    </div>
+
+    {% include 'blocks/message-box.html' with field_id=form.q4f.html_name hint_text=q4_hints.2 %}
+
+    <hr>
+
+</section>
+
+    <div class="otree-form-errors">
+      {{ form.non_field_errors }}
+    </div>
+{% endblock %}
+
+
+
+{% block page_footer_buttons %}
+{% include 'blocks/quiz-buttons.html' %}
+{% endblock %}

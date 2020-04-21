@@ -200,10 +200,13 @@ class Player(BasePlayer):
     def q4_total_attempts(self):
         return self.qattempts("q4a") \
             + self.qattempts("q4b") \
-            + self.qattempts("q4c") \
-            + self.qattempts("q4d") \
-            + self.qattempts("q4e") \
-            + self.qattempts("q4f")
+            + self.qattempts("q4c")
+
+
+    def q4b_total_attempts(self):
+        return self.qattempts("q4d") \
+        + self.qattempts("q4e") \
+        + self.qattempts("q4f")
 
 
     def valid_q4(self, values):
@@ -228,30 +231,14 @@ class Player(BasePlayer):
             or values["q4c"] == answers[2]:
                 self.set_qcorrect("q4c", 1)
 
-        if self.qcorrect("q4d") is not True:
-            self.bump_qattempt("q4d")
-            if self.q4d == answers[3] \
-            or values["q4d"] == answers[3]:
-                self.set_qcorrect("q4d", 1)
-
-        if self.qcorrect("q4e") is not True:
-            self.bump_qattempt("q4e")
-            if self.q4e == answers[4] \
-            or values["q4e"] == answers[4]:
-                self.set_qcorrect("q4e", 1)
-
-        if self.qcorrect("q4f") is not True:
-            self.bump_qattempt("q4f")
-            if self.q4f == answers[5] \
-            or values["q4f"] == answers[5]:
-                self.set_qcorrect("q4f", 1)
-
         correct = self.participant.vars["qcorrect"]
-        sum = 0 + correct["q4a"] + correct["q4b"] \
-            + correct["q4c"] + correct["q4d"] \
-            + correct["q4e"] + correct["q4f"]
+        sum = 0 \
+            + correct["q4a"] \
+            + correct["q4b"] \
+            + correct["q4c"]
 
-        if sum == 6 and self.qattempts("q4a") <= 2:
+        if sum == 3 \
+            and self.qattempts("q4a") <= 2:
             self.pay_bonus()
             return True
 
@@ -259,6 +246,42 @@ class Player(BasePlayer):
             self.qcorrect("q4a"),
             self.qcorrect("q4b"),
             self.qcorrect("q4c"),
+         ]
+
+    def valid_q4b(self, values):
+        quiz_index = 3
+        answers = self.session.vars["answer_key"][quiz_index]
+
+        if self.qcorrect("q4d") is not True:
+            self.bump_qattempt("q4d")
+            if self.q4d == answers[0] \
+            or values["q4d"] == answers[0]:
+                self.set_qcorrect("q4d", 1)
+
+        if self.qcorrect("q4e") is not True:
+            self.bump_qattempt("q4e")
+            if self.q4e == answers[1] \
+            or values["q4e"] == answers[1]:
+                self.set_qcorrect("q4e", 1)
+
+        if self.qcorrect("q4f") is not True:
+            self.bump_qattempt("q4f")
+            if self.q4f == answers[2] \
+            or values["q4f"] == answers[2]:
+                self.set_qcorrect("q4f", 1)
+
+        correct = self.participant.vars["qcorrect"]
+        sum = 0 \
+            + correct["q4d"] \
+            + correct["q4e"] \
+            + correct["q4f"]
+
+        if sum == 3 \
+            and self.qattempts("q4d") <= 2:
+            self.pay_bonus()
+            return True
+
+        return [
             self.qcorrect("q4d"),
             self.qcorrect("q4e"),
             self.qcorrect("q4f"),

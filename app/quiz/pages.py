@@ -452,7 +452,7 @@ class Quiz3b(Page):
                 q3b=Constants.q3[1]["answer"],
             ),
             'q3b_choices': Constants.q3[1]["choices"],
-            'q3_hint': Constants.q3[1]["hint"],
+            'q3b_hint': Constants.q3[1]["hint"],
         }
 
     def error_message(self, values):
@@ -471,21 +471,15 @@ class Quiz4(Page):
         "q4a",
         "q4b",
         "q4c",
-        "q4d",
-        "q4e",
-        "q4f",
     ]
 
     def is_displayed(self):
         if self.player.qcorrect("q4a") \
             and self.player.qcorrect("q4b") \
-            and self.player.qcorrect("q4c") \
-            and self.player.qcorrect("q4d") \
-            and self.player.qcorrect("q4e") \
-            and self.player.qcorrect("q4f"):
+            and self.player.qcorrect("q4c"):
             return False
         else:
-            if self.player.q4_total_attempts() <= 6:
+            if self.player.q4_total_attempts() <= 3:
                 return True
             return False
 
@@ -494,18 +488,12 @@ class Quiz4(Page):
             q4a=Constants.q4[0]["answer"],
             q4b=Constants.q4[1]["answer"],
             q4c=Constants.q4[2]["answer"],
-            q4d=Constants.q4[3]["answer"],
-            q4e=Constants.q4[4]["answer"],
-            q4f=Constants.q4[5]["answer"],
         )
 
         hint_text = [
             Constants.q4[0]["hint"],
             Constants.q4[1]["hint"],
             Constants.q4[2]["hint"],
-            Constants.q4[3]["hint"],
-            Constants.q4[4]["hint"],
-            Constants.q4[5]["hint"],
         ]
 
         return {
@@ -521,8 +509,58 @@ class Quiz4(Page):
 
     def error_message(self, values):
         valid = self.player.valid_q4(values)
+        print('valid', valid)
         if valid is not True:
-            if self.player.q4_total_attempts() <= 6:
+            if self.player.q4_total_attempts() <= 3:
+                self.player.review_rules = 4
+
+
+class Quiz4b(Page):
+    form_model = "player"
+    form_fields = [
+        "q4d",
+        "q4e",
+        "q4f",
+    ]
+
+    def is_displayed(self):
+        if self.player.qcorrect("q4d") \
+            and self.player.qcorrect("q4e") \
+            and self.player.qcorrect("q4f"):
+            return False
+        else:
+            if self.player.q4b_total_attempts() <= 3:
+                return True
+            return False
+
+    def vars_for_template(self):
+        answer_key = dict(
+            q4d=Constants.q4[3]["answer"],
+            q4e=Constants.q4[4]["answer"],
+            q4f=Constants.q4[5]["answer"],
+        )
+
+        hint_text = [
+            Constants.q4[3]["hint"],
+            Constants.q4[4]["hint"],
+            Constants.q4[5]["hint"],
+        ]
+
+        return {
+            'page_title': Constants.page_titles["quiz4b"],
+            'progress': 'Quiz',
+            'participant_vars': self.player.participant.vars,
+            'can_review': self.player.qattempts("q4d"),
+            'show_hint': self.player.qattempts("q4d") > 0,
+            'attempts': self.player.qattempts("q4d"),
+            'answer_key': answer_key,
+            'q4_hints': hint_text,
+        }
+
+    def error_message(self, values):
+        valid = self.player.valid_q4b(values)
+        if valid is not True:
+            if self.player.q4b_total_attempts() <= 3:
                 self.player.review_rules = 4
 
 
@@ -623,14 +661,15 @@ page_sequence = [
     Quiz2,
     Quiz3,
     ReviewGameRules,
-    ReviewGameRules,
     Quiz3,
     Quiz3b,
     ReviewGameRules,
-    ReviewGameRules,
     Quiz3b,
     Quiz4,
     ReviewGameRules,
     Quiz4,
+    Quiz4b,
+    ReviewGameRules,
+    Quiz4b,
     GameIntro,
 ]
