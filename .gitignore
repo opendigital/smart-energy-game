@@ -17,3 +17,7 @@ src/bootstrap/
 node_modules/
 
 src/certificate/
+
+tests/*.docx
+
+tests/.~lock.*
