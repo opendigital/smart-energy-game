@@ -88,6 +88,11 @@ class FinalWaitPage(WaitPage):
 
 
 class Congrats(Page):
+    form_model = 'player'
+    form_fields = [
+        'email',
+    ]
+
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 

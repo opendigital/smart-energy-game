@@ -277,6 +277,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     round = models.StringField()
+    email = models.StringField(blank=True)
     contributed = models.IntegerField(min=0, max=10)
     withheld = models.IntegerField(min=0, max=10)
     total_contributed = models.IntegerField()
