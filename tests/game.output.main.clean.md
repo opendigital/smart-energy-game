@@ -259,7 +259,7 @@ Instruction: Environmental Outcomes
 ---
 
 
-Examples {#examples-overview .card-title}
+Examples
 ==================
 
 Next, we'll show you 5 examples of how the game might be played and what
@@ -440,30 +440,12 @@ Practice results DO NOT count toward your final payment.
 Practice Rounds
 =====================
 
-+-----------------+-----------------+-----------------+-----------------+
 |                 | MONTH 0         | CUMULATIVE      |                 |
-+=================+=================+=================+=================+
-| **Your**        | 0 tokens        | 0 tokens        |                 |
-| contribution to |                 |                 |                 |
-| the group       |                 |                 |                 |
-| conservation    |                 |                 |                 |
-| account         |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **You** put     | 10 tokens       | 20 tokens       |                 |
-| into your       |                 |                 |                 |
-| private account |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| **Other's** total | 143 tokens    | 290 tokens      | 6 tokens        |
-| contributions   |                 |                 | average         |
-| to the group    |                 |                 |                 |
-| conservation    |                 |                 |                 |
-| account         |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
-| TOTAL group     | **153 tokens**  | **310 tokens**  |  32% to goal    |
-| conservation    |                 |                 |                 |
-| account         |                 |                 |                 |
-| contributions   |                 |                 |                 |
-+-----------------+-----------------+-----------------+-----------------+
+|-----------------|-----------------|-----------------|-----------------|
+| **Your** contribution to the group conservation account       | 0 tokens        | 0 tokens        |                 |
+| **You** put into your private account    | 10 tokens       | 20 tokens       |                 |
+| **Other's** total contributions to the group conservation account | 143 tokens    | 290 tokens      | 6 tokens average |
+| TOTAL group conservation account contributions | **153 tokens**  | **310 tokens**  |  32% to goal    |
 
 
 ---
@@ -520,7 +502,7 @@ Continue
 ---
 
 
-Comprehension Quiz 2/4 {#comprehension-quiz-24 .card-title}
+Comprehension Quiz 2/4
 =======================
 
 **Q2:** For each energy token in the group conservation account $0.01 is
@@ -657,13 +639,15 @@ How much energy do you want to keep in your private account this month?
 Energy Conservation Game
 ========================
                                                                                      APRIL                                 CUMULATIVE
-  ----------------------------------------------------------------- ------------------------------------- -------------------------------------
-  **Your** contribution to the group conservation account:                      [5]{.color-private}               [5]{.color-private}
-  **You** put into your private account:                                        [5]{.color-private}               [5]{.color-private}
-  **Others'** total contributions to the group conservation account:          [145]{.color-carbon}              [105]{.color-carbon}
-  **TOTAL group conservation account contributions:**                         [150]{.color-carbon .font-bold}   [150]{.color-carbon .font-bold}
+  ----------------------------------------------------------------- ------------------------------------- -------------------------------------  
+  
+- **Your** contribution to the group conservation account:                      [5]{.color-private}               [5]{.color-private}
+- **You** put into your private account:                                        [5]{.color-private}               [5]{.color-private}
+- **Others'** total contributions to the group conservation account:          [145]{.color-carbon}              [105]{.color-carbon}
+- **TOTAL group conservation account contributions:**                         [150]{.color-carbon .font-bold}   [150]{.color-carbon .font-bold}
 
 Average contribution: **6.0 tokens**  
+
 Progress to date: 150 / 900 = **16.67%** of goal achieved  
 
 Next
