@@ -444,7 +444,7 @@ class Quiz3b(Page):
     def vars_for_template(self):
         return {
             'can_review': self.player.qattempts("q3b") <= 0,
-            'page_title': Constants.page_titles["quiz3"],
+            'page_title': Constants.page_titles["quiz3b"],
             'participant_vars': self.player.participant.vars,
             'progress': 'Quiz',
             'show_hint': self.player.qattempts("q3b")  > 0,
