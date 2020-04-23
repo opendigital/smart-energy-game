@@ -9,14 +9,18 @@ from os import environ
 # BROWSER_COMMAND = ''
 
 OTREE_PRODUCTION='1'
-ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+# ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
+# ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
+ADMIN_USERNAME = 'developer'
+ADMIN_PASSWORD = 'developer'
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 # DEBUG = False
+DEBUG = True
 POINTS_CUSTOM_NAME = 'tokens'
-AUTH_LEVEL = 'STUDY'
+AUTH_LEVEL = 'DEMO'
+# AUTH_LEVEL = 'STUDY'
 SECRET_KEY = '68j-5$9@d=m0_*pb0n=_3u6%33fng(738yww&w^ttk136n(4vz'
 INSTALLED_APPS = [
     'otree',
@@ -79,6 +83,12 @@ SESSION_CONFIGS = [
         'display_name': "SURVEY: Postgame Survey",
         'num_demo_participants': 1,
         'app_sequence': ['survey'],
+    },
+    {
+        'name': 'nogame',
+        'display_name': "NO_GAME: Content Tests",
+        'num_demo_participants': 1,
+        'app_sequence': ['quiz', 'survey'],
     }
 ]
 

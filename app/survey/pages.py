@@ -1,6 +1,8 @@
+from random import shuffle
 from otree.api import Currency as c
 from ._builtin import Page
 from .constants import Constants
+
 
 
 class PostSurvey1(Page):
@@ -23,9 +25,10 @@ class PostSurvey1(Page):
         's1c5',
     ]
 
+
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 1/4',
+            'page_title': Constants.page_titles["PostSurvey1"],
             'progress': 'Survey'
         }
 
@@ -45,9 +48,24 @@ class PostSurvey2(Page):
         's2a8',
     ]
 
+    def get_form_fields(self):
+        fields = [
+            's2a0',
+            's2a1',
+            's2a2',
+            's2a3',
+            's2a4',
+            's2a5',
+            's2a6',
+            's2a7',
+            's2a8',
+        ]
+        shuffle(fields)
+        return fields
+
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 2/4',
+            'page_title': Constants.page_titles["PostSurvey2"],
             'progress': 'Survey',
         }
 
@@ -69,9 +87,26 @@ class PostSurvey3(Page):
         's3a10',
     ]
 
+    def get_form_fields(self):
+        fields = [
+            's3a0',
+            's3a1',
+            's3a2',
+            's3a3',
+            's3a4',
+            's3a5',
+            's3a6',
+            's3a7',
+            's3a8',
+            's3a9',
+            's3a10',
+        ]
+        shuffle(fields)
+        return fields
+
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 3/4',
+            'page_title': Constants.page_titles["PostSurvey3"],
             'progress': 'Survey',
         }
 
@@ -92,7 +127,7 @@ class PostSurvey4(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': 'Post-Game Survey 4/4',
+            'page_title': Constants.page_titles["PostSurvey4"],
             'progress': 'Survey',
         }
 
@@ -106,7 +141,7 @@ class Debriefing(Page):
 
     def vars_for_template(self):
         return {
-            'page_title': 'Debriefing',
+            'page_title': Constants.page_titles["Debriefing"],
             'progress': 'End'
         }
 

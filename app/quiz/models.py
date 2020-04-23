@@ -82,13 +82,15 @@ class Player(BasePlayer):
 
     def qattempts(self, q):
         return self.participant.vars["qattempts"][q]
+
     def bump_qattempt(self, q):
         self.participant.vars["qattempts"][q] += 1
+
     def qcorrect(self, q):
         return self.participant.vars["qcorrect"][q] == 1
+
     def set_qcorrect(self, q, value):
         self.participant.vars["qcorrect"][q] = value
-
 
     def finalize_data(self):
         result=dict(
@@ -120,7 +122,6 @@ class Player(BasePlayer):
         self.quiz_data = str(result)
         self.participant.vars["quiz_data"] = str(result)
         self.participant.vars["quiz_bonus"] = self.quiz_bonus
-        print(str(result))
 
 
     def pay_bonus(self):
@@ -168,35 +169,44 @@ class Player(BasePlayer):
     def valid_q3(self, values):
         quiz_index = 2
         answers = self.session.vars["answer_key"][quiz_index]
-        print("checking 3", values)
-        print("answers", answers)
 
         if self.qcorrect("q3a") is not True:
             self.bump_qattempt("q3a")
             if self.q3a == answers[0] or values["q3a"] == answers[0]:
                 self.set_qcorrect("q3a", 1)
 
+        if self.qcorrect("q3a"):
+            if self.qattempts("q3a") <= 2:
+                self.pay_bonus()
+            return True
+        return False
+
+    def valid_q3b(self, values):
+        quiz_index = 2
+        answers = self.session.vars["answer_key"][quiz_index]
+
         if self.qcorrect("q3b") is not True:
             self.bump_qattempt("q3b")
             if self.q3b == answers[1] or values["q3b"] == answers[1]:
                 self.set_qcorrect("q3b", 1)
 
-        if self.qcorrect("q3a") and self.qcorrect("q3b"):
-            if self.qattempts("q3a") <= 2:
+        if self.qcorrect("q3b"):
+            if self.qattempts("q3b") <= 2:
                 self.pay_bonus()
-            print("returning true")
             return True
-        print("returning false")
         return False
 
 
     def q4_total_attempts(self):
         return self.qattempts("q4a") \
             + self.qattempts("q4b") \
-            + self.qattempts("q4c") \
-            + self.qattempts("q4d") \
-            + self.qattempts("q4e") \
-            + self.qattempts("q4f")
+            + self.qattempts("q4c")
+
+
+    def q4b_total_attempts(self):
+        return self.qattempts("q4d") \
+        + self.qattempts("q4e") \
+        + self.qattempts("q4f")
 
 
     def valid_q4(self, values):
@@ -221,30 +231,14 @@ class Player(BasePlayer):
             or values["q4c"] == answers[2]:
                 self.set_qcorrect("q4c", 1)
 
-        if self.qcorrect("q4d") is not True:
-            self.bump_qattempt("q4d")
-            if self.q4d == answers[3] \
-            or values["q4d"] == answers[3]:
-                self.set_qcorrect("q4d", 1)
-
-        if self.qcorrect("q4e") is not True:
-            self.bump_qattempt("q4e")
-            if self.q4e == answers[4] \
-            or values["q4e"] == answers[4]:
-                self.set_qcorrect("q4e", 1)
-
-        if self.qcorrect("q4f") is not True:
-            self.bump_qattempt("q4f")
-            if self.q4f == answers[5] \
-            or values["q4f"] == answers[5]:
-                self.set_qcorrect("q4f", 1)
-
         correct = self.participant.vars["qcorrect"]
-        sum = 0 + correct["q4a"] + correct["q4b"] \
-            + correct["q4c"] + correct["q4d"] \
-            + correct["q4e"] + correct["q4f"]
+        sum = 0 \
+            + correct["q4a"] \
+            + correct["q4b"] \
+            + correct["q4c"]
 
-        if sum == 6 and self.qattempts("q4a") <= 2:
+        if sum == 3 \
+            and self.qattempts("q4a") <= 2:
             self.pay_bonus()
             return True
 
@@ -252,6 +246,42 @@ class Player(BasePlayer):
             self.qcorrect("q4a"),
             self.qcorrect("q4b"),
             self.qcorrect("q4c"),
+         ]
+
+    def valid_q4b(self, values):
+        quiz_index = 3
+        answers = self.session.vars["answer_key"][quiz_index]
+
+        if self.qcorrect("q4d") is not True:
+            self.bump_qattempt("q4d")
+            if self.q4d == answers[0] \
+            or values["q4d"] == answers[0]:
+                self.set_qcorrect("q4d", 1)
+
+        if self.qcorrect("q4e") is not True:
+            self.bump_qattempt("q4e")
+            if self.q4e == answers[1] \
+            or values["q4e"] == answers[1]:
+                self.set_qcorrect("q4e", 1)
+
+        if self.qcorrect("q4f") is not True:
+            self.bump_qattempt("q4f")
+            if self.q4f == answers[2] \
+            or values["q4f"] == answers[2]:
+                self.set_qcorrect("q4f", 1)
+
+        correct = self.participant.vars["qcorrect"]
+        sum = 0 \
+            + correct["q4d"] \
+            + correct["q4e"] \
+            + correct["q4f"]
+
+        if sum == 3 \
+            and self.qattempts("q4d") <= 2:
+            self.pay_bonus()
+            return True
+
+        return [
             self.qcorrect("q4d"),
             self.qcorrect("q4e"),
             self.qcorrect("q4f"),
@@ -270,7 +300,7 @@ class Player(BasePlayer):
     q2 = models.BooleanField(
         label=Constants.q2[0]["label"],
         choices=Constants.q2[0]["choices"],
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
     )
 
     q3a = models.BooleanField(
@@ -282,41 +312,41 @@ class Player(BasePlayer):
     q3b = models.BooleanField(
         label=Constants.q3[1]["label"],
         choices=Constants.q3[1]["choices"],
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
     )
 
     q4a = models.IntegerField(
         label=Constants.q4[0]["label"],
+        choices=Constants.q4[0]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[0]["choices"]
     )
 
     q4b = models.IntegerField(
         label=Constants.q4[1]["label"],
+        choices=Constants.q4[1]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[1]["choices"]
     )
 
     q4c = models.IntegerField(
         label=Constants.q4[2]["label"],
+        choices=Constants.q4[2]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[2]["choices"]
     )
 
     q4d = models.IntegerField(
         label=Constants.q4[3]["label"],
+        choices=Constants.q4[3]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[3]["choices"]
     )
 
     q4e = models.IntegerField(
         label=Constants.q4[4]["label"],
+        choices=Constants.q4[4]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[4]["choices"]
     )
 
     q4f = models.IntegerField(
         label=Constants.q4[5]["label"],
+        choices=Constants.q4[5]["choices"],
         widget=widgets.RadioSelectHorizontal,
-        choices=Constants.q4[5]["choices"]
     )

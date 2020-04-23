@@ -1,9 +1,10 @@
-import random
+from random import shuffle
 import json
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .constants import Constants
 from .utils import Utils
+
 
 
 class Game(Page):
@@ -21,10 +22,11 @@ class Game(Page):
         round_month = Utils.get_month(index)
         return {
             'progress': 'Game',
-            'page_title': 'Energy Game',
+            'page_title': 'Energy Conservation Game',
             'current_month': round_month,
             'current_round': self.round_number,
         }
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -34,6 +36,7 @@ class ResultsWaitPage(WaitPage):
 
     def is_displayed(self):
         return self.round_number <= Constants.game_rounds
+
 
 
 class Results(Page):
@@ -51,7 +54,7 @@ class Results(Page):
         percent_complete = str("%.2f" % round(float(100 * game_total_contrib / group_goal),2))
         templatevars = {
             "progress": "Game",
-            "page_title": "Energy Game Results",
+            "page_title": "Energy Conservation Game",
             "group_goal": group_goal,
             "current_month": round_month,
             "percent_complete": percent_complete,
@@ -73,6 +76,7 @@ class Results(Page):
         return templatevars
 
 
+
 class FinalWaitPage(WaitPage):
     title_text = "Waiting Room"
     body_text = "Please wait until the other participants are ready."
@@ -82,7 +86,13 @@ class FinalWaitPage(WaitPage):
         return self.round_number == Constants.num_rounds
 
 
+
 class Congrats(Page):
+    form_model = 'player'
+    form_fields = [
+        'email',
+    ]
+
     def is_displayed(self):
         return self.player.round_number == Constants.num_rounds
 

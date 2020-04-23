@@ -231,6 +231,7 @@ class Group(BaseGroup):
         for player in self.get_players():
             player.set_player_round_data()
 
+
     def set_group_aggregate_data(self):
         round_fixed_sum = Constants.game_players * 10
         player_round_contrib = self.session.vars["player_round_contrib"]
@@ -277,6 +278,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     round = models.StringField()
+    email = models.StringField(blank=True)
     contributed = models.IntegerField(min=0, max=10)
     withheld = models.IntegerField(min=0, max=10)
     total_contributed = models.IntegerField()
@@ -290,6 +292,7 @@ class Player(BasePlayer):
 
     def tokens_to_dollars(self, value):
         return c(value).to_real_world_currency(self.session)
+
 
     def set_player_round_name(self):
         if self.round_number == Constants.num_rounds:
@@ -321,15 +324,11 @@ class Player(BasePlayer):
         else:
             self.quiz_bonus = 0
 
-    # def record_bot_round_contributions(self):
-    #     bot_contributions = [[10 for x in round_] for round_ in self.bot_contributions]
-    #     print('bot_contributions', self.bot_contributions)
-    #     self.bot_contributions = bot_contributions
-
 
     def cleanup_session_variables(self):
         self.session.vars["bot_round_contributions"] = []
         self.session.vars["group_round_contrib"] = []
+
 
     def finalize_game_player_data(self):
         if self.group.game_total_contrib >= Constants.group_goal:

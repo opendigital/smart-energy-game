@@ -12,10 +12,12 @@ from otree.api import (
 from .constants import Constants
 
 _c_ = Constants
+
 author = 'Matt Harris'
 doc = """
-RCODI Energy game Post Survey
+RCODI Energy Game Post Survey
 """
+
 
 def get_int_field(_label='', _min=0, _max=9999, _initial=None):
     """Return otree text field type"""
@@ -25,6 +27,7 @@ def get_int_field(_label='', _min=0, _max=9999, _initial=None):
         max=_max,
         initial=_initial,
     )
+
 
 def get_text_field(_label=''):
     """Return otree integer field type"""
@@ -45,6 +48,7 @@ def get_select_field(_label, _choices):
         label=_label,
         choices=_choices,
     )
+
 
 def get_selectint_field(_label, _choices):
     """Return otree select field type"""

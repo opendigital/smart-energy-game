@@ -7,39 +7,40 @@
 
   <table id="table" class="game-card table my-0 shadow-md" style="text-align:left;">
     <tr class="bg-grey200 text-center shadow">
-      <th class="text-left">MONTH: {{ current_round }} ({{ current_month }})</th>
-      <th class="text-center">{{ current_month }}</th>
-      <th class="text-center">CUMULATIVE</th>
-      <th></th>
+      <th class="text-left"></th>
+      <th class="text-center">MONTH {{ current_round }}</th>
+      <th class="text-center">CUMULATIVE TO DATE</th>
     </tr>
 
-      <tr class="bd-dashed-bottom-2 bc-inherit">
-        <td class="text-left"><span class="row-title">Your contribution to the group conservation account:</span></td>
-        <td class="text-right color-conserve font-bold">{{ player_withheld }}</td>
-        <td class="text-right color-conserve font-bold">{{ player_withheld_total }}</td>
-        <td></td>
-      </tr>
+    <tr class="bd-dashed-bottom-2 bc-inherit">
+      <td class="text-left"><span class="row-title"><strong>You</strong> put into your private account:</span></td>
+      <td class="text-right color-private font-bold">{{ player_withheld }}</td>
+      <td class="text-right color-private font-bold">{{ player_withheld_total }}</td>
+    </tr>
 
-      <tr>
-        <td class="text-left"><span class="row-title">You put into your private account:</span></td>
-        <td class="text-right color-private font-bold">{{ player_contribution }}</td>
-        <td class="text-right color-private font-bold">{{ player_contribution_total }}</td>
-        <td></td>
-      </tr>
+    <tr>
+      <td class="text-left"><span class="row-title"><strong>Your</strong> contribution to the group conservation account:</span></td>
+      <td class="text-right color-carbon font-bold">{{ player_contribution }}</td>
+      <td class="text-right color-carbon font-bold">{{ player_contribution_total }}</td>
+    </tr>
 
-      <tr class="text-muted">
-        <td class="text-left"><span class="row-title">Other residents total contributions to the group conservation account:</span></td>
-        <td class="text-right"><span class="">{{ group_contribution }}</span></td>
-        <td class="text-right"><span class="">{{ group_contribution_total }}</span></td>
-        <td id-="token_avg"><span class="text-muted">{{ avg_contrib }} average</span></td>
-      </tr>
+    <tr class="text-muted">
+      <td class="text-left"><span class="row-title"><strong>Other's</strong> total contributions to the group conservation account:</span></td>
+      <td class="text-right color-carbon"><strong>{{ group_contribution }}</strong></td>
+      <td class="text-right color-carbon"><strong>{{ group_contribution_total }}</strong></td>
+    </tr>
 
-      <tr>
-        <td class="text-left"><span class="row-title">Total group conservation account contributions:</span></td>
-        <td class="text-right"><span class="font-bold">{{ contributions_round }}</span></td>
-        <td class="text-right"><span class="font-bold">{{ contributions_total }}</span></td>
-        <td><span id="percentage" class="text-muted"><div class='percenttogoal'>{{ percent_goal }}% to goal</div></span></td>
-      </tr>
-    </table>
+    <tr class="font-bold">
+      <td class="text-left"><span class="row-title">TOTAL group conservation account contributions:</span></td>
+      <td class="text-right color-carbon"><strong>{{ contributions_round }}</strong></td>
+      <td class="text-right color-carbon"><strong>{{ contributions_total }}</strong></td>
+    </tr>
+  </table>
+
+  <p class="p-r2 mt-sm-3 text-center color-secondary font-italic text-small"><span class="text-muted">Average contribution</span>: <span class="font-bold">{{ avg_contrib }}</span></p>
+  <p class="color-secondary text-small text-center font-italic ">
+    Progress to date: <span class="">{{ contributions_total }}</span>/<span class="">900</span>
+    = <span class="font-bold">{{ percent_goal }}%</span> of goal achieved
+  </p>
 
 {% endblock %}

@@ -4,36 +4,41 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-      <div class="my-5 flex flex-row flex-center">
-        <div class="model-card flex flex-vcenter text-center color-conserve bc-inherit flex-center flex-item">Tokens in Group Conservation Account</div>
-        <div class="icon-type">x</div>
-        <div class="model-card flex flex-vcenter text-center color-private bc-inherit flex-center flex-item">$0.01</div>
-        <div class="icon-type">=</div>
-        <div class="model-card flex flex-vcenter text-center color-carbon bc-inherit flex-center flex-item">Carbon Offset</div>
-      </div>
+<div class="my-5 flex flex-row flex-center">
+  <div class="model-card flex flex-vcenter text-center color-carbon bc-inherit flex-center flex-item">Tokens in Group Conservation Account</div>
+  <div class="icon-type">x</div>
+  <div class="model-card flex flex-vcenter text-center color-carbon bc-inherit flex-center flex-item">$0.01</div>
+  <div class="icon-type">=</div>
+  <div class="model-card flex flex-vcenter text-center color-carbon bc-inherit flex-center flex-item">Carbon Offset</div>
+</div>
 
-      <div class="row">
-        <div class="col">
-          <ul>
-            <li>
-              <p>The monetary value of the energy tokens in the <span class="color-conserve font-bold">group conservation account</span> at the end of the
-                game will used to pay for programs through Carbonfund.org that reduce air pollution in the
-                US at the rate of 220 pounds for each 100 tokens ($1.00).
-              </p>
-            </li>
-            <li>
-              <p>All contributions to the conservation account will go toward <span class="color-carbon font-bold">pollution reduction</span>, even
-                if the group does not meet its conservation goal.
-              </p>
-            </li>
-            <blockquote>
-              <p>
-                For example, if the group conservation account has 800 tokens at the end of the game
-                (group misses their goal of 900 tokens), $8.00 will still be used to eliminate 1,760 pounds
-                of carbon from the air in the US.
-              </p>
-            </blockquote>
-          </ul>
-        </div>
-      </div>
+<div class="row">
+  <div class="col">
+    <ul>
+      <li>
+        <p>
+          The monetary value of the energy tokens in the
+          <span class="color-carbon font-bold">group conservation account</span>
+          at the end of the game will used to pay for programs through Carbonfund.org
+          that reduce air pollution in the US at the rate of 220 pounds for each
+          100 tokens ($1.00).
+        </p>
+      </li>
+      <li>
+        <p>
+          All contributions to the conservation account will go toward
+          <span class="color-carbon font-bold">pollution reduction</span>, <strong>even
+          if the group does not meet its conservation goal.</strong>
+        </p>
+      </li>
+      <li>
+        <p>
+          For example, if the group conservation account has 800 tokens at the end of the game
+          (missing the goal of 900 tokens), $8.00 will be used to eliminate 1,760 pounds of carbon from
+          the air in the US. Group will miss the bonus pay.
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
 {% endblock %}

@@ -9,13 +9,22 @@ class PlayerBot(Bot):
     # def contribution_type():
     #     return 10
     cases = [
-        'avg', # : { 'contribute': c(6), 'withhold': c(4) },
-        'min', # : { 'contribute': c(0), 'withhold': c(10) },
-        'max', # :{ 'contribute': c(0), 'withhold': c(10) },
-        'falling',
-        'increasing',
+        # 'avg', # : { 'contribute': c(6), 'withhold': c(4) },
+        # 'min', # : { 'contribute': c(0), 'withhold': c(10) },
+        # 'max', # :{ 'contribute': c(0), 'withhold': c(10) },
+        # 'falling',
+        # 'increasing',
         'winning'
     ]
+
+    def dump_html(self,_html):
+        if Constants.TESTS_EXPORT_HTML:
+            print("\n\n\n")
+            print("<article>")
+            print(_html)
+            print("</article>")
+            print("\n\n\n")
+            print("<hr />\n\n\n")
 
     def print_round_title(self, title_text):
         print("\n[CASE: ", title_text, "]")
@@ -62,11 +71,14 @@ class PlayerBot(Bot):
         if self.round_number == 1:
             self.print_round_title(round_title)
             #     print(os.environ)
-
+            # self.dump_html(self.html)
         if self.round_number <= Constants.game_rounds:
             yield (pages.Game, {'contributed': contribute, 'withheld': (10-contribute)})
+            self.dump_html(self.html)
             yield (pages.Results)
-
+            self.dump_html(self.html)
         if self.round_number == Constants.num_rounds:
             yield (pages.Congrats)
+            self.dump_html(self.html)
             yield (pages.FinalResults)
+            # self.dump_html(self.html)

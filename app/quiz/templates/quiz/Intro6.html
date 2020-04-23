@@ -4,40 +4,49 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block page_content %}
-      <div class="my-5 flex flex-row flex-center">
-        <div class="model-card flex flex-vcenter text-center flex-center flex-item color-private bc-inherit">Tokens in Private Account</div>
-        <div class="icon-type">+</div>
-        <div class="model-card flex flex-vcenter text-center flex-center flex-item color-conserve bc-inherit">Group Conservation Bonus</div>
-        <div class="icon-type">=</div>
-        <div class="model-card flex flex-vcenter text-center flex-center flex-item">Your pay at the end of the game.</div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <ul>
+<div class="my-5 flex flex-row flex-center">
+  <div class="model-card flex flex-vcenter text-center flex-center flex-item color-private bc-inherit">Tokens in Private Account</div>
+  <div class="icon-type">+</div>
+  <div class="model-card flex flex-vcenter text-center flex-center flex-item color-conserve bc-inherit">Group Conservation Bonus</div>
+  <div class="icon-type">=</div>
+  <div class="model-card flex flex-vcenter text-center flex-center flex-item">Your pay at the end of the game.</div>
+</div>
 
-            <li>
-              <p>Regrdless of the group goal, all players receive <span class="game-variable">${{ token_value }}</span> for every energy
-              token left in their <span class="color-private font-bold">private accounts</span> at the end of the game.</p>
-            </li>
-
-
-            <li>
-              <p>If the <span class="color-conserve font-bold"><span class="game-variable color-conserve">{{ reduction_goal }}</span>% group conservation </span>goal is met
-              (i.e., there are at least <span class="game-variable">{{ token_goal }}</span> tokens</span> in the group conservation account
-              at the end of the game), then the building owner doubles the monetary value of the conserved tokens and divides
-              them equally among all<span class="game-variable">{{ game_players }}</span> players as a bonus.</p>
-              <blockquote>
-                <p>For example, if <span class="game-variable">{{ token_goal }}</span> tokens are contributed to the group
-                conservation account, each player will receive an additional bonus pay of $0.72, which is their equal
-                share of the $18 group bonus ($18.00 = <span class="game-variable">{{ token_goal }}</span> tokens
-                in the group conservation account &times; <span class="game-variable">2</span> &times; <span class="game-variable">${{ token_value }}</span> per token).</p>
-              </blockquote>
-            </li>
-          <li>
-            <p>If the group fails to meet its group conservation goal, <strong>no bonus</strong> will be paid to any player.</p>
-          </li>
-
-          </ul>
-          </div>
-        </div>
+<div class="row">
+  <div class="col">
+    <ul>
+      <li>
+        <p>
+          Regardless of the group goal, all players receive
+          <span class="game-variable">${{ token_value }}</span> for every energy
+          token left in their <span class="color-private font-bold">private accounts</span>
+          at the end of the game.
+        </p>
+      </li>
+      <li>
+        <p>
+          If the group fails to meet its group conservation goal,
+          <strong>no bonus</strong> will be paid to any player.
+        </p>
+      </li>
+      <li>
+        <p>
+          If the <span class="color-conserve font-bold"><span class="game-variable">{{ reduction_goal }}</span>% group conservation </span>goal is met
+          (i.e., there are at least <span class="game-variable">{{ token_goal }}</span> tokens in the group conservation account
+          at the end of the game), then the building owner <strong>doubles</strong> the monetary value of the conserved tokens and
+          <strong>divides them equally</strong> among all<span class="game-variable">{{ game_players }}</span> players as a <span class="color-conserve">bonus</span>.
+        </p>
+        <blockquote>
+          <p>
+            For example, if <span class="game-variable">{{ token_goal }}</span> tokens are contributed to the group
+            conservation account, each player will receive an additional bonus pay of $0.72, which is their equal
+            share of the $18 group bonus ($18.00 = <span class="game-variable">{{ token_goal }}</span> tokens
+            in the group conservation account &times; <span class="game-variable">2</span>
+            &times; <span class="game-variable">${{ token_value }}</span> per token).
+          </p>
+        </blockquote>
+      </li>
+    </ul>
+  </div>
+</div>
 {% endblock %}
