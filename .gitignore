@@ -21,3 +21,5 @@ src/certificate/
 tests/*.docx
 
 tests/.~lock.*
+
+tests/
