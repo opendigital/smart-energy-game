@@ -197,7 +197,7 @@ class Constants(BaseConstants):
         ),
         dict(
             label="Total payout is (private + group conservation bonus)",
-            answer=2,
+            answer=1,
             choices=[
                 [1, "$0.30"],
                 [2, "$0.64"],
