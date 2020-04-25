@@ -9,27 +9,27 @@
   <thead class="bg-grey200 color-whiteshadow">
     <tr class="text-left">
       <th class="p-l2"></th>
-      <th>{{ current_month }}</th>
-      <th class="p-r2">CUMULATIVE</th>
+      <th>MONTH {{ current_round }}</th>
+      <th class="p-r2">CUMULATIVE TO DATE</th>
     </tr>
   </thead>
 
-  <tr class="bc-inherit">
-    <td class="text-left row-title"><strong>Your</strong> contribution to the group conservation account:</td>
-    <td class="text-right color-private">{{ player_contributed }}</td>
-    <td class="p-r2 text-right color-private">{{ player_contrib_total }}</td>
+  <tr class="bd-dashed-bottom-2">
+    <td class="text-left row-title"><strong>You</strong> put into your private account:</td>
+    <td class="text-right color-private font-bold">{{ player_withheld }}</td>
+    <td class="p-r2 text-right color-private font-bold">{{ player_total_witheld }}</td>
   </tr>
 
-  <tr class="bd-dashed-bottom-2">
-    <td class="text-left row-title"><strong>You</strong> put into your private account::</td>
-    <td class="text-right color-private">{{ player_withheld }}</td>
-    <td class="p-r2 text-right color-private">{{ player_total_witheld }}</td>
+  <tr class="bc-inherit">
+    <td class="text-left row-title"><strong>Your</strong> contribution to the group conservation account:</td>
+    <td class="text-right color-carbon font-bold">{{ player_contributed }}</td>
+    <td class="p-r2 text-right color-carbon font-bold">{{ player_contrib_total }}</td>
   </tr>
 
   <tr class="text-muted">
     <td class="text-left row-title"><strong>Other's</strong> total contributions to the group conservation account:</td>
-    <td class="text-right color-carbon">{{ group_round_contributions }}</td>
-    <td class="p-r2 text-right color-carbon">{{ group_total_witheld }}</td>
+    <td class="text-right font-bold color-carbon">{{ group_round_contributions }}</td>
+    <td class="p-r2 text-right font-bold color-carbon">{{ group_total_witheld }}</td>
   </tr>
 
   <tr class="font-bold">
