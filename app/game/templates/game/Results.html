@@ -37,17 +37,12 @@
     <td class="bd-b text-right color-carbon">{{ group_round_total }}</td>
     <td class="bd-b p-r2 text-right color-carbon">{{ game_total_contrib }}</td>
   </tr>
-
-  <tfoot class="text-small color-secondary">
-    <tr>
-      <td class="color-secondary font-bold text-small">
-        Progress to date: <span class="font-bold">{{ game_total_contrib }}</span>/<span class="font-bold"> {{ group_goal }}</span>
-        = <span class="font-bold">{{ percent_complete }}%</span> of goal achieved</td>
-      <td></td>
-      <td class="p-r2 text-right">Average contribution: <span class="font-bold">{{ avg_contrib }}</span></td>
-    </tr>
-  </tfoot>
-
 </table>
+
+<p class="p-r2 mt-sm-3 text-center color-secondary font-italic text-small"><span class="text-muted">Average contribution</span>: <span class="font-bold">{{ avg_contrib }}</span></p>
+<p class="color-secondary text-small text-center font-italic ">
+  Progress to date: <span class="">{{ game_total_contrib }}</span>/<span class="">900</span>
+  = <span class="font-bold">{{ percent_complete }}%</span> of goal achieved
+</p>
 
 {% endblock %}

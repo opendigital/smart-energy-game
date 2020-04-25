@@ -20,23 +20,25 @@
 
     <div class="row">
       <div class="col flex flex-valign flex-distribute h2 py-1">
-        <h4 class="fs-inherit lh-1 my-0">How much energy do you want to contribute to the group conservation account this month?</h4>
+        <label class="fs-inherit lh-1 my-0">How much energy do you want to contribute to the group conservation account this month?</label>
+      <div class="mx-2">
         <input
         id="contribution_box"
         type="number"
         name="{{ field_name }}"
-        class="token-box color-conserve mx-2 game-variable fs-inherit"
+        class="token-box color-conserve game-variable fs-inherit"
         min="0"
         max="10"
         onchange="document.getElementById('personal').setAttribute('value', 10-this.value)"
         autofocus
         >
       </div>
+      </div>
     </div>
 
     <div class="row">
       <div class="col flex flex-valign flex-distribute h2 py-1">
-        <h4 class="fs-inherit lh-1 my-0">How much energy do you want to put in your private account this month?</h4>
+        <label class="fs-inherit lh-1 my-0">How much energy do you want to put in your private account this month?</label>
 
         <div id="personal" class="color-private mx-2 game-variable token-box fs-inherit"></div>
 
