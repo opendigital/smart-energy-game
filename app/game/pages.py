@@ -37,6 +37,27 @@ class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number <= Constants.game_rounds
 
+# FAKE WAITING ROOM
+# NOTE: CANNOT USE THE WORD 'FAKE'
+# AS IT SHOWS IN THE UP URL
+class WaitRoom(Page):
+    template_name = './game/waiting-room.html'
+    title_text = "Waiting Room"
+    body_text = "Please wait until the other participants are ready."
+    after_all_players_arrive = 'finalize_group_round_data'
+
+    def is_displayed(self):
+        return self.round_number <= Constants.game_rounds
+
+    def vars_for_template(self):
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
+        return {
+        'progress': 'Game',
+        'page_title': 'Energy Conservation Game',
+        'current_month': round_month,
+        'current_round': self.round_number,
+        }
 
 
 class Results(Page):
@@ -169,6 +190,7 @@ class FinalResults(Page):
 page_sequence = [
     Game,
     ResultsWaitPage,
+    WaitRoom,
     Results,
     FinalWaitPage,
     Congrats,

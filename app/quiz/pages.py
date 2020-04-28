@@ -564,6 +564,28 @@ class Quiz4b(Page):
                 self.player.review_rules = 4
 
 
+# FAKE WAITING ROOM
+# NOTE: CANNOT USE THE WORD 'FAKE'
+# AS IT SHOWS IN THE UP URL
+class WaitRoom(Page):
+    template_name = './quiz/waiting-room.html'
+    title_text = "Waiting Room"
+    body_text = "Please wait until the other participants are ready."
+    after_all_players_arrive = 'finalize_group_round_data'
+
+    def is_displayed(self):
+        return self.round_number <= Constants.game_rounds
+
+    def vars_for_template(self):
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
+        return {
+        'progress': 'Game',
+        'page_title': 'Energy Conservation Game',
+        'current_month': round_month,
+        'current_round': self.round_number,
+        }
+
 
 class ReviewGameRules(Page):
     def is_displayed(self):
@@ -652,6 +674,7 @@ page_sequence = [
     PracticeResults1,
     PracticeGame2,
     PracticeResults2,
+    WaitRoom,
     Quiz,
     Quiz1,
     ReviewGameRules,
@@ -671,5 +694,6 @@ page_sequence = [
     Quiz4b,
     ReviewGameRules,
     Quiz4b,
+    WaitRoom,
     GameIntro,
 ]
