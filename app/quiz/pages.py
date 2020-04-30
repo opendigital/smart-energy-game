@@ -689,7 +689,6 @@ page_sequence = [
     PracticeResults1,
     PracticeGame2,
     PracticeResults2,
-    WaitRoom,
     Summary,
     Quiz,
     Quiz1,
