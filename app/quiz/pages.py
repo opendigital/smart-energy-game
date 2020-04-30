@@ -107,7 +107,6 @@ class Intro6(Page):
         }
 
 
-
 class Intro7(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -329,6 +328,16 @@ class PracticeResults2(Page):
             'percent_goal': percent_goal
         }
 
+
+class Summary(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return  {
+            'progress': 'Practice',
+            'page_title': 'Summary',
+        }
 
 
 class Quiz(Page):
@@ -681,6 +690,7 @@ page_sequence = [
     PracticeGame2,
     PracticeResults2,
     WaitRoom,
+    Summary,
     Quiz,
     Quiz1,
     ReviewGameRules,

@@ -1,0 +1,47 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+<div class="row">
+  <div class="col">
+    <h3>DONATION:</h3>
+    <ul>
+      <li>
+        <p>Your group is trying to conserve at minimum 60% of your collective non-essential energy use (by putting 900 tokens in the group conservation account) over 6 months.</p>
+      </li>
+      <li>
+        <p>
+          Every token in the Group Conservation Account will reduce actual air pollution through a purchase of emissions reductions from Carbonfund.org
+        </p>
+      </li>
+    </ul>
+
+    <h3>BONUS PAY:</h3>
+    <ul>
+      <li>
+        <p>
+          Your total pay = Tokens in your Private Account + BONUS (if goal was met)
+        </p>
+      </li>
+      <li>
+        <p>
+          If the goal is NOT met there is no bonus. You lose what you contributed to the group account.
+        </p>
+      </li>
+      <li>
+        <p>
+          The goal is met if, at minimum, the group reduces the non-jessential monthly energy usage by 60%. However, the more tokens are contributed the higher the bonus is for everyone because bonus based on how much is contributed.
+        </p>
+      </li>
+      <li>
+        <p>
+          BONUS = total tokens in the group account are doubled (x2) and then divided equally between the 25 players
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
