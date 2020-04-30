@@ -84,7 +84,7 @@ class Results(Page):
             "player_withheld": c(player_withheld),
             "group_round_total": c(group_round_total),
             "current_round": self.round_number,
-            "avg_contrib": c(self.group.group_round_avg),
+            "avg_contrib": self.group.group_round_avg,
             "total_players": Constants.game_players,
             "group_round_withholdings": self.session.vars["group_withholdings"],
             "group_total_witheld": c(self.session.vars["group_round_witheld_total"]),
