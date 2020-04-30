@@ -470,7 +470,7 @@ class Quiz3b(Page):
         if not valid:
             print("q3 valid", valid)
             if self.player.qattempts("q3b") <= 1:
-                self.player.review_rules = 3
+                self.player.review_rules = 4
                 print("review ", self.player.review_rules)
 
 
@@ -522,7 +522,7 @@ class Quiz4(Page):
         print('valid', valid)
         if valid is not True:
             if self.player.q4_total_attempts() <= 3:
-                self.player.review_rules = 4
+                self.player.review_rules = 5
 
 
 class Quiz4b(Page):
@@ -571,7 +571,7 @@ class Quiz4b(Page):
         valid = self.player.valid_q4b(values)
         if valid is not True:
             if self.player.q4b_total_attempts() <= 3:
-                self.player.review_rules = 5
+                self.player.review_rules = 6
 
 
 # FAKE WAITING ROOM
@@ -590,10 +590,10 @@ class WaitRoom(Page):
         index = self.round_number - 1
         round_month = Utils.get_month(index)
         return {
-        'progress': 'Game',
-        'page_title': 'Energy Conservation Game',
-        'current_month': round_month,
-        'current_round': self.round_number,
+            'progress': 'Game',
+            'page_title': 'Energy Conservation Game',
+            'current_month': round_month,
+            'current_round': self.round_number,
         }
 
 
@@ -603,7 +603,8 @@ class ReviewGameRules(Page):
             or self.player.review_rules == 2 \
             or self.player.review_rules == 3 \
             or self.player.review_rules == 4 \
-            or self.player.review_rules == 5:
+            or self.player.review_rules == 5 \
+            or self.player.review_rules == 6:
             return True
         else:
             return False
@@ -618,13 +619,22 @@ class ReviewGameRules(Page):
         elif self.player.review_rules == 3:
             page_title = 'Review: Examples Table'
             table_classes = {
-                'row1': '',
-                'row2': '',
-                'row3': '',
-                'row4': '',
-                'row5': '',
+                'row1': 'text-muted',
+                'row2': 'text-muted',
+                'row3': 'text-muted',
+                'row4': 'text-muted',
+                'row5': 'outline-row',
             }
         elif self.player.review_rules == 4:
+            page_title = 'Review: Examples Table'
+            table_classes = {
+                'row1': 'text-muted',
+                'row2': 'text-muted',
+                'row3': 'outline-row',
+                'row4': 'text-muted',
+                'row5': 'text-muted',
+            }
+        elif self.player.review_rules == 5:
             page_title = 'Review: Example 1'
             table_classes = {
                 'row1': 'outline-row',
@@ -633,8 +643,15 @@ class ReviewGameRules(Page):
                 'row4': 'text-muted',
                 'row5': 'text-muted',
             }
-        elif self.player.review_rules == 5:
-            page_title = 'Review: Financial Outcomes'
+        elif self.player.review_rules == 6:
+            page_title = 'Review: Example 1'
+            table_classes = {
+                'row1': 'text-muted',
+                'row2': 'outline-row',
+                'row3': 'text-muted',
+                'row4': 'outline-row',
+                'row5': 'text-muted',
+            }
 
         return {
             'optimal_contribution': '6',

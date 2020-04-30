@@ -68,6 +68,7 @@ class Results(Page):
         index = self.round_number - 1
         round_month = Utils.get_month(index)
         player_contrib = self.player.contributed
+        player_total_contrib = self.player.participant.vars["player_total_contrib"]
         player_withheld = self.player.withheld
         group_round_total = self.session.vars["group_round_contrib_total"]
         game_total_contrib = self.session.vars["game_total_contrib"]
@@ -79,9 +80,9 @@ class Results(Page):
             "group_goal": group_goal,
             "current_month": round_month,
             "percent_complete": percent_complete,
-            "game_total_contrib": c(game_total_contrib),
             "player_contributed": c(player_contrib),
             "player_withheld": c(player_withheld),
+            "game_total_contrib": c(game_total_contrib),
             "group_round_total": c(group_round_total),
             "current_round": self.round_number,
             "avg_contrib": self.group.group_round_avg,
@@ -89,10 +90,11 @@ class Results(Page):
             "group_round_withholdings": self.session.vars["group_withholdings"],
             "group_total_witheld": c(self.session.vars["group_round_witheld_total"]),
             'group_round_contributions': c(group_round_total - player_contrib),
+            'group_total_contributions': c(game_total_contrib - player_total_contrib),
             "player_past_contributions": self.player.participant.vars["player_contributions"],
             "player_past_witholdings": self.player.participant.vars["player_witholdings"],
             "player_total_witheld": c(self.player.participant.vars["player_total_witheld"]),
-            "player_contrib_total": c(self.player.participant.vars["player_total_contrib"]),
+            "player_contrib_total": c(player_total_contrib),
         }
         return templatevars
 
