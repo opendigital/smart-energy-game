@@ -432,6 +432,7 @@ class Quiz3(Page):
                 self.player.review_rules = 3
                 print("review ", self.player.review_rules)
 
+
 class Quiz3b(Page):
     form_model = 'player'
     form_fields = [
@@ -561,7 +562,7 @@ class Quiz4b(Page):
         valid = self.player.valid_q4b(values)
         if valid is not True:
             if self.player.q4b_total_attempts() <= 3:
-                self.player.review_rules = 4
+                self.player.review_rules = 5
 
 
 # FAKE WAITING ROOM
@@ -592,7 +593,8 @@ class ReviewGameRules(Page):
         if self.player.review_rules == 1 \
             or self.player.review_rules == 2 \
             or self.player.review_rules == 3 \
-            or self.player.review_rules == 4:
+            or self.player.review_rules == 4 \
+            or self.player.review_rules == 5:
             return True
         else:
             return False
@@ -622,6 +624,9 @@ class ReviewGameRules(Page):
                 'row4': 'text-muted',
                 'row5': 'text-muted',
             }
+        elif self.player.review_rules == 5:
+            page_title = 'Review: Financial Outcomes'
+
         return {
             'optimal_contribution': '6',
             'page_title': page_title,
@@ -632,7 +637,8 @@ class ReviewGameRules(Page):
             'reduction_goal': Constants.reduction_goal,
             'game_rounds': Constants.game_rounds,
             'progress': 'Examples',
-            'classes': table_classes
+            'classes': table_classes,
+            'token_goal': Constants.token_goal,
         }
 
     def before_next_page(self):
