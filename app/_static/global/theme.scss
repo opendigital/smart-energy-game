@@ -502,6 +502,11 @@ tr > td:last-of-type {
       margin: 0;
       padding-top: 1em;
       padding-bottom: 1em;
+      list-style: none;
+    }
+
+    > ul li {
+      list-style-type: none;
     }
 
     li > label {
