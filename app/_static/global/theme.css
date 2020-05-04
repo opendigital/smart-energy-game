@@ -223,14 +223,11 @@ body {
   background-color: inherit !important;
 }
 
-.bg-red-
-.priv,
-.color-private {
+.priv, .color-private {
   color: var(--purple);
 }
 
-.cons,
-.color-conserve {
+.cons, .color-conserve {
   color: var(--blue);
 }
 
@@ -308,10 +305,8 @@ body {
 }
 
 .game-variable {
-  /* background: #efefef; */
-  /* padding: 0 0.25em; */
+  padding: 0 0.25em;
   font-size: 1.1em;
-  /* border: 1px solid #ddd; */
   font-family: monospace;
 }
 
@@ -757,7 +752,6 @@ body {
 .explanation-content {
   border: 1px solid;
   padding: 1em 2em .5em 2em;
-  font-weight: bold;
 }
 
 .game-card {
@@ -1030,6 +1024,21 @@ tr > td:last-of-type {
   margin: 0;
   padding-top: 1em;
   padding-bottom: 1em;
+  list-style: none;
+}
+
+.form-group.horiz-select > ul li {
+  list-style-type: none;
+}
+
+.form-group.horiz-select li > label {
+  margin-bottom: 0;
+}
+
+.form-group.horiz-select label > input {
+  margin-left: -1em;
+  margin-top: 0;
+  list-style: none;
 }
 
 .form-group {
@@ -1180,9 +1189,4 @@ tr > td:last-of-type {
 
 .two-col-form .form-group > .controls .form-control {
   flex: 1;
-}
-
-b,
-strong {
-  font-weight: 600;
 }

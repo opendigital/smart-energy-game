@@ -107,7 +107,6 @@ class Intro6(Page):
         }
 
 
-
 class Intro7(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -330,6 +329,16 @@ class PracticeResults2(Page):
         }
 
 
+class Summary(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return  {
+            'progress': 'Practice',
+            'page_title': 'Summary',
+        }
+
 
 class Quiz(Page):
     def is_displayed(self):
@@ -432,6 +441,7 @@ class Quiz3(Page):
                 self.player.review_rules = 3
                 print("review ", self.player.review_rules)
 
+
 class Quiz3b(Page):
     form_model = 'player'
     form_fields = [
@@ -460,7 +470,7 @@ class Quiz3b(Page):
         if not valid:
             print("q3 valid", valid)
             if self.player.qattempts("q3b") <= 1:
-                self.player.review_rules = 3
+                self.player.review_rules = 4
                 print("review ", self.player.review_rules)
 
 
@@ -512,7 +522,7 @@ class Quiz4(Page):
         print('valid', valid)
         if valid is not True:
             if self.player.q4_total_attempts() <= 3:
-                self.player.review_rules = 4
+                self.player.review_rules = 5
 
 
 class Quiz4b(Page):
@@ -561,8 +571,30 @@ class Quiz4b(Page):
         valid = self.player.valid_q4b(values)
         if valid is not True:
             if self.player.q4b_total_attempts() <= 3:
-                self.player.review_rules = 4
+                self.player.review_rules = 6
 
+
+# FAKE WAITING ROOM
+# NOTE: CANNOT USE THE WORD 'FAKE'
+# AS IT SHOWS IN THE UP URL
+class WaitRoom(Page):
+    template_name = './quiz/waiting-room.html'
+    title_text = "Waiting Room"
+    body_text = "Please wait until the other participants are ready."
+    after_all_players_arrive = 'finalize_group_round_data'
+
+    def is_displayed(self):
+        return self.round_number <= Constants.game_rounds
+
+    def vars_for_template(self):
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
+        return {
+            'progress': 'Game',
+            'page_title': 'Energy Conservation Game',
+            'current_month': round_month,
+            'current_round': self.round_number,
+        }
 
 
 class ReviewGameRules(Page):
@@ -570,7 +602,9 @@ class ReviewGameRules(Page):
         if self.player.review_rules == 1 \
             or self.player.review_rules == 2 \
             or self.player.review_rules == 3 \
-            or self.player.review_rules == 4:
+            or self.player.review_rules == 4 \
+            or self.player.review_rules == 5 \
+            or self.player.review_rules == 6:
             return True
         else:
             return False
@@ -585,13 +619,22 @@ class ReviewGameRules(Page):
         elif self.player.review_rules == 3:
             page_title = 'Review: Examples Table'
             table_classes = {
-                'row1': '',
-                'row2': '',
-                'row3': '',
-                'row4': '',
-                'row5': '',
+                'row1': 'text-muted',
+                'row2': 'text-muted',
+                'row3': 'text-muted',
+                'row4': 'text-muted',
+                'row5': 'outline-row',
             }
         elif self.player.review_rules == 4:
+            page_title = 'Review: Examples Table'
+            table_classes = {
+                'row1': 'text-muted',
+                'row2': 'text-muted',
+                'row3': 'outline-row',
+                'row4': 'text-muted',
+                'row5': 'text-muted',
+            }
+        elif self.player.review_rules == 5:
             page_title = 'Review: Example 1'
             table_classes = {
                 'row1': 'outline-row',
@@ -600,6 +643,16 @@ class ReviewGameRules(Page):
                 'row4': 'text-muted',
                 'row5': 'text-muted',
             }
+        elif self.player.review_rules == 6:
+            page_title = 'Review: Example 1'
+            table_classes = {
+                'row1': 'text-muted',
+                'row2': 'outline-row',
+                'row3': 'text-muted',
+                'row4': 'outline-row',
+                'row5': 'text-muted',
+            }
+
         return {
             'optimal_contribution': '6',
             'page_title': page_title,
@@ -610,7 +663,8 @@ class ReviewGameRules(Page):
             'reduction_goal': Constants.reduction_goal,
             'game_rounds': Constants.game_rounds,
             'progress': 'Examples',
-            'classes': table_classes
+            'classes': table_classes,
+            'token_goal': Constants.token_goal,
         }
 
     def before_next_page(self):
@@ -652,6 +706,7 @@ page_sequence = [
     PracticeResults1,
     PracticeGame2,
     PracticeResults2,
+    Summary,
     Quiz,
     Quiz1,
     ReviewGameRules,
@@ -671,5 +726,6 @@ page_sequence = [
     Quiz4b,
     ReviewGameRules,
     Quiz4b,
+    WaitRoom,
     GameIntro,
 ]

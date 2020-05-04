@@ -1,5 +1,6 @@
 .debug-info { display: none;; }
 .otree-form-errors { display: none; }
+
 html { height: 100%; }
 
 body {
@@ -29,9 +30,7 @@ body {
 .color-white { color: var(--white); }  //  #fff;
 .color-yellow { color: var(--yellow); }  //  #ffc107;
 .color-grey800 { color: #2d3748!important; }  //  #343a40;
-
 .bg-grey800 { background-color: #2d3748!important; }  //  #343a40;
-
 .bg-blue { background-color: var(--blue); }  //  #007bff;
 .bg-cyan { background-color: var(--cyan); }  //  #17a2b8;
 .bg-dark { background-color: var(--dark); }  //  #343a40;
@@ -47,10 +46,8 @@ body {
 .bg-teal { background-color: var(--teal); }  //  #20c997;
 .bg-white { background-color: var(--white); }  //  #fff;
 .bg-yellow { background-color: var(--yellow); }  //  #ffc107;
-
 .bg-grey800 { background-color: #2d3748!important; }  //  #343a40;
 .bg-grey800 { background-color: #2d3748!important; }  //  #343a40;
-
 .bg-black { background-color: #000!important }
 .bg-white { background-color: #fff!important }
 .bg-grey100 { background-color: #f7fafc!important }
@@ -62,16 +59,16 @@ body {
 .bg-grey700 { background-color: #4a5568!important }
 .bg-grey800 { background-color: #2d3748!important }
 .bg-grey900 { background-color: #1a202c!important }
-
 .bg-inherit { background-color: inherit!important; }
-.bg-red-
-.priv,
-.color-private { color: var(--purple); }
 
-.cons,
-.color-conserve { color: var(--blue); }
+.priv, .color-private { color: var(--purple); }
+
+.cons, .color-conserve { color: var(--blue); }
+
 .color-carbon { color: var(--green); }
+
 .color-tokens { color: var(--green); }
+
 .tk_out { color: var(--red); }
 
 .otree-title { text-align: var(--orange); }
@@ -79,9 +76,6 @@ body {
 .color-inherit { color: inherit !important; }
 .bc-inherit { border-color: inherit !important; }
 .bg-inherit { background-color: inherit !important; }
-
-
-
 
 .hide { display: none; }
 
@@ -125,10 +119,8 @@ body {
 }
 
 .game-variable {
-  background: #efefef;
   padding: 0 0.25em;
   font-size: 1.1em;
-  border: 1px solid #ddd;
   font-family: monospace;
 }
 
@@ -311,7 +303,6 @@ body {
 .explanation-content {
   border: 1px solid;
   padding: 1em 2em .5em 2em;
-  font-weight: bold;
 }
 
 // .card-header h1 {}
@@ -511,6 +502,21 @@ tr > td:last-of-type {
       margin: 0;
       padding-top: 1em;
       padding-bottom: 1em;
+      list-style: none;
+    }
+
+    > ul li {
+      list-style-type: none;
+    }
+
+    li > label {
+      margin-bottom: 0;
+    }
+
+    label > input {
+      margin-left: -1em;
+      margin-top: 0;
+      list-style: none;
     }
   }
 }

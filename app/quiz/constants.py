@@ -134,9 +134,9 @@ class Constants(BaseConstants):
             choices=true_false,
             hint="The group gets the maximum financial payment if all players contribute \
                 all 10 tokens in the conservation account in each month (25 players \
-                &times; 10 tokens &times; 6 months &times; $.01 = $15). Every player then gets an equal \
+                x 10 tokens x 6 months x $.01 = $15). Every player then gets an equal \
                 share of the maximum bonus possible, which is double the value of the \
-                tokens in the conservation account (2 &times; $15 &divide; 25 players = $1.20).",
+                tokens in the conservation account (2 x $15 x 25 players = $1.20).",
         )
     ]
 
