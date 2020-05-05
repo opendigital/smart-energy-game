@@ -228,7 +228,6 @@ class Group(BaseGroup):
                 diff.append(delta)
 
             reciprocator_list = new_set
-            print(new_set, diff, trend)
             Bots.print_bot_round_result(new_set, diff, trend)
 
         new_contributions = reciprocator_list + cooperator_list + freerider_list
