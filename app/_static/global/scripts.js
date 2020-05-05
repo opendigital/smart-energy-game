@@ -383,7 +383,7 @@ function parseCurrency(str) {
 })(window);
 
 function reset_form_fields(){
-  var fields = document.querySelectorAll('.form-check-input');
+  var fields = document.querySelectorAll('.form-check-input, .form-check-inline');
 
   for (field of fields) {
     if (field.checked === true) {

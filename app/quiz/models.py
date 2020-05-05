@@ -254,20 +254,20 @@ class Player(BasePlayer):
 
         if self.qcorrect("q4d") is not True:
             self.bump_qattempt("q4d")
-            if self.q4d == answers[0] \
-            or values["q4d"] == answers[0]:
+            if self.q4d == answers[3] \
+            or values["q4d"] == answers[3]:
                 self.set_qcorrect("q4d", 1)
 
         if self.qcorrect("q4e") is not True:
             self.bump_qattempt("q4e")
-            if self.q4e == answers[1] \
-            or values["q4e"] == answers[1]:
+            if self.q4e == answers[4] \
+            or values["q4e"] == answers[4]:
                 self.set_qcorrect("q4e", 1)
 
         if self.qcorrect("q4f") is not True:
             self.bump_qattempt("q4f")
-            if self.q4f == answers[2] \
-            or values["q4f"] == answers[2]:
+            if self.q4f == answers[5] \
+            or values["q4f"] == answers[5]:
                 self.set_qcorrect("q4f", 1)
 
         correct = self.participant.vars["qcorrect"]

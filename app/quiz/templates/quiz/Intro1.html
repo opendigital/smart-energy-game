@@ -19,7 +19,7 @@
 
       <div class="text-right" role="group">
         <button type="button" class="btn mx-3 btn-lg btn-outline-secondary" data-action="clear">Clear</button>
-        <button class="otree-btn-next btn btn-success btn-lg" data-action="next" style="display: none;">I agree</button>
+        <button class="otree-btn-next btn btn-success btn-lg" data-action="next" disabled>I agree</button>
       </div>
     </div>
   </div>
@@ -48,24 +48,19 @@ resizeCanvas();
 
 clearButton.addEventListener("click", function (event) {
   signaturePad.clear();
-  nextButton.style.display = "none";
+  nextButton.disabled = true;
 });
 
 nextButton.addEventListener("click", function (event) {
   if (signaturePad.isEmpty()) {
+    event.preventDefault();
     alert("Please provide a signature first.");
-  } else {
-    // var dataURL = signaturePad.toDataURL();
-    // download(dataURL, "signature.png");
+    return false;
   }
 });
 
 canvas.addEventListener("click" || "ontouch" || "touchstart", function (event) {
-  nextButton.style.display = "";
-});
-
-canvas.addEventListener("touchstart",function (event) {
-  nextButton.style.display = "";
+  nextButton.disabled = false;
 });
 </script>
 

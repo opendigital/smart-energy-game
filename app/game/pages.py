@@ -27,6 +27,9 @@ class Game(Page):
             'current_round': self.round_number,
         }
 
+    def before_next_page(self):
+        self.group.finalize_group_round_data()
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -37,6 +40,26 @@ class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number <= Constants.game_rounds
 
+# FAKE WAITING ROOM
+# NOTE: CANNOT USE THE WORD 'FAKE'
+# AS IT SHOWS IN THE UP URL
+class WaitRoom(Page):
+    template_name = './game/waiting-room.html'
+    title_text = "Waiting Room"
+    body_text = "Please wait until the other participants are ready."
+
+    def is_displayed(self):
+        return self.round_number <= Constants.game_rounds
+
+    def vars_for_template(self):
+        index = self.round_number - 1
+        round_month = Utils.get_month(index)
+        return {
+        'progress': 'Game',
+        'page_title': 'Energy Conservation Game',
+        'current_month': round_month,
+        'current_round': self.round_number,
+        }
 
 
 class Results(Page):
@@ -47,6 +70,7 @@ class Results(Page):
         index = self.round_number - 1
         round_month = Utils.get_month(index)
         player_contrib = self.player.contributed
+        player_total_contrib = self.player.participant.vars["player_total_contrib"]
         player_withheld = self.player.withheld
         group_round_total = self.session.vars["group_round_contrib_total"]
         game_total_contrib = self.session.vars["game_total_contrib"]
@@ -58,20 +82,21 @@ class Results(Page):
             "group_goal": group_goal,
             "current_month": round_month,
             "percent_complete": percent_complete,
-            "game_total_contrib": game_total_contrib,
-            "player_contributed": player_contrib,
-            "player_withheld": player_withheld,
-            "group_round_total": group_round_total,
+            "player_contributed": c(player_contrib),
+            "player_withheld": c(player_withheld),
+            "game_total_contrib": c(game_total_contrib),
+            "group_round_total": c(group_round_total),
             "current_round": self.round_number,
             "avg_contrib": self.group.group_round_avg,
             "total_players": Constants.game_players,
             "group_round_withholdings": self.session.vars["group_withholdings"],
-            "group_total_witheld": self.session.vars["group_round_witheld_total"],
-            'group_round_contributions': (group_round_total - player_contrib),
+            "group_total_witheld": c(self.session.vars["group_round_witheld_total"]),
+            'group_round_contributions': c(group_round_total - player_contrib),
+            'group_total_contributions': c(game_total_contrib - player_total_contrib),
             "player_past_contributions": self.player.participant.vars["player_contributions"],
             "player_past_witholdings": self.player.participant.vars["player_witholdings"],
-            "player_total_witheld": self.player.participant.vars["player_total_witheld"],
-            "player_contrib_total": self.player.participant.vars["player_total_contrib"],
+            "player_total_witheld": c(self.player.participant.vars["player_total_witheld"]),
+            "player_contrib_total": c(player_total_contrib),
         }
         return templatevars
 
@@ -111,6 +136,9 @@ class Congrats(Page):
             'amount': self.group.tokens_to_dollars(carbonfund_total),
         }
 
+
+    def before_next_page(self):
+        self.group.finalize_group_game_data()
 
 
 
@@ -168,9 +196,10 @@ class FinalResults(Page):
 
 page_sequence = [
     Game,
-    ResultsWaitPage,
+    # ResultsWaitPage,
+    WaitRoom,
     Results,
-    FinalWaitPage,
+    # FinalWaitPage,
     Congrats,
     FinalResults,
 ]

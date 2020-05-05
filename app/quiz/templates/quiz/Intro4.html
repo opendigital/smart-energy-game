@@ -17,9 +17,8 @@
     <p>
       At the start of each month, each player has <strong><span class="game-variable">{{ game_tokens }}</span>
       energy tokens</strong> (worth<strong> $<span class="game-variable">{{ token_value }}</span>
-      each</strong>) that represent non-essential energy use beyond their basic needs.
-
-      <img src="{% static 'assets/non-essential-energy2.png' %}" class="img-fluid" style="" alt="Responsive image" />
+      each</strong>) that represent non-essential energy use beyond their basic needs.<br>
+      <img src="{% static 'assets/non-essential-energy2.png' %}" class="img-fluid" style="max-width: 419px;" alt="Responsive image" />
     </p>
   </li>
 
@@ -28,7 +27,7 @@
       Each month, every player faces the same  <strong>decision problem:</strong>
       how much energy to use for their private benefit (by putting tokens in
       their <span class="font-bold color-private">private account</span>) versus
-      how much to conserve (by putting tokens in the <span class="font-bold color-conserve">group conservation account</span>).
+      how much to conserve (by putting tokens in the <span class="font-bold color-carbon">group conservation account</span>).
     </p>
   </li>
 
@@ -40,10 +39,10 @@
     </li>
     <li>
       <p>
-        If the group meets the <span class="game-variable">{{ reduction_goal }}%</span>
+        If the group meets the <span class= "font-bold color-conserve" "game-variable">{{ reduction_goal }}%</span>
         conservation goal by the end of the game,
         then the value of those tokens in the group conservation account is doubled
-        and given in equal shares to all players as a <strong>bonus</strong>.
+        and given in equal shares to all players as a <span class="font-bold color-conserve">bonus</span>.
         If the 60% goal is not met, there is no bonus.
       </p>
     </li>

@@ -13,6 +13,7 @@ document.querySelector(`${checkButton}`).onclick = checkForm;
 const page_form_keys = '{{ answer_key }}';
 const FORM_KEY = parseTemplateObject(page_form_keys);
 const CAN_REVIEW = '{{ can_review }}';
+reset_form_fields();
 // document.querySelector('#form').onsubmit = function(event){
 //   console.log('prevented');
 //   event.preventDefault();

@@ -1,0 +1,44 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+
+<div class="row">
+  <div class="col">
+    <h3>DONATION:</h3>
+    <ul>
+      <li>
+        <p>
+          Every token in the <span class="color-carbon">Group Conservation Account</span> will reduce actual air pollution through a purchase of emissions reductions from Carbonfund.org
+        </p>
+      </li>
+    </ul>
+
+    <h3>BONUS PAY:</h3>
+    <ul>
+      <li>
+        <p>
+          <strong>Your total pay</strong> = Tokens in your <span class="color-private">Private Account</span> + <span class="color-conserve">BONUS</span> (if goal was met).
+        </p>
+      </li>
+      <li>
+        <p>
+          The <strong>GOAL</strong> is to conserve at least <strong>60%</strong> of the non-essential energy use over <strong>6 months</strong> (by collecting 900 tokens into the group account).
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>If the goal is NOT met</strong> there is $0 bonus and you lose what you contributed to the group account.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>If the goal is met</strong>, everybody gets a <span class="color-conserve">BONUS</span>: total tokens in the <span class="color-carbon">Group Account</span> are <strong>doubled (x2)</strong> and then <strong>divided equally</strong> between the 25 players. The more tokens are contributed the higher the bonus for everyone.
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

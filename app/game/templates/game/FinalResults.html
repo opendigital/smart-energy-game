@@ -13,16 +13,16 @@
 
 
 <table class="table text-left">
-  <tr class="bg-primary color-white text-upper">
+  <tr class="bg-grey700 color-white text-upper">
     <th class="valign-middle py-2 p-l2 text-left"></th>
     <th class="valign-middle py-2 px-0 text-right w-15"><span>Energy Tokens</span></th>
     <th class="valign-middle py-2 p-r2 text-center w-10"><span>USD</span></th>
   </tr>
 
   <tr class="text-reg font-bold">
-    <td class="text-upper">Total GROUP CONSERVATION and DONATION to Carbonfund.org to reduce air pollution:</td>
-    <td class="bg-grey100 w-15 color-conserve text-right">{{ carbonfund_total }}</td>
-    <td class="bg-grey200 w-10 color-conserve text-center">{{ carbonfund_total_usd }}</td>
+    <td class="">TOTAL GROUP CONSERVATION AND DONATION TO Carbonfund.org TO REDUCE AIR POLLUTION:</td>
+    <td class="bg-grey100 w-15 color-carbon text-right">{{ carbonfund_total }}</td>
+    <td class="bg-grey200 w-10 color-carbon text-center">{{ carbonfund_total_usd }}</td>
   </tr>
 
   <!-- <tr class="text-reg"> -->
@@ -32,31 +32,31 @@
   <!-- </tr>  -->
 
   <tr class="text-reg ">
-    <td class="">BONUS for meeting the goal (2xtotal conservation):</td>
-    <td class="color-teal w-15 text-right font-bold">{{ bonus_tokens }}</td>
-    <td class="color-teal bg-grey200 w-10 text-center font-bold">+{{ bonus_tokens_usd }}</td>
+    <td class="">BONUS for meeting the goal (2xtotal conservation/25):</td>
+    <td class="color-conserve w-15 text-right font-bold">{{ bonus_tokens }}</td>
+    <td class="color-conserve bg-grey200 w-10 text-center font-bold">+{{ bonus_tokens_usd }}</td>
   </tr>
 
   <tr class="text-reg">
-    <td class="text-upper">Your private account:</td>
+    <td class="">Your private account:</td>
     <td class="bg-grey100 w-15 color-private text-right">{{ player_withheld }}</td>
     <td class="bg-grey200 w-10 color-private text-center">+{{ player_withheld_usd }}</td>
   </tr>
 
   <tr class="text-reg">
-    <td class="text-upper">Additional pay ($.05 / question) for correct answers on quiz:</td>
+    <td class="">Additional pay ($.05 / question) for correct answers on quiz:</td>
     <td class="w-15"></td>
     <td class="bg-grey200 w-10 text-center">+{{ quiz_bonus_usd }}</td>
   </tr>
 
   <tr class="text-reg">
-    <td class="text-upper bd-dashed-bottom-2">Your participation pay: </td>
+    <td class="bd-dashed-bottom-2">Your participation pay: </td>
     <td class="bd-dashed-bottom-2 w-15"></td>
     <td class="bd-dashed-bottom-2 bg-grey200 w-10 text-center">+{{ participation_pay_usd }}</td>
   </tr>
 
   <tr class="text-reg">
-    <td class="font-bold text-upper">TOTAL PAY TO YOU:</td>
+    <td class="font-bold">TOTAL PAY TO YOU:</td>
     <td class="bg-grey100 w-15 text-right"></td>
     <td class="w-10 font-bold text-bigger text-center">{{ total_pay }}</td>
   </tr>
@@ -65,5 +65,5 @@
 {% endblock %}
 
 {% block page_footer_message %}
-  <span class="color-red text-biggerfont-italic font-bold">NOTE: Before you receive your pay, you will need to answer a brief survey.</span>
+  <span class="color-red">NOTE: Before you receive your pay, you will need to answer a brief survey.</span>
 {% endblock %}

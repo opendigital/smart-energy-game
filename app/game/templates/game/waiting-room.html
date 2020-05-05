@@ -1,0 +1,26 @@
+{% extends "blocks/main-card.html" %}
+{% load static otree %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block page_content %}
+<h3>Waiting for other players...</h3>
+<p>Please wait until the other participants are ready</p>
+<style>
+.btn.otree-btn-next {
+  visibility: hidden;
+}
+</style>
+<script>
+ONE_SECOND = 1000;
+MIN_WAIT_TIME = {{ Constants.GAME_ROUND_MIN_TIMEOUT_SECONDS }};
+MAX_WAIT_TIME = {{ Constants.GAME_ROUND_MAX_TIMEOUT_SECONDS }}
+WAIT_TIME = Math.random() * ONE_SECOND * MAX_WAIT_TIME;
+
+window.setTimeout(function(){
+  console.log("max timeout", MAX_WAIT_TIME);
+  document.querySelector(".btn.otree-btn-next").click();
+}, WAIT_TIME + MIN_WAIT_TIME)
+</script>
+
+{% endblock %}
