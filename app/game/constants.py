@@ -22,6 +22,8 @@ class Constants(BaseConstants):
     token_value = .01
     participation_pay = 50
     game_tokens = 10
+    GAME_ROUND_MIN_TIMEOUT_SECONDS = 1
+    GAME_ROUND_MAX_TIMEOUT_SECONDS = 5
     game_rounds = 6
     game_max_score = 1750
     game_players = 25
