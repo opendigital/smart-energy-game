@@ -2,12 +2,12 @@ from os import environ
 
 # OTREE_PRODUCTION Consider '', None, and '0' to be empty/false
 # SENTRY_DSN = environ.get('SENTRY_DSN')
-# AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 # DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
 # POINTS_CUSTOM_NAME = 'tokens'
 # BROWSER_COMMAND = ''
 
+AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 OTREE_PRODUCTION='1'
 # ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
 # ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
@@ -35,21 +35,20 @@ ROOMS = [{
     'display_name': 'Room for live demo (no participant labels)',
 }]
 
-# MTURK_HIT_SETTINGS = {
-#     'keywords': ['bonus', 'study'],
-#     'title': 'Title for your experiment',
-#     'description': 'Description for your experiment',
-#     'frame_height': 500,
-#     'preview_template': 'global/MTurkPreview.html',
-#     'minutes_allotted_per_assignment': 60,
-#     'expiration_hours': 7*24,
-#     'grant_qualification_id': '31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY',
-#     'qualification_requirements': [{
-#         'QualificationTypeId': "31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY",
-#         'Comparator': "DoesNotExist",
-#     }]
-# }
-# 'mturk_hit_settings': MTURK_HIT_SETTINGS,
+MTURK_HIT_SETTINGS = {
+    'keywords': ['bonus', 'study'],
+    'title': 'Title for your experiment',
+    'description': 'Description for your experiment',
+    'frame_height': 500,
+    'template': 'global/mturk_template.html',
+    'minutes_allotted_per_assignment': 60,
+    'expiration_hours': 7*24,
+    'grant_qualification_id': '31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY',
+    'qualification_requirements': [{
+        'QualificationTypeId': "31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY",
+        'Comparator': "DoesNotExist",
+    }]
+}
 
 
 SESSION_CONFIG_DEFAULTS = {
@@ -61,16 +60,23 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = [
     {
         'name': 'main',
-        'display_name': "MAIN: Full Game Sequence",
+        'display_name': "MAIN: Main Game Sequnce",
         'num_demo_participants': 1,
-        'app_sequence': ['quiz', 'game', 'survey']
+        'app_sequence': ['quiz', 'game', 'survey'],
     },
     {
-        'name': 'quiz',
-        'display_name': "QUIZ: Pregame Training and Practice",
+        'name': 'mturk',
+        'display_name': "MTURK: Main Game (mturk)",
         'num_demo_participants': 1,
-        'app_sequence': ['quiz'],
+        'app_sequence': ['quiz', 'game', 'survey'],
+        'mturk_hit_settings': MTURK_HIT_SETTINGS,
     },
+    # {
+    #     'name': 'quiz',
+    #     'display_name': "QUIZ: Pregame Training and Practice",
+    #     'num_demo_participants': 1,
+    #     'app_sequence': ['quiz'],
+    # },
     {
         'name': 'game',
         'num_demo_participants': 1,
@@ -78,18 +84,18 @@ SESSION_CONFIGS = [
         'display_name': "GAME:  Energy Conservation Game",
         'app_sequence': ['game'],
     },
-    {
-        'name': 'survey',
-        'display_name': "SURVEY: Postgame Survey",
-        'num_demo_participants': 1,
-        'app_sequence': ['survey'],
-    },
-    {
-        'name': 'nogame',
-        'display_name': "NO_GAME: Content Tests",
-        'num_demo_participants': 1,
-        'app_sequence': ['quiz', 'survey'],
-    }
+    # {
+    #     'name': 'survey',
+    #     'display_name': "SURVEY: Postgame Survey",
+    #     'num_demo_participants': 1,
+    #     'app_sequence': ['survey'],
+    # },
+    # {
+    #     'name': 'nogame',
+    #     'display_name': "NO_GAME: Content Tests",
+    #     'num_demo_participants': 1,
+    #     'app_sequence': ['quiz', 'survey'],
+    # }
 ]
 
 
