@@ -19,6 +19,21 @@ DOC = """
 RCODI Energy Game - Main App
 """
 
+class Bots():
+    def print_bot_round_result(round, diff, trend):
+        round_str=''
+        diff_str=''
+        for val in round:
+            round_str += str(val).rjust(4, ' ')
+        round_str += "|count: " + str(len(round))
+        round_str += "|sum: " + str(sum(round))
+        round_str += "|avg: " + str(float(sum(round) / len(round)))
+        round_str += "|trend: " + trend
+        print(round_str)
+        for val in diff:
+            diff_str += str(val).rjust(4, ' ')
+        print(diff_str)
+
 
 
 class Subsession(BaseSubsession):
@@ -119,21 +134,6 @@ class Group(BaseGroup):
     def get_bot_round_avg(self):
         return self.group_round_avg
 
-    def print_bot_round_result(self, round, diff, trend):
-        round_str=''
-        diff_str=''
-        for val in round:
-            round_str += str(val).rjust(4, ' ')
-        round_str += "|count: " + str(len(round))
-        round_str += "|sum: " + str(sum(round))
-        round_str += "|avg: " + str(float(sum(round) / len(round)))
-        round_str += "|trend: " + trend
-        print(round_str)
-        for val in diff:
-            diff_str += str(val).rjust(4, ' ')
-        print(diff_str)
-
-
     def get_contribution_trend(self):
         player = self.get_players()[0]
         player_round_n1 = player.in_round(self.round_number - 1).contributed
@@ -165,7 +165,11 @@ class Group(BaseGroup):
         NUM_RECIPROCATORS_BELOW = 2
 
         cooperator_list = [10,9,8]
-        freerider_list = [3,3,2,2,1]
+        freerider_list = [3,3,2,2,1]    # 'preview_template': 'global/MTurkPreview.html',
+        diff = []
+        new_set = []
+        trend = ""
+
         if self.round_number <= 1:
             reciprocator_list = [8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4]
         elif self.round_number == 2:
@@ -193,9 +197,11 @@ class Group(BaseGroup):
 
             shuffle(rcp_below_avg)
             shuffle(rcp_above_avg)
+
             reciprocator_changelist = rcp_below_avg[:NUM_RECIPROCATORS_BELOW] + rcp_above_avg[-NUM_RECIPROCATORS_ABOVE:]
             diff = []
             new_set=[]
+
             for value in prev_reciprocators:
                 delta=" "
                 # ----------------------
@@ -214,10 +220,16 @@ class Group(BaseGroup):
                     elif trend == "down" and value > round_n1_avg:
                         value = self.set_contribution_range(0, 10, value - 1)
                         delta = "-"
+                    else:
+                        delta = " "
+                        value = 0
+
                 new_set.append(value)
                 diff.append(delta)
 
             reciprocator_list = new_set
+            print(new_set, diff, trend)
+            Bots.print_bot_round_result(new_set, diff, trend)
 
         new_contributions = reciprocator_list + cooperator_list + freerider_list
         self.session.vars["bot_round_contributions"] = new_contributions
@@ -225,7 +237,6 @@ class Group(BaseGroup):
         self.bot_contributions = str(new_contributions).replace(" ", "")
         self.bot_round_contrib_total = sum(new_contributions)
         self.bot_round_avg = float(self.bot_round_contrib_total / len(new_contributions))
-
 
     def finalize_group_player_data(self):
         for player in self.get_players():
@@ -244,7 +255,6 @@ class Group(BaseGroup):
 
         self.group_round_contrib_total = group_round_contrib_total
         self.group_round_avg = round(float(group_round_contrib_total / Constants.game_players), 3)
-
 
         self.session.vars["bot_round_contrib_total"] = bot_round_contrib_total
         self.session.vars["group_round_contrib_total"] = group_round_contrib_total
@@ -305,14 +315,14 @@ class Player(BasePlayer):
     def set_player_round_data(self):
         self.set_player_round_name()
         self.session.vars['player_round_contrib'] = self.contributed
+        self.participant.vars['player_contributions'].append(self.contributed)
+        self.participant.vars['player_witholdings'].append(self.withheld)
 
-        player_total_contrib = sum(self.participant.vars["player_contributions"]) + self.contributed
-        player_total_witheld = sum(self.participant.vars["player_witholdings"]) + self.withheld
+        player_total_contrib = sum(self.participant.vars["player_contributions"])
+        player_total_witheld = sum(self.participant.vars["player_witholdings"])
 
         self.participant.vars["player_total_contrib"] = player_total_contrib
         self.participant.vars["player_total_witheld"] = player_total_witheld
-        self.participant.vars['player_contributions'].append(self.contributed)
-        self.participant.vars['player_witholdings'].append(self.withheld)
 
         self.payoff = self.withheld
 
