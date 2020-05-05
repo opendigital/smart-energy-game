@@ -19,7 +19,20 @@ DOC = """
 RCODI Energy Game - Main App
 """
 
-class Bots():
+class Bots:
+    NUM_COOPERATORS = 3
+    NUM_FREE_RIDERS = 5
+    NUM_RECIPROCATORS = 16
+    NUM_RECIPROCATORS_ABOVE_AVG = 3
+    NUM_RECIPROCATORS_BELOW_AVG = 2
+
+    COOPERATOR_INITIAL_CONTRIBUTIONS    = [10, 9, 8]
+    FREERIDER_INITIAL_CONTRIBUTIONS     = [3, 3, 2, 2, 1]
+    RECIPROCATORS_INITIAL_CONTRIBUTIONS = [8, 10, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 4, 4, 4]
+
+    def __init__(self):
+        self.rcp_contrib = self.RECIPROCATORS_INITIAL_CONTRIBUTIONS
+
     def print_bot_round_result(round, diff, trend):
         round_str=''
         diff_str=''
@@ -34,6 +47,14 @@ class Bots():
             diff_str += str(val).rjust(4, ' ')
         print(diff_str)
 
+    def get_cooperator_contributions(self):
+        return self.COOPERATOR_INITIAL_CONTRIBUTIONS
+
+    def get_freerider_contributions(self):
+        return self.FREERIDER_INITIAL_CONTRIBUTIONS
+
+    def get_reciprocator_contributions(self):
+        return self.rcp_contrib
 
 
 class Subsession(BaseSubsession):
@@ -96,7 +117,7 @@ class Group(BaseGroup):
         self.set_group_aggregate_data()
 
     def finalize_group_game_data(self):
-        self.game_total_contrib = self.session.vars["game_total_contrib"]
+        self.game_total_contr,ib = self.session.vars["game_total_contrib"]
         if self.game_total_contrib >= Constants.group_goal:
             self.group_game_bonus = self.game_total_contrib
         else:
@@ -134,8 +155,7 @@ class Group(BaseGroup):
     def get_bot_round_avg(self):
         return self.group_round_avg
 
-    def get_contribution_trend(self):
-        player = self.get_players()[0]
+    def get_player_contribution_trend(self, player):
         player_round_n1 = player.in_round(self.round_number - 1).contributed
         player_round_n2 = player.in_round(self.round_number - 2).contributed
         bot_contribution_last = self.session.vars["bot_contributions"][-1]
@@ -155,23 +175,20 @@ class Group(BaseGroup):
 
 
     def set_bot_contributions(self):
+        bots = Bots()
         player = self.get_players()[0]
         round_number = self.round_number
         NUM_AGENTS = Constants.game_players -1
-        NUM_COOPERATORS = 3
-        NUM_FREE_RIDERS = 5
-        NUM_RECIPROCATORS = 16
-        NUM_RECIPROCATORS_ABOVE = 3
-        NUM_RECIPROCATORS_BELOW = 2
 
-        cooperator_list = [10,9,8]
-        freerider_list = [3,3,2,2,1]    # 'preview_template': 'global/MTurkPreview.html',
+        cooperator_list = bots.get_cooperator_contributions()
+        freerider_list = bots.get_freerider_contributions()
+
         diff = []
         new_set = []
         trend = ""
 
         if self.round_number <= 1:
-            reciprocator_list = [8,10,10,9,8,8,7,7,6,6,6,5,5,4,4,4]
+            reciprocator_list = bots.get_reciprocator_contributions()
         elif self.round_number == 2:
             reciprocator_list = [8, 9,10,9,8,7,7,7,5,6,6,6,5,4,5,4]
         else:
@@ -181,8 +198,8 @@ class Group(BaseGroup):
             round_n1_sum = player_round_n1_contributed + sum(bots_round_n1_contributions)
             round_n1_avg = float(round_n1_sum / (len(bots_round_n1_contributions) + 1))
 
-            trend = self.get_contribution_trend()
-            prev_reciprocators = bots_round_n1_contributions[:NUM_RECIPROCATORS:]
+            trend = self.get_player_contribution_trend(player)
+            prev_reciprocators = bots_round_n1_contributions[:bots.NUM_RECIPROCATORS:]
 
             rcp_below_avg=[]
             rcp_above_avg=[]
@@ -198,7 +215,7 @@ class Group(BaseGroup):
             shuffle(rcp_below_avg)
             shuffle(rcp_above_avg)
 
-            reciprocator_changelist = rcp_below_avg[:NUM_RECIPROCATORS_BELOW] + rcp_above_avg[-NUM_RECIPROCATORS_ABOVE:]
+            reciprocator_changelist = rcp_below_avg[:bots.NUM_RECIPROCATORS_BELOW_AVG] + rcp_above_avg[-bots.NUM_RECIPROCATORS_ABOVE_AVG:]
             diff = []
             new_set=[]
 
