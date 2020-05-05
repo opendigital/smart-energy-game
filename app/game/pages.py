@@ -27,6 +27,9 @@ class Game(Page):
             'current_round': self.round_number,
         }
 
+    def before_next_page(self):
+        self.group.finalize_group_round_data()
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -44,7 +47,6 @@ class WaitRoom(Page):
     template_name = './game/waiting-room.html'
     title_text = "Waiting Room"
     body_text = "Please wait until the other participants are ready."
-    after_all_players_arrive = 'finalize_group_round_data'
 
     def is_displayed(self):
         return self.round_number <= Constants.game_rounds
@@ -135,6 +137,9 @@ class Congrats(Page):
         }
 
 
+    def before_next_page(self):
+        self.group.finalize_group_game_data()
+
 
 
 class FinalResults(Page):
@@ -191,10 +196,10 @@ class FinalResults(Page):
 
 page_sequence = [
     Game,
-    ResultsWaitPage,
+    # ResultsWaitPage,
     WaitRoom,
     Results,
-    FinalWaitPage,
+    # FinalWaitPage,
     Congrats,
     FinalResults,
 ]
