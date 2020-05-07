@@ -32,7 +32,7 @@ class Functions():
 
         print(DIVIDER_LINE_MINOR)
         print(player_total_withheld_label, data["player_total_withheld"])
-        print(player_total_contrib_label, data["player_total_contrib"])
+        print(player_total_contrib_label, data["player_total_contributed"])
 
         print(DIVIDER_LINE_MINOR)
         print(group_round_contributions_label, data["group_round_contributions"])

@@ -142,7 +142,7 @@ class Congrats(Page):
         # self.group.finalize_group_game_data()
         self.player.set_player_round_name()
         self.player.finalize_game_player_data()
-        self.player.cleanup_session_variables()
+        # self.player.cleanup_session_variables()
 
         if Constants.print_game_result_table:
             self.player.print_player_game_result_table()
@@ -155,9 +155,9 @@ class FinalResults(Page):
 
     def vars_for_template(self):
         quiz_bonus = self.player.participant.vars["quiz_bonus"]
+        player_contributed = self.participant.vars['player_contributions_total']
+        player_withheld = self.participant.vars['player_witholdings_total']
         game_total_contrib = self.player.player_game_total_contrib
-        player_contributed = self.player.total_contributed
-        player_withheld = self.player.player_total_withheld
         carbonfund_total = self.player.player_carbonfund_total
         participation_pay = Constants.participation_pay
 

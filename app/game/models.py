@@ -68,6 +68,10 @@ class Bots:
         return  rcp_index_less + rcp_index_more
 
     def update_reciprocator_changelist(self, reciprocator_contributions, changelist, trend, avg_contribution):
+        print("\n\nupdate_reciprocator_changelist")
+        print(reciprocator_contributions, changelist, trend, avg_contribution)
+
+
         diff = []
         new_set = []
 
@@ -76,21 +80,25 @@ class Bots:
 
             if value in changelist:
                 changelist.remove(value)
+                print("value=", value)
 
                 # RECIPROCITY NORM RULE =  Trend is up/down
                 # SOCIAL NORM RULE = value vs group avg
                 if trend == "up" and value <= avg_contribution:
                     value = self.set_contribution_range(0, 10, value + 1)
                     delta = "+"
+                    print("value UP ", value)
                 elif trend == "stable" and value <= avg_contribution:
                     value = self.set_contribution_range(0, 10, value + 1)
                     delta = "+"
+                    print("value stable ", value)
                 elif trend == "down" and value > avg_contribution:
                     value = self.set_contribution_range(0, 10, value - 1)
                     delta = "-"
+                    print("value DOWN ", value)
                 else:
                     delta = " "
-                    value = 0
+                    print("value else ", value, trend, avg_contribution)
 
             new_set.append(value)
             diff.append(delta)
@@ -164,7 +172,7 @@ class Subsession(BaseSubsession):
             p.participant.vars["player_game_total_withheld"] = 0
 
 
-            p.participant.vars['player_total_withheld'] = 0
+            p.participant.vars['player_witholdings_total'] = 0
             p.participant.vars['player_total_contrib'] = 0
             p.participant.vars["quiz_bonus"] = 0
 
@@ -258,7 +266,9 @@ class Group(BaseGroup):
                 prev_round_avg,
             )
 
-            Functions.print_bot_round_result(rcp_data["contributions"], rcp_data["diff"], trend)
+            print("rcp_data")
+            print(rcp_data["contributions"], rcp_data["diff"], trend)
+            # Functions.print_bot_round_result(rcp_data["contributions"], rcp_data["diff"], trend)
 
             reciprocator_list = rcp_data["contributions"]
 
@@ -346,25 +356,26 @@ class Player(BasePlayer):
     email = models.StringField(blank=True)
 
     contributed = models.IntegerField(min=0, max=10)
-    withheld = models.IntegerField(min=0, max=10)
-    total_contributed = models.IntegerField()
-    player_total_withheld = models.IntegerField()
     contributions = models.LongStringField()
+    player_contributions_total = models.IntegerField()
 
-    player_game_bonus = models.FloatField()
-    round_avg = models.FloatField()
-    quiz_bonus = models.IntegerField()
-    total_payoff = models.CurrencyField()
+    withheld = models.IntegerField(min=0, max=10)
+    player_witholdings_total = models.IntegerField()
+
     game_result = models.LongStringField()
-
+    round_avg = models.FloatField()
     player_bots_contributions = models.LongStringField()
+    player_bots_round_avg = models.FloatField()
     player_bots_round_contrib_total = models.IntegerField()
     player_bots_round_withheld_total = models.IntegerField()
-    player_bots_round_avg = models.FloatField()
-
-    player_game_total_contrib = models.IntegerField(initial=0)
-    player_game_bonus = models.IntegerField()
     player_carbonfund_total = models.IntegerField()
+
+
+    quiz_bonus = models.IntegerField()
+    player_game_bonus = models.IntegerField(initial=0)
+    # player_game_bonus = models.FloatField()
+    player_game_total_contrib = models.IntegerField(initial=0)
+    total_payoff = models.CurrencyField()
 
     def init_player(self):
         print('init player')
@@ -402,6 +413,7 @@ class Player(BasePlayer):
         trend = ""
 
         if round_number <= 2:
+
             reciprocator_list = bots.get_reciprocator_contributions(round_number)
         else:
             print("player_contributions", self.participant.vars['player_contributions'])
@@ -423,6 +435,7 @@ class Player(BasePlayer):
             )
 
             prev_reciprocators = bots_round_n1_contributions[:bots.NUM_RECIPROCATORS:]
+            print("prev_reciprocators", prev_reciprocators)
             reciprocator_changelist = bots.get_reciprocator_changelist(prev_reciprocators, prev_round_avg)
 
             rcp_data = bots.update_reciprocator_changelist(
@@ -436,7 +449,12 @@ class Player(BasePlayer):
 
             reciprocator_list = rcp_data["contributions"]
 
+
+        print("reciprocator_list", reciprocator_list)
+        print("cooperator_list", cooperator_list)
+        print("freerider_list", freerider_list)
         new_contributions = reciprocator_list + cooperator_list + freerider_list
+        print("new_contributions", reciprocator_list + cooperator_list + freerider_list)
         self.participant.vars["player_bots_round_contributions"] = new_contributions
         self.participant.vars["player_bots_contributions"].append(new_contributions)
         self.player_bots_contributions = str(new_contributions).replace(" ", "")
@@ -453,12 +471,15 @@ class Player(BasePlayer):
         self.participant.vars['player_round_contributed'] = self.contributed
         self.participant.vars['player_contributions'].append(self.contributed)
         player_contributions_total = sum(self.participant.vars['player_contributions'])
+        self.player_contributions_total = player_contributions_total
         self.participant.vars['player_contributions_total'] = player_contributions_total
 
         self.participant.vars['player_round_withheld'] = self.withheld
         self.participant.vars['player_witholdings'].append(self.withheld)
-        self.player_total_withheld = sum(self.participant.vars['player_witholdings'])
-        self.participant.vars['player_witholdings_total'] = self.player_total_withheld
+        player_witholdings_total = sum(self.participant.vars['player_witholdings'])
+        self.player_witholdings_total = player_witholdings_total
+        self.participant.vars['player_witholdings_total'] = player_witholdings_total
+
         self.payoff = self.withheld
 
         player_round_contributed_total = self.contributed + sum(self.participant.vars["player_bots_round_contributions"])
@@ -497,33 +518,40 @@ class Player(BasePlayer):
 
         print("finalize_group_game_data")
         self.player_game_total_contrib = self.participant.vars["player_game_total_contrib"]
-        if self.player_game_total_contrib >= Constants.group_goal:
-            self.player_game_bonus = self.player_game_total_contrib
-        else:
-            self.player_game_bonus = 0
+        print("player_game_total_contrib", self.player_game_total_contrib)
 
-        self.set_player_carbonfund_total()
+        # if self.player_game_total_contrib >= Constants.group_goal:
+        #     print("1 self.player_game_bonus", self.player_game_bonus)
+        #     self.player_game_bonus = self.player_game_total_contrib
+        # else:
+        #     self.player_game_bonus = 0
+        #     print("2 self.player_game_bonus", self.player_game_bonus)
+
 
         if self.player_game_total_contrib >= Constants.group_goal:
             self.player_game_bonus = int(self.player_game_total_contrib * Constants.multiplier / Constants.game_players)
         else:
             self.player_game_bonus = 0
 
+        print("1 self.player_game_bonus", self.player_game_bonus)
+        self.set_player_carbonfund_total()
         self.contributions = str(self.participant.vars["player_contributions"])
-        self.total_contributed = self.participant.vars["player_total_contrib"]
-        self.player_total_withheld = self.participant.vars["player_total_withheld"]
+        self.player_contributions_total = self.participant.vars["player_total_contrib"]
+        self.player_witholdings_total = self.participant.vars["player_witholdings_total"]
 
         game_result = {
-            'pl.tcontrib': self.participant.vars["player_contributions"],
-            'pl.twithheld': self.participant.vars['player_total_withheld'],
-            'pl.contributions': self.participant.vars['player_total_contrib'],
+            'contributed': self.participant.vars["player_contributions"],
+            'withheld': self.participant.vars['player_witholdings_total'],
+            'contributions': sum(self.participant.vars['player_contributions']),
             'bonus_quiz': self.participant.vars['quiz_bonus'],
             'bonus_game': self.player_game_bonus,
         }
 
-        total_payoff = self.tokens_to_dollars(self.quiz_bonus) \
-            + self.tokens_to_dollars(self.player_total_withheld) \
+        total_payoff = \
+            self.tokens_to_dollars(self.quiz_bonus) \
+            + self.tokens_to_dollars(self.player_witholdings_total) \
             + self.tokens_to_dollars(self.player_game_bonus)
+
 
         self.total_payoff = total_payoff
         self.payoff = int(self.player_game_bonus) + int(self.quiz_bonus)
@@ -535,13 +563,13 @@ class Player(BasePlayer):
             "bot_contributions": self.participant.vars["player_bots_contributions"],
             "game_contributions_total": self.participant.vars["player_game_total_contrib"],
             "player_contributions": self.participant.vars["player_contributions"],
+            "player_total_contributed": sum(self.participant.vars["player_contributions"]),
             "player_game_bonus" : self.player_game_bonus,
             "player_payoff": self.participant.payoff,
             "player_payoff_plus_partip_fee": self.participant.payoff_plus_participation_fee(),
             "player_quiz_bonus": self.quiz_bonus,
-            "player_total_contributed": self.total_contributed,
             "player_total_payoff": self.total_payoff,
-            "player_total_withheld": self.player_total_withheld,
+            "player_total_withheld": self.player_witholdings_total,
             "player_vars": self.participant.vars,
         }
 

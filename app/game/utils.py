@@ -51,9 +51,8 @@ class Utils():
     def game_round_sum(token_list):
         token_sum = 0
         for token_round in token_list:
-            print("token_round", token_round)
-            print("token_sum", token_sum)
             token_sum = token_sum + sum(token_round)
+            print("token_round", token_round, " | ", token_sum)
         return token_sum
 
     def isset(arg):
