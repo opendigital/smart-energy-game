@@ -29,10 +29,10 @@ class Bots:
 
     COOPERATOR_INITIAL_CONTRIBUTIONS = [10, 9, 8]
     FREERIDER_INITIAL_CONTRIBUTIONS = [3, 3, 2, 2, 1]
-    RECIPROCATORS_INITIAL_CONTRIBUTIONS = [8, 10, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 4, 4, 4]
+    RECIPROCATORS_CONTRIBUTIONS_INIT = [8, 10, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 4, 4, 4]
+    RECIPROCATORS_CONTRIBUTIONS_TEST = [8, 9,  10, 9, 8, 7, 7, 7, 5, 6, 6, 6, 5, 4, 5, 4]
 
     def __init__(self):
-        self.rcp_contrib = self.RECIPROCATORS_INITIAL_CONTRIBUTIONS
         self.contributions = []
 
     def get_cooperator_contributions(self):
@@ -41,8 +41,11 @@ class Bots:
     def get_freerider_contributions(self):
         return self.FREERIDER_INITIAL_CONTRIBUTIONS
 
-    def get_reciprocator_contributions(self):
-        return self.rcp_contrib
+    def get_reciprocator_contributions(self, round):
+        if round == 1:
+            return self.RECIPROCATORS_CONTRIBUTIONS_INIT
+        elif round == 2:
+            return self.RECIPROCATORS_CONTRIBUTIONS_TEST
 
     def push_round_contributions(self, round_conributions):
         self.contributions.append(round_conributions)
@@ -127,15 +130,12 @@ class Group(BaseGroup):
     group_game_bonus = models.IntegerField()
     carbonfund_total = models.IntegerField()
 
-    def get_bot_contributions_string(self):
-        bot_contributions_str = models.LongStringField(initial=str(self.session.vars["bot_contributions"][0]))
-        for i in range(1, len(self.session.vars["bot_contributions"])):
-            bot_contributions_str = bot_contributions_str + \
-                "\n" + models.LongStringField(initial=str(self.session.vars["bot_contributions"][i]))
-        return bot_contributions_str
 
     def tokens_to_dollars(self, value):
         return c(value).to_real_world_currency(self.session)
+
+    def dollars_to_carbon(self, value):
+        return value * 10 / 22
 
     def set_carbonfund_total(self):
         self.carbonfund_total = self.game_total_contrib
@@ -148,22 +148,6 @@ class Group(BaseGroup):
 
     def get_bot_round_avg(self):
         return self.group_round_avg
-
-    def get_player_contribution_trend(self, player):
-        player_round_n1 = player.in_round(self.round_number - 1).contributed
-        player_round_n2 = player.in_round(self.round_number - 2).contributed
-        bot_contribution_last = self.session.vars["bot_contributions"][-1]
-        bot_contribution_last2 = self.session.vars["bot_contributions"][-2]
-        group_contribution_total1 = player_round_n1 + sum(bot_contribution_last)
-        group_contribution_total2 = player_round_n2 + sum(bot_contribution_last2)
-
-        if group_contribution_total1 > group_contribution_total2:
-            return "up"
-        elif group_contribution_total1 < group_contribution_total2:
-            return "down"
-        else:
-            return "stable"
-
 
     def set_bot_contributions(self):
         bots = Bots()
@@ -178,17 +162,28 @@ class Group(BaseGroup):
         trend = ""
 
         if round_number <= 1:
-            reciprocator_list = bots.get_reciprocator_contributions()
+            reciprocator_list = bots.get_reciprocator_contributions(round_number)
         elif round_number == 2:
-            reciprocator_list = [8, 9,10,9,8,7,7,7,5,6,6,6,5,4,5,4]
+            reciprocator_list = bots.get_reciprocator_contributions(round_number)
         else:
             bots_round_n1_contributions = self.session.vars["bot_contributions"][-1]
-            player_round_n1 = player.in_round(round_number-1)
+            player_round_n1 = player.in_round(round_number - 1)
             player_round_n1_contributed = int(player_round_n1.contributed)
             round_n1_sum = player_round_n1_contributed + sum(bots_round_n1_contributions)
             round_n1_avg = float(round_n1_sum / (len(bots_round_n1_contributions) + 1))
 
-            trend = self.get_player_contribution_trend(player)
+            player_round_n1 = player.in_round(self.round_number - 1).contributed
+            player_round_n2 = player.in_round(self.round_number - 2).contributed
+            bot_round_n1 = self.session.vars["bot_contributions"][-1]
+            bot_round_n2 = self.session.vars["bot_contributions"][-2]
+
+            trend = Functions.get_contribution_trend(
+                player_round_n1,
+                player_round_n2,
+                bot_round_n1,
+                bot_round_n2,
+            )
+
             prev_reciprocators = bots_round_n1_contributions[:bots.NUM_RECIPROCATORS:]
 
             rcp_below_avg = []
@@ -252,7 +247,6 @@ class Group(BaseGroup):
     def set_group_aggregate_data(self):
         round_fixed_sum = Constants.game_players * 10
         player_round_contrib = self.session.vars["player_round_contrib"]
-        player_round_withheld = 10 - player_round_contrib
 
         bot_round_contrib_total = sum(self.session.vars["bot_round_contributions"])
         bot_round_witheld_total = round_fixed_sum - bot_round_contrib_total
@@ -316,7 +310,7 @@ class Group(BaseGroup):
             player.cleanup_session_variables()
 
             if Constants.print_game_result_table:
-                player.print_game_result_table()
+                player.print_player_game_result_table()
 
 
 class Player(BasePlayer):
@@ -348,7 +342,6 @@ class Player(BasePlayer):
     def tokens_to_dollars(self, value):
         return c(value).to_real_world_currency(self.session)
 
-
     def set_player_round_name(self):
         if self.round_number == Constants.num_rounds:
             round_title = "rZ"
@@ -357,9 +350,9 @@ class Player(BasePlayer):
         self.round = round_title
 
 
-
     def set_player_bot_contributions(self):
         self.participant.vars['player_bot_contributions'] = bots.get_bot_contributions()
+
 
     def set_player_round_data(self):
         self.set_player_round_name()
@@ -379,7 +372,6 @@ class Player(BasePlayer):
 
 
     def init_player(self):
-        # self.participation_pay = Constants.participation_pay
         if 'quiz_data' in self.participant.vars:
             self.quiz_bonus = self.participant.vars["quiz_bonus"]
         else:
@@ -389,6 +381,8 @@ class Player(BasePlayer):
     def cleanup_session_variables(self):
         self.session.vars["bot_round_contributions"] = []
         self.session.vars["group_round_contrib"] = []
+
+
 
 
     def finalize_game_player_data(self):
@@ -414,89 +408,23 @@ class Player(BasePlayer):
             + self.tokens_to_dollars(self.player_game_bonus)
 
         self.total_payoff = total_payoff
-
         self.payoff = int(self.player_game_bonus) + int(self.quiz_bonus)
         self.game_result = str(game_result).replace(", ", ",").replace(": ", ":")
 
 
-    def print_game_result_table(self):
-        # print(str(self.session.vars).replace("],", "],\n ").replace("[[", "[\n["))
-        print('=================================================================================================================')
-        print('    #  |  P  | BOTS                                                                    |  t   Δt   x̄    Δx̄       ')
-        print('-----------------------------------------------------------------------------------------------------------------')
+    def print_player_game_result_table(self):
+        data = {
+            "bot_contributions": self.session.vars["bot_contributions"],
+            "game_contributions_total": self.session.vars["game_total_contrib"],
+            "player_contributions": self.participant.vars["player_contributions"],
+            "player_game_bonus" : self.player_game_bonus,
+            "player_payoff": self.participant.payoff,
+            "player_payoff_plus_partip_fee": self.participant.payoff_plus_participation_fee(),
+            "player_quiz_bonus": self.quiz_bonus,
+            "player_total_contributed": self.total_contributed,
+            "player_total_payoff": self.total_payoff,
+            "player_total_witheld": self.total_witheld,
+            "player_vars": self.participant.vars,
+        }
 
-        player_contributions = self.participant.vars["player_contributions"].copy()
-        bot_contributions = self.session.vars["bot_contributions"]
-        game_total_contrib = 0
-        round_num = 0
-
-        for bot_round in bot_contributions:
-            round_num += 1
-            player_round = (player_contributions.pop(0))
-            player_round_str = "[ " + str(player_round).rjust(2, ' ')
-
-            if round_num > 1:
-                round_total_prev = bot_round_total
-                bot_round_total = sum(bot_round) + int(player_round)
-                diff_total = int(bot_round_total) - int(round_total_prev)
-
-                if (diff_total > 0):
-                    diff_total_str = "(+" + str(diff_total) + ")"
-                elif (diff_total < 0):
-                    diff_total_str = "(" + str(diff_total)+ ")"
-                else:
-                    diff_total_str = ""
-            else:
-                bot_round_total = sum(bot_round) + int(player_round)
-                diff_total_str = ""
-
-
-            if round_num > 1:
-                round_avg_prev = round_avg
-                round_avg = float(bot_round_total / (len(bot_round) + 1))
-                diff_avg = round(float(round_avg) - float(round_avg_prev), 4)
-
-                if (diff_avg > 0):
-                    diff_avg_str = "(+" + str(diff_avg).ljust(4, '0') + ")"
-                elif (diff_avg < 0):
-                    diff_avg_str = "(" + str(diff_avg).ljust(4, '0')+ ")"
-                else:
-                    diff_avg_str = "    "
-            else:
-                diff_avg_str = "    "
-                round_avg = float(bot_round_total / (len(bot_round) + 1))
-
-            round_avg_str = str(round_avg).ljust(4, '0')
-            game_total_contrib += bot_round_total
-            bot_round_str = ""
-            for bot_val in bot_round:
-                bot_round_str += str(bot_val).rjust(3, ' ')
-
-            print(
-                "|| ("+ str(round_num) + ")",
-                player_round_str, "|",
-                bot_round_str.lstrip(), "]", '|',
-                str(bot_round_total),
-                str(diff_total_str).rjust(4, ' '),
-                str(round_avg_str),
-                str(diff_avg_str).rjust(7, ' '), '||',
-                str(game_total_contrib)
-            )
-
-        print('-----------------------------------------------------------------------------------------------------------------')
-        print('GAME TOTAL:                \t', self.session.vars["game_total_contrib"])
-        print('_________________________________________________________')
-        print('PLAYER:')
-        print('  player_contributions       \t', self.participant.vars["player_total_contrib"], self.contributions)
-        print('  total contrib              \t', self.participant.vars["player_total_contrib"], self.total_contributed)
-        print('  total witheld              \t', self.participant.vars["player_total_witheld"], self.total_witheld)
-        # print('  participation_pay          \t', self.participation_pay)
-        print('  total_payoff               \t', self.total_payoff)
-        print('  quiz_bonus                 \t', self.quiz_bonus)
-        print('  game_bonus                 \t', self.player_game_bonus)
-        print('  payoff                     \t', self.payoff)
-        print('  self.participant.payoff    \t', self.participant.payoff)
-        print('  payoff_plus_partip_fee     \t', self.participant.payoff_plus_participation_fee())
-
-        print('\n\n')
-        print(self.participant.vars)
+        Functions.print_game_result_table(data)

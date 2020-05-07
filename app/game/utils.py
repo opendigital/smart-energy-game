@@ -44,6 +44,11 @@ class Utils():
             print(v, '\t\t', getattr(obj, v))
 
 
+
+    def tokens_to_dollars(self, value):
+        return c(value).to_real_world_currency(self.session)
+
+
     def isset(arg):
         print("testing argument", arg)
         if arg is None:

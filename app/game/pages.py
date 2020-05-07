@@ -126,6 +126,7 @@ class Congrats(Page):
         round_month = Utils.get_month(index)
         game_total_contrib = self.session.vars["game_total_contrib"]
         carbonfund_total = game_total_contrib
+        carbon_offset = self.player.tokens_to_dollars(carbonfund_total)
         lbs_reduced = int(game_total_contrib / 10 * 22)
         return {
             'progress': 'Game',
@@ -133,7 +134,7 @@ class Congrats(Page):
             'current_month': round_month,
             'page_title': 'Your Group\'s Air Pollution Reduction Result',
             'lbs': str(lbs_reduced) + " lbs",
-            'amount': self.group.tokens_to_dollars(carbonfund_total),
+            'amount': carbon_offset,
         }
 
 
@@ -152,10 +153,10 @@ class FinalResults(Page):
         player_contributed = self.player.total_contributed
         player_withheld = self.player.total_witheld
         carbonfund_total = self.group.carbonfund_total
+        participation_pay = Constants.participation_pay
 
         if game_total_contrib >= Constants.group_goal:
             result_message = 'Congratulations, you met the 60% group energy conservation goal of 900 energy tokens.'
-            result_message_classes = '  '
             goal_meet = True
             bonus_tokens = int(game_total_contrib * 2 / 25)
         else:
@@ -163,13 +164,13 @@ class FinalResults(Page):
             goal_meet = False
             bonus_tokens = 0
 
-        player_contributed_usd = self.group.tokens_to_dollars(player_contributed)
-        game_total_usd = self.group.tokens_to_dollars(game_total_contrib)
-        quiz_bonus_usd = self.group.tokens_to_dollars(quiz_bonus)
-        bonus_tokens_usd = self.group.tokens_to_dollars(bonus_tokens)
-        player_withheld_usd = self.group.tokens_to_dollars(player_withheld)
-        participation_pay_usd = self.group.tokens_to_dollars(Constants.participation_pay)
-        carbonfund_total_usd = self.group.tokens_to_dollars(carbonfund_total)
+        player_contributed_usd = self.player.tokens_to_dollars(player_contributed)
+        game_total_usd = self.player.tokens_to_dollars(game_total_contrib)
+        quiz_bonus_usd = self.player.tokens_to_dollars(quiz_bonus)
+        bonus_tokens_usd = self.player.tokens_to_dollars(bonus_tokens)
+        player_withheld_usd = self.player.tokens_to_dollars(player_withheld)
+        participation_pay_usd = self.player.tokens_to_dollars(participation_pay)
+        carbonfund_total_usd = self.player.tokens_to_dollars(carbonfund_total)
 
         return {
             'page_title': 'Final Game Result',
