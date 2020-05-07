@@ -44,6 +44,17 @@ class Utils():
             print(v, '\t\t', getattr(obj, v))
 
 
+    def tokens_to_dollars(self, value):
+        return c(value).to_real_world_currency(self.session)
+
+
+    def game_round_sum(token_list):
+        token_sum = 0
+        for token_round in token_list:
+            token_sum = token_sum + sum(token_round)
+            print("token_round", token_round, " | ", token_sum)
+        return token_sum
+
     def isset(arg):
         print("testing argument", arg)
         if arg is None:
