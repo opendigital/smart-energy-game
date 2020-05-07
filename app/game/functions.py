@@ -12,12 +12,12 @@ class Functions():
         game_total_contrib_label = "game_total_contrib                   \t"
         player_withheld_label = "player_withheld              \t"
         player_contributed_label = "player_contributed           \t"
-        player_total_witheld_label = "player_total_witheld         \t"
+        player_total_withheld_label = "player_total_withheld         \t"
         player_total_contrib_label = "player_total_contrib     \t"
         group_round_contributions_label = "group_round_contributions    \t"
         group_round_withholdings_label = "group_round_withholdings     \t"
         group_round_contrib_total_label = "group_round_contrib_total         \t"
-        group_round_witheld_total_label = "group_round_witheld_total         \t"
+        group_round_withheld_total_label = "group_round_withheld_total         \t"
         player_past_contributions_label = "player_past_contributions    \t"
         player_past_witholdings_label = "player_past_witholdings      \t"
         group_round_contrib_label = "group_round_contrib        \t"
@@ -31,7 +31,7 @@ class Functions():
         print(player_contributed_label, data["player_contributed"])
 
         print(DIVIDER_LINE_MINOR)
-        print(player_total_witheld_label, data["player_total_witheld"])
+        print(player_total_withheld_label, data["player_total_withheld"])
         print(player_total_contrib_label, data["player_total_contrib"])
 
         print(DIVIDER_LINE_MINOR)
@@ -40,7 +40,7 @@ class Functions():
 
         print(DIVIDER_LINE_MINOR)
         print(group_round_contrib_total_label, data["group_round_contrib_total"])
-        print(group_round_witheld_total_label, data["group_round_witheld_total"])
+        print(group_round_withheld_total_label, data["group_round_withheld_total"])
         print(player_past_contributions_label, data["player_past_contributions"])
         print(player_past_witholdings_label, data["player_past_witholdings"])
         print(group_round_contrib_label, data["group_round_contrib"])
@@ -146,7 +146,7 @@ class Functions():
         print('PLAYER:')
         print('  player_contributions       \t', data["player_contributions"])
         print('  total contrib              \t', data["player_total_contributed"])
-        print('  total witheld              \t', data["player_total_witheld"])
+        print('  total withheld              \t', data["player_total_withheld"])
         print('  total_payoff               \t', data["player_total_payoff"])
         print('  quiz_bonus                 \t', data["player_quiz_bonus"])
         print('  game_bonus                 \t', data["player_game_bonus"])
