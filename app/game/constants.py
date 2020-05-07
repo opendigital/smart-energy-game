@@ -21,7 +21,7 @@ class Constants(BaseConstants):
     reduction_goal = 60
     token_value = .01
     participation_pay = 50
-    game_tokens = 10
+    GAME_TOKENS = 10
     GAME_ROUND_MIN_TIMEOUT_SECONDS = 1
     GAME_ROUND_MAX_TIMEOUT_SECONDS = 5
     game_rounds = 6
