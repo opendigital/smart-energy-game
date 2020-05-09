@@ -23,38 +23,54 @@ AUTH_LEVEL = 'DEMO'
 # AUTH_LEVEL = 'STUDY'
 SECRET_KEY = '68j-5$9@d=m0_*pb0n=_3u6%33fng(738yww&w^ttk136n(4vz'
 INSTALLED_APPS = [
-    'otree',
+    "otree",
 ]
 
 ROOMS = [{
-    'name': 'test_in_progress',
-    'display_name': 'Testing In Progress',
-    'participant_label_file': '_rooms/test_room.txt',
+    "name": "test_in_progress",
+    "display_name": "Testing In Progress",
+    "participant_label_file": "_rooms/test_room.txt",
 }, {
-    'name': 'live_demo',
-    'display_name': 'Room for live demo (no participant labels)',
+    "name": "live_demo",
+    "display_name": "Room for live demo (no participant labels)",
 }]
 
 MTURK_HIT_SETTINGS = {
-    'keywords': ['bonus', 'study'],
-    'title': 'Title for your experiment',
-    'description': 'Description for your experiment',
-    'frame_height': 500,
-    'template': 'global/mturk_template.html',
-    'minutes_allotted_per_assignment': 60,
-    'expiration_hours': 7*24,
-    'grant_qualification_id': '31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY',
-    'qualification_requirements': [{
-        'QualificationTypeId': "31QNOLHLAC6NIMX6DIG1ZLVNCV9IMY",
-        'Comparator': "DoesNotExist",
-    }]
+    "keywords": [
+        "energy conservation game",
+        "real-word impact",
+        "carbon offset",
+        "donation task",
+        "trade-offs",
+        "bonus",
+    ],
+    "title": "Multiplayer energy conservation game with real-world impact",
+    "description": "The purpose of this research is to learn about how people make energy related decisions. We plan to recruit up to 1,000 participants. The study will last no more than 60 minutes and your pay will vary depending on your and other's decisions during the game.",
+    "frame_height": 500,
+    "template": "global/mturk_template.html",
+    "minutes_allotted_per_assignment": 60,
+    "expiration_hours": 7 * 24,
+    "grant_qualification_id": "3T0EA825IJO4BK6G2YOU4KNLRVSQQ3",
+    "qualification_requirements": [
+        {
+            "QualificationTypeId": "3T0EA825IJO4BK6G2YOU4KNLRVSQQ3",
+            "Comparator": "DoesNotExist",
+        },
+        {
+            "QualificationTypeId": "00000000000000000071",
+            "Comparator": "EqualTo",
+            "LocaleValues":[{
+                "Country": "US"
+            }]
+        }
+    ]
 }
 
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.01,
-    'participation_fee': 0.50,
-    'doc': "",
+    "real_world_currency_per_point": 0.01,
+    "participation_fee": 0.50,
+    "doc": "",
 }
 
 SESSION_CONFIGS = [
