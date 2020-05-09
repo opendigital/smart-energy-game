@@ -369,7 +369,6 @@ class Player(BasePlayer):
     total_payoff = models.CurrencyField()
 
     def init_player(self):
-        print('init player')
         self.participant.vars["player_bots"] = Bots()
         if 'quiz_data' in self.participant.vars:
             self.quiz_bonus = self.participant.vars["quiz_bonus"]
