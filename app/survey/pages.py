@@ -4,7 +4,6 @@ from ._builtin import Page
 from .constants import Constants
 
 
-
 class PostSurvey1(Page):
     form_model = 'player'
     form_fields = [
@@ -25,13 +24,14 @@ class PostSurvey1(Page):
         's1c5',
     ]
 
-
     def vars_for_template(self):
         return {
             'page_title': Constants.page_titles["PostSurvey1"],
             'progress': 'Survey'
         }
 
+    def before_next_page(self):
+        self.player.payout_page()
 
 
 class PostSurvey2(Page):
@@ -69,6 +69,8 @@ class PostSurvey2(Page):
             'progress': 'Survey',
         }
 
+    def before_next_page(self):
+        self.player.payout_page()
 
 class PostSurvey3(Page):
     """Page Docstring"""
@@ -110,6 +112,9 @@ class PostSurvey3(Page):
             'progress': 'Survey',
         }
 
+    def before_next_page(self):
+        self.player.payout_page()
+
 
 
 class PostSurvey4(Page):
@@ -130,6 +135,10 @@ class PostSurvey4(Page):
             'page_title': Constants.page_titles["PostSurvey4"],
             'progress': 'Survey',
         }
+
+    def before_next_page(self):
+        self.player.payout_page()
+
 
 
 class Debriefing(Page):

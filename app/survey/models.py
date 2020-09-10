@@ -110,6 +110,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    survey_payout = 0
     # ------------------
     # SURVEY FORM FIELDS
     # ------------------
@@ -174,6 +175,11 @@ class Player(BasePlayer):
     s4a6 = get_yesno_field(_c_.survey_4_items[5])
     s4a7 = get_selectint_field(_c_.survey_4_items[6], _c_.choices_demographics_political)
     s4a8 = get_int_field(_c_.survey_4_items[7], 0, 120)
+
+    def payout_page(self):
+        self.payoff += 5
+        self.survey_payout += 5
+
 
     def finalize_game_survey_data(self):
         print("done")

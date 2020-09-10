@@ -18,7 +18,7 @@ class Utils():
 
 
     def print_var(somevar, title=""):
-        if title is not "":
+        if title != "":
             print(title)
 
         variables = [i for i in dir(somevar) if not inspect.ismethod(i)]
@@ -26,7 +26,7 @@ class Utils():
 
 
     def dump(obj):
-        if title is not "":
+        if title != "":
             print("")
             print(title)
 
@@ -35,7 +35,7 @@ class Utils():
 
 
     def dump_obj(obj, title=""):
-        if title is not "":
+        if title != "":
             print("")
             print(title)
 
