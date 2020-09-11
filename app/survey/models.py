@@ -101,8 +101,7 @@ def get_likert_field(_label, _choices):
 
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        print('in creating_session', self.round_number)
+    pass
 
 
 class Group(BaseGroup):
@@ -110,18 +109,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    survey_payout = 0
-    # ------------------
-    # SURVEY FORM FIELDS
-    # ------------------
-    survey_consent = models.BooleanField(
-        label="",
-        choices=[
-            [True, 'Yes, I give my permission for the researchers to use my data.'],
-            [False, 'No, I do not give permission for the researchers to use my data. Please discard the data you obtained from me.']
-        ],
-        widget=widgets.RadioSelect
-    )
+    survey_payout = models.IntegerField(initial=0)
 
     # POST SURVEY 1
     s1a1 = get_text_field(_c_.survey_1a_items[0])
@@ -180,6 +168,5 @@ class Player(BasePlayer):
         self.payoff += 5
         self.survey_payout += 5
 
-
     def finalize_game_survey_data(self):
-        print("done")
+        self.participant.vars["survey_payout"] = self.survey_payout

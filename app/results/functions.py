@@ -154,4 +154,4 @@ class Functions():
         print('  payoff_plus_partip_fee     \t', data["player_payoff_plus_partip_fee"])
 
         print('\n\n')
-        # print(data["player_vars"])
+        print(data["player_vars"])

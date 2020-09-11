@@ -138,24 +138,8 @@ class PostSurvey4(Page):
 
     def before_next_page(self):
         self.player.payout_page()
-
-
-
-class Debriefing(Page):
-    form_model = "player"
-    form_fields = ["survey_consent"]
-
-    def is_displayed(self):
-        return self.player.round_number == Constants.num_rounds
-
-    def vars_for_template(self):
-        return {
-            'page_title': Constants.page_titles["Debriefing"],
-            'progress': 'End'
-        }
-
-    def before_next_page(self):
         self.player.finalize_game_survey_data()
+
 
 
 page_sequence = [
@@ -163,5 +147,4 @@ page_sequence = [
     PostSurvey2,
     PostSurvey3,
     PostSurvey4,
-    Debriefing
 ]

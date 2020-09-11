@@ -68,10 +68,6 @@ class Bots:
         return  rcp_index_less + rcp_index_more
 
     def update_reciprocator_changelist(self, reciprocator_contributions, changelist, trend, avg_contribution):
-        print("\n\nupdate_reciprocator_changelist")
-        print(reciprocator_contributions, changelist, trend, avg_contribution)
-
-
         diff = []
         new_set = []
 
@@ -80,25 +76,20 @@ class Bots:
 
             if value in changelist:
                 changelist.remove(value)
-                print("value=", value)
 
                 # RECIPROCITY NORM RULE =  Trend is up/down
                 # SOCIAL NORM RULE = value vs group avg
                 if trend == "up" and value <= avg_contribution:
                     value = self.set_contribution_range(0, 10, value + 1)
                     delta = "+"
-                    print("value UP ", value)
                 elif trend == "stable" and value <= avg_contribution:
                     value = self.set_contribution_range(0, 10, value + 1)
                     delta = "+"
-                    print("value stable ", value)
                 elif trend == "down" and value > avg_contribution:
                     value = self.set_contribution_range(0, 10, value - 1)
                     delta = "-"
-                    print("value DOWN ", value)
                 else:
                     delta = " "
-                    print("value else ", value, trend, avg_contribution)
 
             new_set.append(value)
             diff.append(delta)
@@ -350,7 +341,6 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     player_bots = Bots()
     round = models.StringField()
-    email = models.StringField(blank=True)
     contributed = models.IntegerField(min=0, max=10)
     contributions = models.LongStringField()
     player_contributions_total = models.IntegerField()
@@ -424,7 +414,7 @@ class Player(BasePlayer):
             )
 
             prev_reciprocators = bots_round_n1_contributions[:bots.NUM_RECIPROCATORS:]
-            print("prev_reciprocators", prev_reciprocators)
+
             reciprocator_changelist = bots.get_reciprocator_changelist(prev_reciprocators, prev_round_avg)
 
             rcp_data = bots.update_reciprocator_changelist(
@@ -439,7 +429,7 @@ class Player(BasePlayer):
             reciprocator_list = rcp_data["contributions"]
 
         new_contributions = reciprocator_list + cooperator_list + freerider_list
-        print("new_contributions", reciprocator_list + cooperator_list + freerider_list)
+
         self.participant.vars["player_bots_round_contributions"] = new_contributions
         self.participant.vars["player_bots_contributions"].append(new_contributions)
         self.player_bots_contributions = str(new_contributions).replace(" ", "")
@@ -499,29 +489,29 @@ class Player(BasePlayer):
 
 
     def finalize_game_player_data(self):
-
-        print("finalize_group_game_data")
+        self.participant.vars["game_total_contrib"] = self.player_game_total_contrib
+        self.participant.vars["carbonfund_total"] = self.player_carbonfund_total
+        self.participant.vars["game_total_contrib"] = self.participant.vars["player_game_total_contrib"]
+        self.participant.vars["carbonfund_total"] = self.participant.vars["game_total_contrib"]
+        self.participant.vars["player_contributed"] = self.participant.vars['player_contributions_total']
+        self.participant.vars["total_payoff"] = self.total_payoff
         self.player_game_total_contrib = self.participant.vars["player_game_total_contrib"]
-        print("player_game_total_contrib", self.player_game_total_contrib)
-
-        # if self.player_game_total_contrib >= Constants.group_goal:
-        #     print("1 self.player_game_bonus", self.player_game_bonus)
-        #     self.player_game_bonus = self.player_game_total_contrib
-        # else:
-        #     self.player_game_bonus = 0
-        #     print("2 self.player_game_bonus", self.player_game_bonus)
-
 
         if self.player_game_total_contrib >= Constants.group_goal:
             self.player_game_bonus = int(self.player_game_total_contrib * Constants.multiplier / Constants.game_players)
         else:
             self.player_game_bonus = 0
 
-        print("1 self.player_game_bonus", self.player_game_bonus)
+        self.participant.vars["player_game_bonus"] = self.player_game_bonus
+
         self.set_player_carbonfund_total()
+
         self.contributions = str(self.participant.vars["player_contributions"])
         self.player_contributions_total = self.participant.vars["player_total_contrib"]
         self.player_witholdings_total = self.participant.vars["player_witholdings_total"]
+        self.participant.vars["player_withheld"] = self.player_witholdings_total
+
+        self.payoff = int(self.player_game_bonus)
 
         game_result = {
             'contributed': self.participant.vars["player_contributions"],
@@ -531,16 +521,7 @@ class Player(BasePlayer):
             'bonus_game': self.player_game_bonus,
         }
 
-        total_payoff = \
-            self.tokens_to_dollars(self.quiz_bonus) \
-            + self.tokens_to_dollars(self.player_witholdings_total) \
-            + self.tokens_to_dollars(self.player_game_bonus)
-
-
-        self.total_payoff = total_payoff
-        self.payoff = int(self.player_game_bonus) + int(self.quiz_bonus)
         self.game_result = str(game_result).replace(", ", ",").replace(": ", ":")
-
 
     def print_player_game_result_table(self):
         data = {

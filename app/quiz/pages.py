@@ -17,7 +17,6 @@ class Intro1(Page):
         }
 
 
-
 class Intro2(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -29,13 +28,11 @@ class Intro2(Page):
         }
 
 
-
 class Intro3(Page):
     def is_displayed(self):
         return self.round_number == 1 \
             or self.round_number == 2 \
             and self.player.repeatQuiz1
-
 
     def vars_for_template(self):
         return {
@@ -46,7 +43,6 @@ class Intro3(Page):
             'other_players': Constants.game_players - 1,
             'game_rounds': Constants.game_rounds,
         }
-
 
 
 class Intro4(Page):
@@ -69,7 +65,6 @@ class Intro4(Page):
         }
 
 
-
 class Intro5(Page):
     def is_displayed(self):
         return (self.round_number == 1)
@@ -85,7 +80,6 @@ class Intro5(Page):
             'reduction_goal': Constants.reduction_goal,
             'token_value': Constants.token_value,
         }
-
 
 
 class Intro6(Page):
@@ -125,7 +119,6 @@ class Intro7(Page):
         }
 
 
-
 class Examples(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -135,7 +128,6 @@ class Examples(Page):
             'page_title': Constants.page_titles["examples"],
             'progress': 'Examples'
         }
-
 
 
 class Example1(Page):
@@ -157,7 +149,6 @@ class Example1(Page):
         }
 
 
-
 class Example2(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -174,7 +165,6 @@ class Example2(Page):
                 'row5': 'hide',
             }
         }
-
 
 
 class Example3(Page):
@@ -195,7 +185,6 @@ class Example3(Page):
         }
 
 
-
 class PracticeIntro(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -205,7 +194,6 @@ class PracticeIntro(Page):
             'page_title': Constants.page_titles["practiceintro"],
             'progress': 'Practice'
         }
-
 
 
 class PracticeGame1(Page):
@@ -230,7 +218,6 @@ class PracticeGame1(Page):
         }
 
 
-
 class PracticeGame2(Page):
     template_name = './quiz/PracticeGame.html'
     form_model = 'player'
@@ -251,7 +238,6 @@ class PracticeGame2(Page):
             'current_month': round_month,
             'current_round': 0,
         }
-
 
 
 class PracticeResults1(Page):
@@ -289,7 +275,6 @@ class PracticeResults1(Page):
             'avg_contrib': contributions_total / Constants.game_players,
             'percent_goal': percent_goal
         }
-
 
 
 class PracticeResults2(Page):
@@ -351,7 +336,6 @@ class Quiz(Page):
         }
 
 
-
 class Quiz1(Page):
     form_model = 'player'
     form_fields = ['q1']
@@ -375,7 +359,6 @@ class Quiz1(Page):
         if not valid:
             if self.player.qattempts("q1") <= 1:
                 self.player.review_rules = 1
-
 
 
 class Quiz2(Page):
@@ -404,7 +387,6 @@ class Quiz2(Page):
         if not valid:
             if self.player.qattempts("q2") <= 1:
                 self.player.review_rules = 2
-
 
 
 class Quiz3(Page):
@@ -436,10 +418,8 @@ class Quiz3(Page):
     def error_message(self, values):
         valid = self.player.valid_q3(values)
         if not valid:
-            print("q3 valid", valid)
             if self.player.qattempts("q3a") <= 1:
                 self.player.review_rules = 3
-                print("review ", self.player.review_rules)
 
 
 class Quiz3b(Page):
@@ -468,11 +448,8 @@ class Quiz3b(Page):
     def error_message(self, values):
         valid = self.player.valid_q3b(values)
         if not valid:
-            print("q3 valid", valid)
             if self.player.qattempts("q3b") <= 1:
                 self.player.review_rules = 4
-                print("review ", self.player.review_rules)
-
 
 
 class Quiz4(Page):
@@ -519,7 +496,6 @@ class Quiz4(Page):
 
     def error_message(self, values):
         valid = self.player.valid_q4(values)
-        print('valid', valid)
         if valid is not True:
             if self.player.q4_total_attempts() <= 3:
                 self.player.review_rules = 5
@@ -671,11 +647,9 @@ class ReviewGameRules(Page):
         self.player.review_rules = 0
 
 
-
 class GameIntro(Page):
     def is_displayed(self):
         return self.round_number >= 1
-
 
     def vars_for_template(self):
         return {

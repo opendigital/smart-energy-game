@@ -23,7 +23,6 @@ class Constants(BaseConstants):
         PostSurvey2="Post-Game Survey 2/4",
         PostSurvey3="Post-Game Survey 3/4",
         PostSurvey4="Post-Game Survey 4/4",
-        Debriefing="Debriefing",
     )
 
     true_false = [

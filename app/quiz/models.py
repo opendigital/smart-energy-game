@@ -71,8 +71,6 @@ class Group(BaseGroup):
     pass
 
 
-
-
 class Player(BasePlayer):
     quiz_data = models.LongStringField()
     quiz_bonus = models.IntegerField(initial=0)
@@ -123,11 +121,9 @@ class Player(BasePlayer):
         self.participant.vars["quiz_data"] = str(result)
         self.participant.vars["quiz_bonus"] = self.quiz_bonus
 
-
     def pay_bonus(self):
         self.payoff += 5
         self.quiz_bonus += 5
-
 
     def valid_q1(self, values):
         quiz_index = 0
@@ -196,18 +192,15 @@ class Player(BasePlayer):
             return True
         return False
 
-
     def q4_total_attempts(self):
         return self.qattempts("q4a") \
             + self.qattempts("q4b") \
             + self.qattempts("q4c")
 
-
     def q4b_total_attempts(self):
         return self.qattempts("q4d") \
-        + self.qattempts("q4e") \
-        + self.qattempts("q4f")
-
+            + self.qattempts("q4e") \
+            + self.qattempts("q4f")
 
     def valid_q4(self, values):
         quiz_index = 3
@@ -232,6 +225,7 @@ class Player(BasePlayer):
                 self.set_qcorrect("q4c", 1)
 
         correct = self.participant.vars["qcorrect"]
+
         sum = 0 \
             + correct["q4a"] \
             + correct["q4b"] \
@@ -271,6 +265,7 @@ class Player(BasePlayer):
                 self.set_qcorrect("q4f", 1)
 
         correct = self.participant.vars["qcorrect"]
+
         sum = 0 \
             + correct["q4d"] \
             + correct["q4e"] \
