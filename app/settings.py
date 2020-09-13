@@ -9,18 +9,18 @@ from os import environ
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 OTREE_PRODUCTION='1'
-# ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
-# ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
-ADMIN_USERNAME = 'developer'
-ADMIN_PASSWORD = 'developer'
 LANGUAGE_CODE = 'en'
+# ADMIN_USERNAME = 'developer'
+# ADMIN_PASSWORD = 'developer'
+ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
+ADMIN_PASSWORD = environ.get('OTREE_ADMIN_USERNAME')
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 POINTS_CUSTOM_NAME = 'tokens'
-AUTH_LEVEL = 'DEMO'
-# AUTH_LEVEL = 'STUDY'
+# AUTH_LEVEL = 'DEMO'
+AUTH_LEVEL = 'STUDY'
 SECRET_KEY = '68j-5$9@d=m0_*pb0n=_3u6%33fng(738yww&w^ttk136n(4vz'
 INSTALLED_APPS = [
     "otree",
@@ -150,7 +150,7 @@ SESSION_CONFIGS = [
 
 
 DEMO_PAGE_INTRO_HTML = """
-In order to test
+RCODI Energy Game
 </br>
 </br>
 </br>
