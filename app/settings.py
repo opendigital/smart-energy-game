@@ -71,6 +71,7 @@ SESSION_CONFIG_DEFAULTS = {
     "real_world_currency_per_point": 0.01,
     "participation_fee": 0.50,
     "doc": "",
+    "game_type": "base"
 }
 
 SESSION_CONFIGS = [
@@ -79,21 +80,21 @@ SESSION_CONFIGS = [
         'display_name': "Base Game",
         'num_demo_participants': 1,
         'app_sequence': ['quiz', 'game', 'survey', 'results'],
-        'game_type': 'base_game',
+        'game_type': 'base',
     },
     {
-        'name': 'text_game',
+        'name': 'descriptive_text_game',
         'display_name': "Text Game",
         'num_demo_participants': 1,
         'app_sequence': ['quiz', 'game', 'survey', 'results'],
-        'game_type': 'text_game',
+        'game_type': 'descriptive_text',
     },
     {
         'name': 'mturk_base',
         'display_name': "MTurk Base Game (mturk)",
         'num_demo_participants': 1,
         'app_sequence': ['quiz', 'game', 'survey'],
-        'game_type': 'base_game',
+        'game_type': 'base',
         'mturk_hit_settings': MTURK_HIT_SETTINGS,
     },
     {
@@ -101,16 +102,17 @@ SESSION_CONFIGS = [
         'display_name': "MTurk Text Game (mturk)",
         'num_demo_participants': 1,
         'app_sequence': ['quiz', 'game', 'survey'],
-        'game_type': 'text_game',
+        'game_type': 'descriptive_text',
         'mturk_hit_settings': MTURK_HIT_SETTINGS,
     },
-    # {
-    #     'name': 'game',
-    #     'num_demo_participants': 1,
-    #     'wait_for_all_groups': False,
-    #     'display_name': "GAME ONLY:  Energy Conservation Game",
-    #     'app_sequence': ['game'],
-    # },
+    {
+        'name': 'game',
+        'num_demo_participants': 1,
+        'wait_for_all_groups': False,
+        'display_name': "GAME ONLY:  Energy Conservation Game",
+        'game_type': 'descriptive_text',
+        'app_sequence': ['game'],
+    },
     # {
     #     'name': 'quiz',
     #     'display_name': "QUIZ ONLY: Pregame Training and Practice",
