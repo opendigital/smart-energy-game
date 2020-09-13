@@ -20,6 +20,7 @@ class Game(Page):
         game_type = self.session.config["game_type"]
         index = self.round_number - 1
         round_month = Utils.get_month(index)
+        carbon_reduction = round(self.participant.vars['player_round_contributed'] * 2.2, 2)
         return {
             'progress': 'Game',
             'page_title': 'Energy Conservation Game',
@@ -27,7 +28,8 @@ class Game(Page):
             'current_round': self.round_number,
             "game_type": game_type,
             "avg_contrib": self.player.participant.vars["player_group_round_contributions_avg"],
-            'player_contributed': self.participant.vars['player_round_contributed'],
+            "player_contributed": self.participant.vars['player_round_contributed'],
+            "carbon_reduction": carbon_reduction,
         }
 
     def before_next_page(self):
