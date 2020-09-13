@@ -4,33 +4,26 @@
 
 ```
 
-                                		GAME-SESSION         PAGE-NAME
-                                            |                  |   PAGE-NUMBER
-																					  v                  v   V
+         HEROKU-PROJ-NAME      GAME-SESSION          PAGENAME PAGENUM
+         |                                |                 |      |
+         v                                v                 v      V
 https://rcodi-energy-game.herokuapp.com/p/03hyj25a/training/Intro2/2/
-|------|-----------------|--------------|---------|--------|
-				 HEROKU-PROJ-NAME							  |          APP_PATH
-                                      PAGE	       (settings.py at SESSION_CONFIGS  
-                                                      ```name = "<aapp_name>"```
-                                                    or to set to something different
-                                                    in <app_name>/constants.py set
-                                                      ```name_in_url = 'training'```
+                                                   ʌ        ʌ
+                                                   |        |
+                                                  APP    PAGE
 ```
 
-
+`settings.py` at SESSION_CONFIGS
 
 ```
-                NOTE: The HTML template
-      is usually a file with same name
-      as the page namein the url
-      |
-      PAGE-NAME |       Number in the overall  since          
-    |   |-------sequence the session started
-    v   V        
-/training/Intro2/2/
-|--------|
+name = "<app_name>"
 ```
 
+or to set to something different in <app_name>/constants.py set
+
+```
+name_in_url = 'training'
+```
 
 ## IN THE PROJECT FILES
 
