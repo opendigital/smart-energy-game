@@ -14,8 +14,9 @@ class Constants(BaseConstants):
     )
 
     TESTS_EXPORT_HTML = True
-    multiplier = 2
     print_game_result_table = True
+    DEBUG_ROUND_DATA = False
+    multiplier = 2
     name_in_url = 'energy-game'
     players_per_group = None
     reduction_goal = 60

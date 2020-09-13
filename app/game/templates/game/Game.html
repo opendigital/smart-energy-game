@@ -11,8 +11,15 @@
   </div>
 </div>
 
-<div class="card game-card z1">
+{% if current_round > 1 and game_type == "descriptive_text" %}
+  <h4 class="my-3 px-3" style="line-height:150%;">
+    Last month, <strong>you conserved {{ player_contributed }}</strong>
+    energy tokens, while <strong>others conserved {{ avg_contrib }}</strong> energy tokens
+    on average.
+  </h4>
+{% endif %}
 
+<div class="card game-card z1">
   <h2 class="card-title game-title">MONTH {{ current_round }} ({{ current_month }})</h2>
   <div class="card-body">
 
