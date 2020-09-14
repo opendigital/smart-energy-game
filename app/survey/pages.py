@@ -4,6 +4,16 @@ from ._builtin import Page
 from .constants import Constants
 
 
+
+class SurveyIntro(Page):
+    def vars_for_template(self):
+        return {
+            'page_title': 'Survey Introduction',
+            'progress': 'Survey'
+        }
+
+
+
 class PostSurvey1(Page):
     form_model = 'player'
     form_fields = [
@@ -143,6 +153,7 @@ class PostSurvey4(Page):
 
 
 page_sequence = [
+    SurveyIntro,
     PostSurvey1,
     PostSurvey2,
     PostSurvey3,
