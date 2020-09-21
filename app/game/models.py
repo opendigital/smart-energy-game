@@ -343,9 +343,10 @@ class Player(BasePlayer):
         self.payoff = int(self.player_game_bonus)
 
         game_result = {
-            'contributed': self.participant.vars["player_contributions"],
-            'withheld': self.participant.vars['player_witholdings_total'],
-            'contributions': sum(self.participant.vars['player_contributions']),
+            'game_type': self.session.config["game_type"],
+            'contributions': self.participant.vars["player_contributions"],
+            'total_withheld': self.participant.vars['player_witholdings_total'],
+            'total_contributed': sum(self.participant.vars['player_contributions']),
             'bonus_quiz': self.participant.vars['quiz_bonus'],
             'bonus_game': self.player_game_bonus,
         }
