@@ -24,6 +24,7 @@ class Constants(BaseConstants):
     reduction_goal = 60
     token_goal = 900
     token_value = .01
+    # 220 lbs per dollar
     carbon_per_token = 2.2
 
     page_titles = dict(
