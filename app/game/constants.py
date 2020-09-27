@@ -2,7 +2,11 @@ from otree.api import (
     BaseConstants,
     Currency as c,
 )
+from random import choice
 
+offset = 3
+ROUNDS = 6
+PLAYERS = 25
 
 class Constants(BaseConstants):
     def __init__(self):
@@ -14,7 +18,7 @@ class Constants(BaseConstants):
     )
 
     TESTS_EXPORT_HTML = True
-    print_game_result_table = True
+    print_game_result_table = False
     DEBUG_ROUND_DATA = False
     multiplier = 2
     name_in_url = 'energy-game'
@@ -25,9 +29,9 @@ class Constants(BaseConstants):
     GAME_TOKENS = 10
     GAME_ROUND_MIN_TIMEOUT_SECONDS = 1
     GAME_ROUND_MAX_TIMEOUT_SECONDS = 5
-    game_rounds = 6
+    game_rounds = ROUNDS
     game_max_score = 1750
-    game_players = 25
+    game_players = PLAYERS
     game_goal = 900
     num_rounds = game_rounds + 1
     endowment = 100
@@ -56,3 +60,8 @@ class Constants(BaseConstants):
         'NOVEMBER',
         'DECEMBER'
     ]
+
+
+    offsets = [[[choice([-offset, offset]), choice([-offset, offset])] for player in range(ROUNDS)]
+        for round in range(PLAYERS)]
+        # inner num is players_per_group, outer_num is num_rounds
