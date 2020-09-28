@@ -21,7 +21,7 @@ class Congrats(Page):
         game_total_contrib = self.player.participant.vars["game_total_contrib"]
         carbonfund_total = game_total_contrib
         carbon_offset = self.player.tokens_to_dollars(carbonfund_total)
-        lbs_reduced = int(game_total_contrib / 10 * 22)
+        lbs_reduced = round(game_total_contrib / 10 * 22, 2)
 
         return {
             'progress': 'Game',
