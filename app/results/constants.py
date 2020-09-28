@@ -15,7 +15,7 @@ class Constants(BaseConstants):
 
     TESTS_EXPORT_HTML = True
     multiplier = 2
-    print_game_result_table = True
+    print_game_result_table = False
     name_in_url = 'results'
     players_per_group = None
     reduction_goal = 60
@@ -28,7 +28,7 @@ class Constants(BaseConstants):
     game_max_score = 1750
     game_players = 25
     game_goal = 900
-    num_rounds = game_rounds + 1
+    num_rounds = game_rounds
     endowment = 100
     group_goal = 900
 

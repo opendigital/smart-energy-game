@@ -17,7 +17,7 @@ class Constants(BaseConstants):
         debug_jsvars=False
     )
 
-    TESTS_EXPORT_HTML = True
+    TESTS_EXPORT_HTML = False
     print_game_result_table = False
     DEBUG_ROUND_DATA = False
     multiplier = 2
