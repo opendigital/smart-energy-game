@@ -11,13 +11,6 @@
   </div>
 </div>
 
-{% if current_round == 1 and game_type == "descriptive_text" %}
-  <h4 class="my-3 px-3" style="line-height:150%;">
-    Last month, <strong>you conserved 5</strong> energy tokens, while
-    <strong>others conserved 5.5</strong> energy tokens on average.
-  </h4>
-{% endif %}
-
 {% if current_round > 1 and game_type == "descriptive_text" %}
   <h4 class="my-3 px-3" style="line-height:150%;">
     Last month, <strong>you conserved {{ player_contributed }}</strong>
@@ -28,8 +21,6 @@
 
 {% if current_round == 1 and game_type == "injunctive_text" %}
   <h4 class="my-3 px-3" style="line-height:150%;">
-    Last month, <strong>you conserved 5</strong> energy tokens, while <strong>
-    others conserved 5.5</strong> energy tokens on average.
     Your energy conservation <strong>will eliminate air pollution in the US</strong>,
     which contribute to known health impacts such as childhood asthma and cancer.
   </h4>

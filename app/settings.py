@@ -84,7 +84,7 @@ SESSION_CONFIGS = [
     },
     {
         'name': 'descriptive_text_game',
-        'display_name': " Text Game - Descriptive Norm",
+        'display_name': " Text Game - Descriptive Norm v1.1",
         'num_demo_participants': 1,
         'app_sequence': ['quiz', 'game', 'survey', 'results'],
         'game_type': 'descriptive_text',
@@ -113,7 +113,7 @@ SESSION_CONFIGS = [
     },
     {
         'name': 'mturk_descriptive_text',
-        'display_name': "MTurk: Text Game - Descriptive Norm",
+        'display_name': "MTurk: Text Game - Descriptive Norm v1.1",
         'num_demo_participants': 1,
         'app_sequence': ['quiz', 'game', 'survey', 'results'],
         'game_type': 'descriptive_text',
