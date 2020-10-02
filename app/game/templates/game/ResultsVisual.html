@@ -109,10 +109,10 @@ function drawRadialGraph(data, new_data) {
       if (i < circle_edges.length - 1) {
         let unit = ""
         if (i == 0) {
-          unit = " contributed"
+          unit = " tokens"
         }
         svg.append("text")
-          .text(`$${d} ${unit}`)
+          .text(`${d} ${unit}`)
           .attr("transform", () => {
             return `translate(7, ${-r(d + 0.25)})`
           })
