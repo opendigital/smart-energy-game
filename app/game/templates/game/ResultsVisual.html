@@ -8,13 +8,23 @@
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="{% static 'global/charts.js' %}"></script>
 <style>
-    .axis text {
-        font: 10px sans-serif;
-    }
+  .axis text {
+    font: 10px sans-serif;
+  }
 
-    svg {
-        font-family: Helvetica, Arial, Sans-Serif;
-    }
+  svg {
+    font-family: Helvetica, Arial, Sans-Serif;
+  }
+/*
+text.axis-label {
+  font-size: 14px;
+  text-shadow: 1px 1px 1px #747474c2;
+  font-weight: bold;
+  fill: #58d6ea;
+  font-family: 'Source Sans Pro', monospace;
+  text-transform: uppercase;
+}
+*/
 </style>
 <div id="chart_container" class="card" style="background: white;"></div>
 
@@ -106,15 +116,18 @@ function drawRadialGraph(data, new_data) {
 
     // AXIS LABELS
     circle_edges.map((d, i) => {
-      if (i < circle_edges.length - 1) {
+      if (i < circle_edges.length) {
+
         let unit = ""
         if (i == 0) {
           unit = " tokens"
         }
+
         svg.append("text")
           .text(`${d} ${unit}`)
+          .attr("class", "axis-label")
           .attr("transform", () => {
-            return `translate(7, ${-r(d + 0.25)})`
+            return `translate(7, ${-r(d + .15)})`
           })
       }
 
