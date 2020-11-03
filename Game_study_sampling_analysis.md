@@ -30,9 +30,9 @@ Experiment 2:
 | 2    | `cum_cont`                   | Contribution | an individual's cumulative contribution through round r1 and r6 | INTEGER   |
 | 3    | `diff_r1_r2`                 | Change       | an individual's change of his/her contribution from round r1 to r2 | INTEGER   |
 | 4    | `mean_diff_rounds`           | Change       | an individual's mean increase/decrease from round ri to ri+1 (with i=1 ...5) | FLOAT     |
-| 5    | `mean_count_increase`        | Change       | the average number of rounds where an individual increases her/his contribution from round ri to ri+1 (with i=1 ...5) | FLOAT     |
+| 5    | `count_increase`             | Change       | the average number of rounds where an individual increases her/his contribution from round ri to ri+1 (with i=1 ...5) | FLOAT     |
 | 6    | `mean_count_decrease/stable` | Change       | the average number of rounds where an individual decreases her/his contribution from round ri to ri+1 (with i=1 ...5) or remains stable | FLOAT     |
-| 7    | diff_total                   | Change       | An individual's total change throughout the game measured as the \|max(contribution)- min(contribution)\| across all rounds r1 to r6 | INTEGER   |
+| 7    | `range`                      | Change       | An individual's total change throughout the game measured as the \|max(contribution)- min(contribution)\| across all rounds r1 to r6 | INTEGER   |
 
 
 
@@ -55,12 +55,12 @@ Experiment 2:
 
 | Nr   | Variable name             | Brief Description                               | Data type |
 | ---- | :------------------------ | ----------------------------------------------- | --------- |
-| 8    | `a`ge                     |                                                 | INTEGER   |
-| 9    | `g`ender                  |                                                 | FACTOR    |
-| 10   | `economic status`         |                                                 | FACTOR    |
-| 11   | `political situation`     |                                                 | FACTOR    |
-| 12   | `prior game experience`   |                                                 | 0/1       |
-| 15   | `Environmental attitudes` | Requires some PCA and cronbach's alpha analysis | INTEGER   |
+| 16   | `a`ge                     |                                                 | INTEGER   |
+| 17   | `g`ender                  |                                                 | FACTOR    |
+| 18   | `economic status`         |                                                 | FACTOR    |
+| 19   | `political situation`     |                                                 | FACTOR    |
+| 20   | `prior game experience`   |                                                 | 0/1       |
+| 21   | `Environmental attitudes` | Requires some PCA and cronbach's alpha analysis | INTEGER   |
 
 
 
@@ -70,12 +70,12 @@ Experiment 2:
 
 | Nr   | Variable name  | Brief Description                                            | Data type |
 | ---- | :------------- | ------------------------------------------------------------ | --------- |
-| 8    | `user_id`      |                                                              | STRING    |
-| 9    | `treatment_id` | 1=Base Game, 2=Descriptive Text Game v 1.1., 3=Injunctive Text Game, 4=Visualization Game (Enclosure) | FACTOR    |
+| 22   | `user_id`      |                                                              | STRING    |
+| 23   | `treatment_id` | 1=Base Game, 2=Descriptive Text Game v 1.1., 3=Injunctive Text Game, 4=Visualization Game (Enclosure) | FACTOR    |
 
 
 
-## DEA ANALYSIS ## (Design of Experiment Analysis)
+## DEA ANALYSIS  (Design of Experiment Analysis)
 
 * Data inspections
   * Are there entries suggesting low quality (e.g. age out of range, e.g. all values the same 10,10,10,10)
@@ -83,6 +83,6 @@ Experiment 2:
 * Creating one data frame with all games and a treatment_id
 * Creating basic statistics on this variables
   * Mean, median, min, max, std, 
-  * Plotting a box plots to see if confidence intervals overlap on means
+  * Plotting a boxplot to see if confidence intervals overlap on means
   * simple t-test
 * Preparing an Anova
